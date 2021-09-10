@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 54d89b69bf594404cbf4fe61d8090d7a
+guid: 175ed52fc36ffa64eb8e45f1006d79f0
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,10 +7,25 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: gen_Mtex
-    second: {fileID: 2100000, guid: 2e10938fe05c4434a907b2e9ba417ba5, type: 2}
+      name: asphalt
+    second: {fileID: 2100000, guid: eddc06134a448d546ac73902abf52135, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bz_asphalt_02
+    second: {fileID: 2100000, guid: 5fcabaea2791eff4b94f09d65977658b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bz_grass_to_asphalt_01
+    second: {fileID: 2100000, guid: 3eadfb4366bb23b459779d10eca90ff8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gen_tex_01
+    second: {fileID: 6236400097248309628, guid: 1c2d6722aed119b4293692057afe6735, type: 3}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -47,8 +62,8 @@ ModelImporter:
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
-    importLights: 0
-    fileIdsGeneration: 1
+    importLights: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 1
     useFileUnits: 1
@@ -64,7 +79,7 @@ ModelImporter:
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
-    secondaryUVMarginMethod: 0
+    secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
@@ -97,10 +112,10 @@ ModelImporter:
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
