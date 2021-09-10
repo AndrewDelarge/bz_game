@@ -7,7 +7,10 @@ namespace Core.InputSystem
 {
     public class Control : MonoBehaviour, IControlable
     {
-        private const float SPEED_MULTIPLIER = 1f;
+        [SerializeField] private float speedMultiplier = 3f;
+        [SerializeField] private float angularDrag = .5f;
+        
+        private const float SPEED_MULTIPLIER = 3f;
         
         [SerializeField] private Rigidbody target;
         private Camera mainCamera;
@@ -21,22 +24,28 @@ namespace Core.InputSystem
         };
         private void Start()
         {
-            mainCamera = Camera.current;
+            mainCamera = Camera.main;
             InputManager.Instance.RegisterControlable(this);
+            target.mass = 0.1f;
         }
 
 
         public void OnInputKeyPressed(KeyCode keyCode)
         {
-            if (keyToDirectionDict.ContainsKey(keyCode))
-            {
-                target.AddForce(keyToDirectionDict[keyCode] * SPEED_MULTIPLIER, ForceMode.Force);
-            }
         }
-    
+
+        public void OnVectorInput(Vector3 vector3)
+        {
+            var goPosition = mainCamera.transform.TransformDirection(vector3);
+            goPosition.y = 0;
+
+            target.velocity = goPosition.normalized * speedMultiplier;
+            
+            Debug.Log($"final {goPosition} v3 {vector3} go norm norm {goPosition.normalized}");
+        }
+
         public void OnInputKeyDown(KeyCode keyCode)
         {
-        
         }
     }
 }

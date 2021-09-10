@@ -19,7 +19,8 @@ namespace Core.InputSystem
                 return;
             }
 
-            input.keyPressed += DispatchInputPressedToControlables;
+            input.keyPressed += DispatchInputPressed;
+            input.inputVector += DispatchInputVector;
             
             _inputs.Add(input);
         }
@@ -35,11 +36,19 @@ namespace Core.InputSystem
             _controlables.Add(control);
         }
 
-        private void DispatchInputPressedToControlables(KeyCode key)
+        private void DispatchInputPressed(KeyCode key)
         {
             foreach (var controlable in _controlables)
             {
                 controlable.OnInputKeyPressed(key);
+            }
+        }
+
+        private void DispatchInputVector(Vector3 vector)
+        {
+            foreach (var controlable in _controlables)
+            {
+                controlable.OnVectorInput(vector);
             }
         }
         

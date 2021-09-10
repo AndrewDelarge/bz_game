@@ -8,7 +8,8 @@ namespace Core.InputSystem
     {
         public event Action<KeyCode> keyDown;
         public event Action<KeyCode> keyPressed;
-
+        public event Action<Vector3> inputVector;
+        
         private KeyCode[] trackingKeys = new[]
         {
             KeyCode.W,
@@ -22,8 +23,13 @@ namespace Core.InputSystem
             InputManager.Instance.RegisterInput(this);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
+            if (UnityEngine.Input.GetAxis("Horizontal") != 0 || UnityEngine.Input.GetAxis("Vertical") != 0)
+            {
+                inputVector?.Invoke(new Vector3(UnityEngine.Input.GetAxis("Horizontal"), 0, UnityEngine.Input.GetAxis("Vertical")));
+            }
+            
             for (int i = 0; i < trackingKeys.Length; i++)
             {
                 if (UnityEngine.Input.GetKey(trackingKeys[i]))
