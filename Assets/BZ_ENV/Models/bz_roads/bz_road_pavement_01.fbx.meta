@@ -23,7 +23,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: gen_tex_01
-    second: {fileID: 6236400097248309628, guid: 1c2d6722aed119b4293692057afe6735, type: 3}
+    second: {fileID: 2100000, guid: bd1f224408baf984a8217aaf13cc2c30, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
