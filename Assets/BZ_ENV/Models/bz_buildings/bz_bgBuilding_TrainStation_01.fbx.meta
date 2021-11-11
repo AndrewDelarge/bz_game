@@ -19,6 +19,21 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: gen_tex_01
     second: {fileID: 2100000, guid: bd1f224408baf984a8217aaf13cc2c30, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roof_tiles_01
+    second: {fileID: 2100000, guid: 868ddf9963fd210489fbf6a647940aba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tiles_01
+    second: {fileID: 2100000, guid: 9f5d3d5419973944d8aff23ff981289f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tiles_02
+    second: {fileID: 2100000, guid: 2a26f6b66d9c0384c89418207043195c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

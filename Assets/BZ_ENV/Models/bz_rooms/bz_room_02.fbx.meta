@@ -3,7 +3,22 @@ guid: 663f69254b99ec147b8fba930e661355
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bz_room_01
+    second: {fileID: 2855075855186006520, guid: cbe7c513a51189643be14be9076ca99d, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: conc_02
+    second: {fileID: 2100000, guid: 4bf606317b37fb74190cabb658369707, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gen_tex_01
+    second: {fileID: 2100000, guid: bd1f224408baf984a8217aaf13cc2c30, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
