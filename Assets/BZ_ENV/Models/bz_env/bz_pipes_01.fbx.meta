@@ -1,12 +1,19 @@
 fileFormatVersion: 2
-guid: 956b9e58da0cac547a7954fb28729fc3
+guid: 359e350edb370854c8f3dd6d071f6983
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable:
+  internalIDToNameTable: []
+  externalObjects:
   - first:
-      74: 5871244814170344313
-    second: bz_hero_01|ReloadShotgun_01
-  externalObjects: {}
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mgen_01
+    second: {fileID: 2100000, guid: 2e10938fe05c4434a907b2e9ba417ba5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: conc_05
+    second: {fileID: 2100000, guid: d9672ab704bedc347be862f2613e70c4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
