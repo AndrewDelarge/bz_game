@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using Core.InputSystem.Interfaces;
+using game.core.common;
 using UnityEngine;
 
-namespace Core.InputSystem
+namespace game.core.InputSystem
 {
-    public class InputManager
+    public class InputManager : ICoreManager
     {
-        public static InputManager Instance => _instance ??= new InputManager();
-
-        private static InputManager _instance;
         private List<IInputable> _inputs = new List<IInputable>();
         private List<IControlable> _controlables = new List<IControlable>();
         

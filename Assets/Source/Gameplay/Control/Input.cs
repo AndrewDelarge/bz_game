@@ -1,8 +1,9 @@
 ﻿using System;
 using Core.InputSystem.Interfaces;
+using game.core.InputSystem;
 using UnityEngine;
 
-namespace Core.InputSystem
+namespace game.gameplay.control
 {
     public class Input : MonoBehaviour, IInputable
     {
@@ -20,7 +21,7 @@ namespace Core.InputSystem
 
         private void Start()
         {
-            InputManager.Instance.RegisterInput(this);
+            Core.Get<InputManager>().RegisterInput(this);
         }
 
         private void FixedUpdate()

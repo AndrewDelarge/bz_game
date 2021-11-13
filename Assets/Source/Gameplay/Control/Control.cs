@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Core.InputSystem.Interfaces;
+using game.core.InputSystem;
 using UnityEngine;
 
-namespace Core.InputSystem
+namespace game.gameplay.control
 {
     public class Control : MonoBehaviour, IControlable
     {
@@ -22,10 +22,11 @@ namespace Core.InputSystem
             {KeyCode.S, Vector3.back},
             {KeyCode.D, Vector3.right},
         };
+
         private void Start()
         {
+            Core.Get<InputManager>().RegisterControlable(this);
             mainCamera = Camera.main;
-            InputManager.Instance.RegisterControlable(this);
             target.mass = 0.1f;
         }
 
