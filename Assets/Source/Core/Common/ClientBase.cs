@@ -19,8 +19,13 @@ namespace game.core.common
         private void init()
         {
             CoreInit();
+            CoreStart();
+            GameStart();
         }
 
         protected abstract void CoreInit();
+        protected abstract void CoreStart();
+        
+        protected abstract void GameStart();
     }
 }
