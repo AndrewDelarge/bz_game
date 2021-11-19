@@ -3,9 +3,14 @@ guid: cbe7c513a51189643be14be9076ca99d
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bz_room_01
+    second: {fileID: 2100000, guid: 60f45e5c7ddb64649ba9b15fe4b82059, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

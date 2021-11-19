@@ -6,6 +6,39 @@ ModelImporter:
   - first:
       74: 5871244814170344313
     second: bz_hero_01|ReloadShotgun_01
+  - first:
+      74: 1216424554499354265
+    second: L_Char01|Aiming_01
+  - first:
+      74: -1233177359290082708
+    second: L_Char01|Dialog_01
+  - first:
+      74: 8795582695865442128
+    second: L_Char01|Idle_01
+  - first:
+      74: 7482009715624589246
+    second: L_Char01|Idle_02
+  - first:
+      74: 7903045844793983345
+    second: L_Char01|Interaction_01
+  - first:
+      74: -7210046998544164677
+    second: L_Char01|Kick_01
+  - first:
+      74: -2162825530927051311
+    second: L_Char01|ReloadShotgun_01
+  - first:
+      74: -3314474522720647266
+    second: L_Char01|Run_NoWeapon_01
+  - first:
+      74: 8272899522464831333
+    second: L_Char01|Run_weapon_01
+  - first:
+      74: 212919944887838762
+    second: L_Char01|ShootShotgun_01
+  - first:
+      74: 7931124602466384355
+    second: L_Char01|Walk_01
   externalObjects: {}
   materials:
     materialImportMode: 2

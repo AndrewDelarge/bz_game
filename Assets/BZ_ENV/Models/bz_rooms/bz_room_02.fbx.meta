@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: bz_room_01
-    second: {fileID: 2855075855186006520, guid: cbe7c513a51189643be14be9076ca99d, type: 3}
+    second: {fileID: 2100000, guid: 60f45e5c7ddb64649ba9b15fe4b82059, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

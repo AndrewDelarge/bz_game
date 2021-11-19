@@ -25,7 +25,7 @@ ModelImporter:
       name: gen_tex_01
     second: {fileID: 2100000, guid: bd1f224408baf984a8217aaf13cc2c30, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
