@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using UnityEngine;
@@ -7,46 +8,72 @@ namespace game.gameplay.control
 {
     public class Control : MonoBehaviour, IControlable
     {
-        [SerializeField] private float speedMultiplier = 3f;
-        [SerializeField] private float angularDrag = .5f;
-        
-        private const float SPEED_MULTIPLIER = 3f;
-        
-        [SerializeField] private Rigidbody target;
-        private Camera mainCamera;
+        [SerializeField] private float _speed = 1.5f;
+        [SerializeField] private float _sprintSpeedMultiplier = 2f;
+        [SerializeField] private float _angularDrag = .5f;
 
-        private Dictionary<KeyCode, Vector3> keyToDirectionDict = new Dictionary<KeyCode, Vector3>()
-        {
-            {KeyCode.A, Vector3.left},
-            {KeyCode.W, Vector3.forward},
-            {KeyCode.S, Vector3.back},
-            {KeyCode.D, Vector3.right},
-        };
+        [SerializeField] private CharacterController _characterController;
+        [SerializeField] private Animator _characterAnimator;
+        private Camera _mainCamera;
 
+        private Vector3 _lastPosition;
+        private float _rotationVelocity;
+        private bool _sprint;
         private void Start()
         {
             Core.Get<InputManager>().RegisterControlable(this);
-            mainCamera = Camera.main;
-            target.mass = 0.1f;
+            
+            //TODO remake to player camera
+            _mainCamera = Camera.main;
+            // target.mass = 0.1f;
         }
 
 
         public void OnInputKeyPressed(KeyCode keyCode)
         {
+            
         }
 
         public void OnVectorInput(Vector3 vector3)
         {
-            var goPosition = mainCamera.transform.TransformDirection(vector3);
-            goPosition.y = 0;
+            var direction = vector3.normalized;
+            direction.y = _characterController.isGrounded ? -.05f : -9.8f;
 
-            target.velocity = goPosition.normalized * speedMultiplier;
+            var angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
+            var rotationAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref _rotationVelocity, .05f);
+            var moveDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+            var speedMultiplier = _speed;
             
-            Debug.Log($"final {goPosition} v3 {vector3} go norm norm {goPosition.normalized}");
+            if (_sprint)
+                speedMultiplier *= _sprintSpeedMultiplier;
+            
+            transform.rotation = Quaternion.Euler(0f, rotationAngle, 0f);
+
+            _characterController.Move(moveDirection.normalized * speedMultiplier * Time.deltaTime);
+        }
+
+        private void FixedUpdate()
+        {
+            Vector3 vel = (transform.position - _lastPosition) / Time.deltaTime;
+            _lastPosition = transform.position;
+            
+            _characterAnimator.SetFloat("velocity", vel.magnitude / (_speed * _sprintSpeedMultiplier), .15f, Time.deltaTime);
         }
 
         public void OnInputKeyDown(KeyCode keyCode)
         {
+            if (keyCode == KeyCode.LeftShift)
+            {
+                _sprint = true;
+            }
+        }
+
+        public void OnInputKeyUp(KeyCode keyCode)
+        {
+            if (keyCode == KeyCode.LeftShift)
+            {
+                _sprint = false;
+            }
         }
     }
 }
