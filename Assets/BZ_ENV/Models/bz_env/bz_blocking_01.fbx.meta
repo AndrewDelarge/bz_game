@@ -12,6 +12,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: bz_grass_01
+    second: {fileID: 2100000, guid: a57d9816c01d68244b8907e40714edfd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: conc_02
     second: {fileID: 2100000, guid: 4bf606317b37fb74190cabb658369707, type: 2}
   - first:
