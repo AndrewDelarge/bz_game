@@ -17,7 +17,6 @@ namespace game.core.InputSystem
                 return;
             }
 
-            input.keyPressed += DispatchInputPressed;
             input.inputVector += DispatchInputVector;
             input.keyUp += DispatchInputKeyUp;
             input.keyDown += DispatchInputKeyDown;
@@ -33,7 +32,6 @@ namespace game.core.InputSystem
             }
         }
 
-
         public void RegisterControlable(IControlable control)
         {
             if (_controlables.Contains(control))
@@ -44,14 +42,6 @@ namespace game.core.InputSystem
             _controlables.Add(control);
         }
 
-        private void DispatchInputPressed(KeyCode key)
-        {
-            foreach (var controlable in _controlables)
-            {
-                controlable.OnInputKeyPressed(key);
-            }
-        }
-        
         private void DispatchInputKeyUp(KeyCode key)
         {
             foreach (var controlable in _controlables)

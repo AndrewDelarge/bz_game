@@ -7,7 +7,6 @@ namespace Core.InputSystem.Interfaces
     {
         public event Action<KeyCode> keyDown;
         public event Action<KeyCode> keyUp;
-        public event Action<KeyCode> keyPressed;
 
         public event Action<Vector3> inputVector;
     }

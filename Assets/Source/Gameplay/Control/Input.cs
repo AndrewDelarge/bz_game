@@ -8,7 +8,6 @@ namespace game.gameplay.control
     public class Input : MonoBehaviour, IInputable
     {
         public event Action<KeyCode> keyDown;
-        public event Action<KeyCode> keyPressed;
         public event Action<KeyCode> keyUp;
         public event Action<Vector3> inputVector;
         

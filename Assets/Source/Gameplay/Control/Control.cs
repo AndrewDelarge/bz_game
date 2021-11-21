@@ -10,7 +10,6 @@ namespace game.gameplay.control
     {
         [SerializeField] private float _speed = 1.5f;
         [SerializeField] private float _sprintSpeedMultiplier = 2f;
-        [SerializeField] private float _angularDrag = .5f;
 
         [SerializeField] private CharacterController _characterController;
         [SerializeField] private Animator _characterAnimator;
@@ -57,7 +56,9 @@ namespace game.gameplay.control
             Vector3 vel = (transform.position - _lastPosition) / Time.deltaTime;
             _lastPosition = transform.position;
             
-            _characterAnimator.SetFloat("velocity", vel.magnitude / (_speed * _sprintSpeedMultiplier), .15f, Time.deltaTime);
+            
+            //TODO MOVE to animator
+            _characterAnimator.SetFloat("velocity", vel.magnitude / (_speed * _sprintSpeedMultiplier), .1f, Time.deltaTime);
         }
 
         public void OnInputKeyDown(KeyCode keyCode)
