@@ -15,6 +15,7 @@ namespace game.gameplay.control
         [SerializeField] private Animator _characterAnimator;
         private Camera _mainCamera;
 
+        private Vector3 _horizontalVelocity;
         private Vector3 _lastPosition;
         private float _rotationVelocity;
         private bool _sprint;
@@ -24,7 +25,8 @@ namespace game.gameplay.control
             
             //TODO remake to player camera
             _mainCamera = Camera.main;
-            // target.mass = 0.1f;
+            
+            _lastPosition = transform.position;
         }
 
 
@@ -51,14 +53,18 @@ namespace game.gameplay.control
             _characterController.Move(moveDirection.normalized * speedMultiplier * Time.deltaTime);
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             Vector3 vel = (transform.position - _lastPosition) / Time.deltaTime;
             _lastPosition = transform.position;
+            _horizontalVelocity = new Vector3(vel.x, 0, vel.z);
             
-            
+            var direction = Vector3.zero;
+            direction.y = _characterController.isGrounded ? -.05f : -9.8f;
+            _characterController.Move(direction * Time.deltaTime);
+
             //TODO MOVE to animator
-            _characterAnimator.SetFloat("velocity", vel.magnitude / (_speed * _sprintSpeedMultiplier), .1f, Time.deltaTime);
+            _characterAnimator.SetFloat("velocity", _horizontalVelocity.magnitude / (_speed * _sprintSpeedMultiplier), .1f, Time.deltaTime);
         }
 
         public void OnInputKeyDown(KeyCode keyCode)
