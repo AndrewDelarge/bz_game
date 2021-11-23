@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bc556d470a12e8b4aa7ca53e2586189c
+guid: 4fe4d400a0d30964685c6417123c136b
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,30 +7,10 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Mgen_01
-    second: {fileID: 2100000, guid: 2e10938fe05c4434a907b2e9ba417ba5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bz_bldirt_01
-    second: {fileID: 2100000, guid: 3fc74007c7f754845a45ac05c7b103ca, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bz_grass_01
-    second: {fileID: 2100000, guid: a57d9816c01d68244b8907e40714edfd, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: conc_02
-    second: {fileID: 2100000, guid: 4bf606317b37fb74190cabb658369707, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: conc_05
-    second: {fileID: 2100000, guid: d9672ab704bedc347be862f2613e70c4, type: 2}
+      name: bl_asphalt
+    second: {fileID: 2100000, guid: eddc06134a448d546ac73902abf52135, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
