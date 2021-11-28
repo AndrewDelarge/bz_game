@@ -16,7 +16,10 @@ namespace game.core
         }
 
         protected override void GameStart() {
-            // Core.Get<SceneLoader>().LoadScene(1);
+            #if UNITY_EDITOR 
+                return;
+            #endif
+            Core.Get<SceneLoader>().LoadScene(1);
         }
     }
 }
