@@ -1,60 +1,60 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using core.InputSystem.Interfaces;
+using game.core.InputSystem;
+using game.gameplay.characters;
+using UnityEngine;
 
 namespace game.Source.Gameplay.Characters
 {
-    public class Character
+    public partial class Character : MonoBehaviour, IControlable, ICharacter
     {
+        private CharacterStateMachine _stateMachine = new CharacterStateMachine();
+        
+        private CharacterState _idleState;
+        private CharacterState _moveState;
+        private CharacterMove _move { get; } = new CharacterMove(Vector3.zero, 0f, 0f);
+        private Queue<CharacterMove> _moves = new Queue<CharacterMove>();
 
-        private Vector3 _move;
-        private bool _sprint;
-        private CharacterStateMachine _stateMachine;
+
+        [Header("Components")]
+        [SerializeField] private CharacterMovement _movement;
+        [SerializeField] private CharacterAnimation _animation;
+        [SerializeField] private Camera _camera;
 
         public void Init()
         {
-            
+            game.Core.Get<IInputManager>().RegisterControlable(this);
+
+            InitStates();
+            _stateMachine.ChangeState(_idleState);
+        }
+
+        private void Update()
+        {
+            _stateMachine.currentState.HandleState();
+        }
+
+        private void InitStates()
+        {
+            _idleState = new PlayerIdleState(this);
+            _moveState = new CharacterMoveState(this);
         }
         
-        public void HandleInput(Vector3 move)
+        public void OnVectorInput(Vector3 vector3)
         {
-            
+            _moves.Enqueue(new CharacterMove(vector3, 0, 0));
         }
 
-        private void HandleInput(CharacterAction action, bool keyUp = false)
+        public void OnInputKeyPressed(KeyCode keyCode)
         {
-            if (action == CharacterAction.RUN)
-            {
-                _sprint = true;
-                
-                if (keyUp)
-                {
-                    _sprint = false;
-                }
-            }
         }
-    }
 
-    public enum CharacterAction
-    {
-        RUN = 0,
-    }
-
-    public class CharacterStateMachine
-    {
-        public CharacterState currentState;
-        public CharacterState action;
-
-        public void ChangeState(CharacterState state)
+        public void OnInputKeyDown(KeyCode keyCode)
         {
-            
         }
-    }
 
-    public class CharacterState
-    {
-
-        public void handleState()
+        public void OnInputKeyUp(KeyCode keyCode)
         {
-            
         }
     }
 }

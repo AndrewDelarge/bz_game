@@ -1,11 +1,11 @@
 ﻿using System;
-using Core.InputSystem.Interfaces;
+using core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using UnityEngine;
 
 namespace game.gameplay.control
 {
-    public class Input : MonoBehaviour, IInputable
+    public class InputListener : MonoBehaviour, IInputable
     {
         public event Action<KeyCode> keyDown;
         public event Action<KeyCode> keyUp;
@@ -21,23 +21,23 @@ namespace game.gameplay.control
 
         private void Start()
         {
-            Core.Get<InputManager>().RegisterInput(this);
+            Core.Get<IInputManager>().RegisterInput(this);
         }
 
         private void Update()
         {
-            if (UnityEngine.Input.GetAxis("Horizontal") != 0 || UnityEngine.Input.GetAxis("Vertical") != 0)
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
-                inputVector?.Invoke(new Vector3(UnityEngine.Input.GetAxis("Horizontal"), 0, UnityEngine.Input.GetAxis("Vertical")));
+                inputVector?.Invoke(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
             }
             
             for (int i = 0; i < _trackingKeys.Length; i++)
             {
-                if (UnityEngine.Input.GetKeyDown(_trackingKeys[i]))
+                if (Input.GetKeyDown(_trackingKeys[i]))
                 {
                     keyDown?.Invoke(_trackingKeys[i]);
                 }
-                if (UnityEngine.Input.GetKeyUp(_trackingKeys[i]))
+                if (Input.GetKeyUp(_trackingKeys[i]))
                 {
                     keyUp?.Invoke(_trackingKeys[i]);
                 }

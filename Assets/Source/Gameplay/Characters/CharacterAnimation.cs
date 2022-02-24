@@ -2,7 +2,8 @@
 
 namespace game.Source.Gameplay.Characters
 {
-    public class CharacterAnimation : MonoBehaviour
+    [RequireComponent(typeof(Animator))]
+    public class CharacterAnimation : MonoBehaviour, ICharacterAnimation
     {
         private const string PARAM_VELOCITY = "velocity";
         

@@ -1,0 +1,90 @@
+﻿using System.Collections.Generic;
+using game.Source.Gameplay.Characters;
+using UnityEngine;
+
+namespace game.gameplay.characters
+{
+    public class CharacterMovement : MonoBehaviour, ICharacterMovement
+    {
+        private const float ON_GROUND_GRAVITY = -.05f;
+
+        // TODO Use own movement realization
+        [SerializeField] private CharacterController _characterController;
+        
+        public Vector3 _horizontalVelocity { get; private set; }
+
+        private Vector3 _lastPosition;
+        private float _rotationVelocity;
+
+        private bool _sprint;
+        private CharacterMove _targetCharacterMove;
+        private Queue<CharacterMove> _movesQueue = new Queue<CharacterMove>();
+
+
+        public void Init()
+        {
+            _lastPosition = transform.position;
+        }
+
+        private void Update()
+        {
+            UpdateHorizontalVelocity();
+            
+            DoMove();
+        }
+
+        public void Move(CharacterMove move)
+        {
+            _targetCharacterMove = move;
+            _movesQueue.Enqueue(move);
+        }
+
+        public void Rotate(float angle)
+        {
+            DoRotate(angle);
+        }
+
+        public float GetHorizontalVelocity()
+        {
+            return _horizontalVelocity.magnitude;
+        }
+
+        private void DoMove()
+        {
+            var moveDirection = Vector3.zero;
+            var multiplier = 1f;
+            
+            if (_movesQueue.Count != 0)
+            {
+                var move = _movesQueue.Dequeue();
+                
+                moveDirection = move.vector;
+                multiplier = move.multiplier;
+                
+                DoRotate(move.angle);
+            }
+
+            moveDirection.y = _characterController.isGrounded ? ON_GROUND_GRAVITY : Physics.gravity.y;
+            
+            Debug.Log(moveDirection);
+            _characterController.Move(moveDirection.normalized * multiplier * Time.deltaTime);
+        }
+
+        private void DoRotate(float angle)
+        {
+            var rotationAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref _rotationVelocity, .05f);
+            transform.rotation = Quaternion.Euler(0f, rotationAngle, 0f);
+        }
+
+        private void UpdateHorizontalVelocity()
+        {
+            Vector3 vel = (transform.position - _lastPosition) / Time.deltaTime;
+            _lastPosition = transform.position;
+            _horizontalVelocity = new Vector3(vel.x, 0, vel.z);
+        }
+    }
+    
+    
+
+    
+}

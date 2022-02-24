@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Core.InputSystem.Interfaces
+namespace core.InputSystem.Interfaces
 {
-    public interface IControlable
+    public interface IControlable 
     {
         void OnVectorInput(Vector3 vector3);
         void OnInputKeyPressed(KeyCode keyCode);

@@ -4,7 +4,7 @@ namespace game.core.common
 {
     public abstract class ClientBase : MonoBehaviour
     {
-        private void Start()
+        private void Awake()
         {
             init();
         }

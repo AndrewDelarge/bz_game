@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Core.InputSystem.Interfaces
+namespace core.InputSystem.Interfaces
 {
     public interface IInputable
     {

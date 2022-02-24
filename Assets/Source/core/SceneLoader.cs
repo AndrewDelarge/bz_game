@@ -20,6 +20,7 @@ namespace game.core
             SceneManager.sceneLoaded += SceneLoadingComplete;
         }
         
+        // TODO Make scene dictionary\enum
         public void LoadScene(int id)
         {
             if (_loading != null)

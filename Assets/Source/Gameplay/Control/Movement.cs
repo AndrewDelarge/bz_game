@@ -1,7 +1,6 @@
-﻿using Core.InputSystem.Interfaces;
+﻿using core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using game.Source.Gameplay.Characters;
-using UnityEditor;
 using UnityEngine;
 
 namespace game.gameplay.control
@@ -23,7 +22,7 @@ namespace game.gameplay.control
 
         private void Start()
         {
-            Core.Get<InputManager>().RegisterControlable(this);
+            Core.Get<IInputManager>().RegisterControlable(this);
             
             //TODO remake to player camera
             _mainCamera = Camera.main;

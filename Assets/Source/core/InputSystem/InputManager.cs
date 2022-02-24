@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
-using Core.InputSystem.Interfaces;
+using core.InputSystem.Interfaces;
 using game.core.common;
 using UnityEngine;
 
 namespace game.core.InputSystem
 {
-    public class InputManager : ICoreManager
+    public interface IInputManager
+    {
+        void RegisterInput(IInputable input);
+        void RegisterControlable(IControlable control);
+    }
+
+    public class InputManager : ICoreManager, IInputManager
     {
         private List<IInputable> _inputs = new List<IInputable>();
         private List<IControlable> _controlables = new List<IControlable>();
@@ -24,14 +30,6 @@ namespace game.core.InputSystem
             _inputs.Add(input);
         }
 
-        private void DispatchInputKeyDown(KeyCode key)
-        {
-            foreach (var controlable in _controlables)
-            {
-                controlable.OnInputKeyDown(key);
-            }
-        }
-
         public void RegisterControlable(IControlable control)
         {
             if (_controlables.Contains(control))
@@ -41,7 +39,15 @@ namespace game.core.InputSystem
             
             _controlables.Add(control);
         }
-
+        
+        private void DispatchInputKeyDown(KeyCode key)
+        {
+            foreach (var controlable in _controlables)
+            {
+                controlable.OnInputKeyDown(key);
+            }
+        }
+        
         private void DispatchInputKeyUp(KeyCode key)
         {
             foreach (var controlable in _controlables)
