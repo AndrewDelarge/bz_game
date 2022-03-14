@@ -8,18 +8,22 @@ namespace game.Source.Gameplay.Characters
 {
     public partial class Character : MonoBehaviour, IControlable, ICharacter
     {
-        private CharacterStateMachine _stateMachine = new CharacterStateMachine();
-        
-        private CharacterState _idleState;
-        private CharacterState _moveState;
-        private CharacterMove _move { get; } = new CharacterMove(Vector3.zero, 0f, 0f);
-        private Queue<CharacterMove> _moves = new Queue<CharacterMove>();
-
-
         [Header("Components")]
         [SerializeField] private CharacterMovement _movement;
         [SerializeField] private CharacterAnimation _animation;
         [SerializeField] private Camera _camera;
+        
+        
+        // Model data
+        [SerializeField] private float normalSpeed = 3f;
+        [SerializeField] private float speedMultiplier = 1f;
+        
+        
+        private CharacterStateMachine _stateMachine = new CharacterStateMachine();
+        
+        private CharacterState _idleState;
+        private CharacterMoveState _moveState;
+        private Queue<Vector3> _moves = new Queue<Vector3>();
 
         public void Init()
         {
@@ -38,15 +42,18 @@ namespace game.Source.Gameplay.Characters
         {
             _idleState = new PlayerIdleState(this);
             _moveState = new CharacterMoveState(this);
+            game.Core.Get<IInputManager>().RegisterControlable(_moveState);
+
         }
         
         public void OnVectorInput(Vector3 vector3)
         {
-            _moves.Enqueue(new CharacterMove(vector3, 0, 0));
+            _moves.Enqueue(vector3);
         }
 
         public void OnInputKeyPressed(KeyCode keyCode)
         {
+            
         }
 
         public void OnInputKeyDown(KeyCode keyCode)

@@ -79,6 +79,8 @@ MonoBehaviour:
   _movement: {fileID: 3171773415191112151}
   _animation: {fileID: 3726608878209224817}
   _camera: {fileID: 5481474671396007646}
+  normalSpeed: 1.3
+  speedMultiplier: 2.9
 --- !u!1 &475448938622600078
 GameObject:
   m_ObjectHideFlags: 0

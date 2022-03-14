@@ -11,19 +11,16 @@ namespace game.gameplay.characters
         // TODO Use own movement realization
         [SerializeField] private CharacterController _characterController;
         
-        public Vector3 _horizontalVelocity { get; private set; }
+        public Vector3 horizontalVelocity { get; private set; }
 
-        private Vector3 _lastPosition;
         private float _rotationVelocity;
 
         private bool _sprint;
-        private CharacterMove _targetCharacterMove;
         private Queue<CharacterMove> _movesQueue = new Queue<CharacterMove>();
 
 
         public void Init()
         {
-            _lastPosition = transform.position;
         }
 
         private void Update()
@@ -35,7 +32,6 @@ namespace game.gameplay.characters
 
         public void Move(CharacterMove move)
         {
-            _targetCharacterMove = move;
             _movesQueue.Enqueue(move);
         }
 
@@ -46,7 +42,7 @@ namespace game.gameplay.characters
 
         public float GetHorizontalVelocity()
         {
-            return _horizontalVelocity.magnitude;
+            return horizontalVelocity.magnitude;
         }
 
         private void DoMove()
@@ -66,7 +62,6 @@ namespace game.gameplay.characters
 
             moveDirection.y = _characterController.isGrounded ? ON_GROUND_GRAVITY : Physics.gravity.y;
             
-            Debug.Log(moveDirection);
             _characterController.Move(moveDirection.normalized * multiplier * Time.deltaTime);
         }
 
@@ -78,9 +73,8 @@ namespace game.gameplay.characters
 
         private void UpdateHorizontalVelocity()
         {
-            Vector3 vel = (transform.position - _lastPosition) / Time.deltaTime;
-            _lastPosition = transform.position;
-            _horizontalVelocity = new Vector3(vel.x, 0, vel.z);
+            var vel = _characterController.velocity;
+            horizontalVelocity = new Vector3(vel.x, 0, vel.z);
         }
     }
     

@@ -13,7 +13,11 @@ namespace game.Source.Gameplay.Characters
                 if (character._moves.Count != 0)
                 {
                     character._stateMachine.ChangeState(character._moveState);
+                    return;
                 }
+                
+                character._animation.SetMotionVelocityPercent(character._movement.GetHorizontalVelocity() /
+                                                              (character.normalSpeed * character.speedMultiplier));
             }
         }
     }
