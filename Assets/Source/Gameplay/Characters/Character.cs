@@ -17,18 +17,22 @@ namespace game.Source.Gameplay.Characters
         // Model data
         [SerializeField] private float normalSpeed = 3f;
         [SerializeField] private float speedMultiplier = 1f;
-        
+        [SerializeField] private float speedSmoothTime = 1f;
+        [SerializeField] private AnimationClip testAnim;
+
         
         private CharacterStateMachine _stateMachine = new CharacterStateMachine();
         
-        private CharacterState _idleState;
-        private CharacterMoveState _moveState;
+        private PlayerStateBase _idleState;
+        private PlayerStateBase _moveState;
         private Queue<Vector3> _moves = new Queue<Vector3>();
+
 
         public void Init()
         {
             game.Core.Get<IInputManager>().RegisterControlable(this);
 
+            _animation.Init();
             InitStates();
             _stateMachine.ChangeState(_idleState);
         }
@@ -43,7 +47,7 @@ namespace game.Source.Gameplay.Characters
             _idleState = new PlayerIdleState(this);
             _moveState = new CharacterMoveState(this);
             game.Core.Get<IInputManager>().RegisterControlable(_moveState);
-
+            game.Core.Get<IInputManager>().RegisterControlable(_idleState);
         }
         
         public void OnVectorInput(Vector3 vector3)

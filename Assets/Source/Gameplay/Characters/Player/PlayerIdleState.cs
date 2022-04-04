@@ -19,6 +19,17 @@ namespace game.Source.Gameplay.Characters
                 character._animation.SetMotionVelocityPercent(character._movement.GetHorizontalVelocity() /
                                                               (character.normalSpeed * character.speedMultiplier));
             }
+
+            public override void OnInputKeyDown(KeyCode keyCode)
+            {
+                base.OnInputKeyDown(keyCode);
+                
+                // TODO KEYMAP
+                if (keyCode == KeyCode.F)
+                {
+                    character._animation.PlayAnimation(character.testAnim);
+                }
+            }
         }
     }
 }

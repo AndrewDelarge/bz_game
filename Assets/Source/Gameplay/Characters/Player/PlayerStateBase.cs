@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using core.InputSystem.Interfaces;
+using UnityEngine;
 
 namespace game.Source.Gameplay.Characters
 {
     public partial class Character
     {
-        public abstract class PlayerStateBase : CharacterState
+        public abstract class PlayerStateBase : CharacterState, IControlable
         {
             public PlayerStateBase(Character character) : base(character) { }
 
@@ -19,6 +20,14 @@ namespace game.Source.Gameplay.Characters
             {
                 Debug.Log($"Exit {GetType()}");
             }
+            
+            public virtual void OnVectorInput(Vector3 vector3) { }
+
+            public virtual void OnInputKeyPressed(KeyCode keyCode) { }
+
+            public virtual void OnInputKeyDown(KeyCode keyCode) { }
+
+            public virtual void OnInputKeyUp(KeyCode keyCode) { }
         }
     }
 }

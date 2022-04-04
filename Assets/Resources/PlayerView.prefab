@@ -81,6 +81,8 @@ MonoBehaviour:
   _camera: {fileID: 5481474671396007646}
   normalSpeed: 1.3
   speedMultiplier: 2.9
+  speedSmoothTime: 2
+  testAnim: {fileID: -7210046998544164677, guid: 956b9e58da0cac547a7954fb28729fc3, type: 3}
 --- !u!1 &475448938622600078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,8 +1603,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b603115c41814a60a97073d025ffec9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 8426677134400353345}
+  animator: {fileID: 8426677134400353345}
   _velocityDampTime: 0.1
+  _actionName: 
 --- !u!1 &6448697374966313531
 GameObject:
   m_ObjectHideFlags: 0

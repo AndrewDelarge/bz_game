@@ -16,6 +16,7 @@ namespace game.gameplay.control
             KeyCode.A,
             KeyCode.D,
             KeyCode.S,
+            KeyCode.F,
             KeyCode.LeftShift
         };
 
