@@ -8,16 +8,21 @@ namespace game.Source.Gameplay.Characters
         public abstract class PlayerStateBase : CharacterState, IControlable
         {
             public PlayerStateBase(Character character) : base(character) { }
-
+            
+            public bool isListen => _isListen;
             protected Character character => (Character) base.character;
+
+            private bool _isListen;
 
             public override void Enter()
             {
+                _isListen = true;
                 Debug.Log($"Enter {GetType()}");
             }
 
             public override void Exit()
             {
+                _isListen = false;
                 Debug.Log($"Exit {GetType()}");
             }
             

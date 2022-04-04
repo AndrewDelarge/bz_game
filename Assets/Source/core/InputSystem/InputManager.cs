@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using core.InputSystem.Interfaces;
 using game.core.common;
 using UnityEngine;
@@ -44,6 +45,9 @@ namespace game.core.InputSystem
         {
             foreach (var controlable in _controlables)
             {
+                if (controlable.isListen == false) 
+                    continue;
+                
                 controlable.OnInputKeyDown(key);
             }
         }
@@ -52,6 +56,9 @@ namespace game.core.InputSystem
         {
             foreach (var controlable in _controlables)
             {
+                if (controlable.isListen == false) 
+                    continue;
+                
                 controlable.OnInputKeyUp(key);
             }
         }
@@ -60,9 +67,13 @@ namespace game.core.InputSystem
         {
             foreach (var controlable in _controlables)
             {
+                if (controlable.isListen == false) 
+                    continue;
+                
                 controlable.OnVectorInput(vector);
             }
+            
         }
-        
+
     }
 }

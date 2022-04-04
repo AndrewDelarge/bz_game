@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using core.InputSystem.Interfaces;
 using game.core.InputSystem;
+using game.core.Storage.Data.Character;
 using game.gameplay.characters;
 using UnityEngine;
 
@@ -12,27 +13,26 @@ namespace game.Source.Gameplay.Characters
         [SerializeField] private CharacterMovement _movement;
         [SerializeField] private CharacterAnimation _animation;
         [SerializeField] private Camera _camera;
-        
-        
+
         // Model data
         [SerializeField] private float normalSpeed = 3f;
         [SerializeField] private float speedMultiplier = 1f;
         [SerializeField] private float speedSmoothTime = 1f;
-        [SerializeField] private AnimationClip testAnim;
+        [SerializeField] private CharacterAnimData animationSet;
+        public bool isListen => true;
 
-        
         private CharacterStateMachine _stateMachine = new CharacterStateMachine();
         
         private PlayerStateBase _idleState;
         private PlayerStateBase _moveState;
+        
         private Queue<Vector3> _moves = new Queue<Vector3>();
-
 
         public void Init()
         {
             game.Core.Get<IInputManager>().RegisterControlable(this);
 
-            _animation.Init();
+            _animation.Init(animationSet);
             InitStates();
             _stateMachine.ChangeState(_idleState);
         }

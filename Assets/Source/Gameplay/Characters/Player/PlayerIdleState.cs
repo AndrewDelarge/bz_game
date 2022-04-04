@@ -24,10 +24,10 @@ namespace game.Source.Gameplay.Characters
             {
                 base.OnInputKeyDown(keyCode);
                 
-                // TODO KEYMAP
+                // TODO KEYMAP OR ACTIONS
                 if (keyCode == KeyCode.F)
                 {
-                    character._animation.PlayAnimation(character.testAnim);
+                    character._animation.PlayAnimation(character.animationSet.testClip);
                 }
             }
         }

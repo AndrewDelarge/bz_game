@@ -7,6 +7,7 @@ namespace game.Source.Gameplay.Characters
 {
     public class CharacterInput : IControlable
     {
+        public bool isListen { get; }
         private CharacterMove _move { get; } = new CharacterMove(Vector3.zero, 0f, 0f);
         public CharacterMove move => _move;
 

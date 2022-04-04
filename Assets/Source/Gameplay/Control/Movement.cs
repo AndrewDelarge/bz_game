@@ -13,6 +13,8 @@ namespace game.gameplay.control
         [SerializeField] private CharacterController _characterController;
         [SerializeField] private CharacterAnimation _characterAnimator;
         
+        public bool isListen { get; }
+        
         private Camera _mainCamera;
         private Vector3 _horizontalVelocity;
         private Vector3 _lastPosition;

@@ -82,7 +82,7 @@ MonoBehaviour:
   normalSpeed: 1.3
   speedMultiplier: 2.9
   speedSmoothTime: 2
-  testAnim: {fileID: -7210046998544164677, guid: 956b9e58da0cac547a7954fb28729fc3, type: 3}
+  animationSet: {fileID: 11400000, guid: 10879c1e94f9ae648a793b84b4f598b2, type: 2}
 --- !u!1 &475448938622600078
 GameObject:
   m_ObjectHideFlags: 0

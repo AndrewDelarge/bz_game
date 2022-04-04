@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6b8517f2444acea3aba24420eff2b9, type: 3}
+  m_Name: CharacterAnimData
+  m_EditorClassIdentifier: 
+  _idle: {fileID: 8795582695865442128, guid: 956b9e58da0cac547a7954fb28729fc3, type: 3}
+  _walk: {fileID: 7931124602466384355, guid: 956b9e58da0cac547a7954fb28729fc3, type: 3}
+  _run: {fileID: -3314474522720647266, guid: 956b9e58da0cac547a7954fb28729fc3, type: 3}
+  _testClip: {fileID: -7210046998544164677, guid: 956b9e58da0cac547a7954fb28729fc3, type: 3}
