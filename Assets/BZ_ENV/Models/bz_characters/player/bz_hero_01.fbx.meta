@@ -39,7 +39,12 @@ ModelImporter:
   - first:
       74: 7931124602466384355
     second: L_Char01|Walk_01
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bz_character_blendmat_01
+    second: {fileID: 2100000, guid: af791f10e8e611e4a84c44467bdc48c9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
