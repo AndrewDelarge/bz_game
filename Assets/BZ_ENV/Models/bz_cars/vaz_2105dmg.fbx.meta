@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1c2d6722aed119b4293692057afe6735
+guid: 1ec792040d0b7394bb5cbe9228da96ad
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,30 +7,10 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: bz_conc_01
-    second: {fileID: 2100000, guid: d9672ab704bedc347be862f2613e70c4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bz_red_bick_01
-    second: {fileID: 2100000, guid: f7c58d850b86c48429d2632a08575bf7, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bz_white_bick_01
-    second: {fileID: 2100000, guid: 4135961c24011fa49ae022a1f09ca0fb, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: gen_tex_01
-    second: {fileID: 2100000, guid: bd1f224408baf984a8217aaf13cc2c30, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: tiles_01
-    second: {fileID: 2100000, guid: d9672ab704bedc347be862f2613e70c4, type: 2}
+      name: bl_d2105
+    second: {fileID: 2100000, guid: 7a1868db8bb797e41a4061c0ddfc18ac, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
