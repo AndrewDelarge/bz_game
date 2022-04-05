@@ -25,8 +25,11 @@ namespace game.Source.Gameplay.Characters
         
         private PlayerStateBase _idleState;
         private PlayerStateBase _moveState;
+
+
+        private InputData _data;
         
-        private Queue<Vector3> _moves = new Queue<Vector3>();
+        private Queue<Vector2> _moves = new Queue<Vector2>();
 
         public void Init()
         {
@@ -38,7 +41,10 @@ namespace game.Source.Gameplay.Characters
         }
 
         private void Update()
-        {
+        {            
+            if (_data != null)
+                _stateMachine.currentState.HandleInput(_data);
+            
             _stateMachine.currentState.HandleState();
         }
 
@@ -46,8 +52,8 @@ namespace game.Source.Gameplay.Characters
         {
             _idleState = new PlayerIdleState(this);
             _moveState = new CharacterMoveState(this);
-            game.Core.Get<IInputManager>().RegisterControlable(_moveState);
-            game.Core.Get<IInputManager>().RegisterControlable(_idleState);
+            // game.Core.Get<IInputManager>().RegisterControlable(_moveState);
+            // game.Core.Get<IInputManager>().RegisterControlable(_idleState);
         }
         
         public void OnVectorInput(Vector3 vector3)
@@ -66,6 +72,16 @@ namespace game.Source.Gameplay.Characters
 
         public void OnInputKeyUp(KeyCode keyCode)
         {
+        }
+
+        public void OnDataUpdate(InputData data)
+        {
+            _data = data;
+
+            if (_data.move.value != Vector2.zero)
+            {
+                _moves.Enqueue(_data.move.value);
+            }
         }
     }
 }

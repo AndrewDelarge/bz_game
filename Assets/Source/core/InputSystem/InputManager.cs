@@ -27,8 +27,20 @@ namespace game.core.InputSystem
             input.inputVector += DispatchInputVector;
             input.keyUp += DispatchInputKeyUp;
             input.keyDown += DispatchInputKeyDown;
+            input.updated += DispatchInputDataUpdate;
             
             _inputs.Add(input);
+        }
+
+        private void DispatchInputDataUpdate(InputData data)
+        {
+            foreach (var controlable in _controlables)
+            {
+                if (controlable.isListen == false) 
+                    continue;
+                
+                controlable.OnDataUpdate(data);
+            }
         }
 
         public void RegisterControlable(IControlable control)

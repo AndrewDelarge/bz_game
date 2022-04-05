@@ -67,7 +67,12 @@ namespace game.gameplay.control
             if (keyCode == KeyCode.LeftShift) 
                 _sprint = false;
         }
-        
+
+        public void OnDataUpdate(InputData data)
+        {
+            
+        }
+
         public void OnInputKeyPressed(KeyCode keyCode) {}
 
         private void UpdateHorizontalVelocity()

@@ -22,7 +22,6 @@ namespace game.core
         {
             // init input
             var inputListener = Instantiate(Resources.Load<InputListener>("InputListener"));
-            Core.Get<IInputManager>().RegisterInput(inputListener);
             
             // init player
             var playerCharacter = Instantiate(Resources.Load<Character>("PlayerView"));

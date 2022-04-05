@@ -35,6 +35,11 @@ namespace game.Source.Gameplay.Characters
         {
             throw new System.NotImplementedException();
         }
+
+        public void OnDataUpdate(InputData data)
+        {
+            throw new System.NotImplementedException();
+        }
     }
     
     public struct CharacterMove

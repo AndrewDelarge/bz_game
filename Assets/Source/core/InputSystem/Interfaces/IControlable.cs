@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using game.core.InputSystem;
+using UnityEngine;
 
 namespace core.InputSystem.Interfaces
 {
@@ -9,5 +10,6 @@ namespace core.InputSystem.Interfaces
         void OnInputKeyPressed(KeyCode keyCode);
         void OnInputKeyDown(KeyCode keyCode);
         void OnInputKeyUp(KeyCode keyCode);
+        void OnDataUpdate(InputData data);
     }
 }

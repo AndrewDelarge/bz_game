@@ -1,4 +1,5 @@
 ﻿using core.InputSystem.Interfaces;
+using game.core.InputSystem;
 using UnityEngine;
 
 namespace game.Source.Gameplay.Characters
@@ -23,7 +24,7 @@ namespace game.Source.Gameplay.Characters
                 var moveVector3 = character._moves.Dequeue();
                 
                 var direction = moveVector3.normalized;
-                var angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + character._camera.transform.eulerAngles.y;
+                var angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg + character._camera.transform.eulerAngles.y;
                 var moveDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
 
                 CalculateSpeedMultiplier();
@@ -37,7 +38,20 @@ namespace game.Source.Gameplay.Characters
                 character._animation.SetMotionVelocityPercent(character._movement.GetHorizontalVelocity() /
                                                               (character.normalSpeed * character.speedMultiplier));
             }
-            
+
+            public override void HandleInput(InputData data)
+            {
+                var sprint = data.GetAction(InputActionType.SPRINT);
+
+                _sprint = false;
+                
+                if (sprint != null && sprint.value.status == InputStatus.PRESSED)
+                {
+                    _sprint = true;
+                }
+            }
+
+
             public override void OnInputKeyDown(KeyCode keyCode)
             {
                 if (keyCode == KeyCode.LeftShift)

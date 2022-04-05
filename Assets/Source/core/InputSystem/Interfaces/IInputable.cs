@@ -1,4 +1,5 @@
 ﻿using System;
+using game.core.InputSystem;
 using UnityEngine;
 
 namespace core.InputSystem.Interfaces
@@ -9,5 +10,7 @@ namespace core.InputSystem.Interfaces
         public event Action<KeyCode> keyUp;
 
         public event Action<Vector3> inputVector;
+
+        public event Action<InputData> updated;
     }
 }

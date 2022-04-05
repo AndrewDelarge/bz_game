@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using game.core.InputSystem;
+using UnityEngine;
 
 namespace game.Source.Gameplay.Characters
 {
@@ -18,6 +19,16 @@ namespace game.Source.Gameplay.Characters
                 
                 character._animation.SetMotionVelocityPercent(character._movement.GetHorizontalVelocity() /
                                                               (character.normalSpeed * character.speedMultiplier));
+            }
+
+            public override void HandleInput(InputData data)
+            {
+                var kick = data.GetAction(InputActionType.KICK);
+                if (kick != null && kick.value.status == InputStatus.UP)
+                {
+                    kick.isAbsorbed = true;
+                    character._animation.PlayAnimation(character.animationSet.testClip);
+                }
             }
 
             public override void OnInputKeyDown(KeyCode keyCode)

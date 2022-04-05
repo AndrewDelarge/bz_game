@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using game.core.InputSystem;
+using UnityEngine;
 
 namespace game.Source.Gameplay.Characters
 {
@@ -16,5 +17,6 @@ namespace game.Source.Gameplay.Characters
         public abstract void Exit();
 
         public abstract void HandleState();
+        public abstract void HandleInput(InputData data);
     }
 }

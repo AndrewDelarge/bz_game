@@ -5,7 +5,7 @@ namespace game.Source.Gameplay.Characters
 {
     public partial class Character
     {
-        public abstract class PlayerStateBase : CharacterState, IControlable
+        public abstract class PlayerStateBase : CharacterState
         {
             public PlayerStateBase(Character character) : base(character) { }
             
