@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: bl_vaz2105
-    second: {fileID: 2100000, guid: 7c830a30b9ce1d843aaf97536e4042a0, type: 2}
+    second: {fileID: 2100000, guid: 2bab9ac950d8301419db20aa2d6b223d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: bl_vaz2114
-    second: {fileID: 2100000, guid: 8e3733038b29c6944ae68fb8b975fa8d, type: 2}
+    second: {fileID: 2100000, guid: d0d00f384d0db53499523947774f2305, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
