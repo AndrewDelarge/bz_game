@@ -17,8 +17,8 @@ namespace game.core.InputSystem
 
         public void Update(Vector2 move, Vector2 aim, List<InputActionField<InputAction>> actions)
         {
-            this.move.value = move;
-            this.aim.value = aim;
+            this.move.Update(move);
+            this.aim.Update(aim);
             this.actions = actions;
         }
 
@@ -70,6 +70,12 @@ namespace game.core.InputSystem
         public InputActionField(T value)
         {
             this.value = value;
+        }
+
+        public void Update(T value)
+        {
+            this.value = value;
+            isAbsorbed = false;
         }
     }
 

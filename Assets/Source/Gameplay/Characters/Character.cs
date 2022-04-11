@@ -21,30 +21,37 @@ namespace game.Source.Gameplay.Characters
         [SerializeField] private CharacterAnimData animationSet;
         public bool isListen => true;
 
-        private CharacterStateMachine _stateMachine = new CharacterStateMachine();
+        private BaseStateMachine _stateMachine = new BaseStateMachine();
+        private BaseStateMachine _actionStateMachine = new BaseStateMachine();
         
         private PlayerStateBase _idleState;
         private PlayerStateBase _moveState;
 
+        private PlayerStateBase _idleActionState;
+        private PlayerStateBase _kickActionState;
 
-        private InputData _data;
         
-        private Queue<Vector2> _moves = new Queue<Vector2>();
+        private InputData _data;
+
 
         public void Init()
         {
             game.Core.Get<IInputManager>().RegisterControlable(this);
 
             _animation.Init(animationSet);
+            
             InitStates();
-            _stateMachine.ChangeState(_idleState);
         }
 
         private void Update()
-        {            
+        {
             if (_data != null)
+            {
+                _actionStateMachine.currentState.HandleInput(_data);
                 _stateMachine.currentState.HandleInput(_data);
+            }
             
+            _actionStateMachine.currentState.HandleState();
             _stateMachine.currentState.HandleState();
         }
 
@@ -52,13 +59,25 @@ namespace game.Source.Gameplay.Characters
         {
             _idleState = new PlayerIdleState(this);
             _moveState = new CharacterMoveState(this);
+            
+            _idleActionState = new PlayerActionIdleState(this);
+            _kickActionState = new PlayerKickState(this);
+            
+            _stateMachine.ChangeState(_idleState);
+            _actionStateMachine.ChangeState(_idleActionState);
             // game.Core.Get<IInputManager>().RegisterControlable(_moveState);
             // game.Core.Get<IInputManager>().RegisterControlable(_idleState);
         }
         
+
+
+        public void OnDataUpdate(InputData data)
+        {
+            _data = data;
+        }
+        
         public void OnVectorInput(Vector3 vector3)
         {
-            _moves.Enqueue(vector3);
         }
 
         public void OnInputKeyPressed(KeyCode keyCode)
@@ -72,16 +91,6 @@ namespace game.Source.Gameplay.Characters
 
         public void OnInputKeyUp(KeyCode keyCode)
         {
-        }
-
-        public void OnDataUpdate(InputData data)
-        {
-            _data = data;
-
-            if (_data.move.value != Vector2.zero)
-            {
-                _moves.Enqueue(_data.move.value);
-            }
         }
     }
 }

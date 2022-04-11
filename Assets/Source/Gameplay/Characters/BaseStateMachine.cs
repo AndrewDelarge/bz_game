@@ -1,6 +1,6 @@
 ﻿namespace game.Source.Gameplay.Characters
 {
-    public class CharacterStateMachine
+    public class BaseStateMachine
     {
         public CharacterState currentState;
 

@@ -66,7 +66,10 @@ namespace game.gameplay.control
             foreach (var button in _buttonsPool)
             {
                 if (Input.GetKeyDown(button.code))
+                {
                     button.SetStatus(InputStatus.DOWN);
+                    continue;
+                }
 
                 if (Input.GetKey(button.code))
                     button.SetStatus(InputStatus.PRESSED);

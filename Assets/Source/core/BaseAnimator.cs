@@ -20,8 +20,6 @@ namespace game.core
 
         public virtual void PlayAnimation(AnimationClip animationClip)
         {
-            var anim = overrideController[DEFAULT_ACTION_ANIMATION_NAME];
-            
             overrideController[DEFAULT_ACTION_ANIMATION_NAME] = animationClip;
             PlayState(DEFAULT_ACTION_STATE_NAME);
         }
@@ -30,5 +28,8 @@ namespace game.core
         {
             animator.Play(name);
         }
+        
+        
+        
     }
 }

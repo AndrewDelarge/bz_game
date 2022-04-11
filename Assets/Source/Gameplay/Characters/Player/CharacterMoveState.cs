@@ -11,25 +11,16 @@ namespace game.Source.Gameplay.Characters
             public CharacterMoveState(Character character) : base(character) {}
 
             private bool _sprint;
+            private Vector2 _move;
             private float _currentSprintMultiplier = 1f;
             
             public override void HandleState()
             {
-                if (character._moves.Count == 0)
-                {
-                    character._stateMachine.ChangeState(character._idleState);
-                    return;
-                }
-                
-                var moveVector3 = character._moves.Dequeue();
-                
-                var direction = moveVector3.normalized;
+                var direction = _move.normalized;
                 var angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg + character._camera.transform.eulerAngles.y;
                 var moveDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
 
-                CalculateSpeedMultiplier();
-                
-                var characterSpeed = character.normalSpeed * _currentSprintMultiplier;
+                var characterSpeed = character.normalSpeed * GetSpeedMultiplier();
                 
                 var move = new CharacterMove(moveDirection, characterSpeed, angle);
                 
@@ -41,43 +32,45 @@ namespace game.Source.Gameplay.Characters
 
             public override void HandleInput(InputData data)
             {
+                _move = data.move.isAbsorbed ? Vector2.zero : data.move.value;
+                
+                if (_move == Vector2.zero)
+                {
+                    character._stateMachine.ChangeState(character._idleState);
+                    return;
+                }
+                
                 var sprint = data.GetAction(InputActionType.SPRINT);
-
+                
                 _sprint = false;
                 
                 if (sprint != null && sprint.value.status == InputStatus.PRESSED)
                 {
                     _sprint = true;
                 }
-            }
-
-
-            public override void OnInputKeyDown(KeyCode keyCode)
-            {
-                if (keyCode == KeyCode.LeftShift)
+                
+                var kick = data.GetAction(InputActionType.KICK);
+                
+                if (kick != null && kick.value.status == InputStatus.DOWN && _sprint == false)
                 {
-                    _sprint = true;
+                    kick.isAbsorbed = true;
+                    character._actionStateMachine.ChangeState(character._kickActionState);
                 }
             }
 
-            public override void OnInputKeyUp(KeyCode keyCode)
+            private float GetSpeedMultiplier()
             {
-                if (keyCode == KeyCode.LeftShift)
-                {
-                    _sprint = false;
-                }
-            }
-
-            private void CalculateSpeedMultiplier()
-            {
-                if (! _sprint)
+                if (!_sprint)
                 {
                     _currentSprintMultiplier = 1;
-                    return;
+                }
+                else
+                {
+                    _currentSprintMultiplier = Mathf.Lerp(_currentSprintMultiplier, character.speedMultiplier,
+                        character.speedSmoothTime * Time.deltaTime);
                 }
 
-                _currentSprintMultiplier = Mathf.Lerp(_currentSprintMultiplier, character.speedMultiplier,
-                    character.speedSmoothTime * Time.deltaTime);
+                return _currentSprintMultiplier;
             }
         }
     }
