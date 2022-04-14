@@ -32,51 +32,5 @@ namespace game.Source.Gameplay.Characters
                 }
             }
         }
-
-        public class PlayerActionIdleState : PlayerStateBase
-        {
-            public PlayerActionIdleState(Character character) : base(character)
-            {
-            }
-
-            public override void HandleState()
-            {
-            }
-
-            public override void HandleInput(InputData data)
-            {
-            }
-        }
-        
-        public class PlayerKickState : PlayerStateBase
-        {
-            private float _endTime = 0;
-            
-            public PlayerKickState(Character character) : base(character)
-            {
-            }
-
-            public override void HandleState()
-            {
-                _endTime -= Time.deltaTime;
-                
-                if (_endTime <= 0)
-                    character._actionStateMachine.ChangeState(character._idleActionState);
-            }
-
-            public override void HandleInput(InputData data)
-            {
-                data.move.isAbsorbed = true;
-            }
-
-            public override void Enter()
-            {
-                base.Enter();
-                
-                _endTime = character.animationSet.testClip.length * .9f;
-                character._animation.PlayAnimation(character.animationSet.testClip);
-            }
-            
-        }
     }
 }

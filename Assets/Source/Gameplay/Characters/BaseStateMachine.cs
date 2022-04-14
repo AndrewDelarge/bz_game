@@ -6,6 +6,11 @@
 
         public void ChangeState(CharacterState state)
         {
+            if (currentState == state)
+            {
+                return;
+            }
+            
             currentState?.Exit();
             currentState = state;
             currentState.Enter();

@@ -18,6 +18,13 @@ namespace game.Source.Gameplay.Characters
         [SerializeField] private float normalSpeed = 3f;
         [SerializeField] private float speedMultiplier = 1f;
         [SerializeField] private float speedSmoothTime = 1f;
+        [SerializeField] private float kickPhysicsImpulsDelay = .8f;
+        
+        [SerializeField] private float distance = 1.5f;
+        [SerializeField] private float radius = .5f;
+        [SerializeField] private float viewAngle = 50f;
+        [SerializeField] private float kickPower = 20;
+        
         [SerializeField] private CharacterAnimData animationSet;
         public bool isListen => true;
 

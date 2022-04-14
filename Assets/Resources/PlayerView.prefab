@@ -82,6 +82,11 @@ MonoBehaviour:
   normalSpeed: 1.3
   speedMultiplier: 2.9
   speedSmoothTime: 2
+  kickPhysicsImpulsDelay: 0.25
+  distance: 0
+  radius: 0.8
+  viewAngle: 50
+  kickPower: 20
   animationSet: {fileID: 11400000, guid: 10879c1e94f9ae648a793b84b4f598b2, type: 2}
 --- !u!1 &475448938622600078
 GameObject:
