@@ -1,4 +1,6 @@
 ﻿using game.core.InputSystem;
+using game.core.storage;
+using game.Source.core.Common.Helpers;
 using UnityEngine;
 
 namespace game.Source.Gameplay.Characters
@@ -38,46 +40,28 @@ namespace game.Source.Gameplay.Characters
                 base.Enter();
                 
                 _endTime = character.animationSet.testClip.length * .9f;
-                _impulsTime = _endTime - character.kickPhysicsImpulsDelay;
+                _impulsTime = _endTime - character.data.kickPhysicsImpulseDelay;
                 character._animation.PlayAnimation(character.animationSet.testClip);
-            }
-
-            public bool IsInViewAngle(Transform current, Vector3 target, float viewAngle)
-            {
-                Vector3 dirToTarget = (target - current.position).normalized;
-
-                if (Vector3.Angle(current.forward, dirToTarget) < viewAngle)
-                    return true;
-
-                return false;
-            }
-
-            protected Vector3 GetDirection(Vector3 from, Vector3 to)
-            {
-                Vector3 heading = to - from;
-                float distance = heading.magnitude;
-                return heading / distance;
             }
             
             private void ProduceKickImpulse()
             {
-                var layerMask = 1 << 10;
-                var distance  = character.distance ;
-                var radius    = character.radius   ;
-                var viewAngle = character.viewAngle;
-                var kickPower = character.kickPower;
+                var distance  = character.data.kickFlightSphereDistance ;
+                var radius    = character.data.kickSphereRadius   ;
+                var viewAngle = character.data.kickAngle;
+                var kickPower = character.data.kickPower;
                 
                 var centerPos = character._movement.transform.position;
                 RaycastHit[] raycastHits = new RaycastHit[15];
-                Physics.SphereCastNonAlloc(centerPos, radius, Vector3.forward, raycastHits, distance, layerMask);
+                Physics.SphereCastNonAlloc(centerPos, radius, Vector3.forward, raycastHits, distance, (int) GameLayers.PHYSICS_OBJECTS);
                 
                 for (int i = 0; i < raycastHits.Length; i++)
                 {
                     var rigidbody  = raycastHits[i].rigidbody;
 
-                    if (rigidbody != null && IsInViewAngle(character._movement.transform, rigidbody.transform.position, viewAngle))
+                    if (rigidbody != null && VectorHelper.IsInViewAngle(character._movement.transform, rigidbody.transform.position, viewAngle))
                     {
-                        rigidbody.AddForce(GetDirection(centerPos, rigidbody.transform.position) * kickPower, ForceMode.Impulse);
+                        rigidbody.AddForce(VectorHelper.GetDirection(centerPos, rigidbody.transform.position).normalized * kickPower, ForceMode.Impulse);
                     } 
                 }
             }

@@ -12,7 +12,7 @@ namespace game.Source.Gameplay.Characters
             public override void HandleState()
             {
                 character._animation.SetMotionVelocityPercent(character._movement.GetHorizontalVelocity() /
-                                                              (character.normalSpeed * character.speedMultiplier));
+                                                              (character.data.normalSpeed * character.data.speedMultiplier));
             }
 
             public override void HandleInput(InputData data)

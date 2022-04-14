@@ -20,14 +20,14 @@ namespace game.Source.Gameplay.Characters
                 var angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg + character._camera.transform.eulerAngles.y;
                 var moveDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
 
-                var characterSpeed = character.normalSpeed * GetSpeedMultiplier();
+                var characterSpeed = character.data.normalSpeed * GetSpeedMultiplier();
                 
                 var move = new CharacterMove(moveDirection, characterSpeed, angle);
                 
                 character._movement.Move(move);
                 
                 character._animation.SetMotionVelocityPercent(character._movement.GetHorizontalVelocity() /
-                                                              (character.normalSpeed * character.speedMultiplier));
+                                                              (character.data.normalSpeed * character.data.speedMultiplier));
             }
 
             public override void HandleInput(InputData data)
@@ -66,8 +66,8 @@ namespace game.Source.Gameplay.Characters
                 }
                 else
                 {
-                    _currentSprintMultiplier = Mathf.Lerp(_currentSprintMultiplier, character.speedMultiplier,
-                        character.speedSmoothTime * Time.deltaTime);
+                    _currentSprintMultiplier = Mathf.Lerp(_currentSprintMultiplier, character.data.speedMultiplier,
+                        character.data.speedSmoothTime * Time.deltaTime);
                 }
 
                 return _currentSprintMultiplier;
