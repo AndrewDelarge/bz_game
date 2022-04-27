@@ -6,7 +6,7 @@ namespace game.Source.core.Common.Helpers
     {
         public static bool IsInViewAngle(Transform current, Vector3 target, float viewAngle)
         {
-            Vector3 dirToTarget = (target - current.position).normalized;
+            var dirToTarget = (target - current.position).normalized;
 
             if (Vector3.Angle(current.forward, dirToTarget) < viewAngle)
                 return true;
@@ -16,8 +16,8 @@ namespace game.Source.core.Common.Helpers
 
         public static Vector3 GetDirection(Vector3 from, Vector3 to)
         {
-            Vector3 heading = to - from;
-            float distance = heading.magnitude;
+            var heading = to - from;
+            var distance = heading.magnitude;
             return heading / distance;
         }
     }

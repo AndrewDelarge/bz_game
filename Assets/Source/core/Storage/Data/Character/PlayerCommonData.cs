@@ -16,6 +16,7 @@ namespace game.core.Storage.Data.Character
         [SerializeField] private float _kickSphereRadius = .8f;
         [SerializeField] private float _kickAngle = 50f;
         [SerializeField] private float _kickPower = 20;
+        [SerializeField] private float _yKick = -.7f;
         
         public float normalSpeed => _normalSpeed;
         public float speedMultiplier => _speedMultiplier;
@@ -25,5 +26,6 @@ namespace game.core.Storage.Data.Character
         public float kickSphereRadius => _kickSphereRadius;
         public float kickAngle => _kickAngle;
         public float kickPower => _kickPower;
+        public float yKick => _yKick;
     }
 }

@@ -1,4 +1,5 @@
-﻿using game.core.InputSystem;
+﻿using System.Collections;
+using game.core.InputSystem;
 using game.core.storage;
 using game.Source.core.Common.Helpers;
 using UnityEngine;
@@ -52,17 +53,21 @@ namespace game.Source.Gameplay.Characters
                 var kickPower = character.data.kickPower;
                 
                 var centerPos = character._movement.transform.position;
-                RaycastHit[] raycastHits = new RaycastHit[15];
-                Physics.SphereCastNonAlloc(centerPos, radius, Vector3.forward, raycastHits, distance, (int) GameLayers.PHYSICS_OBJECTS);
+                var charForward = character._movement.transform.forward;
                 
+                RaycastHit[] raycastHits = new RaycastHit[15];
+                Physics.SphereCastNonAlloc(centerPos, radius, charForward, raycastHits, distance, (int) GameLayers.PHYSICS_OBJECTS);
+
                 for (int i = 0; i < raycastHits.Length; i++)
                 {
                     var rigidbody  = raycastHits[i].rigidbody;
 
                     if (rigidbody != null && VectorHelper.IsInViewAngle(character._movement.transform, rigidbody.transform.position, viewAngle))
                     {
-                        rigidbody.AddForce(VectorHelper.GetDirection(centerPos, rigidbody.transform.position).normalized * kickPower, ForceMode.Impulse);
-                    } 
+                        var direction = charForward;
+                        direction.y = character.data.yKick;
+                        rigidbody.AddForceAtPosition(direction * kickPower, centerPos + charForward, ForceMode.Impulse);
+                    }
                 }
             }
         }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6b8517f2444acea3aba24420eff2b9, type: 3}
   m_Name: CharacterAnimData
   m_EditorClassIdentifier: 
-  _idle: {fileID: 8795582695865442128, guid: 956b9e58da0cac547a7954fb28729fc3, type: 3}
-  _walk: {fileID: 7931124602466384355, guid: 956b9e58da0cac547a7954fb28729fc3, type: 3}
-  _run: {fileID: -3314474522720647266, guid: 956b9e58da0cac547a7954fb28729fc3, type: 3}
-  _testClip: {fileID: -7210046998544164677, guid: 956b9e58da0cac547a7954fb28729fc3, type: 3}
+  _idle: {fileID: 7400000, guid: 168e9f9a2fb662c46b3032f90e265bad, type: 2}
+  _walk: {fileID: 7400000, guid: 19fc8e3bee443df4283fdbd585206265, type: 2}
+  _run: {fileID: 7400000, guid: bebfece54dba98242ba8bda6f8e945ac, type: 2}
+  _testClip: {fileID: 7400000, guid: 5816f5ad61f7d9a428847c7541bbaca4, type: 2}
