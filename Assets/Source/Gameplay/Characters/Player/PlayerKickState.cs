@@ -47,8 +47,8 @@ namespace game.Source.Gameplay.Characters
             
             private void ProduceKickImpulse()
             {
-                var distance  = character.data.kickFlightSphereDistance ;
-                var radius    = character.data.kickSphereRadius   ;
+                var distance  = character.data.kickFlightSphereDistance;
+                var radius    = character.data.kickSphereRadius;
                 var viewAngle = character.data.kickAngle;
                 var kickPower = character.data.kickPower;
                 
