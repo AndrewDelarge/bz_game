@@ -66,3 +66,6 @@ crashlytics-build.properties
 # Common IntelliJ Platform excludes
 
 UserSettings/EditorUserSettings.asset
+UserSettings/Layouts
+UserSettings/Search.index
+UserSettings/Search.settings
