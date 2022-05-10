@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 36a04b84f68288144a572f3b160b791b
+guid: 68dd9ac731aa0024faac733149afd494
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
@@ -52,7 +52,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -75,11 +75,11 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 2
+    tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
-    normalSmoothingSource: 3
+    normalSmoothingSource: 0
   referencedClips: []
   importAnimation: 1
   humanDescription:
