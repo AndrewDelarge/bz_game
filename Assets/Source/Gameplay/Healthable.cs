@@ -10,7 +10,7 @@ namespace game.Source.Gameplay {
 		protected HealthResource health;
 		public Action die;
 		
-		private void Start() {
+		protected virtual void Start() {
 			if (! _initializeOnStart) 
 				return;
 

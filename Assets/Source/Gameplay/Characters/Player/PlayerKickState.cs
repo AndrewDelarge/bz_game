@@ -25,6 +25,7 @@ namespace game.Source.Gameplay.Characters
 
                 if (_endTime <= _impulsTime)
                 {
+                    ProduceDamage();
                     ProduceKickImpulse();
                     
                     _impulsTime = int.MinValue;
@@ -43,6 +44,31 @@ namespace game.Source.Gameplay.Characters
                 _endTime = character.animationSet.testClip.length * .9f;
                 _impulsTime = _endTime - character.data.kickPhysicsImpulseDelay;
                 character._animation.PlayAnimation(character.animationSet.testClip);
+            }
+
+            private void ProduceDamage() {
+                var distance  = character.data.kickFlightSphereDistance;
+                var radius    = character.data.kickSphereRadius;
+                
+                var centerPos = character._movement.transform.position;
+                var charForward = character._movement.transform.forward;
+                
+                RaycastHit[] raycastHits = new RaycastHit[15];
+                Physics.SphereCastNonAlloc(centerPos, radius, charForward, raycastHits, distance, (int) GameLayers.HEALTHABLE_OBJECTS);
+
+                foreach (var hit in raycastHits) {
+                    if (hit.transform == null) {
+                        continue;
+                    }
+                    
+                    var healthable = hit.transform.gameObject.GetComponent<Healthable>();
+
+                    if (healthable == null) {
+                        continue;
+                    }
+                    
+                    healthable.TakeDamage(new HealthChange<DamageType>(10, DamageType.PHYSICS));
+                }
             }
             
             private void ProduceKickImpulse()

@@ -18,7 +18,7 @@ namespace game.Source.Gameplay {
 		}
 
 		public override bool Reduce(float value) {
-			if (value >= 0) {
+			if (value <= 0) {
 				return false;
 			}
 			
