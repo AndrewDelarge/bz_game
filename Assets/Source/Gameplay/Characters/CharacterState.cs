@@ -1,26 +1,15 @@
-﻿using game.core.InputSystem;
+﻿using game.Source.Gameplay.Characters.Common;
 using UnityEngine;
 
 namespace game.Source.Gameplay.Characters
 {
     public abstract class CharacterState : BaseState
     {
-        protected ICharacter character;
+        protected CharacterContext context;
         
-        public CharacterState(ICharacter character)
+        public CharacterState(CharacterContext context)
         {
-            this.character = character;
+            this.context = context;
         }
-    }
-
-    public abstract class BaseState
-    {
-        public abstract void Enter();
-
-        public abstract void Exit();
-
-        public abstract void HandleState();
-        
-        public abstract void HandleInput(InputData data);
     }
 }

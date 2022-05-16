@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6b8517f2444acea3aba24420eff2b9, type: 3}
+  m_Name: InfectedAnimData
+  m_EditorClassIdentifier: 
+  _idle: {fileID: 7400000, guid: 5c58d310389184a859148d9ec1b2d768, type: 2}
+  _walk: {fileID: 7400000, guid: 7e141d359c8a343448642e01252a0090, type: 2}
+  _run: {fileID: 7400000, guid: 7e141d359c8a343448642e01252a0090, type: 2}
+  _testClip: {fileID: 7400000, guid: d56ecb72fb1c24394a7615f53889a874, type: 2}

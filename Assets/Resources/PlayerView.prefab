@@ -81,7 +81,7 @@ MonoBehaviour:
   _movement: {fileID: 3171773415191112151}
   _animation: {fileID: 3726608878209224817}
   _camera: {fileID: 5481474671396007646}
-  animationSet: {fileID: 11400000, guid: 10879c1e94f9ae648a793b84b4f598b2, type: 2}
+  animationSet: {fileID: 11400000, guid: d1e186efc0bbe45fb88d1193cfa131c0, type: 2}
   data: {fileID: 11400000, guid: 8d9eab988f3233245b63bdc55ee5db37, type: 2}
 --- !u!1 &475448938622600078
 GameObject:

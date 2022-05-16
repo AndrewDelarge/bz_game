@@ -18,11 +18,6 @@ namespace game.gameplay.characters
         private bool _sprint;
         private Queue<CharacterMove> _movesQueue = new Queue<CharacterMove>();
 
-
-        public void Init()
-        {
-        }
-
         private void Update()
         {
             UpdateHorizontalVelocity();

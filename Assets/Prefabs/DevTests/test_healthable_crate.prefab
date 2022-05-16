@@ -52,6 +52,7 @@ MonoBehaviour:
   _currentHealth: 10
   _initializeOnStart: 1
   _baseCollider: {fileID: 2889702594924024874}
+  _baseRigidbody: {fileID: 2889702594924024873}
   _baseObject: {fileID: 2655752562719875129}
   _destroyedObject: {fileID: 2655752563249432000}
 --- !u!65 &2889702594924024874

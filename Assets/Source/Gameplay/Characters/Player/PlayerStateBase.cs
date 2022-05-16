@@ -3,13 +3,12 @@ using UnityEngine;
 
 namespace game.Source.Gameplay.Characters
 {
-    public partial class Character
-    {
+
         public abstract class PlayerStateBase : CharacterState
         {
-            public PlayerStateBase(Character character) : base(character) { }
+            public PlayerStateBase(PlayerCharacterContext context) : base(context) { }
             
-            protected Character character => (Character) base.character;
+            protected PlayerCharacterContext context => (PlayerCharacterContext) base.context;
 
             public override void Enter()
             {
@@ -22,4 +21,3 @@ namespace game.Source.Gameplay.Characters
             }
         }
     }
-}

@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using core.InputSystem.Interfaces;
+﻿using core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using game.core.Storage.Data.Character;
 using game.gameplay.characters;
+using game.Source.Gameplay.Characters.Common;
 using UnityEngine;
 
-namespace game.Source.Gameplay.Characters
+namespace game.Source.Gameplay.Characters.Player
 {
-    public partial class Character : MonoBehaviour, IControlable, ICharacter
+    public class PlayerCharacter : MonoBehaviour, IControlable, ICharacter
     {
         [Header("Components")]
         [SerializeField] private CharacterMovement _movement;
@@ -19,7 +19,7 @@ namespace game.Source.Gameplay.Characters
         [SerializeField] private PlayerCommonData data;
         public bool isListen => true;
 
-        private BaseStateMachine _stateMachine = new BaseStateMachine();
+        private BaseStateMachine _mainStateMachine = new BaseStateMachine();
         private BaseStateMachine _actionStateMachine = new BaseStateMachine();
         
         private PlayerStateBase _idleState;
@@ -46,28 +46,33 @@ namespace game.Source.Gameplay.Characters
             if (_data != null)
             {
                 _actionStateMachine.currentState.HandleInput(_data);
-                _stateMachine.currentState.HandleInput(_data);
+                _mainStateMachine.currentState.HandleInput(_data);
             }
             
             _actionStateMachine.currentState.HandleState();
-            _stateMachine.currentState.HandleState();
+            _mainStateMachine.currentState.HandleState();
         }
 
-        private void InitStates()
-        {
-            _idleState = new PlayerIdleState(this);
-            _moveState = new CharacterMoveState(this);
+        private void InitStates() {
+            var context = new PlayerCharacterContext(_movement, _animation, animationSet, data, _movement.transform, _actionStateMachine, _mainStateMachine);
+            context.camera = _camera;
             
-            _idleActionState = new PlayerActionIdleState(this);
-            _kickActionState = new PlayerKickState(this);
+
+            _idleState = new PlayerIdleState(context);
+            _moveState = new PlayerMoveState(context);
             
-            _stateMachine.ChangeState(_idleState);
+            _idleActionState = new PlayerActionIdleState(context);
+            _kickActionState = new PlayerKickState(context);
+            
+            context.idleState = _idleState;
+            context.moveState = _moveState;
+            context.idleActionState = _idleActionState;
+            context.kickActionState = _kickActionState;
+            
+            _mainStateMachine.ChangeState(_idleState);
             _actionStateMachine.ChangeState(_idleActionState);
-            // game.Core.Get<IInputManager>().RegisterControlable(_moveState);
-            // game.Core.Get<IInputManager>().RegisterControlable(_idleState);
         }
         
-
 
         public void OnDataUpdate(InputData data)
         {

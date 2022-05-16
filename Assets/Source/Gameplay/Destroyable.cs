@@ -4,11 +4,20 @@ using UnityEngine;
 namespace game.Source.Gameplay {
 	public class Destroyable : Healthable {
 		[SerializeField] protected Collider _baseCollider;
+		[SerializeField] protected Rigidbody _baseRigidbody;
 
 		[SerializeField] protected GameObject _baseObject;
 		[SerializeField] protected GameObject _destroyedObject;
 		
 		public override void Init() {
+			if (_baseCollider == null) {
+				_baseCollider = GetComponent<Collider>();
+			}
+			
+			if (_baseRigidbody == null) {
+				_baseRigidbody = GetComponent<Rigidbody>();
+			}
+			
 			_baseObject.SetActive(true);
 			_destroyedObject.SetActive(false);
 			
@@ -22,9 +31,11 @@ namespace game.Source.Gameplay {
 		}
 
 		private void OnDie() {
-			_baseCollider.enabled = false;
 			_baseObject.SetActive(false);
 			_destroyedObject.SetActive(true);
+			
+			_baseCollider.enabled = false;
+			_baseRigidbody.isKinematic = true;
 		}
 	}
 }

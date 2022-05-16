@@ -1,10 +1,10 @@
-﻿namespace game.Source.Gameplay.Characters
+﻿namespace game.Source.Gameplay.Characters.Common
 {
     public class BaseStateMachine
     {
-        public CharacterState currentState;
+        public BaseState currentState;
 
-        public void ChangeState(CharacterState state)
+        public void ChangeState(BaseState state)
         {
             if (currentState == state)
             {

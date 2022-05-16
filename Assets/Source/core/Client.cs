@@ -2,6 +2,7 @@
 using game.core.InputSystem;
 using game.gameplay.control;
 using game.Source.Gameplay.Characters;
+using game.Source.Gameplay.Characters.Player;
 using UnityEngine;
 
 namespace game.core
@@ -24,7 +25,7 @@ namespace game.core
             var inputListener = Instantiate(Resources.Load<InputListener>("InputListener"));
             
             // init player
-            var playerCharacter = Instantiate(Resources.Load<Character>("PlayerView"));
+            var playerCharacter = Instantiate(Resources.Load<PlayerCharacter>("PlayerView"));
             playerCharacter.Init();
             
             

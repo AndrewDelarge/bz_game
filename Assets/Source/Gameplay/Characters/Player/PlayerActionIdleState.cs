@@ -1,22 +1,14 @@
 ﻿using game.core.InputSystem;
 
-namespace game.Source.Gameplay.Characters
-{
-    public partial class Character
-    {
-        public class PlayerActionIdleState : PlayerStateBase
-        {
-            public PlayerActionIdleState(Character character) : base(character)
-            {
-            }
+namespace game.Source.Gameplay.Characters {
+	public class PlayerActionIdleState : PlayerStateBase {
+		public PlayerActionIdleState(PlayerCharacterContext context) : base(context) {
+		}
 
-            public override void HandleState()
-            {
-            }
+		public override void HandleState() {
+		}
 
-            public override void HandleInput(InputData data)
-            {
-            }
-        }
-    }
+		public override void HandleInput(InputData data) {
+		}
+	}
 }
