@@ -6,5 +6,7 @@ namespace game.Source.Gameplay.Characters
         void PlayAnimation(AnimationClip animationClip);
 
         void SetMotionVelocityPercent(float percent);
+
+        void Disable();
     }
 }

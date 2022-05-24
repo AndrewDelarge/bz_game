@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using game.Source.Gameplay.Characters;
 using UnityEngine;
 
@@ -16,13 +17,18 @@ namespace game.gameplay.characters
         private float _rotationVelocity;
 
         private bool _sprint;
-        private Queue<CharacterMove> _movesQueue = new Queue<CharacterMove>();
+        private Queue<CharacterMove> _movesQueue = new ();
 
         private void Update()
         {
             UpdateHorizontalVelocity();
             
             DoMove();
+        }
+
+        public void Disable() {
+            _characterController.enabled = false;
+            enabled = false;
         }
 
         public void Move(CharacterMove move)

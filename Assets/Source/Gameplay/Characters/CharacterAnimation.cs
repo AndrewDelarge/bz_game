@@ -38,6 +38,11 @@ namespace game.Source.Gameplay.Characters
             overrideController[ANIMATION_IDLE_NAME] = animationSet.idle;
             overrideController[ANIMATION_WALK_NAME] = animationSet.walk;
             overrideController[ANIMATION_RUN_NAME] = animationSet.run;
-        } 
+        }
+
+        public void Disable() {
+            animator.enabled = false;
+            enabled = false;
+        }
     }
 }

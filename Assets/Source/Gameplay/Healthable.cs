@@ -28,7 +28,7 @@ namespace game.Source.Gameplay {
 		
 		public virtual void TakeDamage(HealthChange<DamageType> damage) {
 			health.Reduce(damage.value);
-
+			
 			if (health.value == 0) {
 				die?.Invoke();
 			}

@@ -3,13 +3,8 @@
 namespace game.core.Storage.Data.Character
 {
     [CreateAssetMenu(fileName = "PlayerData", menuName = "Character/PlayerData")]
-    public class PlayerCommonData : ScriptableObject
+    public class PlayerCharacterCommonData : CharacterCommonData
     {
-        // Model data
-        [SerializeField] private float _normalSpeed = 1.3f;
-        [SerializeField] private float _speedMultiplier = 2.8f;
-        [SerializeField] private float _speedSmoothTime = 2f;
-        
         [Header("Kick data")]
         [SerializeField] private float _kickPhysicsImpulseDelay = .25f;
         [SerializeField] private float _kickFlightSphereDistance = 0f;
@@ -18,9 +13,6 @@ namespace game.core.Storage.Data.Character
         [SerializeField] private float _kickPower = 20;
         [SerializeField] private float _yKick = -.7f;
         
-        public float normalSpeed => _normalSpeed;
-        public float speedMultiplier => _speedMultiplier;
-        public float speedSmoothTime => _speedSmoothTime;
         public float kickPhysicsImpulseDelay => _kickPhysicsImpulseDelay;
         public float kickFlightSphereDistance => _kickFlightSphereDistance;
         public float kickSphereRadius => _kickSphereRadius;

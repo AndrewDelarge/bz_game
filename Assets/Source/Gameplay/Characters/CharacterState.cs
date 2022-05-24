@@ -6,9 +6,8 @@ namespace game.Source.Gameplay.Characters
     public abstract class CharacterState : BaseState
     {
         protected CharacterContext context;
-        
-        public CharacterState(CharacterContext context)
-        {
+
+        public virtual void Init(CharacterContext context) {
             this.context = context;
         }
     }

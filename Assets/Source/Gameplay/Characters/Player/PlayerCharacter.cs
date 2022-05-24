@@ -1,7 +1,10 @@
-﻿using core.InputSystem.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using game.core.Storage.Data.Character;
 using game.gameplay.characters;
+using game.Source.Gameplay.Characters.AI;
 using game.Source.Gameplay.Characters.Common;
 using UnityEngine;
 
@@ -12,26 +15,30 @@ namespace game.Source.Gameplay.Characters.Player
         [Header("Components")]
         [SerializeField] private CharacterMovement _movement;
         [SerializeField] private CharacterAnimation _animation;
+        [SerializeField] private Healthable _healthable;
         [SerializeField] private Camera _camera;
 
 
         [SerializeField] private CharacterAnimData animationSet;
-        [SerializeField] private PlayerCommonData data;
+        [SerializeField] private PlayerCharacterCommonData data;
         public bool isListen => true;
 
         private BaseStateMachine _mainStateMachine = new BaseStateMachine();
         private BaseStateMachine _actionStateMachine = new BaseStateMachine();
-        
-        private PlayerStateBase _idleState;
-        private PlayerStateBase _moveState;
 
-        private PlayerStateBase _idleActionState;
-        private PlayerStateBase _kickActionState;
-
-        
         private InputData _data;
 
 
+        private Dictionary<Type, CharacterState> _states = new() {
+            {typeof(PlayerIdleState), new PlayerIdleState()},
+            {typeof(PlayerMoveState), new PlayerMoveState()},
+        };
+        
+        private Dictionary<Type, CharacterState> _actionStates = new() {
+            {typeof(PlayerActionIdleState), new PlayerActionIdleState()},
+            {typeof(PlayerKickState), new PlayerKickState()},
+        };
+        
         public void Init()
         {
             game.Core.Get<IInputManager>().RegisterControlable(this);
@@ -54,23 +61,19 @@ namespace game.Source.Gameplay.Characters.Player
         }
 
         private void InitStates() {
-            var context = new PlayerCharacterContext(_movement, _animation, animationSet, data, _movement.transform, _actionStateMachine, _mainStateMachine);
+            var context = new PlayerCharacterContext(_healthable, _movement, _animation, animationSet, data, _movement.transform, _actionStateMachine, _mainStateMachine, _states , _actionStates);
             context.camera = _camera;
-            
 
-            _idleState = new PlayerIdleState(context);
-            _moveState = new PlayerMoveState(context);
+            foreach (var state in _states.Values) {
+                state.Init(context);
+            }
             
-            _idleActionState = new PlayerActionIdleState(context);
-            _kickActionState = new PlayerKickState(context);
+            foreach (var state in _actionStates.Values) {
+                state.Init(context);
+            }
             
-            context.idleState = _idleState;
-            context.moveState = _moveState;
-            context.idleActionState = _idleActionState;
-            context.kickActionState = _kickActionState;
-            
-            _mainStateMachine.ChangeState(_idleState);
-            _actionStateMachine.ChangeState(_idleActionState);
+            _mainStateMachine.ChangeState(_states[typeof(PlayerIdleState)]);
+            _actionStateMachine.ChangeState(_actionStates[typeof(PlayerActionIdleState)]);
         }
         
 

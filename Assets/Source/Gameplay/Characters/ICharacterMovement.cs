@@ -9,5 +9,6 @@ namespace game.gameplay.characters
         void Rotate(float angle);
 
         float GetHorizontalVelocity();
+        void Disable();
     }
 }

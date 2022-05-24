@@ -29,6 +29,8 @@ namespace game.core
             playerCharacter.Init();
             
             
+            Core.Register<CharactersManager>(new CharactersManager());
+            
             #if UNITY_EDITOR 
                 return;
             #endif

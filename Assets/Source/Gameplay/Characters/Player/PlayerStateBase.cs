@@ -6,8 +6,6 @@ namespace game.Source.Gameplay.Characters
 
         public abstract class PlayerStateBase : CharacterState
         {
-            public PlayerStateBase(PlayerCharacterContext context) : base(context) { }
-            
             protected PlayerCharacterContext context => (PlayerCharacterContext) base.context;
 
             public override void Enter()

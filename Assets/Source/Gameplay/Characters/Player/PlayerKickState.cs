@@ -7,14 +7,12 @@ namespace game.Source.Gameplay.Characters {
 	public class PlayerKickState : PlayerStateBase {
 		private float _endTime;
 		private float _impulsTime;
-
-		public PlayerKickState(PlayerCharacterContext context) : base(context) {
-		}
+		
 
 		public override void HandleState() {
 			_endTime -= Time.deltaTime;
 			if (_endTime <= 0) {
-				context.actionStateMachine.ChangeState(context.idleActionState);
+				context.actionStateMachine.ChangeState(context.actionStates[typeof(PlayerActionIdleState)]);
 			}
 
 			if (_endTime <= _impulsTime) {
