@@ -16,12 +16,12 @@ namespace game.Source.Gameplay.Characters.Player
         [SerializeField] private CharacterMovement _movement;
         [SerializeField] private CharacterAnimation _animation;
         [SerializeField] private Healthable _healthable;
+        // TODO: Camera manager and controller
         [SerializeField] private Camera _camera;
 
 
         [SerializeField] private CharacterAnimData animationSet;
         [SerializeField] private PlayerCharacterCommonData data;
-        public bool isListen => true;
 
         private BaseStateMachine _mainStateMachine = new BaseStateMachine();
         private BaseStateMachine _actionStateMachine = new BaseStateMachine();
@@ -39,6 +39,9 @@ namespace game.Source.Gameplay.Characters.Player
             {typeof(PlayerKickState), new PlayerKickState()},
         };
         
+        public bool isPlayer => true;
+        public bool isListen => true;
+
         public void Init()
         {
             game.Core.Get<IInputManager>().RegisterControlable(this);
@@ -54,6 +57,8 @@ namespace game.Source.Gameplay.Characters.Player
             {
                 _actionStateMachine.currentState.HandleInput(_data);
                 _mainStateMachine.currentState.HandleInput(_data);
+
+                _data = null;
             }
             
             _actionStateMachine.currentState.HandleState();
@@ -80,23 +85,6 @@ namespace game.Source.Gameplay.Characters.Player
         public void OnDataUpdate(InputData data)
         {
             _data = data;
-        }
-        
-        public void OnVectorInput(Vector3 vector3)
-        {
-        }
-
-        public void OnInputKeyPressed(KeyCode keyCode)
-        {
-            
-        }
-
-        public void OnInputKeyDown(KeyCode keyCode)
-        {
-        }
-
-        public void OnInputKeyUp(KeyCode keyCode)
-        {
         }
     }
 }

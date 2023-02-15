@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace game.core.InputSystem
 {
@@ -82,11 +83,15 @@ namespace game.core.InputSystem
     public struct InputAction
     {
         public InputActionType type { get; }
-        public InputStatus status { get; }
+        public InputStatus status { get; private set; }
 
         public InputAction(InputActionType type, InputStatus status)
         {
             this.type = type;
+            this.status = status;
+        }
+
+        public void Update(InputStatus status) {
             this.status = status;
         }
     }

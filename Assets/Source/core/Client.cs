@@ -25,11 +25,12 @@ namespace game.core
             var inputListener = Instantiate(Resources.Load<InputListener>("InputListener"));
             
             // init player
-            var playerCharacter = Instantiate(Resources.Load<PlayerCharacter>("PlayerView"));
-            playerCharacter.Init();
+            var playerCharacter = Instantiate(Resources.Load<PlayerCharacter>("PlayerView"), Vector3.zero, Quaternion.identity);
+
+            var characterManager = new CharactersManager();
+            characterManager.RegisterCharacter(playerCharacter);
             
-            
-            Core.Register<CharactersManager>(new CharactersManager());
+            Core.Register<CharactersManager>(characterManager);
             
             #if UNITY_EDITOR 
                 return;

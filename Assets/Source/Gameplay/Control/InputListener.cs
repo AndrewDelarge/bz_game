@@ -12,10 +12,6 @@ namespace game.gameplay.control
         public const string AXIS_WASD = "wasd";
         public const string AXIS_MOUSE = "mouse";
         
-        public event Action<KeyCode> keyDown;
-        public event Action<KeyCode> keyUp;
-        public event Action<Vector3> inputVector;
-
         public event Action<InputRawData> updated; 
 
         private KeyCode[] _trackingKeys = {
@@ -59,7 +55,6 @@ namespace game.gameplay.control
             if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
                 _inputRaw.axes[AXIS_WASD] = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-                // inputVector?.Invoke(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
             }
             
             
@@ -87,27 +82,6 @@ namespace game.gameplay.control
             }
             
             updated?.Invoke(_inputRaw);
-            //
-            // for (int i = 0; i < _trackingKeys.Length; i++)
-            // {
-            //     if (Input.GetKeyDown(_trackingKeys[i]))
-            //     {
-            //         _inputRaw.buttons.Add(new InputRawButton(_trackingKeys[i], InputStatus.DOWN));
-            //         // keyDown?.Invoke(_trackingKeys[i]);
-            //     }
-            //
-            //     if (Input.GetKey(_trackingKeys[i]))
-            //     {
-            //         _inputRaw.buttons.Add(new InputRawButton(_trackingKeys[i], InputStatus.PRESSED));
-            //     }
-            //     
-            //     if (Input.GetKeyUp(_trackingKeys[i]))
-            //     {
-            //         _inputRaw.buttons.Add(new InputRawButton(_trackingKeys[i], InputStatus.UP));
-            //         // keyUp?.Invoke(_trackingKeys[i]);
-            //     }
-            // }
-            
         }
     }
 
@@ -118,7 +92,17 @@ namespace game.gameplay.control
 
     public class KeyboardInputDataProvider : IInputable
     {
+        public event Action<InputData> updated;
+        public event Action<KeyCode> keyDown;
+        public event Action<KeyCode> keyUp;
+        public event Action<Vector3> inputVector;
+        
         private IInputRawListener _inputListener;
+        private InputData _inputData = new InputData();
+        private InputRawData _rawData;
+        
+        private List<InputActionField<InputAction>> _actionPool = new List<InputActionField<InputAction>>();
+        private List<InputActionField<InputAction>> _filledActions = new List<InputActionField<InputAction>>();
 
         private Dictionary<KeyCode, InputActionType> _actionDictionary = new Dictionary<KeyCode, InputActionType>()
         {
@@ -126,21 +110,14 @@ namespace game.gameplay.control
             {KeyCode.F, InputActionType.KICK},
         };
 
-        private InputData _inputData = new InputData();
-        private InputRawData _rawData;
-        
-        private List<InputActionField<InputAction>> _actionPool = new List<InputActionField<InputAction>>();
-
-        public event Action<InputData> updated;
-        
         public void Init(IInputRawListener listener)
         {
             _inputListener = listener;
             _inputListener.updated += OnUpdateRawData;
             
-            foreach (var action in _actionDictionary)
-            {
-                _actionPool.Add(new InputActionField<InputAction>(new InputAction(action.Value, InputStatus.NONE)));
+            foreach (var action in _actionDictionary) {
+                var inputAction = new InputAction(action.Value, InputStatus.NONE);
+                _actionPool.Add(new InputActionField<InputAction>(inputAction));
             }
         }
 
@@ -152,9 +129,8 @@ namespace game.gameplay.control
         private void OnUpdateRawData(InputRawData raw)
         {
             _rawData = raw;
-            var actions = new List<InputActionField<InputAction>>();
+            _filledActions.Clear();
             
-            // TODO [Refactor] some pool or something
             foreach (var button in _rawData.buttons)
             {
                 if (_actionDictionary.TryGetValue(button.code, out var type) == false)
@@ -162,19 +138,22 @@ namespace game.gameplay.control
                     continue;
                 }
 
-                var action = new InputActionField<InputAction>(new InputAction(type, button.status));
+                var action = _actionPool.First();
+                _actionPool.Remove(action);
+                action.Update(new InputAction(type, button.status));
 
-                actions.Add(action);
+                _filledActions.Add(action);
             }
             
-            
-            _inputData.Update(_rawData.axes[InputListener.AXIS_WASD], _rawData.axes[InputListener.AXIS_MOUSE], actions);
+            _inputData.Update(_rawData.axes[InputListener.AXIS_WASD], _rawData.axes[InputListener.AXIS_MOUSE], _filledActions);
             
             updated?.Invoke(_inputData);
+
+            foreach (var filledAction in _filledActions) {
+                filledAction.isAbsorbed = false;
+                _actionPool.Add(filledAction);
+            }
         }
 
-        public event Action<KeyCode> keyDown;
-        public event Action<KeyCode> keyUp;
-        public event Action<Vector3> inputVector;
     }
 }

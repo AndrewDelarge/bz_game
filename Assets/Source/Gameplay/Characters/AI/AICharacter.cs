@@ -21,6 +21,8 @@ namespace game.Source.Gameplay.Characters.AI {
 
 		private BaseStateMachine _mainStateMachine = new ();
 
+		public bool isPlayer => false;
+
 		private void Start() {
 			game.Core.Get<CharactersManager>().RegisterCharacter(this);
 		}
@@ -36,7 +38,6 @@ namespace game.Source.Gameplay.Characters.AI {
 
 			_mainStateMachine.ChangeState(_states[typeof(AIIdleState)]);
 		}
-		
 		
 		private void Update()
 		{

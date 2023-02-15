@@ -3,5 +3,6 @@
     public interface ICharacter {
 
         public void Init();
+        public bool isPlayer { get; }
     }
 }

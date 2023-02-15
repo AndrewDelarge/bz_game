@@ -24,9 +24,6 @@ namespace game.core.InputSystem
                 return;
             }
 
-            input.inputVector += DispatchInputVector;
-            input.keyUp += DispatchInputKeyUp;
-            input.keyDown += DispatchInputKeyDown;
             input.updated += DispatchInputDataUpdate;
             
             _inputs.Add(input);
@@ -51,40 +48,6 @@ namespace game.core.InputSystem
             }
             
             _controlables.Add(control);
-        }
-        
-        private void DispatchInputKeyDown(KeyCode key)
-        {
-            foreach (var controlable in _controlables)
-            {
-                if (controlable.isListen == false) 
-                    continue;
-                
-                controlable.OnInputKeyDown(key);
-            }
-        }
-        
-        private void DispatchInputKeyUp(KeyCode key)
-        {
-            foreach (var controlable in _controlables)
-            {
-                if (controlable.isListen == false) 
-                    continue;
-                
-                controlable.OnInputKeyUp(key);
-            }
-        }
-
-        private void DispatchInputVector(Vector3 vector)
-        {
-            foreach (var controlable in _controlables)
-            {
-                if (controlable.isListen == false) 
-                    continue;
-                
-                controlable.OnVectorInput(vector);
-            }
-            
         }
 
     }
