@@ -23,8 +23,7 @@ namespace Editor.UnityUpperMenu
         {
             EditorApplication.EnterPlaymode();
 
-            var rootScene = EditorSceneManager.OpenScene(ROOT_SCENE_PATH, OpenSceneMode.Additive);
-            EditorSceneManager.SetActiveScene(rootScene);
+            EditorSceneManager.OpenScene(ROOT_SCENE_PATH, OpenSceneMode.Additive);
         }
 
         private static void ChangePlayModeHandler(PlayModeStateChange obj) {
