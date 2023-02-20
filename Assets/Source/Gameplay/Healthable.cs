@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace game.Source.Gameplay {
+namespace game.Gameplay {
 	public class Healthable : MonoBehaviour {
 		[SerializeField] private float _maxHealth;
 		[SerializeField] private float _currentHealth;

@@ -1,7 +1,7 @@
 ﻿using game.core.common;
 using UnityEngine;
 
-namespace game.Source.core.Common
+namespace game.core.Common
 {
     public class Logger : ILogger, ICoreManager
     {

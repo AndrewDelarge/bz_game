@@ -1,6 +1,6 @@
 ﻿using game.core.InputSystem;
 
-namespace game.Source.Gameplay.Characters {
+namespace game.Gameplay.Characters {
 	public class PlayerActionIdleState : PlayerStateBase<PlayerActionState> {
 		public override void HandleState() {
 		}

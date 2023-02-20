@@ -1,6 +1,6 @@
 ﻿using System;
 using game.core.common;
-using game.Source.Core.Common;
+using game.сore.Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

@@ -1,12 +1,12 @@
 ﻿using game.core.common;
 using game.core.InputSystem;
 using game.gameplay.control;
-using game.Source.core.Common;
-using game.Source.Gameplay.Characters;
-using game.Source.Gameplay.Characters.Player;
+using game.core.Common;
+using game.Gameplay.Characters;
+using game.Gameplay.Characters.Player;
 using UnityEngine;
-using ILogger = game.Source.core.Common.ILogger;
-using Logger = game.Source.core.Common.Logger;
+using ILogger = game.core.Common.ILogger;
+using Logger = game.core.Common.Logger;
 
 namespace game.core
 {
@@ -14,13 +14,13 @@ namespace game.core
     {
         protected override void CoreInit()
         {
-            GCore.Register<SceneLoader>(new SceneLoader());
-            GCore.Register<IInputManager>(new InputManager());
-            GCore.Register<ILogger>(new Logger());
+            AppCore.Register<SceneLoader>(new SceneLoader());
+            AppCore.Register<IInputManager>(new InputManager());
+            AppCore.Register<ILogger>(new Logger());
         }
 
         protected override void CoreStart() {
-            GCore.Start();
+            AppCore.Start();
         }
 
         protected override void GameStart()
@@ -34,12 +34,12 @@ namespace game.core
             var characterManager = new CharactersManager();
             characterManager.RegisterCharacter(playerCharacter);
             
-            GCore.Register<CharactersManager>(characterManager);
+            AppCore.Register<CharactersManager>(characterManager);
             
             #if UNITY_EDITOR 
                 return;
             #endif
-            GCore.Get<SceneLoader>().LoadScene(1);
+            AppCore.Get<SceneLoader>().LoadScene(1);
         }
     }
 }

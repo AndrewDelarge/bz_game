@@ -1,6 +1,6 @@
-using game.Source.Gameplay.Characters.Common;
+using game.Gameplay.Characters.Common;
 
-namespace game.Source.Gameplay.Characters.AI {
+namespace game.Gameplay.Characters.AI {
 	public class AIIdleState : BaseAICharacterState {
 		public override void HandleState() {
 			context.animation.SetMotionVelocityPercent(context.movement.GetHorizontalVelocity() /

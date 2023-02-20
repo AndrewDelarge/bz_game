@@ -1,4 +1,4 @@
-namespace game.Source.Gameplay {
+namespace game.Gameplay {
 	public struct HealthChange<T> {
 		public T type { get; }
 		public float value { get; }

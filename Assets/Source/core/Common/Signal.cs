@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace game.Source.core.Common
+namespace game.core.Common
 {
     public class Signal<T> : Signal, ISignal<T>
     {

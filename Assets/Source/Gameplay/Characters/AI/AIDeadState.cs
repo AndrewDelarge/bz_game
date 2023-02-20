@@ -3,7 +3,7 @@ using System.Linq;
 using game.core.InputSystem;
 using UnityEngine;
 
-namespace game.Source.Gameplay.Characters.AI {
+namespace game.Gameplay.Characters.AI {
 	public class AIDeadState : CharacterState<CharacterStateEnum> {
 		private List<Rigidbody> _ragdollBones;
 		private float _endTime;

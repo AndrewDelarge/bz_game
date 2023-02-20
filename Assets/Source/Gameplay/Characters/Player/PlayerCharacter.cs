@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using core.InputSystem.Interfaces;
+using game.core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using game.core.Storage.Data.Character;
 using game.gameplay.characters;
-using game.Source.Gameplay.Characters.AI;
-using game.Source.Gameplay.Characters.Common;
+using game.Gameplay.Characters.Common;
+using game.Gameplay.Characters.AI;
 using UnityEngine;
 
-namespace game.Source.Gameplay.Characters.Player
+namespace game.Gameplay.Characters.Player
 {
     public class PlayerCharacter : MonoBehaviour, IControlable, ICharacter
     {
@@ -34,7 +34,7 @@ namespace game.Source.Gameplay.Characters.Player
 
         public void Init()
         {
-            game.GCore.Get<IInputManager>().RegisterControlable(this);
+            game.AppCore.Get<IInputManager>().RegisterControlable(this);
 
             _animation.Init(animationSet);
             

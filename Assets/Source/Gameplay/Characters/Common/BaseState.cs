@@ -1,6 +1,6 @@
 using game.core.InputSystem;
 
-namespace game.Source.Gameplay.Characters.Common {
+namespace game.Gameplay.Characters.Common {
 	public abstract class BaseState
 	{
 		public virtual bool CheckEnterCondition() => true;

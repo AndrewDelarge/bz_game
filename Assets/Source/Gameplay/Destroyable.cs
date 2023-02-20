@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace game.Source.Gameplay {
+namespace game.Gameplay {
 	public class Destroyable : Healthable {
 		[SerializeField] protected Collider _baseCollider;
 		[SerializeField] protected Rigidbody _baseRigidbody;

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using core.InputSystem.Interfaces;
+using game.core.InputSystem.Interfaces;
 using game.core.common;
 using UnityEngine;
 

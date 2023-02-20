@@ -2,7 +2,7 @@
 using game.core.Storage.Data.Character;
 using UnityEngine;
 
-namespace game.Source.Gameplay.Characters
+namespace game.Gameplay.Characters
 {
     [RequireComponent(typeof(Animator))]
     public class CharacterAnimation : BaseAnimator, ICharacterAnimation

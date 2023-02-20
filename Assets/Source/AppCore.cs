@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using game.core.common;
-using game.Source.Core.Common;
+using game.сore.Common;
 
 namespace game
 {
-    public class GCore
+    public class AppCore
     {   
-        private static GCore _instance = new GCore();
+        private static AppCore _instance = new AppCore();
 
         private Dictionary<Type, ICoreManager> _managers = new Dictionary<Type, ICoreManager>();
         private Queue<Action> _initQueue = new Queue<Action>();

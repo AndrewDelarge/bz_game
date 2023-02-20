@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using game.core.Storage.Data.Character;
 using game.gameplay.characters;
-using game.Source.Gameplay.Characters.Common;
+using game.Gameplay.Characters.Common;
 using UnityEngine;
 
-namespace game.Source.Gameplay.Characters {
+namespace game.Gameplay.Characters {
 	public class PlayerCharacterContext : CharacterContext {
 		private CharacterStateMachine<PlayerActionState> _actionStateMachine;
 		

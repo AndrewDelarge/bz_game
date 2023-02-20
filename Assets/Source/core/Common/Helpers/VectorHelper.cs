@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace game.Source.core.Common.Helpers
+namespace game.core.Common.Helpers
 {
     public class VectorHelper
     {

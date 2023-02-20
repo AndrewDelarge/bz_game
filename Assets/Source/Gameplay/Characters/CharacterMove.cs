@@ -1,9 +1,9 @@
-﻿using core.InputSystem.Interfaces;
+﻿using game.core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using game.gameplay.characters;
 using UnityEngine;
 
-namespace game.Source.Gameplay.Characters
+namespace game.Gameplay.Characters
 {
     public struct CharacterMove
     {

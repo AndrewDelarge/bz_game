@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace game.Source.Gameplay.PhysicsObjects
+namespace game.Gameplay.PhysicsObjects
 {
     public class PhysicsSleepable : MonoBehaviour
     {

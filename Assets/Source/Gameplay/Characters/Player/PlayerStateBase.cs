@@ -1,6 +1,6 @@
-﻿using game.Source.core.Common;
+﻿using game.core.Common;
 
-namespace game.Source.Gameplay.Characters
+namespace game.Gameplay.Characters
 {
 
         public abstract class PlayerStateBase<T> : CharacterState<T>
@@ -9,12 +9,12 @@ namespace game.Source.Gameplay.Characters
 
             public override void Enter()
             {
-                GCore.Get<ILogger>()?.Log($"Enter {GetType()}");
+                AppCore.Get<ILogger>()?.Log($"Enter {GetType()}");
             }
 
             public override void Exit()
             {
-                GCore.Get<ILogger>()?.Log($"Exit {GetType()}");
+                AppCore.Get<ILogger>()?.Log($"Exit {GetType()}");
             }
         }
     }

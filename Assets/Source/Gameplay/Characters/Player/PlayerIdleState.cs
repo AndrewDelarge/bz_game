@@ -1,7 +1,7 @@
 ﻿using game.core.InputSystem;
 using UnityEngine;
 
-namespace game.Source.Gameplay.Characters {
+namespace game.Gameplay.Characters {
 	public class PlayerIdleState : PlayerStateBase<CharacterStateEnum> {
 		public override void HandleState() {
 			context.animation.SetMotionVelocityPercent(context.movement.GetHorizontalVelocity() /

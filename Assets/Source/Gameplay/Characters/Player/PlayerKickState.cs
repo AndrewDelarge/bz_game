@@ -1,9 +1,9 @@
 ﻿using game.core.InputSystem;
 using game.core.storage;
-using game.Source.core.Common.Helpers;
+using game.core.Common.Helpers;
 using UnityEngine;
 
-namespace game.Source.Gameplay.Characters {
+namespace game.Gameplay.Characters {
 	public class PlayerKickState : PlayerStateBase<PlayerActionState> {
 		private float _endTime;
 		private float _impulsTime;

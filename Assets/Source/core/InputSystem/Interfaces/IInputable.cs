@@ -2,7 +2,7 @@
 using game.core.InputSystem;
 using UnityEngine;
 
-namespace core.InputSystem.Interfaces
+namespace game.core.InputSystem.Interfaces
 {
     public interface IInputable
     {

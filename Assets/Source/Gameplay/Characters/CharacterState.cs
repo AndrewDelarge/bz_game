@@ -1,7 +1,7 @@
-﻿using game.Source.Gameplay.Characters.Common;
+﻿using game.Gameplay.Characters.Common;
 using UnityEngine;
 
-namespace game.Source.Gameplay.Characters
+namespace game.Gameplay.Characters
 {
     public abstract class CharacterState<T> : BaseState
     {

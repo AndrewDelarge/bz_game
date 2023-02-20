@@ -1,4 +1,4 @@
-namespace game.Source.Gameplay {
+namespace game.Gameplay {
 	public abstract class Resource<T> {
 		protected T _value;
 

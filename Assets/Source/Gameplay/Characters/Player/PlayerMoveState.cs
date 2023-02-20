@@ -1,7 +1,7 @@
 ﻿using game.core.InputSystem;
 using UnityEngine;
 
-namespace game.Source.Gameplay.Characters {
+namespace game.Gameplay.Characters {
 	public class PlayerMoveState : PlayerStateBase<CharacterStateEnum> {
 		private bool _sprint;
 		private Vector2 _move;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace game.Source.Gameplay {
+namespace game.Gameplay {
 	public class HealthResource : Resource<float> {
 		protected float _maxHealth;
 		public HealthResource(float maxHealth) {

@@ -1,8 +1,8 @@
-﻿using game.Source.core.Common;
+﻿using game.core.Common;
 using UnityEngine;
-using ILogger = game.Source.core.Common.ILogger;
+using ILogger = game.core.Common.ILogger;
 
-namespace game.Source.Gameplay.Characters.Common
+namespace game.Gameplay.Characters.Common
 {
     public class BaseStateMachine<T> where T : BaseState {
     public T currentState;
@@ -20,7 +20,7 @@ namespace game.Source.Gameplay.Characters.Common
 
         if (state.CheckEnterCondition() == false)
         {
-            GCore.Get<ILogger>().Log($"Transition to \"{state.GetType()}\" failed on check condition of this state");
+            AppCore.Get<ILogger>().Log($"Transition to \"{state.GetType()}\" failed on check condition of this state");
             return;
         }
 

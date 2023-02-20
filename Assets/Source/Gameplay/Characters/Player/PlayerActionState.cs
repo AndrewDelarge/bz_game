@@ -1,4 +1,4 @@
-﻿namespace game.Source.Gameplay.Characters
+﻿namespace game.Gameplay.Characters
 {
         public enum PlayerActionState
         {
