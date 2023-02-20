@@ -57,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439189170332596559}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -41.15, y: 0, z: 16.43}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -80,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movement: {fileID: 3171773415191112151}
   _animation: {fileID: 3726608878209224817}
+  _healthable: {fileID: 0}
   _camera: {fileID: 5481474671396007646}
   animationSet: {fileID: 11400000, guid: d1e186efc0bbe45fb88d1193cfa131c0, type: 2}
   data: {fileID: 11400000, guid: 8d9eab988f3233245b63bdc55ee5db37, type: 2}
