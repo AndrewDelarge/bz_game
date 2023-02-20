@@ -4,7 +4,7 @@ using game.Source.core.Common.Helpers;
 using UnityEngine;
 
 namespace game.Source.Gameplay.Characters {
-	public class PlayerKickState : PlayerStateBase {
+	public class PlayerKickState : PlayerStateBase<PlayerActionState> {
 		private float _endTime;
 		private float _impulsTime;
 		
@@ -12,7 +12,7 @@ namespace game.Source.Gameplay.Characters {
 		public override void HandleState() {
 			_endTime -= Time.deltaTime;
 			if (_endTime <= 0) {
-				context.actionStateMachine.ChangeState(context.actionStates[typeof(PlayerActionIdleState)]);
+				context.actionStateMachine.ChangeState(PlayerActionState.IDLE);
 			}
 
 			if (_endTime <= _impulsTime) {

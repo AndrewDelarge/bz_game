@@ -7,18 +7,18 @@ using UnityEngine;
 
 namespace game.Source.Gameplay.Characters {
 	public class PlayerCharacterContext : CharacterContext {
-		private BaseStateMachine _actionStateMachine;
-		protected Dictionary<Type, CharacterState> _actionStates;
+		private CharacterStateMachine<PlayerActionState> _actionStateMachine;
 		
 		public Camera camera;
-		public IReadOnlyDictionary<Type, CharacterState> actionStates => _actionStates;
-		public BaseStateMachine actionStateMachine => _actionStateMachine;
+		public CharacterStateMachine<PlayerActionState> actionStateMachine => _actionStateMachine;
 		public new PlayerCharacterCommonData data => (PlayerCharacterCommonData) _data;
 
-		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, CharacterAnimData animationData, PlayerCharacterCommonData data, Transform transform, BaseStateMachine actionStateMachine, BaseStateMachine mainStateMachine, Dictionary<Type, CharacterState> states, Dictionary<Type, CharacterState> actionStates) : base(healthable, movement, animation, animationData, transform, data, mainStateMachine, states) {
+		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, 
+			CharacterAnimData animationData, PlayerCharacterCommonData data, Transform transform, 
+			CharacterStateMachine<PlayerActionState> actionStateMachine, CharacterStateMachine<CharacterStateEnum> mainStateMachine) 
+			: base(healthable, movement, animation, animationData, transform, data, mainStateMachine) {
 			_data = data;
 			_actionStateMachine = actionStateMachine;
-			_actionStates = actionStates;
 		}
 	}
 }

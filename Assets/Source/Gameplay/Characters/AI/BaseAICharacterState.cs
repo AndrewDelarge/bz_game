@@ -1,7 +1,7 @@
 using game.core.InputSystem;
 
 namespace game.Source.Gameplay.Characters.AI {
-	public abstract class BaseAICharacterState : CharacterState {
+	public abstract class BaseAICharacterState : CharacterState<CharacterStateEnum> {
 		public override void Enter() {
 			context.healthable.die += CharacterDied;
 		}
@@ -15,7 +15,7 @@ namespace game.Source.Gameplay.Characters.AI {
 		}
 
 		public virtual void CharacterDied() {
-			context.mainStateMachine.ChangeState(context.states[typeof(AIDeadState)]);
+			context.mainStateMachine.ChangeState(CharacterStateEnum.DEAD);
 		}
 	}
 }

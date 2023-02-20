@@ -23,35 +23,36 @@ namespace game.Source.Gameplay.Characters.Player
         [SerializeField] private CharacterAnimData animationSet;
         [SerializeField] private PlayerCharacterCommonData data;
 
-        private BaseStateMachine _mainStateMachine = new BaseStateMachine();
-        private BaseStateMachine _actionStateMachine = new BaseStateMachine();
+        private CharacterStateMachine<CharacterStateEnum> _mainStateMachine;
+        private CharacterStateMachine<PlayerActionState> _actionStateMachine;
 
         private InputData _data;
+        private bool isInited;
 
-
-        private Dictionary<Type, CharacterState> _states = new() {
-            {typeof(PlayerIdleState), new PlayerIdleState()},
-            {typeof(PlayerMoveState), new PlayerMoveState()},
-        };
-        
-        private Dictionary<Type, CharacterState> _actionStates = new() {
-            {typeof(PlayerActionIdleState), new PlayerActionIdleState()},
-            {typeof(PlayerKickState), new PlayerKickState()},
-        };
-        
         public bool isPlayer => true;
         public bool isListen => true;
 
         public void Init()
         {
-            game.Core.Get<IInputManager>().RegisterControlable(this);
+            game.GCore.Get<IInputManager>().RegisterControlable(this);
 
             _animation.Init(animationSet);
             
             InitStates();
+
+            isInited = true;
         }
 
         private void Update()
+        {
+            if (isInited == false) {
+                return;
+            }
+            
+            UpdateStateMachines();
+        }
+
+        private void UpdateStateMachines()
         {
             if (_data != null)
             {
@@ -65,20 +66,35 @@ namespace game.Source.Gameplay.Characters.Player
             _mainStateMachine.currentState.HandleState();
         }
 
-        private void InitStates() {
-            var context = new PlayerCharacterContext(_healthable, _movement, _animation, animationSet, data, _movement.transform, _actionStateMachine, _mainStateMachine, _states , _actionStates);
+        private void InitStates()
+        {
+            _mainStateMachine = new CharacterStateMachine<CharacterStateEnum>(new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum>>(){
+                {CharacterStateEnum.IDLE, new PlayerIdleState()},
+                {CharacterStateEnum.WALK, new PlayerMoveState()}
+            });
+
+            _actionStateMachine = new CharacterStateMachine<PlayerActionState>(new Dictionary<PlayerActionState, CharacterState<PlayerActionState>>() {
+                {PlayerActionState.IDLE, new PlayerActionIdleState()},
+                {PlayerActionState.KICK, new PlayerKickState()}
+            });
+
+            var context = new PlayerCharacterContext(_healthable, _movement, _animation, animationSet, data, 
+                _movement.transform, _actionStateMachine, _mainStateMachine);
+            
             context.camera = _camera;
 
-            foreach (var state in _states.Values) {
+            
+            // TODO совсем избавится от контекста не получится мб хотябы не хранить ссылки на него в стейтах
+            foreach (var state in _mainStateMachine.states.Values) {
                 state.Init(context);
             }
             
-            foreach (var state in _actionStates.Values) {
+            foreach (var state in _actionStateMachine.states.Values) {
                 state.Init(context);
             }
             
-            _mainStateMachine.ChangeState(_states[typeof(PlayerIdleState)]);
-            _actionStateMachine.ChangeState(_actionStates[typeof(PlayerActionIdleState)]);
+            _mainStateMachine.ChangeState(CharacterStateEnum.IDLE);
+            _actionStateMachine.ChangeState(PlayerActionState.IDLE);
         }
         
 

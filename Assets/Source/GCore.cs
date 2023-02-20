@@ -5,9 +5,9 @@ using game.Source.Core.Common;
 
 namespace game
 {
-    public class Core
+    public class GCore
     {   
-        private static Core _instance = new Core();
+        private static GCore _instance = new GCore();
 
         private Dictionary<Type, ICoreManager> _managers = new Dictionary<Type, ICoreManager>();
         private Queue<Action> _initQueue = new Queue<Action>();

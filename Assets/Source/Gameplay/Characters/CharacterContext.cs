@@ -14,20 +14,21 @@ namespace game.Source.Gameplay.Characters
         private CharacterAnimData _animationData;
         private Transform _transform;
         private Healthable _healthable;
-        private BaseStateMachine _mainStateMachine;
+        private CharacterStateMachine<CharacterStateEnum> _mainStateMachine;
         protected CharacterCommonData _data;
-        protected Dictionary<Type, CharacterState> _states;
+        protected Dictionary<Type, CharacterStateEnum> _states;
 
         public ICharacterMovement movement => _movement;
         public ICharacterAnimation animation => _animation;
         public CharacterAnimData animationSet => _animationData;
         public Transform transform => _transform;
-        public BaseStateMachine mainStateMachine => _mainStateMachine;
+        public CharacterStateMachine<CharacterStateEnum> mainStateMachine => _mainStateMachine;
         public CharacterCommonData data => _data;
         public Healthable healthable => _healthable;
-        public IReadOnlyDictionary<Type, CharacterState> states => _states;
 
-        public CharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, CharacterAnimData animationData, Transform transform, CharacterCommonData data, BaseStateMachine mainStateMachine, Dictionary<Type, CharacterState> states) {
+        public CharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, 
+            CharacterAnimData animationData, Transform transform, CharacterCommonData data, 
+            CharacterStateMachine<CharacterStateEnum> mainStateMachine) {
             _healthable = healthable;
             _movement = movement;
             _animation = animation;
@@ -35,7 +36,6 @@ namespace game.Source.Gameplay.Characters
             _transform = transform;
             _mainStateMachine = mainStateMachine;
             _data = data;
-            _states = states;
         }
     }
 }

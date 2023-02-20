@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using core.InputSystem.Interfaces;
 using game.core.InputSystem;
+using game.Source;
 using UnityEngine;
 
 namespace game.gameplay.control
@@ -37,7 +38,7 @@ namespace game.gameplay.control
             var dataProvider = new KeyboardInputDataProvider();
             dataProvider.Init(this);
             
-            Core.Get<IInputManager>().RegisterInput(dataProvider);
+            GCore.Get<IInputManager>().RegisterInput(dataProvider);
         }
 
         private void Update()

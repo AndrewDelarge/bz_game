@@ -1,9 +1,12 @@
 ﻿using game.core.common;
 using game.core.InputSystem;
 using game.gameplay.control;
+using game.Source.core.Common;
 using game.Source.Gameplay.Characters;
 using game.Source.Gameplay.Characters.Player;
 using UnityEngine;
+using ILogger = game.Source.core.Common.ILogger;
+using Logger = game.Source.core.Common.Logger;
 
 namespace game.core
 {
@@ -11,12 +14,13 @@ namespace game.core
     {
         protected override void CoreInit()
         {
-            Core.Register<SceneLoader>(new SceneLoader());
-            Core.Register<IInputManager>(new InputManager());
+            GCore.Register<SceneLoader>(new SceneLoader());
+            GCore.Register<IInputManager>(new InputManager());
+            GCore.Register<ILogger>(new Logger());
         }
 
         protected override void CoreStart() {
-            Core.Start();
+            GCore.Start();
         }
 
         protected override void GameStart()
@@ -30,12 +34,12 @@ namespace game.core
             var characterManager = new CharactersManager();
             characterManager.RegisterCharacter(playerCharacter);
             
-            Core.Register<CharactersManager>(characterManager);
+            GCore.Register<CharactersManager>(characterManager);
             
             #if UNITY_EDITOR 
                 return;
             #endif
-            Core.Get<SceneLoader>().LoadScene(1);
+            GCore.Get<SceneLoader>().LoadScene(1);
         }
     }
 }

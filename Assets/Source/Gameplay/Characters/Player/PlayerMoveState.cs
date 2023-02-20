@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace game.Source.Gameplay.Characters {
-	public class PlayerMoveState : PlayerStateBase {
+	public class PlayerMoveState : PlayerStateBase<CharacterStateEnum> {
 		private bool _sprint;
 		private Vector2 _move;
 		private float _currentSprintMultiplier = 1f;
@@ -26,11 +26,11 @@ namespace game.Source.Gameplay.Characters {
 			_move = data.move.isAbsorbed ? Vector2.zero : data.move.value;
 
 			if (_move == Vector2.zero) {
-				context.mainStateMachine.ChangeState(context.states[typeof(PlayerIdleState)]);
+				context.mainStateMachine.ChangeState(CharacterStateEnum.IDLE);
 				return;
 			}
 
-			InputActionField<InputAction> sprint = data.GetAction(InputActionType.SPRINT);
+			var sprint = data.GetAction(InputActionType.SPRINT);
 
 			_sprint = false;
 
@@ -38,11 +38,11 @@ namespace game.Source.Gameplay.Characters {
 				_sprint = true;
 			}
 
-			InputActionField<InputAction> kick = data.GetAction(InputActionType.KICK);
+			var kick = data.GetAction(InputActionType.KICK);
 
 			if (kick != null && kick.value.status == InputStatus.DOWN && _sprint == false) {
 				kick.isAbsorbed = true;
-				context.actionStateMachine.ChangeState(context.actionStates[typeof(PlayerKickState)]);
+				context.actionStateMachine.ChangeState(PlayerActionState.KICK);
 			}
 		}
 
