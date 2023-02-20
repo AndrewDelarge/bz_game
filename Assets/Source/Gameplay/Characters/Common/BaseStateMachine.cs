@@ -7,9 +7,9 @@ namespace game.Gameplay.Characters.Common
     public class BaseStateMachine<T> where T : BaseState {
     public T currentState;
 
-    public ISignal<T> onStateChanged => _onStateChanged;
+    public IWhistle<T> onStateChanged => _onStateChanged;
 
-    private Signal<T> _onStateChanged = new();
+    private Whistle<T> _onStateChanged = new();
 
     public virtual void ChangeState(T state)
     {

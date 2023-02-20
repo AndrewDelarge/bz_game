@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace game.core.Common
 {
-    public class Signal<T> : Signal, ISignal<T>
+    public class Whistle<T> : Whistle, IWhistle<T>
     {
         public void Dispatch(T context)
         {
@@ -21,11 +21,11 @@ namespace game.core.Common
 
         public void Remove(Action<T> action) => base.Remove(action);
     }
-    public class Signal : ISignal
+    public class Whistle : IWhistle
     {
         protected HashSet<Delegate> _callbacks;
 
-        public Signal() {
+        public Whistle() {
             _callbacks = new HashSet<Delegate>();
         }
 
@@ -53,13 +53,13 @@ namespace game.core.Common
         }
     }
 
-    public interface ISignal<T> : ISignal
+    public interface IWhistle<out T> : IWhistle
     {
         void Add(Action<T> action);
         void Remove(Action<T> action);
     }
 
-    public interface ISignal
+    public interface IWhistle
     {
         void Add(Delegate action);
         void Remove(Delegate action);
