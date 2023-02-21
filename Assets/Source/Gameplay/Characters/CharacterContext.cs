@@ -16,7 +16,6 @@ namespace game.Gameplay.Characters
         private Healthable _healthable;
         private CharacterStateMachine<CharacterStateEnum> _mainStateMachine;
         protected CharacterCommonData _data;
-        protected Dictionary<Type, CharacterStateEnum> _states;
 
         public ICharacterMovement movement => _movement;
         public ICharacterAnimation animation => _animation;

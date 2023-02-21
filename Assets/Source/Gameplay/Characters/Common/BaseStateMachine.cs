@@ -1,4 +1,5 @@
 ﻿using game.core.Common;
+using game.core.InputSystem;
 using UnityEngine;
 using ILogger = game.core.Common.ILogger;
 
@@ -31,5 +32,13 @@ namespace game.Gameplay.Characters.Common
         _onStateChanged.Dispatch(state);
     }
 
+    public void HandleState() {
+        currentState.HandleState();
+    }
+
+    public void HandleInput(InputData data) {
+        currentState.HandleInput(data);
+    }
+        
     }
 }

@@ -3,18 +3,18 @@
 namespace game.Gameplay.Characters
 {
 
-        public abstract class PlayerStateBase<T> : CharacterState<T>
+    public abstract class PlayerStateBase<T> : CharacterState<T>
+    {
+        protected new PlayerCharacterContext context => (PlayerCharacterContext) base.context;
+
+        public override void Enter()
         {
-            protected new PlayerCharacterContext context => (PlayerCharacterContext) base.context;
+            AppCore.Get<ILogger>()?.Log($"Enter {GetType()}");
+        }
 
-            public override void Enter()
-            {
-                AppCore.Get<ILogger>()?.Log($"Enter {GetType()}");
-            }
-
-            public override void Exit()
-            {
-                AppCore.Get<ILogger>()?.Log($"Exit {GetType()}");
-            }
+        public override void Exit()
+        {
+            AppCore.Get<ILogger>()?.Log($"Exit {GetType()}");
         }
     }
+}

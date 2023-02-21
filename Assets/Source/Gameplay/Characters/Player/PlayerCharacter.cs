@@ -56,21 +56,22 @@ namespace game.Gameplay.Characters.Player
         {
             if (_data != null)
             {
-                _actionStateMachine.currentState.HandleInput(_data);
-                _mainStateMachine.currentState.HandleInput(_data);
+                _actionStateMachine.HandleInput(_data);
+                _mainStateMachine.HandleInput(_data);
 
                 _data = null;
             }
             
-            _actionStateMachine.currentState.HandleState();
-            _mainStateMachine.currentState.HandleState();
+            _actionStateMachine.HandleState();
+            _mainStateMachine.HandleState();
         }
 
         private void InitStates()
         {
             _mainStateMachine = new CharacterStateMachine<CharacterStateEnum>(new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum>>(){
                 {CharacterStateEnum.IDLE, new PlayerIdleState()},
-                {CharacterStateEnum.WALK, new PlayerMoveState()}
+                {CharacterStateEnum.WALK, new PlayerWalkState()},
+                {CharacterStateEnum.RUN, new PlayerRunState()},
             });
 
             _actionStateMachine = new CharacterStateMachine<PlayerActionState>(new Dictionary<PlayerActionState, CharacterState<PlayerActionState>>() {
@@ -95,6 +96,9 @@ namespace game.Gameplay.Characters.Player
             
             _mainStateMachine.ChangeState(CharacterStateEnum.IDLE);
             _actionStateMachine.ChangeState(PlayerActionState.IDLE);
+            
+            _mainStateMachine.onStateChanged.Add(_actionStateMachine.OnStateChangeHandler);
+            _actionStateMachine.onStateChanged.Add(_mainStateMachine.OnStateChangeHandler);
         }
         
 

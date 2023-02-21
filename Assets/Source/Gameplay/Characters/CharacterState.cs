@@ -12,7 +12,7 @@ namespace game.Gameplay.Characters
             this.context = context;
         }
 
-        public virtual void OnChangedStateHandler(T state)
+        public virtual void OnChangedStateHandler<TObservered>(TObservered state)
         {
             // Break current state? 
         }

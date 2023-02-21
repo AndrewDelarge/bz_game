@@ -2,10 +2,9 @@
 using UnityEngine;
 
 namespace game.Gameplay.Characters {
-	public class PlayerMoveState : PlayerStateBase<CharacterStateEnum> {
-		private bool _sprint;
-		private Vector2 _move;
-		private float _currentSprintMultiplier = 1f;
+	public class PlayerWalkState : PlayerStateBase<CharacterStateEnum> {
+		protected Vector2 _move;
+		protected float _currentSpeedMultiplier = 1f;
 
 		public override void HandleState() {
 			var direction = _move.normalized;
@@ -29,33 +28,18 @@ namespace game.Gameplay.Characters {
 				context.mainStateMachine.ChangeState(CharacterStateEnum.IDLE);
 				return;
 			}
-
+			
 			var sprint = data.GetAction(InputActionType.SPRINT);
 
-			_sprint = false;
 
-			if (sprint != null && sprint.value.status == InputStatus.PRESSED) {
-				_sprint = true;
-			}
-
-			var kick = data.GetAction(InputActionType.KICK);
-
-			if (kick != null && kick.value.status == InputStatus.DOWN && _sprint == false) {
-				kick.isAbsorbed = true;
-				context.actionStateMachine.ChangeState(PlayerActionState.KICK);
+			if (sprint is {value: {status: InputStatus.PRESSED}}) {
+				context.mainStateMachine.ChangeState(CharacterStateEnum.RUN);
+				return;
 			}
 		}
 
-		private float GetSpeedMultiplier() {
-			if (!_sprint) {
-				_currentSprintMultiplier = 1;
-			}
-			else {
-				_currentSprintMultiplier = Mathf.Lerp(_currentSprintMultiplier, context.data.speedMultiplier,
-					context.data.speedSmoothTime * Time.deltaTime);
-			}
-
-			return _currentSprintMultiplier;
+		protected virtual float GetSpeedMultiplier() {
+			return _currentSpeedMultiplier = 1;
 		}
 	}
 }

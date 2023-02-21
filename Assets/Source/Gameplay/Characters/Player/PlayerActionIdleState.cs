@@ -6,6 +6,13 @@ namespace game.Gameplay.Characters {
 		}
 
 		public override void HandleInput(InputData data) {
+			var kick = data.GetAction(InputActionType.KICK);
+
+			if (kick is {value: {status: InputStatus.DOWN}}) {
+				kick.isAbsorbed = true;
+				context.mainStateMachine.ChangeState(CharacterStateEnum.WALK);
+				context.actionStateMachine.ChangeState(PlayerActionState.KICK);
+			}
 		}
 	}
 }

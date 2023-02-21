@@ -51,7 +51,7 @@ namespace game.Gameplay.Characters.AI {
 				return;
 			}
 			
-			_mainStateMachine.currentState.HandleState();
+			_mainStateMachine.HandleState();
 		}
 	}
 }
