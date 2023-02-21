@@ -1,4 +1,5 @@
-﻿using game.Gameplay.Characters.Common;
+﻿using game.Gameplay.Characters.Player.Common;
+using game.Source.Gameplay.Common;
 using UnityEngine;
 
 namespace game.Gameplay.Characters
@@ -14,7 +15,7 @@ namespace game.Gameplay.Characters
 
         public virtual void OnChangedStateHandler<TObservered>(TObservered state)
         {
-            // Break current state? 
+            
         }
     }
 }

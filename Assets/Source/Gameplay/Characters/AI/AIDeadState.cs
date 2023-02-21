@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using game.core.InputSystem;
+using game.Gameplay.Characters.Player;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.AI {

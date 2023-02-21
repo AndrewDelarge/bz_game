@@ -1,6 +1,7 @@
 ﻿using game.core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using game.Gameplay.Characters;
+using game.Gameplay.Characters.Player;
 using UnityEngine;
 
 namespace game.gameplay.control

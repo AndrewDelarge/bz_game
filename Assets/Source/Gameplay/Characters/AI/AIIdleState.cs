@@ -1,4 +1,4 @@
-using game.Gameplay.Characters.Common;
+using game.Gameplay.Characters.Player.Common;
 
 namespace game.Gameplay.Characters.AI {
 	public class AIIdleState : BaseAICharacterState {

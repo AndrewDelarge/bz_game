@@ -1,7 +1,7 @@
 ﻿using game.core.InputSystem;
 using UnityEngine;
 
-namespace game.Gameplay.Characters {
+namespace game.Gameplay.Characters.Player {
 	public class PlayerWalkState : PlayerStateBase<CharacterStateEnum> {
 		protected Vector2 _move;
 		protected float _currentSpeedMultiplier = 1f;

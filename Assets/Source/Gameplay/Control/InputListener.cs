@@ -20,7 +20,10 @@ namespace game.gameplay.control
             KeyCode.D,
             KeyCode.S,
             KeyCode.F,
-            KeyCode.LeftShift
+            KeyCode.LeftShift,
+            KeyCode.R,
+            KeyCode.Mouse0,
+            KeyCode.Mouse1,
         };
 
         private List<InputRawButton> _buttonsPool = new List<InputRawButton>();
@@ -108,6 +111,9 @@ namespace game.gameplay.control
         {
             {KeyCode.LeftShift, InputActionType.SPRINT},
             {KeyCode.F, InputActionType.KICK},
+            {KeyCode.R, InputActionType.RELOAD},
+            {KeyCode.Mouse1, InputActionType.AIM},
+            {KeyCode.Mouse0, InputActionType.SHOT},
         };
 
         public void Init(IInputRawListener listener)

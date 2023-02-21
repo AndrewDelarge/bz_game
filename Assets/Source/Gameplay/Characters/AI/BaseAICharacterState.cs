@@ -1,4 +1,5 @@
 using game.core.InputSystem;
+using game.Gameplay.Characters.Player;
 
 namespace game.Gameplay.Characters.AI {
 	public abstract class BaseAICharacterState : CharacterState<CharacterStateEnum> {

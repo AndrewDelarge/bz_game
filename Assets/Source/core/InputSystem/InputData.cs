@@ -110,6 +110,8 @@ namespace game.core.InputSystem
         KICK = 1,
         AIM = 2, 
         ACTION = 3,
-        SPRINT = 4
+        SPRINT = 4,
+        RELOAD = 5,
+        SHOT = 6
     }
 }

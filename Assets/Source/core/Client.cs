@@ -2,7 +2,6 @@
 using game.core.InputSystem;
 using game.gameplay.control;
 using game.core.Common;
-using game.Gameplay.Characters;
 using game.Gameplay.Characters.Player;
 using UnityEngine;
 using ILogger = game.core.Common.ILogger;

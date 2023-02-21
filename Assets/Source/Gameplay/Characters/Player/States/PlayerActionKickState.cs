@@ -3,8 +3,8 @@ using game.core.storage;
 using game.core.Common.Helpers;
 using UnityEngine;
 
-namespace game.Gameplay.Characters {
-	public class PlayerKickState : PlayerStateBase<PlayerActionState> {
+namespace game.Gameplay.Characters.Player {
+	public class PlayerActionKickState : PlayerStateBase<PlayerActionStateEnum> {
 		private float _endTime;
 		private float _impulsTime;
 		
@@ -12,7 +12,7 @@ namespace game.Gameplay.Characters {
 		public override void HandleState() {
 			_endTime -= Time.deltaTime;
 			if (_endTime <= 0) {
-				context.actionStateMachine.ChangeState(PlayerActionState.IDLE);
+				context.actionStateMachine.ChangeState(PlayerActionStateEnum.IDLE);
 			}
 
 			if (_endTime <= _impulsTime) {

@@ -1,6 +1,6 @@
-﻿namespace game.Gameplay.Characters
+﻿namespace game.Gameplay.Characters.Player
 {
-        public enum PlayerActionState
+        public enum PlayerActionStateEnum
         {
             IDLE = 0,
             KICK = 1,

@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using game.core.common;
-using game.сore.Common;
 using game.Gameplay.Characters;
+using game.сore.Common;
+using game.Gameplay.Characters.Player;
 
 namespace game.core {
 	public class AIManager {

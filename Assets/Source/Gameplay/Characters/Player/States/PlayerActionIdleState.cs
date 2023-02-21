@@ -1,7 +1,8 @@
 ﻿using game.core.InputSystem;
+using game.Gameplay.Characters.Player.Common;
 
-namespace game.Gameplay.Characters {
-	public class PlayerActionIdleState : PlayerStateBase<PlayerActionState> {
+namespace game.Gameplay.Characters.Player {
+	public class PlayerActionIdleState : PlayerStateBase<PlayerActionStateEnum> {
 		public override void HandleState() {
 		}
 
@@ -10,8 +11,7 @@ namespace game.Gameplay.Characters {
 
 			if (kick is {value: {status: InputStatus.DOWN}}) {
 				kick.isAbsorbed = true;
-				context.mainStateMachine.ChangeState(CharacterStateEnum.WALK);
-				context.actionStateMachine.ChangeState(PlayerActionState.KICK);
+				context.actionStateMachine.ChangeState(PlayerActionStateEnum.KICK);
 			}
 		}
 	}

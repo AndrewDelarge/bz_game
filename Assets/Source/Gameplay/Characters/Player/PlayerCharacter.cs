@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using game.core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using game.core.Storage.Data.Character;
 using game.gameplay.characters;
-using game.Gameplay.Characters.Common;
-using game.Gameplay.Characters.AI;
+using game.Gameplay.Characters.Player.Common;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.Player
@@ -24,7 +22,7 @@ namespace game.Gameplay.Characters.Player
         [SerializeField] private PlayerCharacterCommonData data;
 
         private CharacterStateMachine<CharacterStateEnum> _mainStateMachine;
-        private CharacterStateMachine<PlayerActionState> _actionStateMachine;
+        private CharacterStateMachine<PlayerActionStateEnum> _actionStateMachine;
 
         private InputData _data;
         private bool isInited;
@@ -34,7 +32,7 @@ namespace game.Gameplay.Characters.Player
 
         public void Init()
         {
-            game.AppCore.Get<IInputManager>().RegisterControlable(this);
+            AppCore.Get<IInputManager>().RegisterControlable(this);
 
             _animation.Init(animationSet);
             
@@ -74,9 +72,10 @@ namespace game.Gameplay.Characters.Player
                 {CharacterStateEnum.RUN, new PlayerRunState()},
             });
 
-            _actionStateMachine = new CharacterStateMachine<PlayerActionState>(new Dictionary<PlayerActionState, CharacterState<PlayerActionState>>() {
-                {PlayerActionState.IDLE, new PlayerActionIdleState()},
-                {PlayerActionState.KICK, new PlayerKickState()}
+            _actionStateMachine = new CharacterStateMachine<PlayerActionStateEnum>(new Dictionary<PlayerActionStateEnum, CharacterState<PlayerActionStateEnum>>() {
+                {PlayerActionStateEnum.IDLE, new PlayerActionWeaponEquip()},
+                {PlayerActionStateEnum.KICK, new PlayerActionKickState()},
+                // {PlayerActionStateEnum.EQUIP, new PlayerActionWeaponEquip()},
             });
 
             var context = new PlayerCharacterContext(_healthable, _movement, _animation, animationSet, data, 
@@ -95,10 +94,13 @@ namespace game.Gameplay.Characters.Player
             }
             
             _mainStateMachine.ChangeState(CharacterStateEnum.IDLE);
-            _actionStateMachine.ChangeState(PlayerActionState.IDLE);
+            _actionStateMachine.ChangeState(PlayerActionStateEnum.IDLE);
             
             _mainStateMachine.onStateChanged.Add(_actionStateMachine.OnStateChangeHandler);
             _actionStateMachine.onStateChanged.Add(_mainStateMachine.OnStateChangeHandler);
+            
+            
+            _actionStateMachine.ChangeState(PlayerActionStateEnum.EQUIP);
         }
         
 

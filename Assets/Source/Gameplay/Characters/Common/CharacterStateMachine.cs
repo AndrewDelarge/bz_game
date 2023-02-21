@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using game.core.Common;
+using game.Source.Gameplay.Common;
 
-namespace game.Gameplay.Characters.Common
+namespace game.Gameplay.Characters.Player.Common
 {
     public class CharacterStateMachine<T> : BaseStateMachine<CharacterState<T>>  where T : Enum
     {

@@ -1,7 +1,7 @@
 using game.core.InputSystem;
 using UnityEngine;
 
-namespace game.Gameplay.Characters {
+namespace game.Gameplay.Characters.Player {
 	public class PlayerRunState : PlayerWalkState {
 		public override void Enter() {
 			base.Enter();

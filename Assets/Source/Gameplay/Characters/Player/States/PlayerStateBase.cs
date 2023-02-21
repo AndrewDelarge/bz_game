@@ -1,6 +1,6 @@
 ﻿using game.core.Common;
 
-namespace game.Gameplay.Characters
+namespace game.Gameplay.Characters.Player
 {
 
     public abstract class PlayerStateBase<T> : CharacterState<T>
