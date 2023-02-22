@@ -13,7 +13,7 @@ namespace game.Gameplay.Weapon
         {
             var aim = data.GetAction(InputActionType.AIM);
 			
-            if (aim is {value: {status: InputStatus.PRESSED}}) {
+            if (aim is {value: {status: InputStatus.DOWN}}) {
                 aim.isAbsorbed = true;
 
                 _context.stateMachine.ChangeState(_context.states[typeof(WeaponAim)]);
@@ -49,9 +49,8 @@ namespace game.Gameplay.Weapon
             var aim = data.GetAction(InputActionType.AIM);
 			
             if (aim is not {value: {status: InputStatus.PRESSED}}) {
-                aim.isAbsorbed = true;
-
                 _context.stateMachine.ReturnState();
+                return;
             }
             
             var shot = data.GetAction(InputActionType.SHOT);

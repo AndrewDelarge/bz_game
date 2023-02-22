@@ -18,8 +18,6 @@ namespace game.Gameplay.Characters.Player {
 				context.mainStateMachine.ChangeState(CharacterStateEnum.WALK);
 				return;
 			}
-
-			
 		}
 		
 		protected override float GetSpeedMultiplier() {

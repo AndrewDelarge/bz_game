@@ -22,6 +22,7 @@ namespace game.Gameplay.Characters.Player.Common
         public void ChangeState(T state) {
             if (_states.ContainsKey(state)) {
                 base.ChangeState(_states[state]);
+                _currentState = state;
             }
         }
         

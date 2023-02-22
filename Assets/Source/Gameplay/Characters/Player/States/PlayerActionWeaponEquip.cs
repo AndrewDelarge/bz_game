@@ -45,8 +45,17 @@ namespace game.Gameplay.Characters.Player
             var currentWeaponState = _stateMachine.currentState.GetType();
 			
             if (currentWeaponState == typeof(WeaponAim) || currentWeaponState == typeof(WeaponReload)) {
-                if (context.mainStateMachine.currentState == CharacterStateEnum.RUN)
-                {
+                var sprint = data.GetAction(InputActionType.SPRINT);
+                if (sprint is {value: {status: InputStatus.PRESSED}}) {
+                    sprint.isAbsorbed = true;
+                }
+                
+                if (sprint is {value: {status: InputStatus.DOWN}}) {
+                    _stateMachine.ReturnState();
+                    return;
+                }
+                
+                if (context.mainStateMachine.currentState == CharacterStateEnum.RUN) {
                     context.mainStateMachine.ChangeState(CharacterStateEnum.WALK);
                 }
             }

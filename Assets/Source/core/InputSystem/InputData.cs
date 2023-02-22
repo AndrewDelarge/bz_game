@@ -23,10 +23,10 @@ namespace game.core.InputSystem
             this.actions = actions;
         }
 
-        public InputActionField<InputAction> GetAction(InputActionType action)
+        public InputActionField<InputAction> GetAction(InputActionType action, bool ignoreAbsorbed = false)
         {
             foreach (var inputAction in actions)
-                if (inputAction.value.type == action)
+                if (inputAction.value.type == action && (inputAction.isAbsorbed == false || ignoreAbsorbed))
                     return inputAction;
 
             return null;
