@@ -980,7 +980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animation: {fileID: 4636999450195010156}
   _movement: {fileID: 4636999451347354454}
-  _animData: {fileID: 11400000, guid: 10879c1e94f9ae648a793b84b4f598b2, type: 2}
+  _animSet: {fileID: 11400000, guid: 10879c1e94f9ae648a793b84b4f598b2, type: 2}
   _data: {fileID: 11400000, guid: 6205271c7be3c41c8902495c885fd1d2, type: 2}
   _healthable: {fileID: 4636999451347354452}
 --- !u!114 &4636999451347354454

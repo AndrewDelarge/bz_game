@@ -2,7 +2,7 @@
 
 namespace game.core.Storage.Data.Character
 {
-    [CreateAssetMenu(fileName = "PlayerData", menuName = "Character/PlayerData")]
+    [CreateAssetMenu(fileName = "PlayerData", menuName = "GameData/Character/PlayerData")]
     public class PlayerCharacterCommonData : CharacterCommonData
     {
         [Header("Kick data")]

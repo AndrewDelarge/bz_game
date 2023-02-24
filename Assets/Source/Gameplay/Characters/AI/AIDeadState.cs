@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using game.core.InputSystem;
+using game.core.Storage.Data.Character;
 using game.Gameplay.Characters.Player;
 using UnityEngine;
 
@@ -18,9 +19,10 @@ namespace game.Gameplay.Characters.AI {
 		}
 
 		public override void Enter() {
-			_endTime = context.animationSet.testClip.length * .8f;
+			var animData = context.characterAnimationSet.GetAnimationData(CharacterAnimationEnum.KICK);
+			_endTime = animData.clip.length * .8f;
 
-			context.animation.PlayAnimation(context.animationSet.testClip);
+			context.animation.PlayAnimation(animData.clip);
 		}
 
 		public override void Exit() {

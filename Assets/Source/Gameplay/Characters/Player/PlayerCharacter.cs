@@ -2,7 +2,8 @@
 using game.core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using game.core.Storage.Data.Character;
-using game.gameplay.characters;
+using game.core.storage.Data.Equipment;
+using game.Gameplay.Characters;
 using game.Gameplay.Characters.Common;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace game.Gameplay.Characters.Player
         [SerializeField] private Camera _camera;
 
 
-        [SerializeField] private CharacterAnimData animationSet;
+        [SerializeField] private CharacterAnimationSet _characterAnimationSet;
         [SerializeField] private PlayerCharacterCommonData data;
 
         private CharacterStateMachine<CharacterStateEnum> _mainStateMachine;
@@ -26,6 +27,7 @@ namespace game.Gameplay.Characters.Player
 
         private InputData _data;
         private bool isInited;
+        private EquipmentData _equipmentData;
 
         public bool isPlayer => true;
         public bool isListen => true;
@@ -34,7 +36,9 @@ namespace game.Gameplay.Characters.Player
         {
             AppCore.Get<IInputManager>().RegisterControlable(this);
 
-            _animation.Init(animationSet);
+            _equipmentData = Resources.Load<EquipmentData>("Data/Weapons/HandgunWeapon");
+
+            _animation.Init(_characterAnimationSet);
             
             InitStates();
 
@@ -73,12 +77,11 @@ namespace game.Gameplay.Characters.Player
             });
 
             _actionStateMachine = new CharacterStateMachine<PlayerActionStateEnum>(new Dictionary<PlayerActionStateEnum, CharacterState<PlayerActionStateEnum>>() {
-                {PlayerActionStateEnum.IDLE, new PlayerActionWeaponEquip()},
+                {PlayerActionStateEnum.IDLE, new PlayerActionIdleState()},
                 {PlayerActionStateEnum.KICK, new PlayerActionKickState()},
-                // {PlayerActionStateEnum.EQUIP, new PlayerActionWeaponEquip()},
             });
 
-            var context = new PlayerCharacterContext(_healthable, _movement, _animation, animationSet, data, 
+            var context = new PlayerCharacterContext(_healthable, _movement, _animation, _characterAnimationSet, data, 
                 _movement.transform, _actionStateMachine, _mainStateMachine);
             
             context.camera = _camera;
@@ -107,6 +110,24 @@ namespace game.Gameplay.Characters.Player
         public void OnDataUpdate(InputData data)
         {
             _data = data;
+
+            if (data.GetAction(InputActionType.DEBUG_0) is {value: {status: InputStatus.DOWN}}) {
+                Equip(_equipmentData);
+            }
+        }
+
+        public void Equip(EquipmentData equipment) {
+            // equiper for every equip type ? 
+            
+            _animation.SetAnimationSet(equipment.animationSet);
+            
+            foreach (var state in equipment.statesOverrides) {
+                _mainStateMachine.ReplaceState(state.overrideStateType, state.GetState());
+            }
+            
+            foreach (var state in equipment.actionStatesOverrides) {
+                _actionStateMachine.ReplaceState(state.overrideStateType, state.GetState());
+            }
         }
     }
 }

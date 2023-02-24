@@ -10,18 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c6b8517f2444acea3aba24420eff2b9, type: 3}
-  m_Name: CharacterAnimData
+  m_Name: CharacterAnimDataWithGun
   m_EditorClassIdentifier: 
-  _idle: {fileID: 7400000, guid: 168e9f9a2fb662c46b3032f90e265bad, type: 2}
-  _walk: {fileID: 7400000, guid: 19fc8e3bee443df4283fdbd585206265, type: 2}
-  _run: {fileID: 7400000, guid: bebfece54dba98242ba8bda6f8e945ac, type: 2}
-  _testClip: {fileID: 7400000, guid: 5816f5ad61f7d9a428847c7541bbaca4, type: 2}
   _animationSet:
   - _type: 0
-    _clip: {fileID: 7400000, guid: 168e9f9a2fb662c46b3032f90e265bad, type: 2}
+    _clip: {fileID: 7400000, guid: e8c40cd5f6a15c643aa689ff499a6563, type: 2}
   - _type: 1
     _clip: {fileID: 7400000, guid: 19fc8e3bee443df4283fdbd585206265, type: 2}
   - _type: 2
-    _clip: {fileID: 7400000, guid: bebfece54dba98242ba8bda6f8e945ac, type: 2}
+    _clip: {fileID: 7400000, guid: cff3024574b90da4cb2b4668d37b1895, type: 2}
   - _type: 3
     _clip: {fileID: 7400000, guid: 5816f5ad61f7d9a428847c7541bbaca4, type: 2}

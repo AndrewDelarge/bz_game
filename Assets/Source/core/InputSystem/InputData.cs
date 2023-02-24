@@ -112,6 +112,8 @@ namespace game.core.InputSystem
         ACTION = 3,
         SPRINT = 4,
         RELOAD = 5,
-        SHOT = 6
+        SHOT = 6,
+        
+        DEBUG_0 = 9000
     }
 }

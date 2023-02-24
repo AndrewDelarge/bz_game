@@ -1,8 +1,5 @@
-﻿using game.Gameplay.Characters;
-using game.Gameplay.Characters.Player;
-using UnityEngine;
-
-namespace game.gameplay.characters
+﻿
+namespace game.Gameplay.Characters.Common
 {
     public interface ICharacterMovement
     {

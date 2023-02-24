@@ -1,5 +1,6 @@
 ﻿using game.core;
 using game.core.Storage.Data.Character;
+using game.Gameplay.Characters.Common;
 using UnityEngine;
 
 namespace game.Gameplay.Characters
@@ -21,11 +22,11 @@ namespace game.Gameplay.Characters
 
         private AnimatorOverrideController _overrideController;
 
-        public virtual void Init(CharacterAnimData animationSet)
+        public virtual void Init(CharacterAnimationSet characterAnimationSet)
         {
             base.Init();
             
-            SetAnimationSet(animationSet);
+            SetAnimationSet(characterAnimationSet);
         }
         
         public void SetMotionVelocityPercent(float percent)
@@ -33,11 +34,11 @@ namespace game.Gameplay.Characters
             animator.SetFloat(PARAM_VELOCITY, percent, _velocityDampTime, Time.deltaTime);
         }
 
-        private void SetAnimationSet(CharacterAnimData animationSet)
+        public void SetAnimationSet(CharacterAnimationSet characterAnimationSet)
         {
-            overrideController[ANIMATION_IDLE_NAME] = animationSet.idle;
-            overrideController[ANIMATION_WALK_NAME] = animationSet.walk;
-            overrideController[ANIMATION_RUN_NAME] = animationSet.run;
+            overrideController[ANIMATION_IDLE_NAME] = characterAnimationSet.GetAnimationData(CharacterAnimationEnum.IDLE).clip;
+            overrideController[ANIMATION_WALK_NAME] = characterAnimationSet.GetAnimationData(CharacterAnimationEnum.WALK).clip;
+            overrideController[ANIMATION_RUN_NAME] = characterAnimationSet.GetAnimationData(CharacterAnimationEnum.RUN).clip;
         }
 
         public void Disable() {

@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using game.core;
 using game.core.Storage.Data.Character;
-using game.gameplay.characters;
 using game.Gameplay.Characters.Player;
+using game.Gameplay.Characters;
 using game.Gameplay.Characters.Common;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ namespace game.Gameplay.Characters.AI {
 	public class AICharacter : MonoBehaviour, ICharacter {
 		[SerializeField] private CharacterAnimation _animation;
 		[SerializeField] private CharacterMovement _movement;
-		[SerializeField] private CharacterAnimData _animData;
+		[SerializeField] private CharacterAnimationSet _animSet;
 		[SerializeField] private CharacterCommonData _data;
 		[SerializeField] private Healthable _healthable;
 
@@ -33,9 +33,9 @@ namespace game.Gameplay.Characters.AI {
 					{CharacterStateEnum.DEAD, new AIDeadState()}
 				});
 			
-			var context = new CharacterContext(_healthable, _movement, _animation, _animData, _movement.transform, _data, _mainStateMachine);
+			var context = new CharacterContext(_healthable, _movement, _animation, _animSet, _movement.transform, _data, _mainStateMachine);
 			
-			_animation.Init(_animData);
+			_animation.Init(_animSet);
 
 			foreach (var state in _mainStateMachine.states.Values) {
 				state.Init(context);

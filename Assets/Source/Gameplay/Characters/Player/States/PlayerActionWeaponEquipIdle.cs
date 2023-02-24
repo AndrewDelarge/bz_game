@@ -6,7 +6,7 @@ using game.Gameplay.Common;
 
 namespace game.Gameplay.Characters.Player
 {
-    public class PlayerActionWeaponEquip : PlayerStateBase<PlayerActionStateEnum>
+    public class PlayerActionWeaponEquipIdle : PlayerStateBase<PlayerActionStateEnum>
     {
         private BaseStateMachineWithStack<WeaponStateBase> _stateMachine;
         private Dictionary<Type, WeaponStateBase> _weaponStates = new ()
@@ -31,6 +31,11 @@ namespace game.Gameplay.Characters.Player
             }
             
             _stateMachine.ChangeState(_weaponStates[typeof(WeaponIdle)]);
+        }
+
+        public override void Enter() {
+            base.Enter();
+            
         }
 
         public override void HandleState()

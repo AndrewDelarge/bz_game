@@ -82,7 +82,7 @@ MonoBehaviour:
   _animation: {fileID: 3726608878209224817}
   _healthable: {fileID: 0}
   _camera: {fileID: 5481474671396007646}
-  animationSet: {fileID: 11400000, guid: d1e186efc0bbe45fb88d1193cfa131c0, type: 2}
+  _characterAnimationSet: {fileID: 11400000, guid: d1e186efc0bbe45fb88d1193cfa131c0, type: 2}
   data: {fileID: 11400000, guid: 8d9eab988f3233245b63bdc55ee5db37, type: 2}
 --- !u!1 &475448938622600078
 GameObject:
@@ -679,7 +679,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3752337136665303957}
   m_LocalRotation: {x: -0.00040903687, y: 0.036806256, z: -0.03756556, w: 0.9986161}
-  m_LocalPosition: {x: -1.1399992, y: 0.11999917, z: 3.9799984}
+  m_LocalPosition: {x: -1.1399984, y: 0.11999774, z: 3.979997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1295,7 +1295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5481474671396007644}
   m_LocalRotation: {x: -0.00040903687, y: 0.036806256, z: -0.03756556, w: 0.9986161}
-  m_LocalPosition: {x: -1.1399992, y: 0.11999917, z: 3.9799984}
+  m_LocalPosition: {x: -1.1399984, y: 0.11999774, z: 3.979997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

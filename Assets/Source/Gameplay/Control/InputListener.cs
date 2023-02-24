@@ -24,6 +24,7 @@ namespace game.gameplay.control
             KeyCode.R,
             KeyCode.Mouse0,
             KeyCode.Mouse1,
+            KeyCode.P
         };
 
         private List<InputRawButton> _buttonsPool = new List<InputRawButton>();
@@ -114,6 +115,7 @@ namespace game.gameplay.control
             {KeyCode.R, InputActionType.RELOAD},
             {KeyCode.Mouse1, InputActionType.AIM},
             {KeyCode.Mouse0, InputActionType.SHOT},
+            {KeyCode.P, InputActionType.DEBUG_0},
         };
 
         public void Init(IInputRawListener listener)

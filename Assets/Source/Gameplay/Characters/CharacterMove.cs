@@ -1,7 +1,4 @@
-﻿using game.core.InputSystem.Interfaces;
-using game.core.InputSystem;
-using game.gameplay.characters;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace game.Gameplay.Characters
 {

@@ -1,6 +1,4 @@
-﻿using game.Gameplay.Characters.Common;
-using game.Gameplay.Common;
-using UnityEngine;
+﻿using game.Gameplay.Common;
 
 namespace game.Gameplay.Characters
 {

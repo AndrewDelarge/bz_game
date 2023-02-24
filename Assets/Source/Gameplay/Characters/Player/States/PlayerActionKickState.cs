@@ -1,6 +1,7 @@
 ﻿using game.core.InputSystem;
 using game.core.storage;
 using game.core.Common.Helpers;
+using game.core.Storage.Data.Character;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.Player {
@@ -29,10 +30,10 @@ namespace game.Gameplay.Characters.Player {
 
 		public override void Enter() {
 			base.Enter();
-
-			_endTime = context.animationSet.testClip.length * .9f;
+			var animData = context.characterAnimationSet.GetAnimationData(CharacterAnimationEnum.KICK);
+			_endTime = animData.clip.length * .9f;
 			_impulsTime = _endTime - context.data.kickPhysicsImpulseDelay;
-			context.animation.PlayAnimation(context.animationSet.testClip);
+			context.animation.PlayAnimation(animData.clip);
 		}
 
 		private void ProduceDamage() {

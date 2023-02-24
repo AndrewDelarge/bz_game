@@ -1,4 +1,4 @@
-﻿namespace game.Gameplay.Characters
+﻿namespace game.Gameplay.Characters.Common
 {
     public interface ICharacter {
 

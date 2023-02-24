@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using game.core.Storage.Data.Character;
-using game.gameplay.characters;
 using game.Gameplay.Characters.Common;
 using UnityEngine;
 
@@ -15,9 +12,9 @@ namespace game.Gameplay.Characters.Player
 		public new PlayerCharacterCommonData data => (PlayerCharacterCommonData) _data;
 
 		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, 
-			CharacterAnimData animationData, PlayerCharacterCommonData data, Transform transform, 
+			CharacterAnimationSet characterAnimationSet, PlayerCharacterCommonData data, Transform transform, 
 			CharacterStateMachine<PlayerActionStateEnum> actionStateMachine, CharacterStateMachine<CharacterStateEnum> mainStateMachine) 
-			: base(healthable, movement, animation, animationData, transform, data, mainStateMachine) {
+			: base(healthable, movement, animation, characterAnimationSet, transform, data, mainStateMachine) {
 			_data = data;
 			_actionStateMachine = actionStateMachine;
 		}

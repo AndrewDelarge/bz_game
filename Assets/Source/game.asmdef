@@ -1,7 +1,9 @@
 {
     "name": "game",
     "rootNamespace": "game",
-    "references": [],
+    "references": [
+        "NaughtyAttributes.Core"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

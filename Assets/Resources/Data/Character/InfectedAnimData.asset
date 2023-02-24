@@ -16,3 +16,12 @@ MonoBehaviour:
   _walk: {fileID: 7400000, guid: 7e141d359c8a343448642e01252a0090, type: 2}
   _run: {fileID: 7400000, guid: 7e141d359c8a343448642e01252a0090, type: 2}
   _testClip: {fileID: 7400000, guid: 48a75137f0e744e8fae16e115d759f31, type: 2}
+  _animationSet:
+  - _type: 0
+    _clip: {fileID: 7400000, guid: 5c58d310389184a859148d9ec1b2d768, type: 2}
+  - _type: 1
+    _clip: {fileID: 7400000, guid: 7e141d359c8a343448642e01252a0090, type: 2}
+  - _type: 2
+    _clip: {fileID: 7400000, guid: 7e141d359c8a343448642e01252a0090, type: 2}
+  - _type: 3
+    _clip: {fileID: 7400000, guid: 48a75137f0e744e8fae16e115d759f31, type: 2}

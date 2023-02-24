@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using game.core.common;
 using game.Gameplay.Characters;
+using game.Gameplay.Characters.Common;
 using game.сore.Common;
 using game.Gameplay.Characters.Player;
 

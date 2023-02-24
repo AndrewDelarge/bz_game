@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using game.Gameplay.Characters;
-using game.Gameplay.Characters.Player;
+﻿using System.Collections.Generic;
+using game.Gameplay.Characters.Common;
 using UnityEngine;
 
-namespace game.gameplay.characters
+namespace game.Gameplay.Characters
 {
     public class CharacterMovement : MonoBehaviour, ICharacterMovement
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace game.Gameplay.Characters
+namespace game.Gameplay.Characters.Common
 {
     public interface ICharacterAnimation {
         void PlayAnimation(AnimationClip animationClip);
