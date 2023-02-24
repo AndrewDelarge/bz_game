@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using game.core.InputSystem;
 using game.Gameplay.Weapon;
-using game.Source.Gameplay.Common;
+using game.Gameplay.Common;
 
 namespace game.Gameplay.Characters.Player
 {

@@ -2,7 +2,7 @@
 using game.core.InputSystem;
 using ILogger = game.core.Common.ILogger;
 
-namespace game.Source.Gameplay.Common
+namespace game.Gameplay.Common
 {
     public class BaseStateMachine<T> where T : BaseState {
         public T currentState => _currentState;

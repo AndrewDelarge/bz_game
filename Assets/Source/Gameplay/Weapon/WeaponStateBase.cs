@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using game.core.InputSystem;
-using game.Source.Gameplay.Common;
+using game.Gameplay.Common;
 using UnityEngine;
 using ILogger = game.core.Common.ILogger;
 

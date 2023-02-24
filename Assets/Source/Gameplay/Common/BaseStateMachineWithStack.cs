@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace game.Source.Gameplay.Common
+namespace game.Gameplay.Common
 {
     public class BaseStateMachineWithStack<T> : BaseStateMachine<T> where T : BaseState
     {

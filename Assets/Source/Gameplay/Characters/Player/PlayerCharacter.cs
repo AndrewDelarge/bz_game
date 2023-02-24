@@ -3,7 +3,7 @@ using game.core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using game.core.Storage.Data.Character;
 using game.gameplay.characters;
-using game.Gameplay.Characters.Player.Common;
+using game.Gameplay.Characters.Common;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.Player

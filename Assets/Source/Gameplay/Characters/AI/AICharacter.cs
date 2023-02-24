@@ -4,7 +4,7 @@ using game.core;
 using game.core.Storage.Data.Character;
 using game.gameplay.characters;
 using game.Gameplay.Characters.Player;
-using game.Gameplay.Characters.Player.Common;
+using game.Gameplay.Characters.Common;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.AI {

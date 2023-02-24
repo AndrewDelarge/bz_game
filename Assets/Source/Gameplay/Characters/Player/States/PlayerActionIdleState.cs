@@ -1,5 +1,5 @@
 ﻿using game.core.InputSystem;
-using game.Gameplay.Characters.Player.Common;
+using game.Gameplay.Characters.Common;
 
 namespace game.Gameplay.Characters.Player {
 	public class PlayerActionIdleState : PlayerStateBase<PlayerActionStateEnum> {
