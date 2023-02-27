@@ -6,7 +6,7 @@ using game.Gameplay.Characters.Player;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.AI {
-	public class AIDeadState : CharacterState<CharacterStateEnum> {
+	public class AIDeadState : CharacterState<CharacterStateEnum, CharacterContext> {
 		private List<Rigidbody> _ragdollBones;
 		private float _endTime;
 

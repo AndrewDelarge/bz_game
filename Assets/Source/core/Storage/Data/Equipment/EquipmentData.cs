@@ -11,11 +11,11 @@ namespace game.core.storage.Data.Equipment {
 	public abstract class EquipmentData : ScriptableObject {
 		[SerializeField] private CharacterAnimationSet _animationSet;
 
-		[SerializeField] private List<State<CharacterState<CharacterStateEnum>, CharacterStateEnum>> _statesOverrides;
-		[SerializeField] private List<State<CharacterState<PlayerActionStateEnum>, PlayerActionStateEnum>> _actionStatesOverrides;
+		[SerializeField] private List<StateData<CharacterState<CharacterStateEnum, PlayerCharacterContext>, CharacterStateEnum,PlayerCharacterContext>> _statesOverrides;
+		[SerializeField] private List<StateData<CharacterState<PlayerActionStateEnum, PlayerCharacterContext>, PlayerActionStateEnum,PlayerCharacterContext>> _actionStatesOverrides;
 		
 		public CharacterAnimationSet animationSet => _animationSet;
-		public IReadOnlyList<State<CharacterState<CharacterStateEnum>, CharacterStateEnum>> statesOverrides => _statesOverrides;
-		public IReadOnlyList<State<CharacterState<PlayerActionStateEnum>, PlayerActionStateEnum>> actionStatesOverrides => _actionStatesOverrides;
+		public IReadOnlyList<StateData<CharacterState<CharacterStateEnum, PlayerCharacterContext>, CharacterStateEnum,PlayerCharacterContext>> statesOverrides => _statesOverrides;
+		public IReadOnlyList<StateData<CharacterState<PlayerActionStateEnum, PlayerCharacterContext>, PlayerActionStateEnum,PlayerCharacterContext>> actionStatesOverrides => _actionStatesOverrides;
 	}
 }

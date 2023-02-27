@@ -2,11 +2,11 @@
 
 namespace game.Gameplay.Characters
 {
-    public abstract class CharacterState<T> : BaseState
+    public abstract class CharacterState<T, TContext> : BaseState
     {
-        protected CharacterContext context;
+        protected TContext context;
 
-        public virtual void Init(CharacterContext context)
+        public virtual void Init(TContext context)
         {
             this.context = context;
         }

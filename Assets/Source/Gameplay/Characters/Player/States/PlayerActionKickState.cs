@@ -5,7 +5,7 @@ using game.core.Storage.Data.Character;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.Player {
-	public class PlayerActionKickState : PlayerStateBase<PlayerActionStateEnum> {
+	public class PlayerActionKickState : PlayerStateBase<PlayerActionStateEnum, PlayerCharacterContext> {
 		private float _endTime;
 		private float _impulsTime;
 		

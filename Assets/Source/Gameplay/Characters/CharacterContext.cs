@@ -11,20 +11,23 @@ namespace game.Gameplay.Characters
         private CharacterAnimationSet _characterAnimationSet;
         private Transform _transform;
         private Healthable _healthable;
-        private CharacterStateMachine<CharacterStateEnum> _mainStateMachine;
+        private CharacterStateMachine<CharacterStateEnum, CharacterContext> _mainStateMachine;
         protected CharacterCommonData _data;
 
         public ICharacterMovement movement => _movement;
         public ICharacterAnimation animation => _animation;
         public CharacterAnimationSet characterAnimationSet => _characterAnimationSet;
         public Transform transform => _transform;
-        public CharacterStateMachine<CharacterStateEnum> mainStateMachine => _mainStateMachine;
         public CharacterCommonData data => _data;
         public Healthable healthable => _healthable;
 
+        public CharacterStateMachine<CharacterStateEnum, CharacterContext> mainStateMachine {
+            get => _mainStateMachine;
+            set => _mainStateMachine = value;
+        }
+        
         public CharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, 
-            CharacterAnimationSet characterAnimationSet, Transform transform, CharacterCommonData data, 
-            CharacterStateMachine<CharacterStateEnum> mainStateMachine) {
+            CharacterAnimationSet characterAnimationSet, Transform transform, CharacterCommonData data) {
             _healthable = healthable;
             _movement = movement;
             _animation = animation;

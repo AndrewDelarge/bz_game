@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99b0dc330f64411998554de5df311858, type: 3}
-  m_Name: HandgunWeapon
+  m_Name: ShotgunWeapon
   m_EditorClassIdentifier: 
   _animationSet: {fileID: 11400000, guid: 55a6970fd6d244d3fa60da10e585ffe9, type: 2}
   _statesOverrides: []

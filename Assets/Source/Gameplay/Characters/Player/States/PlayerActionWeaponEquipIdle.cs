@@ -6,7 +6,7 @@ using game.Gameplay.Common;
 
 namespace game.Gameplay.Characters.Player
 {
-    public class PlayerActionWeaponEquipIdle : PlayerStateBase<PlayerActionStateEnum>
+    public class PlayerActionWeaponEquipIdle : PlayerStateBase<PlayerActionStateEnum, PlayerCharacterContext>
     {
         private BaseStateMachineWithStack<WeaponStateBase> _stateMachine;
         private Dictionary<Type, WeaponStateBase> _weaponStates = new ()
@@ -17,7 +17,7 @@ namespace game.Gameplay.Characters.Player
             {typeof(WeaponShot), new WeaponShot()},
         };
 
-        public override void Init(CharacterContext context)
+        public override void Init(PlayerCharacterContext context)
         {
             base.Init(context);
 

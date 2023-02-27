@@ -5,7 +5,7 @@ using NaughtyAttributes;
 using UnityEngine;
 
 namespace game.core.storage.Data.Character {
-	public abstract class State<T, T1> : ScriptableObject where T : CharacterState<T1> where  T1 : Enum {
+	public abstract class StateData<T, T1, TContext> : ScriptableObject where T : CharacterState<T1, TContext> where  T1 : Enum {
 		[Dropdown("GetValues")]
 		[SerializeField] private T1 _overrideStateType;
 		public abstract T GetState();

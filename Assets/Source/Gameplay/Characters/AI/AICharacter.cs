@@ -15,7 +15,7 @@ namespace game.Gameplay.Characters.AI {
 		[SerializeField] private CharacterCommonData _data;
 		[SerializeField] private Healthable _healthable;
 
-		private CharacterStateMachine<CharacterStateEnum> _mainStateMachine;
+		private CharacterStateMachine<CharacterStateEnum, CharacterContext> _mainStateMachine;
 		private bool isInited;
 		
 		public bool isPlayer => false;
@@ -26,14 +26,16 @@ namespace game.Gameplay.Characters.AI {
 
 		public void Init()
 		{
-			_mainStateMachine = new CharacterStateMachine<CharacterStateEnum>(
-				new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum>>()
+			var context = new CharacterContext(_healthable, _movement, _animation, _animSet, _movement.transform, _data);
+
+			_mainStateMachine = new CharacterStateMachine<CharacterStateEnum, CharacterContext>(context,
+				new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, CharacterContext>>()
 				{
 					{CharacterStateEnum.IDLE, new AIIdleState()},
 					{CharacterStateEnum.DEAD, new AIDeadState()}
 				});
-			
-			var context = new CharacterContext(_healthable, _movement, _animation, _animSet, _movement.transform, _data, _mainStateMachine);
+
+			context.mainStateMachine = _mainStateMachine;
 			
 			_animation.Init(_animSet);
 

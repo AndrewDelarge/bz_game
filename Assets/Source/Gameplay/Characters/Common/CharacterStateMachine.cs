@@ -5,21 +5,28 @@ using game.Gameplay.Common;
 
 namespace game.Gameplay.Characters.Common
 {
-    public class CharacterStateMachine<T> : BaseStateMachine<CharacterState<T>>  where T : Enum
+    public class CharacterStateMachine<T, TContext> : BaseStateMachine<CharacterState<T, TContext>>  where T : Enum 
     {
-        private Dictionary<T, CharacterState<T>> _states;
-        private Dictionary<T, CharacterState<T>> _statesOverrides = new Dictionary<T, CharacterState<T>>();
+        private Dictionary<T, CharacterState<T, TContext>> _states;
+        private Dictionary<T, CharacterState<T, TContext>> _statesOverrides = new ();
         private T _currentState;
+        private TContext _context;
+        
         private Whistle<T> _whistle;
-        public IReadOnlyDictionary<T, CharacterState<T>> states => _states;
+        public IReadOnlyDictionary<T, CharacterState<T, TContext>> states => _states;
         public new T currentState => _currentState;
         public new IWhistle<T> onStateChanged => _whistle;
 
-        public CharacterStateMachine(Dictionary<T, CharacterState<T>> states) {
+        public CharacterStateMachine(TContext context, Dictionary<T, CharacterState<T, TContext>> states) {
+            _context = context;
             _states = states;
             _whistle = new Whistle<T>();
-        }
 
+            foreach (var characterState in _states.Values) {
+                characterState.Init(_context);
+            }
+        }
+        
         public void ChangeState(T state) {
             var characterState = GetState(state);
             
@@ -28,14 +35,16 @@ namespace game.Gameplay.Characters.Common
                 return;
             }
             
-            base.ChangeState(_states[state]);
+            base.ChangeState(characterState);
             _currentState = state;
         }
 
-        public void ReplaceState(T type, CharacterState<T> state) {
+        public void ReplaceState(T type, CharacterState<T, TContext> state) {
             if (_statesOverrides.ContainsKey(type)) {
                 _statesOverrides.Remove(type);
             }
+            
+            state.Init(_context);
             
             _statesOverrides.Add(type, state);
             
@@ -46,7 +55,7 @@ namespace game.Gameplay.Characters.Common
             base.currentState.OnChangedStateHandler(state);
         }
 
-        private CharacterState<T> GetState(T type) {
+        private CharacterState<T, TContext> GetState(T type) {
             return _statesOverrides.ContainsKey(type)
                 ? _statesOverrides[type]
                 : _states.ContainsKey(type)

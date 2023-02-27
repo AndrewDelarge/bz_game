@@ -2,7 +2,7 @@
 using game.Gameplay.Characters;
 
 namespace game.Gameplay.Characters.Player {
-	public class PlayerActionIdleState : PlayerStateBase<PlayerActionStateEnum> {
+	public class PlayerActionIdleState : PlayerStateBase<PlayerActionStateEnum, PlayerCharacterContext> {
 		public override void HandleState() {
 		}
 

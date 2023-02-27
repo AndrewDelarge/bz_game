@@ -3,9 +3,8 @@
 namespace game.Gameplay.Characters.Player
 {
 
-    public abstract class PlayerStateBase<T> : CharacterState<T>
-    {
-        protected new PlayerCharacterContext context => (PlayerCharacterContext) base.context;
+    public abstract class PlayerStateBase<T, TContext> : CharacterState<T, TContext> {
+        protected new TContext context => (TContext) base.context;
 
         public override void Enter()
         {

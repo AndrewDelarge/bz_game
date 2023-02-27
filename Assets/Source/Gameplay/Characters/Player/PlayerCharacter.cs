@@ -22,8 +22,8 @@ namespace game.Gameplay.Characters.Player
         [SerializeField] private CharacterAnimationSet _characterAnimationSet;
         [SerializeField] private PlayerCharacterCommonData data;
 
-        private CharacterStateMachine<CharacterStateEnum> _mainStateMachine;
-        private CharacterStateMachine<PlayerActionStateEnum> _actionStateMachine;
+        private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
+        private CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> _actionStateMachine;
 
         private InputData _data;
         private bool isInited;
@@ -70,32 +70,27 @@ namespace game.Gameplay.Characters.Player
 
         private void InitStates()
         {
-            _mainStateMachine = new CharacterStateMachine<CharacterStateEnum>(new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum>>(){
+            var context = new PlayerCharacterContext(_healthable, _movement, _animation, _characterAnimationSet, data, 
+                _movement.transform);
+            
+            _mainStateMachine = new CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext>(context,
+                new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, PlayerCharacterContext>>(){
                 {CharacterStateEnum.IDLE, new PlayerIdleState()},
                 {CharacterStateEnum.WALK, new PlayerWalkState()},
                 {CharacterStateEnum.RUN, new PlayerRunState()},
             });
 
-            _actionStateMachine = new CharacterStateMachine<PlayerActionStateEnum>(new Dictionary<PlayerActionStateEnum, CharacterState<PlayerActionStateEnum>>() {
+            _actionStateMachine = new CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext>(context, 
+                new Dictionary<PlayerActionStateEnum, CharacterState<PlayerActionStateEnum, PlayerCharacterContext>>() {
                 {PlayerActionStateEnum.IDLE, new PlayerActionIdleState()},
                 {PlayerActionStateEnum.KICK, new PlayerActionKickState()},
             });
 
-            var context = new PlayerCharacterContext(_healthable, _movement, _animation, _characterAnimationSet, data, 
-                _movement.transform, _actionStateMachine, _mainStateMachine);
-            
+
+            context.mainStateMachine = _mainStateMachine;
+            context.actionStateMachine = _actionStateMachine;
             context.camera = _camera;
 
-            
-            // TODO совсем избавится от контекста не получится мб хотябы не хранить ссылки на него в стейтах
-            foreach (var state in _mainStateMachine.states.Values) {
-                state.Init(context);
-            }
-            
-            foreach (var state in _actionStateMachine.states.Values) {
-                state.Init(context);
-            }
-            
             _mainStateMachine.ChangeState(CharacterStateEnum.IDLE);
             _actionStateMachine.ChangeState(PlayerActionStateEnum.IDLE);
             
