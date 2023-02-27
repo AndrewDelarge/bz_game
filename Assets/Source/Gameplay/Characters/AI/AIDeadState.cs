@@ -19,7 +19,7 @@ namespace game.Gameplay.Characters.AI {
 		}
 
 		public override void Enter() {
-			var animData = context.characterAnimationSet.GetAnimationData(CharacterAnimationEnum.KICK);
+			var animData = context.animation.GetAnimationData(CharacterAnimationEnum.KICK);
 			_endTime = animData.clip.length * .8f;
 
 			context.animation.PlayAnimation(animData.clip);

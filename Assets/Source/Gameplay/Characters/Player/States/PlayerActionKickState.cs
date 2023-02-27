@@ -30,8 +30,8 @@ namespace game.Gameplay.Characters.Player {
 
 		public override void Enter() {
 			base.Enter();
-			var animData = context.characterAnimationSet.GetAnimationData(CharacterAnimationEnum.KICK);
-			_endTime = animData.clip.length * .9f;
+			var animData = context.animation.GetAnimationData(CharacterAnimationEnum.KICK);
+			_endTime = animData.length * .9f;
 			_impulsTime = _endTime - context.data.kickPhysicsImpulseDelay;
 			context.animation.PlayAnimation(animData.clip);
 		}

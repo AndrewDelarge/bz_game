@@ -4,11 +4,11 @@ using UnityEngine;
 namespace game.core.Storage.Data.Character
 {
     [CreateAssetMenu(fileName = "CharacterAnimSet", menuName = "GameData/Character/AnimationSet")]
-    public class CharacterAnimationSet : ScriptableObject, IAnimationSet<CharacterAnimationEnum>
+    public class CharacterAnimationSet : ScriptableObject, IAnimationSet<CharacterAnimationEnum, AnimationClip>
     {
         [SerializeField] private List<AnimationData<CharacterAnimationEnum>> _animationSet;
 
-        public AnimationData<CharacterAnimationEnum> GetAnimationData(CharacterAnimationEnum id) {
+        public IAnimationData<CharacterAnimationEnum, AnimationClip> GetAnimationData(CharacterAnimationEnum id) {
             return _animationSet.Find(x => x.type == id);
         }
     }

@@ -15,7 +15,7 @@ namespace game.Gameplay.Characters
         protected CharacterCommonData _data;
 
         public ICharacterMovement movement => _movement;
-        public ICharacterAnimation animation => _animation;
+        public ICharacterAnimation<CharacterAnimationSet, CharacterAnimationEnum, AnimationClip> animation => _animation;
         public CharacterAnimationSet characterAnimationSet => _characterAnimationSet;
         public Transform transform => _transform;
         public CharacterCommonData data => _data;

@@ -38,11 +38,7 @@ namespace game.Gameplay.Characters.AI {
 			context.mainStateMachine = _mainStateMachine;
 			
 			_animation.Init(_animSet);
-
-			foreach (var state in _mainStateMachine.states.Values) {
-				state.Init(context);
-			}
-
+			
 			_mainStateMachine.ChangeState(CharacterStateEnum.IDLE);
 
 			isInited = true;

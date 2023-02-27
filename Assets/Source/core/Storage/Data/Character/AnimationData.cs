@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace game.core.Storage.Data.Character {
 	[Serializable]
-	public class AnimationData<T> where T : Enum {
+	public class AnimationData<T> : IAnimationData<T, AnimationClip>  where T : Enum {
 		[Dropdown("GetValues")]
 		[SerializeField] private T _type;
 		[SerializeField] private AnimationClip _clip;
@@ -13,6 +13,7 @@ namespace game.core.Storage.Data.Character {
         
 		public T type => _type;
 		public AnimationClip clip => _clip;
+		public float length => _clip.length;
 
 		protected virtual DropdownList<T> GetValues() {
 			if (_enumValues != null) {

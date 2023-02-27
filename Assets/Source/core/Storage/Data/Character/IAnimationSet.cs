@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 
 namespace game.core.Storage.Data.Character {
-	public interface IAnimationSet<T> where T : Enum
+	public interface IAnimationSet<T, T2> where T : Enum
 	{
-		public AnimationData<T> GetAnimationData(T id);
+		public IAnimationData<T, T2> GetAnimationData(T id);
 	}
 }

@@ -36,7 +36,7 @@ namespace game.Gameplay.Characters.Player
         {
             AppCore.Get<IInputManager>().RegisterControlable(this);
 
-            _equipmentData = Resources.Load<EquipmentData>("Data/Weapons/HandgunWeapon");
+            _equipmentData = Resources.Load<EquipmentData>("Data/Weapons/ShotgunWeapon");
 
             _animation.Init(_characterAnimationSet);
             
@@ -70,8 +70,7 @@ namespace game.Gameplay.Characters.Player
 
         private void InitStates()
         {
-            var context = new PlayerCharacterContext(_healthable, _movement, _animation, _characterAnimationSet, data, 
-                _movement.transform);
+            var context = new PlayerCharacterContext(_healthable, _movement, _animation, data, _movement.transform);
             
             _mainStateMachine = new CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext>(context,
                 new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, PlayerCharacterContext>>(){

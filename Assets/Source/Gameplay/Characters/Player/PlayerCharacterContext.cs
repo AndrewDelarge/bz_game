@@ -17,8 +17,7 @@ namespace game.Gameplay.Characters.Player
 		public Camera camera;
 		
 		public ICharacterMovement movement => _movement;
-		public ICharacterAnimation animation => _animation;
-		public CharacterAnimationSet characterAnimationSet => _characterAnimationSet;
+		public ICharacterAnimation<CharacterAnimationSet, CharacterAnimationEnum, AnimationClip> animation => _animation;
 		public Transform transform => _transform;
 		public Healthable healthable => _healthable;
 		public PlayerCharacterCommonData data => _data;
@@ -32,13 +31,11 @@ namespace game.Gameplay.Characters.Player
 			set => _mainStateMachine = value;
 		}
 
-		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, 
-			CharacterAnimationSet characterAnimationSet, PlayerCharacterCommonData data, Transform transform) {
+		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, PlayerCharacterCommonData data, Transform transform) {
 			_data = data;
 			_healthable = healthable;
 			_movement = movement;
 			_animation = animation;
-			_characterAnimationSet = characterAnimationSet;
 			_transform = transform;
 		}
 	}
