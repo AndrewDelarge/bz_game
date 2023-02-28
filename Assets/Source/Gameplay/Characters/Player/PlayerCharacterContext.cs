@@ -5,22 +5,28 @@ using UnityEngine;
 namespace game.Gameplay.Characters.Player
 {
 	public class PlayerCharacterContext {
-		private CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> _actionStateMachine;
-		private CharacterMovement _movement;
-		private CharacterAnimation _animation;
-		private CharacterAnimationSet _characterAnimationSet;
 		private Transform _transform;
 		private Healthable _healthable;
-		private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
+		
+		private CharacterMovement _movement;
+		private CharacterEquipmentManger _equipmentManger;
+		private CharacterAnimation _animation;
 		private PlayerCharacterCommonData _data;
+		private BoneListenerManager _boneListenerManager;
+
+		private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
+		private CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> _actionStateMachine;
 
 		public Camera camera;
-		
-		public ICharacterMovement movement => _movement;
-		public ICharacterAnimation<CharacterAnimationSet, CharacterAnimationEnum, AnimationClip> animation => _animation;
 		public Transform transform => _transform;
 		public Healthable healthable => _healthable;
 		public PlayerCharacterCommonData data => _data;
+		public BoneListenerManager boneListenerManager => _boneListenerManager;
+
+		public CharacterEquipmentManger equipmentManger => _equipmentManger;
+		public ICharacterMovement movement => _movement;
+		public ICharacterAnimation<CharacterAnimationSet, CharacterAnimationEnum, AnimationClip> animation => _animation;
+
 		public CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> actionStateMachine {
 			get => _actionStateMachine;
 			set => _actionStateMachine = value;
@@ -31,12 +37,14 @@ namespace game.Gameplay.Characters.Player
 			set => _mainStateMachine = value;
 		}
 
-		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, PlayerCharacterCommonData data, Transform transform) {
+		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, PlayerCharacterCommonData data, Transform transform, CharacterEquipmentManger equipmentManger, BoneListenerManager boneListenerManager) {
 			_data = data;
 			_healthable = healthable;
 			_movement = movement;
 			_animation = animation;
 			_transform = transform;
+			_equipmentManger = equipmentManger;
+			_boneListenerManager = boneListenerManager;
 		}
 	}
 }

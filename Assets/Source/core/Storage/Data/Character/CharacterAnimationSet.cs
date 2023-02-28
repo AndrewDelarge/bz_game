@@ -15,9 +15,10 @@ namespace game.core.Storage.Data.Character
 
 
     public enum CharacterAnimationEnum {
-        IDLE,
-        WALK,
-        RUN,
-        KICK,
+        IDLE = 0,
+        WALK = 1,
+        RUN = 2,
+        KICK = 3,
+        AIM = 4
     }
 }

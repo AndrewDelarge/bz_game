@@ -9,7 +9,10 @@ namespace game.Gameplay.Characters
     [RequireComponent(typeof(Animator))]
     public class CharacterAnimation : BaseAnimator, ICharacterAnimation<CharacterAnimationSet, CharacterAnimationEnum, AnimationClip>
     {
-        private const string PARAM_VELOCITY = "velocity";
+        private readonly int PARAM_VELOCITY = Animator.StringToHash("velocity");
+        
+        private const int ACTION_LAYER_ID = 1;
+        private const int ACTION_INMOVE_LAYER_ID = 2;
         
         private const string ANIMATION_IDLE_NAME = "empty_idle";
         private const string ANIMATION_WALK_NAME = "empty_walk";
@@ -20,11 +23,10 @@ namespace game.Gameplay.Characters
 
         [Header("States")] 
         [SerializeField] private string _actionName;
-
+        
         protected CharacterAnimationSet _currentAnimationSet;
         protected CharacterAnimationSet _defalutAnimationSet;
         private AnimatorOverrideController _overrideController;
-
 
         public virtual void Init(CharacterAnimationSet characterAnimationSet)
         {
@@ -33,6 +35,14 @@ namespace game.Gameplay.Characters
             _defalutAnimationSet = characterAnimationSet;
             
             SetAnimationSet(characterAnimationSet);
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            
+            animator.SetLayerWeight(ACTION_LAYER_ID, animator.GetFloat(PARAM_VELOCITY) < .01f ? 1f : 0);
+            animator.SetLayerWeight(ACTION_INMOVE_LAYER_ID, animator.GetFloat(PARAM_VELOCITY) > 0 ? 1 : 0);
         }
 
         public void PlayAnimation(CharacterAnimationEnum state)

@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using game.core.InputSystem;
+using game.core.Storage.Data.Character;
+using game.core.storage.Data.Equipment.Weapon;
 using game.Gameplay.Weapon;
 using game.Gameplay.Common;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace game.Gameplay.Characters.Player
 {
     public class PlayerActionWeaponEquipIdle : PlayerStateBase<PlayerActionStateEnum, PlayerCharacterContext>
     {
         private BaseStateMachineWithStack<WeaponStateBase> _stateMachine;
+
+        private GameObject _tmpWeaponView;
+        
         private Dictionary<Type, WeaponStateBase> _weaponStates = new ()
         {
             {typeof(WeaponIdle), new WeaponIdle()},
@@ -35,12 +42,31 @@ namespace game.Gameplay.Characters.Player
 
         public override void Enter() {
             base.Enter();
+
+            var weaponData = (WeaponData) context.equipmentManger.currentEquipment;
+
+            var bone = context.boneListenerManager.bones[BoneListenerManager.CharacterBone.RIGHT_HAND_WEAPON];
             
+            _tmpWeaponView = Object.Instantiate(weaponData.view, bone.transform);
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            
+            Object.Destroy(_tmpWeaponView);
         }
 
         public override void HandleState()
         {
             _stateMachine.HandleState();
+            
+            var currentWeaponState = _stateMachine.currentState.GetType();
+
+            if (currentWeaponState == typeof(WeaponAim))
+            {
+                context.animation.PlayAnimation(CharacterAnimationEnum.AIM);
+            }
         }
 
         public override void HandleInput(InputData data)

@@ -16,3 +16,4 @@ MonoBehaviour:
   _statesOverrides: []
   _actionStatesOverrides:
   - {fileID: 11400000, guid: 1b5c5c8f3a1f84bfaac9e473aa58732c, type: 2}
+  _view: {fileID: 3278481872484581173, guid: 9d908993980e04dbb84705b23856aef3, type: 3}

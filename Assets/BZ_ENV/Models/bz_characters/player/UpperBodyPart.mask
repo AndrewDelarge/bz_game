@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UpperBodyPart
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: bz_hero_01
+    m_Weight: 0
+  - m_Path: bz_wp_shotgun_01
+    m_Weight: 0
+  - m_Path: L_Char01
+    m_Weight: 0
+  - m_Path: L_Char01/Bone
+    m_Weight: 0
+  - m_Path: L_Char01/Bone/Leg_Control.L
+    m_Weight: 0
+  - m_Path: L_Char01/Bone/Leg_Control.L/Foot Roll.L
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.L/Foot Roll.L/Leg_IK.L
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.L/Foot Roll.L/Leg_IK.L/Leg_IK.L_end
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.L/Foot.L
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.L/Foot.L/Toes.L
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.L/Foot.L/Toes.L/Toes.L_end
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.L/Toes Control.L
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.L/Toes Control.L/Toes Control.L_end
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.R
+    m_Weight: 0
+  - m_Path: L_Char01/Bone/Leg_Control.R/Foot Roll.R
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.R/Foot Roll.R/Leg_IK.R
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.R/Foot Roll.R/Leg_IK.R/Leg_IK.R_end
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.R/Foot.R
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.R/Foot.R/Toes.R
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.R/Foot.R/Toes.R/Toes.R_end
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.R/Toes Control.R
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Control.R/Toes Control.R/Toes Control.R_end
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Pole_Target.L
+    m_Weight: 0
+  - m_Path: L_Char01/Bone/Leg_Pole_Target.L/Leg_Pole_Target.L_end
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Leg_Pole_Target.R
+    m_Weight: 0
+  - m_Path: L_Char01/Bone/Leg_Pole_Target.R/Leg_Pole_Target.R_end
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach
+    m_Weight: 0
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Neck
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Neck/Head
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Neck/Head/Head_end
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.L
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.L/Lower_Arm.L
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.L/Lower_Arm.L/Hand.L
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.L/Lower_Arm.L/Hand.L/Hand.L_end
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.R
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.R/Lower_Arm.R
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.R/Lower_Arm.R/Hand.R
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.R/Lower_Arm.R/Hand.R/weapon.r
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.R/Lower_Arm.R/Hand.R/weapon.r/bz_wp_handgun_01
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.R/Lower_Arm.R/Hand.R/weapon.r/weapon.r_end
+    m_Weight: 1
+  - m_Path: L_Char01/Bone/Stomach/Upper_Leg.L
+    m_Weight: 0
+  - m_Path: L_Char01/Bone/Stomach/Upper_Leg.L/Lower_Leg.L
+    m_Weight: 0
+  - m_Path: L_Char01/Bone/Stomach/Upper_Leg.L/Lower_Leg.L/Lower_Leg.L_end
+    m_Weight: 0
+  - m_Path: L_Char01/Bone/Stomach/Upper_Leg.R
+    m_Weight: 0
+  - m_Path: L_Char01/Bone/Stomach/Upper_Leg.R/Lower_Leg.R
+    m_Weight: 0
+  - m_Path: L_Char01/Bone/Stomach/Upper_Leg.R/Lower_Leg.R/Lower_Leg.R_end
+    m_Weight: 0

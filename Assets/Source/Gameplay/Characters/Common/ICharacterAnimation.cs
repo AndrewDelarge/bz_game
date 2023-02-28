@@ -10,6 +10,7 @@ namespace game.Gameplay.Characters.Common
     {
         void PlayAnimation(TClipType animationClip);
         void PlayAnimation(TEnum animationClip);
+        void StopAnimation();
 
         void SetMotionVelocityPercent(float percent);
 

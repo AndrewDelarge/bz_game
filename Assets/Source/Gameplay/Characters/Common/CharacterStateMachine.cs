@@ -47,8 +47,11 @@ namespace game.Gameplay.Characters.Common
             state.Init(_context);
             
             _statesOverrides.Add(type, state);
-            
-            ChangeState(type);
+
+            if (currentState.Equals(type))
+            {
+                ChangeState(type);
+            }
         }
         
         public void OnStateChangeHandler<TObservered>(TObservered state) {

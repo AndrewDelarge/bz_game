@@ -8,11 +8,12 @@ namespace game.Gameplay.Characters.Player {
 	public class PlayerActionKickState : PlayerStateBase<PlayerActionStateEnum, PlayerCharacterContext> {
 		private float _endTime;
 		private float _impulsTime;
-		
+		private float _delayTime;
 
 		public override void HandleState() {
 			_endTime -= Time.deltaTime;
 			if (_endTime <= 0) {
+				context.animation.StopAnimation();
 				context.actionStateMachine.ChangeState(PlayerActionStateEnum.IDLE);
 			}
 
@@ -30,10 +31,11 @@ namespace game.Gameplay.Characters.Player {
 
 		public override void Enter() {
 			base.Enter();
+			
 			var animData = context.animation.GetAnimationData(CharacterAnimationEnum.KICK);
 			_endTime = animData.length * .9f;
 			_impulsTime = _endTime - context.data.kickPhysicsImpulseDelay;
-			context.animation.PlayAnimation(animData.clip);
+			context.animation.PlayAnimation(CharacterAnimationEnum.KICK);
 		}
 
 		private void ProduceDamage() {

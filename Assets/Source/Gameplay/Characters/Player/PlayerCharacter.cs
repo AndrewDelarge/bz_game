@@ -14,7 +14,9 @@ namespace game.Gameplay.Characters.Player
         [Header("Components")]
         [SerializeField] private CharacterMovement _movement;
         [SerializeField] private CharacterAnimation _animation;
+        [SerializeField] private BoneListenerManager _boneListenerManager;
         [SerializeField] private Healthable _healthable;
+        
         // TODO: Camera manager and controller
         [SerializeField] private Camera _camera;
 
@@ -22,6 +24,7 @@ namespace game.Gameplay.Characters.Player
         [SerializeField] private CharacterAnimationSet _characterAnimationSet;
         [SerializeField] private PlayerCharacterCommonData data;
 
+        private CharacterEquipmentManger _equipmentManger;
         private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
         private CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> _actionStateMachine;
 
@@ -37,11 +40,14 @@ namespace game.Gameplay.Characters.Player
             AppCore.Get<IInputManager>().RegisterControlable(this);
 
             _equipmentData = Resources.Load<EquipmentData>("Data/Weapons/ShotgunWeapon");
-
+            
             _animation.Init(_characterAnimationSet);
+            _equipmentManger = new CharacterEquipmentManger();
             
             InitStates();
 
+            _equipmentManger.Init(_animation, _mainStateMachine, _actionStateMachine);
+            
             isInited = true;
         }
 
@@ -70,7 +76,8 @@ namespace game.Gameplay.Characters.Player
 
         private void InitStates()
         {
-            var context = new PlayerCharacterContext(_healthable, _movement, _animation, data, _movement.transform);
+            var context = new PlayerCharacterContext(_healthable, _movement, _animation, data,
+                _movement.transform, _equipmentManger, _boneListenerManager);
             
             _mainStateMachine = new CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext>(context,
                 new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, PlayerCharacterContext>>(){
@@ -112,6 +119,31 @@ namespace game.Gameplay.Characters.Player
 
         public void Equip(EquipmentData equipment) {
             // equiper for every equip type ? 
+            
+            _equipmentManger.Equip(equipment);
+        }
+    }
+
+    public class CharacterEquipmentManger
+    {
+        private EquipmentData _currentEquipment;
+        private CharacterAnimation _animation;
+        private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
+        private CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> _actionStateMachine;
+
+
+        public EquipmentData currentEquipment => _currentEquipment;
+
+        public void Init(CharacterAnimation animation, CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> mainStateMachine, CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> actionStateMachine)
+        {
+            _animation = animation;
+            _mainStateMachine = mainStateMachine;
+            _actionStateMachine = actionStateMachine;
+        }
+
+        public void Equip(EquipmentData equipment)
+        {
+            _currentEquipment = equipment;
             
             _animation.SetAnimationSet(equipment.animationSet);
             
