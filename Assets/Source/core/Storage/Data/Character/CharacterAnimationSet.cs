@@ -19,6 +19,7 @@ namespace game.core.Storage.Data.Character
         WALK = 1,
         RUN = 2,
         KICK = 3,
-        AIM = 4
+        AIM = 4,
+        SHOT = 5
     }
 }

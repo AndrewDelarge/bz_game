@@ -72,12 +72,29 @@ namespace game.Gameplay.Weapon
     
     public class WeaponShot : WeaponStateBase
     {
+
+        private const float TIME = 1f;
+
+
+        private float _endTime;
         
+        public override void Enter()
+        {
+            base.Enter();
+
+            _endTime = TIME;
+        }
+
         public override void HandleState()
         {
-            AppCore.Get<ILogger>().Log("BOOM!");
+            _endTime -= Time.deltaTime;
+
+            if (_endTime <= 0)
+            {
+                AppCore.Get<ILogger>().Log("BOOM!");
             
-            _context.stateMachine.ReturnState();
+                _context.stateMachine.ReturnState();
+            }
         }
     }
     

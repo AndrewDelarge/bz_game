@@ -67,6 +67,18 @@ namespace game.Gameplay.Characters.Player
             {
                 context.animation.PlayAnimation(CharacterAnimationEnum.AIM);
             }
+            
+            if (currentWeaponState == typeof(WeaponShot))
+            {
+                context.animation.PlayAnimation(CharacterAnimationEnum.SHOT);
+            }
+            
+            if (currentWeaponState == typeof(WeaponIdle))
+            {
+                context.animation.StopAnimation();
+            }
+            
+            
         }
 
         public override void HandleInput(InputData data)
