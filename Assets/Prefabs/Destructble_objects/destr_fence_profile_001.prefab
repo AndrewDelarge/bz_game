@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7926054375157612711}
   - component: {fileID: 1891789773521657071}
   - component: {fileID: 2917592753051019776}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bz_fence_profile_004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 5649414255504949425}
   - component: {fileID: 855748085774069884}
   - component: {fileID: 1140709098406341940}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bz_fence_profile_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3678131854442122326}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bz_fence_profile_01dmg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 2508861386553495850}
   - component: {fileID: 3715432100976388225}
   - component: {fileID: 5409737887295931724}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bz_fence_profile_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 6417134524755228559}
   - component: {fileID: 6211620412942239079}
   - component: {fileID: 5115130946475282697}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bz_fence_profile_006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2442130667154729300}
   - component: {fileID: 3924386988877533424}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: COLL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -635,7 +635,7 @@ GameObject:
   - component: {fileID: 2496569161593227790}
   - component: {fileID: 9027381282739705553}
   - component: {fileID: 7350629716307674146}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bz_fence_profile_007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,7 +729,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8268541476255029035}
   serializedVersion: 2
-  m_Mass: 2
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -750,7 +750,7 @@ GameObject:
   - component: {fileID: 446109940584825810}
   - component: {fileID: 1152702230813225537}
   - component: {fileID: 7469127343748088627}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bz_fence_profile_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -843,7 +843,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8692415944444169936}
   serializedVersion: 2
-  m_Mass: 2
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -902,9 +902,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7854295263803272807, guid: d577df3868521ff42a961e30ffdecb4f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -3316047567225449625, guid: d577df3868521ff42a961e30ffdecb4f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -2976914323718629425, guid: d577df3868521ff42a961e30ffdecb4f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d577df3868521ff42a961e30ffdecb4f, type: 3}
       propertyPath: m_Name
       value: bz_fence_profile_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d577df3868521ff42a961e30ffdecb4f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2502300535673180017, guid: d577df3868521ff42a961e30ffdecb4f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518310447794218043, guid: d577df3868521ff42a961e30ffdecb4f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237293653134638528, guid: d577df3868521ff42a961e30ffdecb4f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d577df3868521ff42a961e30ffdecb4f, type: 3}
