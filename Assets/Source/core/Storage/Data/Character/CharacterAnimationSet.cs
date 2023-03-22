@@ -15,6 +15,7 @@ namespace game.core.Storage.Data.Character
 
 
     public enum CharacterAnimationEnum {
+        NONE = -1,
         IDLE = 0,
         WALK = 1,
         RUN = 2,

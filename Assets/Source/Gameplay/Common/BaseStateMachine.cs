@@ -10,19 +10,22 @@ namespace game.Gameplay.Common
         public IWhistle<T> onStateChanged => _onStateChanged;
     
         protected T _currentState;
-        private Whistle<T> _onStateChanged = new();
+        protected Whistle<T> _onStateChanged = new();
     
-        public virtual void ChangeState(T state)
+        public virtual bool ChangeState(T state)
         {
             if (_currentState == state)
             {
-                return;
+                return false;
             }
 
-            if (ChangeStateInternal(state))
+            var isStateChanged = ChangeStateInternal(state);
+            if (isStateChanged)
             {
                 _onStateChanged.Dispatch(state);
             }
+            
+            return isStateChanged;
         }
     
         public void HandleState() {

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using game.core.InputSystem;
 using game.core.Storage.Data.Character;
 using game.core.storage.Data.Equipment.Weapon;
 using game.Gameplay.Weapon;
-using game.Gameplay.Common;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -12,32 +10,29 @@ namespace game.Gameplay.Characters.Player
 {
     public class PlayerActionWeaponEquipIdle : PlayerStateBase<PlayerActionStateEnum, PlayerCharacterContext>
     {
-        private BaseStateMachineWithStack<WeaponStateBase> _stateMachine;
+        private WeaponStateMachine _stateMachine;
 
         private GameObject _tmpWeaponView;
         
-        private Dictionary<Type, WeaponStateBase> _weaponStates = new ()
+        private Dictionary<WeaponStateEnum, WeaponStateBase> _weaponStates = new ()
         {
-            {typeof(WeaponIdle), new WeaponIdle()},
-            {typeof(WeaponAim), new WeaponAim()},
-            {typeof(WeaponReload), new WeaponReload()},
-            {typeof(WeaponShot), new WeaponShot()},
+            {WeaponStateEnum.IDLE, new WeaponIdle()},
+            {WeaponStateEnum.AIM, new WeaponAim()},
+            {WeaponStateEnum.RELOAD, new WeaponReload()},
+            {WeaponStateEnum.SHOT, new WeaponShot()},
         };
 
         public override void Init(PlayerCharacterContext context)
         {
             base.Init(context);
 
-            _stateMachine = new BaseStateMachineWithStack<WeaponStateBase>();
+            _stateMachine = new WeaponStateMachine();
 			
-            var weaponContext = new WeaponStateContext(_stateMachine, _weaponStates);
+            var weaponContext = new WeaponStateContext(_stateMachine);
 			
-            foreach (var state in _weaponStates.Values)
-            {
-                state.Init(weaponContext);
-            }
-            
-            _stateMachine.ChangeState(_weaponStates[typeof(WeaponIdle)]);
+            _stateMachine.Init(weaponContext, _weaponStates);
+            _stateMachine.ChangeState(WeaponStateEnum.IDLE);
+            _stateMachine.onStatesChanged.Add(WeaponStateHandle);
         }
 
         public override void Enter() {
@@ -62,23 +57,21 @@ namespace game.Gameplay.Characters.Player
             _stateMachine.HandleState();
             
             var currentWeaponState = _stateMachine.currentState.GetType();
+        }
 
-            if (currentWeaponState == typeof(WeaponAim))
-            {
-                context.animation.PlayAnimation(CharacterAnimationEnum.AIM);
+        private void WeaponStateHandle(WeaponStateEnum last, WeaponStateEnum current) {
+            switch (current) {
+                case WeaponStateEnum.IDLE:
+                    context.animation.StopAnimation();
+                    break;
+                case WeaponStateEnum.SHOT:
+                    var transition = last == WeaponStateEnum.IDLE;
+                    context.animation.PlayAnimation(CharacterAnimationEnum.SHOT, transition);
+                    break;
+                case WeaponStateEnum.AIM:
+                    context.animation.PlayAnimation(CharacterAnimationEnum.AIM, true);
+                    break;
             }
-            
-            if (currentWeaponState == typeof(WeaponShot))
-            {
-                context.animation.PlayAnimation(CharacterAnimationEnum.SHOT);
-            }
-            
-            if (currentWeaponState == typeof(WeaponIdle))
-            {
-                context.animation.StopAnimation();
-            }
-            
-            
         }
 
         public override void HandleInput(InputData data)
@@ -114,7 +107,7 @@ namespace game.Gameplay.Characters.Player
 			
             if (stateEnum == CharacterStateEnum.RUN)
             {
-                _stateMachine.ChangeState(_weaponStates[typeof(WeaponIdle)]);
+                _stateMachine.ChangeState(WeaponStateEnum.IDLE);
             }
         }
     }

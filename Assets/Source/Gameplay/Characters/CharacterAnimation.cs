@@ -27,7 +27,11 @@ namespace game.Gameplay.Characters
         protected CharacterAnimationSet _currentAnimationSet;
         protected CharacterAnimationSet _defalutAnimationSet;
         private AnimatorOverrideController _overrideController;
+        private CharacterAnimationEnum _currentAnimation;
+        
+        public CharacterAnimationEnum currentAnimation => _currentAnimation;
 
+        
         public virtual void Init(CharacterAnimationSet characterAnimationSet)
         {
             base.Init();
@@ -45,18 +49,29 @@ namespace game.Gameplay.Characters
             animator.SetLayerWeight(ACTION_INMOVE_LAYER_ID, animator.GetFloat(PARAM_VELOCITY) > 0 ? 1 : 0);
         }
 
-        public void PlayAnimation(CharacterAnimationEnum state)
+        public void PlayAnimation(CharacterAnimationEnum state, bool withExitTransition = false)
         {
             var data = GetAnimationData(state);
 
-            if (data != null)
-            {
-                base.PlayAnimation(data.clip);
+            if (data != null) {
+                _currentAnimation = state;
+                base.PlayAnimation(data.clip, withExitTransition);
+                return;
             }
             
             AppCore.Get<ILogger>().Log($"Animation <{state.ToString()}> not found in <{name}>");
         }
+
+
+
+        public override void StopAnimation() {
+            _currentAnimation = CharacterAnimationEnum.NONE;
+
+            base.StopAnimation();
+        }
         
+        
+
         public void SetMotionVelocityPercent(float percent)
         {
             animator.SetFloat(PARAM_VELOCITY, percent, _velocityDampTime, Time.deltaTime);

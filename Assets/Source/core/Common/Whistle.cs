@@ -3,6 +3,25 @@ using System.Collections.Generic;
 
 namespace game.core.Common
 {
+    public class Whistle<T, T2> : Whistle, IWhistle<T, T2>
+    {
+        public void Dispatch(T context, T2 context2)
+        {
+            foreach (var callback in _callbacks) {
+                if (callback is Action<T, T2> action) {
+                    action(context, context2);
+                }
+                else {
+                    callback.DynamicInvoke(context, context2);
+                }
+            }
+        }
+
+        public void Add(Action<T, T2> action) => base.Add(action);
+
+        public void Remove(Action<T, T2> action) => base.Remove(action);
+    }
+    
     public class Whistle<T> : Whistle, IWhistle<T>
     {
         public void Dispatch(T context)
@@ -53,6 +72,12 @@ namespace game.core.Common
         }
     }
 
+    public interface IWhistle<out T, out T2> : IWhistle
+    {
+        void Add(Action<T, T2> action);
+        void Remove(Action<T, T2> action);
+    }
+    
     public interface IWhistle<out T> : IWhistle
     {
         void Add(Action<T> action);

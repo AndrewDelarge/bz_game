@@ -16,7 +16,7 @@ namespace game.Gameplay.Weapon
             if (aim is {value: {status: InputStatus.DOWN}}) {
                 aim.isAbsorbed = true;
 
-                _context.stateMachine.ChangeState(_context.states[typeof(WeaponAim)]);
+                _context.stateMachine.ChangeState(WeaponStateEnum.AIM);
             }
 			
             var shot = data.GetAction(InputActionType.SHOT);
@@ -25,7 +25,7 @@ namespace game.Gameplay.Weapon
             {
                 shot.isAbsorbed = true;
 
-                _context.stateMachine.ChangeState(_context.states[typeof(WeaponShot)]);
+                _context.stateMachine.ChangeState(WeaponStateEnum.SHOT);
                 return;
             }
 			
@@ -36,7 +36,7 @@ namespace game.Gameplay.Weapon
             {
                 reload.isAbsorbed = true;
 
-                _context.stateMachine.ChangeState(_context.states[typeof(WeaponReload)]);
+                _context.stateMachine.ChangeState(WeaponStateEnum.RELOAD);
             }
         }
 
@@ -59,7 +59,7 @@ namespace game.Gameplay.Weapon
             {
                 shot.isAbsorbed = true;
 
-                _context.stateMachine.ChangeState(_context.states[typeof(WeaponShot)]);
+                _context.stateMachine.ChangeState(WeaponStateEnum.SHOT);
                 return;
             }
         }
@@ -73,7 +73,7 @@ namespace game.Gameplay.Weapon
     public class WeaponShot : WeaponStateBase
     {
 
-        private const float TIME = 1f;
+        private const float TIME = .4f;
 
 
         private float _endTime;
@@ -154,16 +154,21 @@ namespace game.Gameplay.Weapon
         }
     }
 
+    public enum WeaponStateEnum {
+        NONE = -1,
+        IDLE = 0,
+        AIM = 1,
+        SHOT = 2,
+        RELOAD = 3
+    }
+
     public class WeaponStateContext
     {
-        public readonly BaseStateMachineWithStack<WeaponStateBase> stateMachine;
-        public readonly Dictionary<Type, WeaponStateBase> states;
-
-
-        public WeaponStateContext(BaseStateMachineWithStack<WeaponStateBase> stateMachine, Dictionary<Type, WeaponStateBase> states)
+        public readonly WeaponStateMachine stateMachine;
+        
+        public WeaponStateContext(WeaponStateMachine stateMachine)
         {
             this.stateMachine = stateMachine;
-            this.states = states;
         }
     }
 }
