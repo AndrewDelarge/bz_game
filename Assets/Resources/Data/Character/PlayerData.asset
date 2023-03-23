@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3460cddc0c34892aa98af4d40baa8ca, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  _animationSet: {fileID: 11400000, guid: d1e186efc0bbe45fb88d1193cfa131c0, type: 2}
   _normalSpeed: 1.3
   _speedMultiplier: 3.5
   _speedSmoothTime: 5

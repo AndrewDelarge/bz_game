@@ -8,7 +8,6 @@ namespace game.core.storage.Data.Equipment.Weapon {
 		[SerializeField] private float _shotTime = .65f;
 		[SerializeField] private float _reloadTime = 3f;
 		
-		
 	}
 	
 	
