@@ -30,7 +30,6 @@ namespace game.core
             if (_animationTime > 0)
             {
                 _animationTime -= Time.deltaTime;
-
                 if (_animationTime <= 0)
                 {
                     StopAnimation();

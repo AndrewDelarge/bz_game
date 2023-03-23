@@ -73,7 +73,7 @@ namespace game.Gameplay.Weapon
     public class WeaponShot : WeaponStateBase
     {
 
-        private const float TIME = .4f;
+        private const float TIME = .65f;
 
 
         private float _endTime;

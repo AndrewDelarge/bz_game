@@ -10,7 +10,7 @@ namespace game.Gameplay.Characters.Player
 {
     public class PlayerActionWeaponEquipIdle : PlayerStateBase<PlayerActionStateEnum, PlayerCharacterContext>
     {
-        private WeaponStateMachine _stateMachine;
+        private WeaponStateMachine _weaponStateMachine;
 
         private GameObject _tmpWeaponView;
         
@@ -26,13 +26,13 @@ namespace game.Gameplay.Characters.Player
         {
             base.Init(context);
 
-            _stateMachine = new WeaponStateMachine();
+            _weaponStateMachine = new WeaponStateMachine();
 			
-            var weaponContext = new WeaponStateContext(_stateMachine);
+            var weaponContext = new WeaponStateContext(_weaponStateMachine);
 			
-            _stateMachine.Init(weaponContext, _weaponStates);
-            _stateMachine.ChangeState(WeaponStateEnum.IDLE);
-            _stateMachine.onStatesChanged.Add(WeaponStateHandle);
+            _weaponStateMachine.Init(weaponContext, _weaponStates);
+            _weaponStateMachine.ChangeState(WeaponStateEnum.IDLE);
+            _weaponStateMachine.onStatesChanged.Add(WeaponChangeStateHandle);
         }
 
         public override void Enter() {
@@ -41,8 +41,10 @@ namespace game.Gameplay.Characters.Player
             var weaponData = (WeaponData) context.equipmentManger.currentEquipment;
 
             var bone = context.boneListenerManager.bones[BoneListenerManager.CharacterBone.RIGHT_HAND_WEAPON];
-            
-            _tmpWeaponView = Object.Instantiate(weaponData.view, bone.transform);
+
+            if (_tmpWeaponView != null) {
+                _tmpWeaponView = Object.Instantiate(weaponData.view, bone.transform);
+            }
         }
 
         public override void Exit()
@@ -54,12 +56,12 @@ namespace game.Gameplay.Characters.Player
 
         public override void HandleState()
         {
-            _stateMachine.HandleState();
+            _weaponStateMachine.HandleState();
             
-            var currentWeaponState = _stateMachine.currentState.GetType();
+            var currentWeaponState = _weaponStateMachine.currentState.GetType();
         }
 
-        private void WeaponStateHandle(WeaponStateEnum last, WeaponStateEnum current) {
+        private void WeaponChangeStateHandle(WeaponStateEnum last, WeaponStateEnum current) {
             switch (current) {
                 case WeaponStateEnum.IDLE:
                     context.animation.StopAnimation();
@@ -76,9 +78,9 @@ namespace game.Gameplay.Characters.Player
 
         public override void HandleInput(InputData data)
         {
-            _stateMachine.HandleInput(data);
+            _weaponStateMachine.HandleInput(data);
 
-            var currentWeaponState = _stateMachine.currentState.GetType();
+            var currentWeaponState = _weaponStateMachine.currentState.GetType();
 			
             if (currentWeaponState == typeof(WeaponAim) || currentWeaponState == typeof(WeaponReload)) {
                 var sprint = data.GetAction(InputActionType.SPRINT);
@@ -87,7 +89,7 @@ namespace game.Gameplay.Characters.Player
                 }
                 
                 if (sprint is {value: {status: InputStatus.DOWN}}) {
-                    _stateMachine.ReturnState();
+                    _weaponStateMachine.ReturnState();
                     return;
                 }
                 
@@ -107,7 +109,7 @@ namespace game.Gameplay.Characters.Player
 			
             if (stateEnum == CharacterStateEnum.RUN)
             {
-                _stateMachine.ChangeState(WeaponStateEnum.IDLE);
+                _weaponStateMachine.ChangeState(WeaponStateEnum.IDLE);
             }
         }
     }
