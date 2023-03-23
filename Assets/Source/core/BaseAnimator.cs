@@ -8,7 +8,7 @@ namespace game.core
         protected readonly int PARAM_ACTION_TRIGGER = Animator.StringToHash("action");
         protected readonly int PARAM_ACTION_WITH_TRANSITION_TRIGGER = Animator.StringToHash("actionWithTransition");
         protected readonly int PARAM_STOP_ACTION_TRIGGER = Animator.StringToHash("endAction");
-        protected const int ACTION_LAYER = 1;
+        public const int ACTION_LAYER = 1;
 
         protected const string DEFAULT_ACTION_STATE_NAME = "Action";
         protected const string DEFAULT_ACTION_ANIMATION_NAME = "empty";
@@ -48,9 +48,9 @@ namespace game.core
         {
             animator.SetTrigger(PARAM_STOP_ACTION_TRIGGER);
             
-            if (animator.IsInTransition(ACTION_LAYER)) {
-                return;
-            }
+            // if (animator.IsInTransition(ACTION_LAYER)) {
+            //     return;
+            // }
 
             _animationTime = 0;
         }

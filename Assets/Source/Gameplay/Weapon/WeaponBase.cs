@@ -14,7 +14,7 @@ namespace game.Gameplay.Weapon {
 		public void Init(ShotgunWeaponData data) {
 			_data = data;
 
-			_fx = _data.fx;
+			// _fx = _data.fx;	
 		}
 		
 		public void Shot() {

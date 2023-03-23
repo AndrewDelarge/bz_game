@@ -21,7 +21,6 @@ namespace game.Gameplay.Characters.Player
         [SerializeField] private Camera _camera;
 
 
-        [SerializeField] private CharacterAnimationSet _characterAnimationSet;
         [SerializeField] private PlayerCharacterCommonData data;
 
         private CharacterEquipmentManger _equipmentManger;
@@ -41,12 +40,13 @@ namespace game.Gameplay.Characters.Player
 
             _equipmentData = Resources.Load<EquipmentData>("Data/Weapons/ShotgunWeapon");
             
-            _animation.Init(_characterAnimationSet);
+            _animation.Init(data.animationSet);
             _equipmentManger = new CharacterEquipmentManger();
             
             InitStates();
 
             _equipmentManger.Init(_animation, _mainStateMachine, _actionStateMachine);
+            _equipmentManger.AddEquiper(new WeaponEquiper(_boneListenerManager));
             
             isInited = true;
         }
@@ -79,19 +79,8 @@ namespace game.Gameplay.Characters.Player
             var context = new PlayerCharacterContext(_healthable, _movement, _animation, data,
                 _movement.transform, _equipmentManger, _boneListenerManager);
             
-            _mainStateMachine = new CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext>(context,
-                new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, PlayerCharacterContext>>(){
-                {CharacterStateEnum.IDLE, new PlayerIdleState()},
-                {CharacterStateEnum.WALK, new PlayerWalkState()},
-                {CharacterStateEnum.RUN, new PlayerRunState()},
-            });
-
-            _actionStateMachine = new CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext>(context, 
-                new Dictionary<PlayerActionStateEnum, CharacterState<PlayerActionStateEnum, PlayerCharacterContext>>() {
-                {PlayerActionStateEnum.IDLE, new PlayerActionIdleState()},
-                {PlayerActionStateEnum.KICK, new PlayerActionKickState()},
-            });
-
+            _mainStateMachine = new CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext>(context, data.states);
+            _actionStateMachine = new CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext>(context, data.actionStates);
 
             context.mainStateMachine = _mainStateMachine;
             context.actionStateMachine = _actionStateMachine;
@@ -102,9 +91,6 @@ namespace game.Gameplay.Characters.Player
             
             _mainStateMachine.onStateChanged.Add(_actionStateMachine.OnStateChangeHandler);
             _actionStateMachine.onStateChanged.Add(_mainStateMachine.OnStateChangeHandler);
-            
-            
-            _actionStateMachine.ChangeState(PlayerActionStateEnum.EQUIP);
         }
         
 
@@ -118,42 +104,7 @@ namespace game.Gameplay.Characters.Player
         }
 
         public void Equip(EquipmentData equipment) {
-            // equiper for every equip type ? 
-            
             _equipmentManger.Equip(equipment);
-        }
-    }
-
-    public class CharacterEquipmentManger
-    {
-        private EquipmentData _currentEquipment;
-        private CharacterAnimation _animation;
-        private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
-        private CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> _actionStateMachine;
-
-
-        public EquipmentData currentEquipment => _currentEquipment;
-
-        public void Init(CharacterAnimation animation, CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> mainStateMachine, CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> actionStateMachine)
-        {
-            _animation = animation;
-            _mainStateMachine = mainStateMachine;
-            _actionStateMachine = actionStateMachine;
-        }
-
-        public void Equip(EquipmentData equipment)
-        {
-            _currentEquipment = equipment;
-            
-            _animation.SetAnimationSet(equipment.animationSet);
-            
-            foreach (var state in equipment.statesOverrides) {
-                _mainStateMachine.ReplaceState(state.overrideStateType, state.GetState());
-            }
-            
-            foreach (var state in equipment.actionStatesOverrides) {
-                _actionStateMachine.ReplaceState(state.overrideStateType, state.GetState());
-            }
         }
     }
 }

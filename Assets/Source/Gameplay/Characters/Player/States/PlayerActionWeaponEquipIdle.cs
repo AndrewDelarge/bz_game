@@ -12,8 +12,6 @@ namespace game.Gameplay.Characters.Player
     {
         private WeaponStateMachine _weaponStateMachine;
 
-        private GameObject _tmpWeaponView;
-        
         private Dictionary<WeaponStateEnum, WeaponStateBase> _weaponStates = new ()
         {
             {WeaponStateEnum.IDLE, new WeaponIdle()},
@@ -34,31 +32,10 @@ namespace game.Gameplay.Characters.Player
             _weaponStateMachine.ChangeState(WeaponStateEnum.IDLE);
             _weaponStateMachine.onStatesChanged.Add(WeaponChangeStateHandle);
         }
-
-        public override void Enter() {
-            base.Enter();
-
-            var weaponData = (WeaponData) context.equipmentManger.currentEquipment;
-
-            var bone = context.boneListenerManager.bones[BoneListenerManager.CharacterBone.RIGHT_HAND_WEAPON];
-
-            if (_tmpWeaponView != null) {
-                _tmpWeaponView = Object.Instantiate(weaponData.view, bone.transform);
-            }
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
-            
-            Object.Destroy(_tmpWeaponView);
-        }
-
+        
         public override void HandleState()
         {
             _weaponStateMachine.HandleState();
-            
-            var currentWeaponState = _weaponStateMachine.currentState.GetType();
         }
 
         private void WeaponChangeStateHandle(WeaponStateEnum last, WeaponStateEnum current) {

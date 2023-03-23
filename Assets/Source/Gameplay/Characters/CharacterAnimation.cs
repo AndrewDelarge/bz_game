@@ -44,8 +44,13 @@ namespace game.Gameplay.Characters
         protected override void Update()
         {
             base.Update();
+
+            // TODO: Smooth layer wight change 
+            // var layerWeight = animator.GetLayerWeight(ACTION_LAYER);
+            // var targetWeight = animator.GetFloat(PARAM_VELOCITY) < .01f ? 1f : 0;
+            // Mathf.Lerp(layerWeight, targetWeight, 1 * Time.deltaTime);
             
-            animator.SetLayerWeight(ACTION_LAYER_ID, animator.GetFloat(PARAM_VELOCITY) < .01f ? 1f : 0);
+            animator.SetLayerWeight(ACTION_LAYER, animator.GetFloat(PARAM_VELOCITY) < .01f ? 1f : 0);
             animator.SetLayerWeight(ACTION_INMOVE_LAYER_ID, animator.GetFloat(PARAM_VELOCITY) > 0 ? 1 : 0);
         }
 
@@ -105,7 +110,6 @@ namespace game.Gameplay.Characters
             animator.enabled = false;
             enabled = false;
         }
-
 
 
         private void ApplyAnimationSet()
