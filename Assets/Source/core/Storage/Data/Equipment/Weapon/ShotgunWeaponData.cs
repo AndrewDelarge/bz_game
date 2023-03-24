@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
+using game.Gameplay.Weapon;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace game.core.storage.Data.Equipment.Weapon {
 	
@@ -13,8 +17,19 @@ namespace game.core.storage.Data.Equipment.Weapon {
 	
 	public class WeaponData : EquipmentData
 	{
-		[SerializeField] private GameObject _view;
+		[SerializeField] private EquipmentViewBase _view;
+		[SerializeField] private List<WeaponFxData> _fx; 
+		public EquipmentViewBase view => _view;
 
-		public GameObject view => _view;
+		public GameObject GetFxByName(string name) => _fx.Find(x => x.name == name)?.prefab;
+
+		[Serializable]
+		class WeaponFxData {
+			[SerializeField] private string _name;
+			[SerializeField] private GameObject _prefab;
+
+			public string name => _name;
+			public GameObject prefab => _prefab;
+		}
 	}
 }

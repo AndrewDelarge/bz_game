@@ -1,12 +1,13 @@
 ﻿using System;
 using game.core.storage.Data.Equipment;
 using game.core.storage.Data.Equipment.Weapon;
+using game.Gameplay.Weapon;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace game.Gameplay.Characters.Player
 {
-    public class WeaponEquiper : ICharacterEquiper<EquipmentData>
+    public class WeaponEquiper : ICharacterEquiper<EquipmentData, EquipmentViewBase>
     {
         private BoneListenerManager _boneListenerManager;
 
@@ -17,7 +18,7 @@ namespace game.Gameplay.Characters.Player
         
         public Type GetDataType() => typeof(WeaponData);
         
-        public GameObject Equip(EquipmentData equipment)
+        public EquipmentViewBase Equip(EquipmentData equipment)
         {
             var weaponData = (WeaponData) equipment;
 
@@ -26,7 +27,7 @@ namespace game.Gameplay.Characters.Player
             return Object.Instantiate(weaponData.view, bone.transform);
         }
 
-        public void Unequip(GameObject equipmentView)
+        public void Unequip(EquipmentViewBase equipmentView)
         {
             Object.Destroy(equipmentView);
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using game.core.InputSystem;
+using game.core.storage.Data.Equipment;
+using game.core.storage.Data.Equipment.Weapon;
 using game.Gameplay.Common;
 using UnityEngine;
 using ILogger = game.core.Common.ILogger;
@@ -75,24 +77,33 @@ namespace game.Gameplay.Weapon
 
         private const float TIME = .65f;
 
-
-        private float _endTime;
+        private IWeaponView _view;
         
+        private float _endTime;
+        public override void Init(WeaponStateContext context) {
+            base.Init(context);
+            
+            _view = context.view;
+        }
+
         public override void Enter()
         {
             base.Enter();
-
+            
             _endTime = TIME;
+            
+            _view.Shot();
         }
 
         public override void HandleState()
         {
             _endTime -= Time.deltaTime;
 
+
             if (_endTime <= 0)
             {
                 AppCore.Get<ILogger>().Log("BOOM!");
-            
+                
                 _context.stateMachine.ReturnState();
             }
         }
@@ -132,7 +143,7 @@ namespace game.Gameplay.Weapon
     {
         protected WeaponStateContext _context;
         
-        public void Init(WeaponStateContext context)
+        public virtual void Init(WeaponStateContext context)
         {
             _context = context;
         }
@@ -165,10 +176,14 @@ namespace game.Gameplay.Weapon
     public class WeaponStateContext
     {
         public readonly WeaponStateMachine stateMachine;
+        public readonly IWeaponView view;
+        public readonly WeaponData data;
         
-        public WeaponStateContext(WeaponStateMachine stateMachine)
+        public WeaponStateContext(WeaponStateMachine stateMachine, EquipmentViewBase view, EquipmentData data)
         {
             this.stateMachine = stateMachine;
+            this.view = (IWeaponView) view;
+            this.data = (WeaponData) data;
         }
     }
 }

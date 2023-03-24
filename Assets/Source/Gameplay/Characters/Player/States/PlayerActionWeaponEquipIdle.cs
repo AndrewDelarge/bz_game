@@ -26,7 +26,7 @@ namespace game.Gameplay.Characters.Player
 
             _weaponStateMachine = new WeaponStateMachine();
 			
-            var weaponContext = new WeaponStateContext(_weaponStateMachine);
+            var weaponContext = new WeaponStateContext(_weaponStateMachine, context.equipmentManger.currentEquipmentView, context.equipmentManger.currentEquipment);
 			
             _weaponStateMachine.Init(weaponContext, _weaponStates);
             _weaponStateMachine.ChangeState(WeaponStateEnum.IDLE);
