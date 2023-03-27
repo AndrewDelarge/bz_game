@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using game.core.storage.Data.Equipment;
-using game.core.storage.Data.Equipment.Weapon;
+using game.core.storage.Data.Models;
 using UnityEngine;
 
 namespace game.Gameplay.Weapon {
@@ -10,14 +9,14 @@ namespace game.Gameplay.Weapon {
 		private const string AMMO_DROP_FX = "ammo_drop";
 		private const string MUZZLE_MARKER = "muzzle";
 		
-		private ShotgunWeaponData _data;
+		private ShotgunWeaponModel _data;
 		[SerializeField] private Markers _markers;
 
 
 		private List<GameObject> _particles = new ();
 		
-		public override void Init(EquipmentData data) {
-			_data = (ShotgunWeaponData) data;
+		public override void Init(EquipmentModel data) {
+			_data = (ShotgunWeaponModel) data;
 		}
 		
 		public void Shot() {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using game.core.storage.Data.Equipment;
+using game.core.storage.Data.Equipment.Weapon;
+using game.core.storage.Data.Models;
 using game.Gameplay.Characters.Common;
 using game.Gameplay.Weapon;
 using UnityEngine;
@@ -9,14 +11,16 @@ namespace game.Gameplay.Characters.Player
 {
     public class CharacterEquipmentManger
     {
-        private EquipmentData _currentEquipment;
+        private EquipmentData _currentEquipmentData;
+        private EquipmentModel _currentEquipment;
         private EquipmentViewBase _currentEquipmentView;
         private CharacterAnimation _animation;
         private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
         private CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> _actionStateMachine;
         private Dictionary<Type, ICharacterEquiper<EquipmentData, EquipmentViewBase>> _equipers = new ();
 
-        public EquipmentData currentEquipment => _currentEquipment;
+        public EquipmentData currentEquipmentData => _currentEquipmentData;
+        public EquipmentModel currentEquipment => _currentEquipment;
         public EquipmentViewBase currentEquipmentView => _currentEquipmentView;
         
 
@@ -34,8 +38,9 @@ namespace game.Gameplay.Characters.Player
 
         public void Equip(EquipmentData equipment)
         {
-            _currentEquipment = equipment;
-            
+            _currentEquipmentData = equipment;
+
+            _currentEquipment = _currentEquipmentData.CreateModel();
             _animation.SetAnimationSet(equipment.animationSet);
             
             //TODO: REMOVE DIRTY HACK!

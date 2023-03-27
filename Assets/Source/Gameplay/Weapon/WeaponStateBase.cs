@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using game.core.InputSystem;
-using game.core.storage.Data.Equipment;
-using game.core.storage.Data.Equipment.Weapon;
+﻿using game.core.InputSystem;
+using game.core.storage.Data.Models;
 using game.Gameplay.Common;
 using UnityEngine;
 using ILogger = game.core.Common.ILogger;
@@ -32,7 +29,7 @@ namespace game.Gameplay.Weapon
             }
 			
 			
-            var reload = data.GetAction(InputActionType.SHOT);
+            var reload = data.GetAction(InputActionType.RELOAD);
 
             if (reload is {value: {status: InputStatus.DOWN}})
             {
@@ -74,9 +71,6 @@ namespace game.Gameplay.Weapon
     
     public class WeaponShot : WeaponStateBase
     {
-
-        private const float TIME = .65f;
-
         private IWeaponView _view;
         
         private float _endTime;
@@ -90,7 +84,7 @@ namespace game.Gameplay.Weapon
         {
             base.Enter();
             
-            _endTime = TIME;
+            _endTime = _context.data.shotTime;
             
             _view.Shot();
         }
@@ -111,8 +105,6 @@ namespace game.Gameplay.Weapon
     
     public class WeaponReload : WeaponStateBase
     {
-        private float RELOAD_TIME = 5f;
-        
         private float _startTime;
 
         public override bool CheckExitCondition()
@@ -122,7 +114,7 @@ namespace game.Gameplay.Weapon
 
         public override void Enter()
         {
-            _startTime = RELOAD_TIME;
+            _startTime = _context.data.reloadTime;
         }
 
         public override void HandleState()
@@ -132,6 +124,7 @@ namespace game.Gameplay.Weapon
             if (CheckExitCondition())
             {
                 _context.stateMachine.ReturnState();
+                return;
             }
             
             AppCore.Get<ILogger>().Log("Reload");
@@ -177,13 +170,13 @@ namespace game.Gameplay.Weapon
     {
         public readonly WeaponStateMachine stateMachine;
         public readonly IWeaponView view;
-        public readonly WeaponData data;
+        public readonly WeaponModel data;
         
-        public WeaponStateContext(WeaponStateMachine stateMachine, EquipmentViewBase view, EquipmentData data)
+        public WeaponStateContext(WeaponStateMachine stateMachine, EquipmentViewBase view, EquipmentModel data)
         {
             this.stateMachine = stateMachine;
             this.view = (IWeaponView) view;
-            this.data = (WeaponData) data;
+            this.data = (WeaponModel) data;
         }
     }
 }

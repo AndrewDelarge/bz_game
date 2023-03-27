@@ -24,7 +24,7 @@ namespace game.Gameplay.Characters.Player
 
             var bone = _boneListenerManager.bones[BoneListenerManager.CharacterBone.RIGHT_HAND_WEAPON];
             
-            return Object.Instantiate(weaponData.view, bone.transform);
+            return Object.Instantiate(weaponData.viewTemplate, bone.transform);
         }
 
         public void Unequip(EquipmentViewBase equipmentView)

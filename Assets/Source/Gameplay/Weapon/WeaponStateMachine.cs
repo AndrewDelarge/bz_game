@@ -4,21 +4,20 @@ using game.Gameplay.Common;
 
 namespace game.Gameplay.Weapon {
 	public class WeaponStateMachine : BaseStateMachineWithStack<WeaponStateBase> {
-		private Dictionary<WeaponStateEnum, WeaponStateBase> _availableStates;
+		private IReadOnlyDictionary<WeaponStateEnum, WeaponStateBase> _availableStates;
 		private Whistle<WeaponStateEnum, WeaponStateEnum> _onStatesChanged = new ();
 		private WeaponStateEnum _currentStateType;
 
-		// первый аргумент прошлый стейт второй - текущий
+		// первый аргумент - прошлый стейт, второй - текущий
 		public IWhistle<WeaponStateEnum, WeaponStateEnum> onStatesChanged => _onStatesChanged;
 		
 		public WeaponStateEnum currentStateType => _currentStateType;
-		public void Init(WeaponStateContext context, Dictionary<WeaponStateEnum, WeaponStateBase> availableStates) {
-			_availableStates = availableStates;
+		public void Init(WeaponStateContext context) {
+			_availableStates = context.data.GetWeaponStates();
 
 			foreach (var state in _availableStates.Values) {
 				state.Init(context);
 			}
-			
 		}
 
 

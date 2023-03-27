@@ -12,14 +12,6 @@ namespace game.Gameplay.Characters.Player
     {
         private WeaponStateMachine _weaponStateMachine;
 
-        private Dictionary<WeaponStateEnum, WeaponStateBase> _weaponStates = new ()
-        {
-            {WeaponStateEnum.IDLE, new WeaponIdle()},
-            {WeaponStateEnum.AIM, new WeaponAim()},
-            {WeaponStateEnum.RELOAD, new WeaponReload()},
-            {WeaponStateEnum.SHOT, new WeaponShot()},
-        };
-
         public override void Init(PlayerCharacterContext context)
         {
             base.Init(context);
@@ -28,7 +20,7 @@ namespace game.Gameplay.Characters.Player
 			
             var weaponContext = new WeaponStateContext(_weaponStateMachine, context.equipmentManger.currentEquipmentView, context.equipmentManger.currentEquipment);
 			
-            _weaponStateMachine.Init(weaponContext, _weaponStates);
+            _weaponStateMachine.Init(weaponContext);
             _weaponStateMachine.ChangeState(WeaponStateEnum.IDLE);
             _weaponStateMachine.onStatesChanged.Add(WeaponChangeStateHandle);
         }
