@@ -38,7 +38,7 @@ namespace game.Gameplay.Common
 
         protected virtual bool ChangeStateInternal(T state)
         {
-            if (state.CheckExitCondition() == false)
+            if (_currentState != null && _currentState.CheckExitCondition() == false)
             {
                 AppCore.Get<ILogger>().Log($"Transition FROM \"{_currentState.GetType()}\" failed on check EXIT condition of this state");
                 return false;

@@ -21,6 +21,7 @@ namespace game.core.Storage.Data.Character
         RUN = 2,
         KICK = 3,
         AIM = 4,
-        SHOT = 5
+        SHOT = 5,
+        RELOAD = 6
     }
 }

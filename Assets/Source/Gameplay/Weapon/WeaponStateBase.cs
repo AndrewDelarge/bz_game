@@ -61,6 +61,15 @@ namespace game.Gameplay.Weapon
                 _context.stateMachine.ChangeState(WeaponStateEnum.SHOT);
                 return;
             }
+            
+            var reload = data.GetAction(InputActionType.RELOAD);
+
+            if (reload is {value: {status: InputStatus.DOWN}})
+            {
+                reload.isAbsorbed = true;
+
+                _context.stateMachine.ChangeState(WeaponStateEnum.RELOAD);
+            }
         }
 
         public override void HandleState()
@@ -80,6 +89,18 @@ namespace game.Gameplay.Weapon
             _view = context.view;
         }
 
+        public override bool CheckEnterCondition()
+        {
+            if (_context.data.currentMagazineAmount > 0)
+            {
+                return true;
+            }
+
+            _context.stateMachine.ChangeState(WeaponStateEnum.RELOAD);
+            
+            return false;
+        }
+
         public override void Enter()
         {
             base.Enter();
@@ -87,12 +108,15 @@ namespace game.Gameplay.Weapon
             _endTime = _context.data.shotTime;
             
             _view.Shot();
+            
+            _context.data.currentMagazineAmount -= 1;
+            
+            AppCore.Get<ILogger>().Log($"AMMO ({_context.data.currentMagazineAmount}/{_context.data.magazineCapacity})");
         }
 
         public override void HandleState()
         {
             _endTime -= Time.deltaTime;
-
 
             if (_endTime <= 0)
             {
@@ -112,6 +136,11 @@ namespace game.Gameplay.Weapon
             return _startTime <= 0;
         }
 
+        public override bool CheckEnterCondition()
+        {
+            return _context.data.magazineCapacity != _context.data.currentMagazineAmount;
+        }
+
         public override void Enter()
         {
             _startTime = _context.data.reloadTime;
@@ -123,11 +152,12 @@ namespace game.Gameplay.Weapon
 
             if (CheckExitCondition())
             {
+                _context.data.currentMagazineAmount = _context.data.magazineCapacity;
                 _context.stateMachine.ReturnState();
                 return;
             }
             
-            AppCore.Get<ILogger>().Log("Reload");
+            AppCore.Get<ILogger>().Log("Reload...");
         }
     }
     

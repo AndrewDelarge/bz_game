@@ -42,6 +42,9 @@ namespace game.Gameplay.Characters.Player
                 case WeaponStateEnum.AIM:
                     context.animation.PlayAnimation(CharacterAnimationEnum.AIM, true);
                     break;
+                case WeaponStateEnum.RELOAD:
+                    context.animation.PlayAnimation(CharacterAnimationEnum.RELOAD, true);
+                    break;
             }
         }
 
