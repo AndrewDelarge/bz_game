@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264dbe9db841453aba60eb859df40d2d, type: 3}
+  m_Name: projectile
+  m_EditorClassIdentifier: 
+  _view: {fileID: 6249345071434772057, guid: c2ca4d5945e060648a3d7f4a8f11ed7a, type: 3}
+  _speed: 10

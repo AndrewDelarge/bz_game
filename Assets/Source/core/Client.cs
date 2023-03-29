@@ -1,8 +1,8 @@
 ﻿using game.core.common;
 using game.core.InputSystem;
 using game.gameplay.control;
-using game.core.Common;
 using game.Gameplay.Characters.Player;
+using game.Source.Gameplay.Weapon;
 using UnityEngine;
 using ILogger = game.core.Common.ILogger;
 using Logger = game.core.Common.Logger;
@@ -34,11 +34,16 @@ namespace game.core
             characterManager.RegisterCharacter(playerCharacter);
             
             AppCore.Register<CharactersManager>(characterManager);
-            
             #if UNITY_EDITOR 
                 return;
             #endif
             AppCore.Get<SceneLoader>().LoadScene(1);
+        }
+
+        private void Start()
+        {
+            // TODO костыль пока что
+            AppCore.Get<LevelManager>().Add(new ProjectileManager());
         }
     }
 }

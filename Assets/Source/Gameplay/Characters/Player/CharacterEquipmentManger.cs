@@ -66,6 +66,13 @@ namespace game.Gameplay.Characters.Player
                 _equipers[_currentEquipment.GetType()].Unequip(_currentEquipmentView);
             }
         }
+
+
+        public HealthChange<DamageType> GetDamageValue()
+        {
+            return _currentEquipment.GetDamage();
+        }
+        
     }
 
     public interface ICharacterEquiper<T, TView>

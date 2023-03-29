@@ -32,5 +32,14 @@ namespace game.Gameplay.Weapon {
 			}
 			// _particles.Add(Object.Instantiate(_fx[AMMO_DROP_FX]));
 		}
+
+		public GameObject GetMarkerPosition(string markerName) {
+			var marker = _markers.GetMarker(markerName);
+			if (marker != null) {
+				return marker.markerObject.gameObject;
+			}
+
+			return null;
+		}
 	}
 }

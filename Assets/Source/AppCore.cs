@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Services;
 using game.core.common;
 using game.сore.Common;
 
@@ -7,7 +8,7 @@ namespace game
 {
     public class AppCore
     {   
-        private static AppCore _instance = new AppCore();
+        private static AppCore _instance = new();
 
         private Dictionary<Type, ICoreManager> _managers = new Dictionary<Type, ICoreManager>();
         private Queue<Action> _initQueue = new Queue<Action>();

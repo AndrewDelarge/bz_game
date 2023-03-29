@@ -19,6 +19,11 @@ namespace game.Gameplay.Characters.AI {
 		private bool isInited;
 		
 		public bool isPlayer => false;
+		
+		public HealthChange<DamageType> GetDamage()
+		{
+			throw new NotImplementedException();
+		}
 
 		private void Start() {
 			game.AppCore.Get<CharactersManager>().RegisterCharacter(this);

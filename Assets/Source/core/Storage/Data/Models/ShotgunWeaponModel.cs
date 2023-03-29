@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using game.core.storage.Data.Equipment.Weapon;
+using game.Gameplay;
 using game.Gameplay.Weapon;
+using game.Source.Gameplay.Weapon;
 using UnityEngine;
 
 namespace game.core.storage.Data.Models
@@ -23,5 +25,16 @@ namespace game.core.storage.Data.Models
         public GameObject GetFxByName(string name) => _data.fx.First(x => x.name == name).prefab;
 
         public override IReadOnlyDictionary<WeaponStateEnum, WeaponStateBase> GetWeaponStates() => _weaponStates;
+        public override Projectile GetProjectile()
+        {
+            var projectile = new ShotgunProjectile();
+            projectile.Init(projectileModel);
+            return projectile;
+        }
+
+        public override HealthChange<DamageType> GetDamage()
+        {
+            return new HealthChange<DamageType>(_data.damage, _data.damageType);
+        }
     }
 }

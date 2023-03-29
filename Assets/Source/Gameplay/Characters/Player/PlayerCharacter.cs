@@ -32,6 +32,11 @@ namespace game.Gameplay.Characters.Player
         private EquipmentData _equipmentData;
 
         public bool isPlayer => true;
+        public HealthChange<DamageType> GetDamage()
+        {
+            return _equipmentManger.currentEquipment.GetDamage();
+        }
+
         public bool isListen => true;
 
         public void Init()

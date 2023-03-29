@@ -19,6 +19,9 @@ MonoBehaviour:
   _shotTime: 0.65
   _reloadTime: 2
   _magazineCapacity: 2
+  _damage: 100
+  _damageType: 0
+  _defaultProjectile: {fileID: 11400000, guid: 3a7b10d5a5bc8384bac2def6f857d4dc, type: 2}
   _viewTemplate: {fileID: 8325011414452542468, guid: c3f4bd6cd57d31946a98e858734b71a5, type: 3}
   _fx:
   - _name: shot

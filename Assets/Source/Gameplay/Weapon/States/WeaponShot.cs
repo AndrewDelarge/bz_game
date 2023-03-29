@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using game.core;
+using game.Source.Gameplay.Weapon;
+using UnityEngine;
 using ILogger = game.core.Common.ILogger;
 
 namespace game.Gameplay.Weapon
 {
-    public class WeaponShot : WeaponStateBase
-    {
+    public class WeaponShot : WeaponStateBase {
         private IWeaponView _view;
         
         private float _endTime;
@@ -35,7 +36,13 @@ namespace game.Gameplay.Weapon
             _view.Shot();
             
             _context.data.currentMagazineAmount -= 1;
+
+            var levelManager = AppCore.Get<LevelManager>();
+            var projectileManager = levelManager.Get<ProjectileManager>();
+            var projectile = _context.data.GetProjectile();
             
+            projectileManager.Launch(projectile, _view.GetMarkerPosition("muzzle"));
+
             AppCore.Get<ILogger>().Log($"AMMO ({_context.data.currentMagazineAmount}/{_context.data.magazineCapacity})");
         }
 
