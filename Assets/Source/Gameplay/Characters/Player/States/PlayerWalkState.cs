@@ -32,7 +32,7 @@ namespace game.Gameplay.Characters.Player {
 			var sprint = data.GetAction(InputActionType.SPRINT);
 
 
-			if (sprint is {value: {status: InputStatus.DOWN}}) {
+			if (sprint is {value: {status: InputStatus.PRESSED}}) {
 				context.mainStateMachine.ChangeState(CharacterStateEnum.RUN);
 				return;
 			}

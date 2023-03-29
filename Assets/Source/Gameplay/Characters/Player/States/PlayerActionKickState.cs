@@ -15,6 +15,7 @@ namespace game.Gameplay.Characters.Player {
 			if (_endTime <= 0) {
 				context.animation.StopAnimation();
 				context.actionStateMachine.ChangeState(PlayerActionStateEnum.IDLE);
+				return;
 			}
 
 			if (_endTime <= _impulsTime) {

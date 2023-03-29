@@ -20,7 +20,7 @@ namespace game.Gameplay.Common
             {
                 var state= _states.Pop();
                 
-                if (ChangeStateInternal(_states.Peek()) == false)
+                if (_states.Count == 0 ||ChangeStateInternal(_states.Peek()) == false)
                 {
                     _states.Push(state);
                 }

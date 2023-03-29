@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using game.core.InputSystem;
+﻿using game.core.InputSystem;
 using game.core.Storage.Data.Character;
-using game.core.storage.Data.Equipment.Weapon;
 using game.Gameplay.Weapon;
-using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace game.Gameplay.Characters.Player
 {
@@ -52,9 +48,9 @@ namespace game.Gameplay.Characters.Player
         {
             _weaponStateMachine.HandleInput(data);
 
-            var currentWeaponState = _weaponStateMachine.currentState.GetType();
+            var currentWeaponState = _weaponStateMachine.currentStateType;
 			
-            if (currentWeaponState == typeof(WeaponAim) || currentWeaponState == typeof(WeaponReload)) {
+            if (currentWeaponState is WeaponStateEnum.AIM or WeaponStateEnum.RELOAD) {
                 var sprint = data.GetAction(InputActionType.SPRINT);
                 if (sprint is {value: {status: InputStatus.PRESSED}}) {
                     sprint.isAbsorbed = true;
@@ -67,6 +63,17 @@ namespace game.Gameplay.Characters.Player
                 
                 if (context.mainStateMachine.currentState == CharacterStateEnum.RUN) {
                     context.mainStateMachine.ChangeState(CharacterStateEnum.WALK);
+                }
+            }
+            else if (currentWeaponState != WeaponStateEnum.SHOT)
+            {
+                var kick = data.GetAction(InputActionType.KICK);
+                if (kick is {value: {status: InputStatus.DOWN}}) {
+                    kick.isAbsorbed = true;
+                    
+                    // _weaponStateMachine.ReturnState();
+                    
+                    context.actionStateMachine.ChangeState(PlayerActionStateEnum.KICK);
                 }
             }
         }
