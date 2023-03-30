@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: projectile
   m_EditorClassIdentifier: 
   _view: {fileID: 6249345071434772057, guid: c2ca4d5945e060648a3d7f4a8f11ed7a, type: 3}
-  _speed: 10
+  _speed: 100

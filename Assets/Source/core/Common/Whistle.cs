@@ -15,6 +15,8 @@ namespace game.core.Common
                     callback.DynamicInvoke(context, context2);
                 }
             }
+
+            ClearUnsubscribed();
         }
 
         public void Add(Action<T, T2> action) => base.Add(action);
@@ -34,6 +36,8 @@ namespace game.core.Common
                     callback.DynamicInvoke(context);
                 }
             }
+
+            ClearUnsubscribed();
         }
 
         public void Add(Action<T> action) => base.Add(action);
@@ -43,9 +47,10 @@ namespace game.core.Common
     public class Whistle : IWhistle
     {
         protected HashSet<Delegate> _callbacks;
-
+        protected HashSet<Delegate> _callbacksToRemove;
         public Whistle() {
             _callbacks = new HashSet<Delegate>();
+            _callbacksToRemove = new HashSet<Delegate>();
         }
 
         public void Add(Delegate action) {
@@ -53,7 +58,7 @@ namespace game.core.Common
         }
 
         public void Remove(Delegate action) {
-            _callbacks.Remove(action);
+            _callbacksToRemove.Add(action);
         }
 
         public virtual void Dispatch() {
@@ -65,10 +70,19 @@ namespace game.core.Common
                     callback.DynamicInvoke();
                 }
             }
+
+            ClearUnsubscribed();
         }
         
         public void Clear() {
             _callbacks.Clear();
+        }
+
+        protected void ClearUnsubscribed() {
+            foreach (var callback in _callbacksToRemove)
+            {
+                _callbacks.Remove(callback);
+            }
         }
     }
 

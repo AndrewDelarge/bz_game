@@ -18,6 +18,7 @@ namespace game.Gameplay.Characters.Player
 		private CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> _actionStateMachine;
 
 		public Camera camera;
+		public readonly ICharacter character;
 		public Transform transform => _transform;
 		public Healthable healthable => _healthable;
 		public PlayerCharacterCommonData data => _data;
@@ -37,7 +38,10 @@ namespace game.Gameplay.Characters.Player
 			set => _mainStateMachine = value;
 		}
 
-		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, PlayerCharacterCommonData data, Transform transform, CharacterEquipmentManger equipmentManger, BoneListenerManager boneListenerManager) {
+		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, PlayerCharacterCommonData data, 
+			Transform transform, CharacterEquipmentManger equipmentManger, BoneListenerManager boneListenerManager, ICharacter character)
+		{
+			this.character = character;
 			_data = data;
 			_healthable = healthable;
 			_movement = movement;

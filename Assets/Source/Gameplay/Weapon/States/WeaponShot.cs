@@ -40,7 +40,7 @@ namespace game.Gameplay.Weapon
             var levelManager = AppCore.Get<LevelManager>();
             var projectileManager = levelManager.Get<ProjectileManager>();
             var projectile = _context.data.GetProjectile();
-            
+            projectile.SetSource(_context.owner);
             projectileManager.Launch(projectile, _view.GetMarkerPosition("muzzle"));
 
             AppCore.Get<ILogger>().Log($"AMMO ({_context.data.currentMagazineAmount}/{_context.data.magazineCapacity})");

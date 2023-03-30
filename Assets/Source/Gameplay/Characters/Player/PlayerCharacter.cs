@@ -82,7 +82,7 @@ namespace game.Gameplay.Characters.Player
         private void InitStates()
         {
             var context = new PlayerCharacterContext(_healthable, _movement, _animation, data,
-                _movement.transform, _equipmentManger, _boneListenerManager);
+                _movement.transform, _equipmentManger, _boneListenerManager, this);
             
             _mainStateMachine = new CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext>(context, data.states);
             _actionStateMachine = new CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext>(context, data.actionStates);
