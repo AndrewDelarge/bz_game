@@ -28,6 +28,11 @@ namespace game.core
         public T Get<T>() {
             return (T) _updatables[typeof(T)];
         }
+
+        public void SpawnDebugObject(Vector3 position, float size = 1f) {
+            var debug = Instantiate(Resources.Load<GameObject>("_dev/debug/mark"), position, Quaternion.identity);
+            debug.transform.localScale = new Vector3(size, size, size);
+        }
     }
 
     public interface IUpdatable

@@ -16,6 +16,7 @@ namespace game.Source.Gameplay.Weapon
     public class ProjectileManager : IUpdatable
     {
         protected List<Projectile> _projectiles = new List<Projectile>();
+        protected List<Projectile> _projectilesToDestroy = new List<Projectile>();
         
         public void Launch(Projectile projectile, GameObject startPosition)
         {
@@ -30,6 +31,9 @@ namespace game.Source.Gameplay.Weapon
                 if (projectile.isStopped == false) {
                     projectile.Update(deltaTime);
                 }
+                else {
+                    _projectilesToDestroy.Add(projectile);
+                }
 
                 if (projectile.hitList.Count == 0) {
                     continue;
@@ -42,24 +46,30 @@ namespace game.Source.Gameplay.Weapon
 
                 projectile.ClearHitList();
             }
+
+            foreach (var projectile in _projectilesToDestroy) {
+                projectile.Dispose();
+                _projectiles.Remove(projectile);
+            }
+            
+            _projectilesToDestroy.Clear();
         }
     }
 
     public class ShotgunProjectile : Projectile
     {
-        private const float LIFE_TIME = 3f;
-
+        private const float LIFE_TIME = 2f;
 
         private float _lifeTimeLeft = LIFE_TIME;
 
         private int PROJECTILE_COUNT = 10;
 
-        public List<ProjectileView> _views;
         public override void Start(GameObject startPosition)
         {
             _views = new List<ProjectileView>();
-            var rotation = new Quaternion(startPosition.transform.rotation.x, startPosition.transform.rotation.y,
-                startPosition.transform.rotation.z, startPosition.transform.rotation.w);
+            var transformRotation = startPosition.transform.rotation;
+            var rotation = new Quaternion(transformRotation.x, transformRotation.y,
+                transformRotation.z, transformRotation.w);
 
 
             for (int i = 0; i < PROJECTILE_COUNT; i++)
@@ -83,22 +93,26 @@ namespace game.Source.Gameplay.Weapon
             view.onHitHealthable.Remove(OnHitHandle);
         }
 
-        public override void Stop()
-        {
+        public override void Stop() {
+            _isStopped = true;
         }
 
         public override void Update(float deltaTime)
         {
-            if (_lifeTimeLeft < 0)
-            {
+            if (_lifeTimeLeft < 0 || _isStopped) {
+                Stop();
                 return;
             }
 
             _lifeTimeLeft -= deltaTime;
 
-            foreach (var _view in _views)
+            foreach (var view in _views)
             {
-                _view.transform.Translate(Vector3.forward * _model.speed * Time.deltaTime );
+                if (view.isStopped) {
+                    continue;
+                }
+                
+                view.transform.Translate(Vector3.forward * _model.speed * Time.deltaTime);
             }
         }
         
@@ -119,7 +133,8 @@ namespace game.Source.Gameplay.Weapon
         protected ProjectileModel _model;
         protected ProjectileView _projectileView;
         protected GameObject _startPosition;
-        protected ProjectileView _view;
+        protected List<ProjectileView> _views;
+
         
         public void Init(ProjectileModel model) {
             _model = model;
@@ -147,5 +162,11 @@ namespace game.Source.Gameplay.Weapon
         {
             _source = source;
         }
+
+        public virtual void Dispose() {
+            foreach (var view in _views) {
+                Object.DestroyImmediate(view);
+            }
+        } 
     }
 }
