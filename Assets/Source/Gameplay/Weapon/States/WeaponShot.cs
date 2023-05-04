@@ -5,9 +5,12 @@ using ILogger = game.core.Common.ILogger;
 namespace game.Gameplay.Weapon
 {
     public class WeaponShot : WeaponStateBase {
+        private const float FROM_IDLE_SHOT_DELAY = .1f;
         private IWeaponView _view;
         
         private float _endTime;
+        private float _shotDelayTime;
+        private bool _isDone;
         public override void Init(WeaponStateContext context) {
             base.Init(context);
             
@@ -29,32 +32,43 @@ namespace game.Gameplay.Weapon
         public override void Enter()
         {
             base.Enter();
-            
+
+            _isDone = false;
             _endTime = _context.data.shotTime;
+            _shotDelayTime = _context.stateMachine.currentStateType == WeaponStateEnum.AIM ? 0 : FROM_IDLE_SHOT_DELAY;
+        }
+
+        public override void HandleState() {
+            _shotDelayTime -= Time.deltaTime;
             
-            _view.Shot();
+            if (_shotDelayTime <= 0 && _isDone == false) {
+                Shot();
+                return;
+            }
             
+            _endTime -= Time.deltaTime;
+            
+            if (_endTime <= 0)
+            {
+                _context.stateMachine.ReturnState();
+            }
+        }
+
+        private void Shot() {
             _context.data.currentMagazineAmount -= 1;
 
             var levelManager = AppCore.Get<LevelManager>();
             var projectileManager = levelManager.Get<ProjectileManager>();
             var projectile = _context.data.GetProjectile();
+            
             projectile.SetSource(_context.owner);
             projectileManager.Launch(projectile, _view.GetMarkerPosition("muzzle"));
+                
+            _view.Shot();
 
             AppCore.Get<ILogger>().Log($"AMMO ({_context.data.currentMagazineAmount}/{_context.data.magazineCapacity})");
-        }
-
-        public override void HandleState()
-        {
-            _endTime -= Time.deltaTime;
-
-            if (_endTime <= 0)
-            {
-                AppCore.Get<ILogger>().Log("BOOM!");
-                
-                _context.stateMachine.ReturnState();
-            }
+            
+            _isDone = true;
         }
     }
 }

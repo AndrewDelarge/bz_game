@@ -4,7 +4,7 @@ namespace game.Gameplay.Common
 {
     public class BaseStateMachineWithStack<T> : BaseStateMachine<T> where T : BaseState
     {
-        public Stack<T> _states = new ();
+        private Stack<T> _states = new ();
         
         public override bool ChangeState(T state) {
             if (base.ChangeState(state)) {
@@ -20,7 +20,7 @@ namespace game.Gameplay.Common
             {
                 var state= _states.Pop();
                 
-                if (_states.Count == 0 ||ChangeStateInternal(_states.Peek()) == false)
+                if (_states.Count == 0 || ChangeStateInternal(_states.Peek()) == false)
                 {
                     _states.Push(state);
                 }
