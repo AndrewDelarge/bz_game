@@ -5,7 +5,7 @@ using game.core.storage;
 using game.Gameplay;
 using UnityEngine;
 
-namespace game.Source.Gameplay.Weapon
+namespace game.Gameplay.Weapon
 {
     public class ProjectileView : MonoBehaviour
     {

@@ -2,7 +2,7 @@
 using game.core.InputSystem;
 using game.gameplay.control;
 using game.Gameplay.Characters.Player;
-using game.Source.Gameplay.Weapon;
+using game.Gameplay.Weapon;
 using UnityEngine;
 using ILogger = game.core.Common.ILogger;
 using Logger = game.core.Common.Logger;

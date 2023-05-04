@@ -1,5 +1,5 @@
 ﻿using game.core.storage.Data.Equipment.Weapon;
-using game.Source.Gameplay.Weapon;
+using game.Gameplay.Weapon;
 
 namespace game.core.storage.Data.Models
 {

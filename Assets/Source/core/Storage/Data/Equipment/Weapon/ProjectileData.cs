@@ -1,5 +1,4 @@
-﻿using game.core.storage.Data.Models;
-using game.Source.Gameplay.Weapon;
+﻿using game.Gameplay.Weapon;
 using UnityEngine;
 
 namespace game.core.storage.Data.Equipment.Weapon

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using game.core.storage.Data.Equipment.Weapon;
 using game.Gameplay.Weapon;
-using game.Source.Gameplay.Weapon;
 
 namespace game.core.storage.Data.Models
 {

@@ -3,7 +3,6 @@ using System.Linq;
 using game.core.storage.Data.Equipment.Weapon;
 using game.Gameplay;
 using game.Gameplay.Weapon;
-using game.Source.Gameplay.Weapon;
 using UnityEngine;
 
 namespace game.core.storage.Data.Models

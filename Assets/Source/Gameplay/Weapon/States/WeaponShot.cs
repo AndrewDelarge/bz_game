@@ -1,5 +1,4 @@
 ﻿using game.core;
-using game.Source.Gameplay.Weapon;
 using UnityEngine;
 using ILogger = game.core.Common.ILogger;
 
