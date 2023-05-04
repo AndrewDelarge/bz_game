@@ -1,10 +1,9 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using game.core;
 using game.core.Common;
 using game.core.storage;
 using game.Gameplay;
 using UnityEngine;
-using UnityEngine.Rendering.VirtualTexturing;
 
 namespace game.Source.Gameplay.Weapon
 {
@@ -14,47 +13,70 @@ namespace game.Source.Gameplay.Weapon
 
         public IWhistle<Healthable, ProjectileView> onHitHealthable => _onHitHealthable;
 
-
-        private Vector3 _lastPosition;
-        private RaycastHit[] _raycastHits = new RaycastHit[10];
+        private RaycastHit[] _raycastHitsRaw = new RaycastHit[10];
+        private List<RaycastHit> _raycastHits = new List<RaycastHit>(10);
         private bool _isStopped;
-
+        private bool _isInited;
+        private Vector3 _targetPosition;
+        
         public bool isStopped => _isStopped;
         
-        private void Start() {
-            _lastPosition = transform.position;
-        }
         
-        private void Update() {
-            if (_lastPosition == Vector3.zero || _isStopped) {
+        public void Move(Vector3 position) {
+            var currentPosition = transform.position;
+            _targetPosition = transform.TransformDirection(position);
+
+            Physics.RaycastNonAlloc(currentPosition, _targetPosition,  _raycastHitsRaw, Vector3.Distance(currentPosition, _targetPosition), (int) GameLayers.HEALTHABLE_OBJECTS);
+
+            _raycastHits.Clear();
+            
+            foreach (var raycastHit in _raycastHitsRaw) {
+                if (raycastHit.transform != null) {
+                    _raycastHits.Add(raycastHit);
+                }
+            }
+
+            if (_raycastHits.Count == 0) {
+                transform.position += _targetPosition;
                 return;
             }
             
-            Physics.RaycastNonAlloc(_lastPosition, transform.position,  _raycastHits, Vector3.Distance(transform.position, _lastPosition), (int) GameLayers.HEALTHABLE_OBJECTS);
-            Debug.DrawLine(_lastPosition, transform.position);
-            if (_raycastHits.Length == 0) {
-                return;
+            _raycastHits.Sort((x, y) => Vector3.Distance(currentPosition, x.point).CompareTo(Vector3.Distance(currentPosition, y.point)));
+            
+            foreach (var raycastHit in _raycastHits) {
+                if (_isStopped) {
+                    break;
+                }
+                
+                handleHit(raycastHit);
+                
+                Debug.DrawLine(transform.position, raycastHit.point);
+                transform.position = raycastHit.point;
             }
+        }
 
-            var hit = _raycastHits[0];
+        public void Stop() {
+            _isStopped = true;
+        }
 
-            AppCore.Get<LevelManager>().SpawnDebugObject(hit.point, .1f);
-
-            if (hit.transform == null) {
-                return;
-            }
-
+        private void handleHit(RaycastHit hit) {
             var healthable = hit.transform.gameObject.GetComponent<Healthable>();
 
             if (healthable == null) {
                 return;
             }
             
+            AppCore.Get<LevelManager>().SpawnDebugObject(hit.point, .1f);
+
             _onHitHealthable.Dispatch(healthable, this);
         }
 
-        public void Stop() {
-            _isStopped = true;
+        public void Dispose() {
+            gameObject.SetActive(false);
+            
+            _onHitHealthable.Clear();
+            _raycastHitsRaw = null;
+            _raycastHits.Clear();
         }
     }
 }

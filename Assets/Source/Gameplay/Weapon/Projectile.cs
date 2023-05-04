@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using game.core;
-using game.core.common;
-using game.core.storage;
 using game.core.storage.Data.Models;
 using game.Gameplay;
 using game.Gameplay.Characters.Common;
-using game.сore.Common;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -15,8 +11,8 @@ namespace game.Source.Gameplay.Weapon
 {
     public class ProjectileManager : IUpdatable
     {
-        protected List<Projectile> _projectiles = new List<Projectile>();
-        protected List<Projectile> _projectilesToDestroy = new List<Projectile>();
+        protected List<Projectile> _projectiles = new ();
+        protected List<Projectile> _projectilesToDestroy = new ();
         
         public void Launch(Projectile projectile, GameObject startPosition)
         {
@@ -82,7 +78,6 @@ namespace game.Source.Gameplay.Weapon
                 view.onHitHealthable.Add(OnHitHandle);
                 _views.Add(view);
             }
-
         }
 
         private void OnHitHandle(Healthable healthable, ProjectileView view) 
@@ -94,6 +89,10 @@ namespace game.Source.Gameplay.Weapon
         }
 
         public override void Stop() {
+            foreach (var view in _views) {
+                view.Stop();
+            }
+            
             _isStopped = true;
         }
 
@@ -112,7 +111,7 @@ namespace game.Source.Gameplay.Weapon
                     continue;
                 }
                 
-                view.transform.Translate(Vector3.forward * _model.speed * Time.deltaTime);
+                view.Move(Vector3.forward * _model.speed * Time.deltaTime);
             }
         }
         
@@ -120,8 +119,6 @@ namespace game.Source.Gameplay.Weapon
         {
             return source.GetDamage();
         }
-
-
     }
     
     public abstract class Projectile
@@ -131,8 +128,6 @@ namespace game.Source.Gameplay.Weapon
         protected int _hitCount;
         protected bool _isStopped;
         protected ProjectileModel _model;
-        protected ProjectileView _projectileView;
-        protected GameObject _startPosition;
         protected List<ProjectileView> _views;
 
         
@@ -164,9 +159,14 @@ namespace game.Source.Gameplay.Weapon
         }
 
         public virtual void Dispose() {
+            Stop();
+            
             foreach (var view in _views) {
-                Object.DestroyImmediate(view);
+                view.Dispose();
+                Object.DestroyImmediate(view.gameObject);
             }
+            
+            _views.Clear();
         } 
     }
 }

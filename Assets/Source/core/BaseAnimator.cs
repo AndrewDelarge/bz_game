@@ -47,7 +47,7 @@ namespace game.core
         public virtual void StopAnimation()
         {
             animator.SetTrigger(PARAM_STOP_ACTION_TRIGGER);
-            animator.Update(Time.deltaTime);
+            animator.Update(0);
             // if (animator.IsInTransition(ACTION_LAYER)) {
             //     return;
             // }
