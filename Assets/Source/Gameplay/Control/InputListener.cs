@@ -52,10 +52,8 @@ namespace game.gameplay.control
             
             _inputRaw.axes[AXIS_WASD] = Vector2.zero;
             
-            // TODO [Implement] mouse position 
-            _inputRaw.axes[AXIS_MOUSE] = Vector2.zero;
-            
-            
+            _inputRaw.axes[AXIS_MOUSE] = CalculateMousePosition();
+
             if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
                 _inputRaw.axes[AXIS_WASD] = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -86,6 +84,13 @@ namespace game.gameplay.control
             }
             
             updated?.Invoke(_inputRaw);
+        }
+
+        private Vector2 CalculateMousePosition() {
+            var mousePosition = Input.mousePosition;
+            mousePosition.x -= Screen.width / 2f;
+            mousePosition.y -= Screen.height / 2f;
+            return mousePosition;
         }
     }
 

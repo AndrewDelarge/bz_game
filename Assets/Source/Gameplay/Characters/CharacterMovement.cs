@@ -17,6 +17,7 @@ namespace game.Gameplay.Characters
 
         private bool _sprint;
         private Queue<CharacterMove> _movesQueue = new ();
+        private bool _rotationLocked;
 
         private void Update()
         {
@@ -28,6 +29,10 @@ namespace game.Gameplay.Characters
         public void Disable() {
             _characterController.enabled = false;
             enabled = false;
+        }
+
+        public void SetLockRotation(bool value) {
+            _rotationLocked = value;
         }
 
         public void Move(CharacterMove move)
@@ -56,8 +61,10 @@ namespace game.Gameplay.Characters
                 
                 moveDirection = move.vector;
                 multiplier = move.multiplier;
-                
-                DoRotate(move.angle);
+
+                if (_rotationLocked == false) {
+                    DoRotate(move.angle);
+                }
             }
 
             moveDirection.y = _characterController.isGrounded ? ON_GROUND_GRAVITY : Physics.gravity.y;

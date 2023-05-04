@@ -1,6 +1,7 @@
 ﻿using game.core.InputSystem;
 using game.core.Storage.Data.Character;
 using game.Gameplay.Weapon;
+using UnityEngine;
 
 namespace game.Gameplay.Characters.Player
 {
@@ -15,7 +16,7 @@ namespace game.Gameplay.Characters.Player
             _weaponStateMachine = new WeaponStateMachine();
 			
             var weaponContext = new WeaponStateContext(_weaponStateMachine, context.equipmentManger.currentEquipmentView, context.equipmentManger.currentEquipment, context.character);
-			
+
             _weaponStateMachine.Init(weaponContext);
             _weaponStateMachine.ChangeState(WeaponStateEnum.IDLE);
             _weaponStateMachine.onStatesChanged.Add(WeaponChangeStateHandle);
@@ -49,7 +50,18 @@ namespace game.Gameplay.Characters.Player
             _weaponStateMachine.HandleInput(data);
 
             var currentWeaponState = _weaponStateMachine.currentStateType;
-			
+
+            var aim = data.aim.value;
+            
+            if (currentWeaponState is WeaponStateEnum.AIM or WeaponStateEnum.SHOT) {
+                var rotateAngle = Mathf.Atan2(aim.x, aim.y) * Mathf.Rad2Deg + context.camera.transform.eulerAngles.y;
+                context.movement.SetLockRotation(true);
+                context.movement.Rotate(rotateAngle);
+            }
+            else {
+                context.movement.SetLockRotation(false);
+            }
+            
             if (currentWeaponState is WeaponStateEnum.AIM or WeaponStateEnum.RELOAD) {
                 var sprint = data.GetAction(InputActionType.SPRINT);
                 if (sprint is {value: {status: InputStatus.PRESSED}}) {

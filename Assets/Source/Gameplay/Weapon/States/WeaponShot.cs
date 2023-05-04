@@ -5,7 +5,7 @@ using ILogger = game.core.Common.ILogger;
 namespace game.Gameplay.Weapon
 {
     public class WeaponShot : WeaponStateBase {
-        private const float FROM_IDLE_SHOT_DELAY = .1f;
+        private const float FROM_IDLE_SHOT_DELAY = .085f;
         private IWeaponView _view;
         
         private float _endTime;

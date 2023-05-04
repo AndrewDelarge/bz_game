@@ -66,9 +66,10 @@ namespace game.Gameplay.Weapon {
 			}
 		}
         
-		public override HealthChange<DamageType> GetDamage()
-		{
-			return source.GetDamage();
+		public override HealthChange<DamageType> GetDamage() {
+			var damage = source.GetDamage();
+			damage.ChangeValue(damage.value / PROJECTILE_COUNT);
+			return damage;
 		}
 	}
 }
