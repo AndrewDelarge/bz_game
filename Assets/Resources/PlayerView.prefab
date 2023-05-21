@@ -83,7 +83,6 @@ MonoBehaviour:
   _boneListenerManager: {fileID: 6308964488428675913}
   _healthable: {fileID: 0}
   _camera: {fileID: 5481474671396007646}
-  _characterAnimationSet: {fileID: 11400000, guid: d1e186efc0bbe45fb88d1193cfa131c0, type: 2}
   data: {fileID: 11400000, guid: 8d9eab988f3233245b63bdc55ee5db37, type: 2}
 --- !u!1 &475448938622600078
 GameObject:
@@ -727,15 +726,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3752337136665303957}
-  m_LocalRotation: {x: -0.00040903687, y: 0.036806256, z: -0.03756556, w: 0.9986161}
-  m_LocalPosition: {x: -1.1399984, y: 0.11999774, z: 3.979997}
+  m_LocalRotation: {x: 0.19134168, y: 0.8001032, z: -0.3314136, w: 0.46193972}
+  m_LocalPosition: {x: -13.46, y: 16.35, z: 8.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3752337137309180354}
   m_Father: {fileID: 5481474669639274248}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0.112, y: 4.217, z: -4.305}
+  m_LocalEulerAnglesHint: {x: 45, y: 120, z: 0}
 --- !u!114 &3752337136665303959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,7 +756,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 3171773415191112145}
   m_Follow: {fileID: 3171773415191112145}
   m_Lens:
-    FieldOfView: 42
+    FieldOfView: 24
     OrthographicSize: 4.31
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -765,7 +764,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2, y: 1}
+    m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -800,8 +799,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3752337137123021572}
-  m_LocalRotation: {x: 0.09679307, y: 0.88902193, z: -0.22388253, w: -0.38748908}
-  m_LocalPosition: {x: -7.1509876, y: 11.6289625, z: 36.199215}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -927,7 +926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: -3.1899052, y: 7.4737897, z: 4.983163}
+  m_FollowOffset: {x: -13.46, y: 16.35, z: 8.3}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1352,8 +1351,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5481474669639274254}
-  m_LocalRotation: {x: -0.13769495, y: -0.8580936, z: 0.36211336, w: -0.33703023}
-  m_LocalPosition: {x: -5.9905014, y: 10.223736, z: 6.3055954}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1389,15 +1388,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5481474671396007644}
-  m_LocalRotation: {x: -0.00040903687, y: 0.036806256, z: -0.03756556, w: 0.9986161}
-  m_LocalPosition: {x: -1.1399984, y: 0.11999774, z: 3.979997}
+  m_LocalRotation: {x: 0.19134168, y: 0.8001032, z: -0.3314136, w: 0.46193972}
+  m_LocalPosition: {x: -13.46, y: 16.35, z: 8.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3752337137123021573}
   m_Father: {fileID: 5481474669639274248}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0.338, z: 0}
 --- !u!20 &5481474671396007646
 Camera:
   m_ObjectHideFlags: 0
@@ -1423,7 +1422,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 42
+  field of view: 24
   orthographic: 0
   orthographic size: 4.31
   m_Depth: -10
@@ -1713,7 +1712,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8426677134400353345
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1730,7 +1729,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3726608878209224817
 MonoBehaviour:
   m_ObjectHideFlags: 0
