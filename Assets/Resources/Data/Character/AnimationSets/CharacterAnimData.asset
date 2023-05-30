@@ -12,16 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6b8517f2444acea3aba24420eff2b9, type: 3}
   m_Name: CharacterAnimData
   m_EditorClassIdentifier: 
-  _idle: {fileID: 7400000, guid: 168e9f9a2fb662c46b3032f90e265bad, type: 2}
-  _walk: {fileID: 7400000, guid: 19fc8e3bee443df4283fdbd585206265, type: 2}
-  _run: {fileID: 7400000, guid: bebfece54dba98242ba8bda6f8e945ac, type: 2}
-  _testClip: {fileID: 7400000, guid: 5816f5ad61f7d9a428847c7541bbaca4, type: 2}
   _animationSet:
   - _type: 0
-    _clip: {fileID: 7400000, guid: 168e9f9a2fb662c46b3032f90e265bad, type: 2}
+    _clip: {fileID: -7437080087607432489, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
   - _type: 1
-    _clip: {fileID: 7400000, guid: 19fc8e3bee443df4283fdbd585206265, type: 2}
+    _clip: {fileID: 1232095090531691670, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
   - _type: 2
-    _clip: {fileID: 7400000, guid: bebfece54dba98242ba8bda6f8e945ac, type: 2}
+    _clip: {fileID: 9019562652801211421, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
   - _type: 3
-    _clip: {fileID: 7400000, guid: 5816f5ad61f7d9a428847c7541bbaca4, type: 2}
+    _clip: {fileID: 6936025963346376127, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
