@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationSet:
   - _type: 0
-    _clip: {fileID: -8191260485548201244, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
+    _clip: {fileID: 8680015987252055418, guid: 015a0dbf24c481f448d724757607ed53, type: 3}
   - _type: 1
-    _clip: {fileID: 1232095090531691670, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
+    _clip: {fileID: 1232095090531691670, guid: 015a0dbf24c481f448d724757607ed53, type: 3}
   - _type: 2
-    _clip: {fileID: -2334474576452779749, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
+    _clip: {fileID: -2334474576452779749, guid: 015a0dbf24c481f448d724757607ed53, type: 3}
   - _type: 4
-    _clip: {fileID: -2135330857609989538, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
+    _clip: {fileID: -2135330857609989538, guid: 015a0dbf24c481f448d724757607ed53, type: 3}
   - _type: 5
-    _clip: {fileID: -3177476551649622993, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
+    _clip: {fileID: -3177476551649622993, guid: 015a0dbf24c481f448d724757607ed53, type: 3}
   - _type: 6
-    _clip: {fileID: -787020738625838128, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
+    _clip: {fileID: -787020738625838128, guid: 015a0dbf24c481f448d724757607ed53, type: 3}

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationSet:
   - _type: 0
-    _clip: {fileID: -7437080087607432489, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
+    _clip: {fileID: -7437080087607432489, guid: 015a0dbf24c481f448d724757607ed53, type: 3}
   - _type: 1
-    _clip: {fileID: 1232095090531691670, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
+    _clip: {fileID: 1232095090531691670, guid: 015a0dbf24c481f448d724757607ed53, type: 3}
   - _type: 2
-    _clip: {fileID: 9019562652801211421, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
+    _clip: {fileID: 9019562652801211421, guid: 015a0dbf24c481f448d724757607ed53, type: 3}
   - _type: 3
-    _clip: {fileID: 6936025963346376127, guid: 78b3b085e1e711e46ad7b2970132cddd, type: 3}
+    _clip: {fileID: 6936025963346376127, guid: 015a0dbf24c481f448d724757607ed53, type: 3}
