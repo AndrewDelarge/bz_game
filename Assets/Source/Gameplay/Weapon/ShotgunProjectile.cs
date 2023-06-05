@@ -1,6 +1,9 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace game.Gameplay.Weapon {
 	public class ShotgunProjectile : Projectile
@@ -10,6 +13,8 @@ namespace game.Gameplay.Weapon {
 		private float _lifeTimeLeft = LIFE_TIME;
 
 		private int PROJECTILE_COUNT = 10;
+
+		private Dictionary<Healthable, List<ProjectileView>> _hitDictionary = new Dictionary<Healthable, List<ProjectileView>>();
 
 		public override void Start(GameObject startPosition)
 		{
@@ -35,6 +40,15 @@ namespace game.Gameplay.Weapon {
 		{
 			_hitCount++;
 			_hitList.Add(healthable);
+
+			if (_hitDictionary.ContainsKey(healthable)) {
+				_hitDictionary[healthable].Add(view);
+			} else {
+				_hitDictionary.Add(healthable, new List<ProjectileView>() {view});
+			}
+			
+			healthable.TakeDamage(GetDamage());
+
 			view.Stop();
 			view.onHitHealthable.Remove(OnHitHandle);
 		}
@@ -49,6 +63,13 @@ namespace game.Gameplay.Weapon {
 
 		public override void Update(float deltaTime)
 		{
+			foreach (var pair in _hitDictionary) {
+				if (pair.Key.GetHealth() <= 0) {
+					AddForce(pair.Key, pair.Value[0]);
+					
+					_hitDictionary.Remove(pair.Key);
+				}
+			}
 			if (_lifeTimeLeft < 0 || _isStopped) {
 				Stop();
 				return;
@@ -70,6 +91,12 @@ namespace game.Gameplay.Weapon {
 			var damage = source.GetDamage();
 			damage.ChangeValue(damage.value / PROJECTILE_COUNT);
 			return damage;
+		}
+		
+		private void AddForce(Healthable healthable, ProjectileView view) {
+			var impulsePower = Math.Clamp(10 * _hitDictionary[healthable].Count, 10, 100);
+			var rigidbody = healthable.GetComponentInChildren<Rigidbody>();
+			rigidbody.AddForce(view.transform.forward * (impulsePower), ForceMode.Impulse);
 		}
 	}
 }

@@ -31,7 +31,7 @@ namespace game.Gameplay.Weapon {
 
 				foreach (var healthable in projectile.hitList)
 				{
-					healthable.TakeDamage(projectile.GetDamage());
+					// healthable.TakeDamage(projectile.GetDamage());
 				}
 
 				projectile.ClearHitList();

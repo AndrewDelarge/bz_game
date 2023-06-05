@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1b5c5c8f3a1f84bfaac9e473aa58732c, type: 2}
   _shotTime: 0.3
   _reloadTime: 2
-  _magazineCapacity: 2
+  _magazineCapacity: 10
   _damage: 100
   _damageType: 0
   _defaultProjectile: {fileID: 11400000, guid: 3a7b10d5a5bc8384bac2def6f857d4dc, type: 2}

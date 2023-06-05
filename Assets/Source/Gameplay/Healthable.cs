@@ -1,4 +1,5 @@
 using System;
+using game.core.Common;
 using UnityEngine;
 
 namespace game.Gameplay {
@@ -8,7 +9,7 @@ namespace game.Gameplay {
 		[SerializeField] protected bool _initializeOnStart = false;
 
 		protected HealthResource health;
-		public Action die;
+		public Whistle die = new Whistle();
 		
 		protected virtual void Start() {
 			if (! _initializeOnStart) 
@@ -30,7 +31,7 @@ namespace game.Gameplay {
 			health.Reduce(damage.value);
 			
 			if (health.value == 0) {
-				die?.Invoke();
+				die.Dispatch();
 			}
 		}
 

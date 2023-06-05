@@ -27,8 +27,12 @@ namespace game.core
             // init input
             var inputListener = Instantiate(Resources.Load<InputListener>("InputListener"));
             
+            InitLevelManager();
+
             // init player
             var playerCharacter = Instantiate(Resources.Load<PlayerCharacter>("PlayerView"), Vector3.zero, Quaternion.identity);
+
+            var manager = AppCore.Get<LevelManager>();
 
             var characterManager = new CharactersManager();
             characterManager.RegisterCharacter(playerCharacter);
@@ -38,12 +42,24 @@ namespace game.core
                 return;
             #endif
             AppCore.Get<SceneLoader>().LoadScene(1);
+
         }
 
         private void Start()
         {
             // TODO костыль пока что
             AppCore.Get<LevelManager>().Add(new ProjectileManager());
+        }
+
+
+        private void InitLevelManager()
+        {
+            if (AppCore.Get<LevelManager>() == null) {
+                var holder = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                holder.transform.position = new Vector3(0, -100);
+                var component = holder.AddComponent<LevelManager>();
+                component.Init();
+            }
         }
     }
 }

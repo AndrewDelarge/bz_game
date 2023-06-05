@@ -23,11 +23,11 @@ namespace game.Gameplay {
 			
 			base.Init();
 			
-			die += OnDie;
+			die.Add(OnDie);
 		}
 
 		private void OnDestroy() {
-			die -= OnDie;
+			die.Remove(OnDie);
 		}
 
 		private void OnDie() {

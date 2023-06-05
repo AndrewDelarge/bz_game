@@ -35,7 +35,6 @@ namespace game.Gameplay.Weapon
         public void ClearHitList()
         {
             _hitList.Clear();
-            _hitCount = 0;
         }
 
         public void SetSource(ICharacter source)

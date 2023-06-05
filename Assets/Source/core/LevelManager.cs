@@ -10,8 +10,9 @@ namespace game.core
     public class LevelManager : MonoBehaviour, ICoreManager
     {
         protected Dictionary<Type, IUpdatable> _updatables = new Dictionary<Type, IUpdatable>();
-
-        private void Start() {
+        
+        public void Init()
+        {
             AppCore.Register<LevelManager>(this);
         }
 

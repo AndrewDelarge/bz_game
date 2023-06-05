@@ -56,10 +56,15 @@ namespace game.core.Common
         public void Add(Delegate action) {
             _callbacks.Add(action);
         }
+        
+        public void Add(Action action) => Add((Delegate) action);
+
 
         public void Remove(Delegate action) {
             _callbacksToRemove.Add(action);
         }
+
+        public void Remove(Action action) => Remove((Delegate) action);
 
         public virtual void Dispatch() {
             foreach (var callback in _callbacks) {
@@ -101,6 +106,8 @@ namespace game.core.Common
     public interface IWhistle
     {
         void Add(Delegate action);
+        void Add(Action action);
         void Remove(Delegate action);
+        void Remove(Action action);
     }
 }
