@@ -11,99 +11,101 @@ AvatarMask:
   m_Elements:
   - m_Path: 
     m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/Hips
+    m_Weight: 0
+  - m_Path: Armature/Hips/IK_Hand.L
+    m_Weight: 0
+  - m_Path: Armature/Hips/IK_Hand.L/IK_Hand.L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/IK_Hand.R
+    m_Weight: 0
+  - m_Path: Armature/Hips/IK_Hand.R/IK_Hand.R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/Spine 0
+    m_Weight: 0
+  - m_Path: Armature/Hips/Spine 0/Spine 1
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Neck
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Neck/Head
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Neck/Head/Head_end
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.L
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.L/Arm.L
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.L/Arm.L/Forarm.L
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.L/Arm.L/Forarm.L/Hand.L
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.L/Arm.L/Forarm.L/Hand.L/Hand.L_end
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.R
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.R/Arm.R
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.R/Arm.R/Forarm.R
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.R/Arm.R/Forarm.R/Hand.R
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.R/Arm.R/Forarm.R/Hand.R/Hand.R_end
+    m_Weight: 1
+  - m_Path: Armature/Hips/Thigh.L
+    m_Weight: 0
+  - m_Path: Armature/Hips/Thigh.L/Leg.L
+    m_Weight: 0
+  - m_Path: Armature/Hips/Thigh.L/Leg.L/Leg.L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/Thigh.R
+    m_Weight: 0
+  - m_Path: Armature/Hips/Thigh.R/Leg.R
+    m_Weight: 0
+  - m_Path: Armature/Hips/Thigh.R/Leg.R/Leg.R_end
+    m_Weight: 0
+  - m_Path: Armature/IK_Hand_Pole.L
+    m_Weight: 0
+  - m_Path: Armature/IK_Hand_Pole.L/IK_Hand_Pole.L_end
+    m_Weight: 0
+  - m_Path: Armature/IK_Hand_Pole.R
+    m_Weight: 0
+  - m_Path: Armature/IK_Hand_Pole.R/IK_Hand_Pole.R_end
+    m_Weight: 0
+  - m_Path: Armature/IK_Heel.L
+    m_Weight: 0
+  - m_Path: Armature/IK_Heel.L/Foot.L
+    m_Weight: 0
+  - m_Path: Armature/IK_Heel.L/Foot.L/FootTip.L
+    m_Weight: 0
+  - m_Path: Armature/IK_Heel.L/Foot.L/FootTip.L/FootTip.L_end
+    m_Weight: 0
+  - m_Path: Armature/IK_Heel.R
+    m_Weight: 0
+  - m_Path: Armature/IK_Heel.R/Foot.R
+    m_Weight: 0
+  - m_Path: Armature/IK_Heel.R/Foot.R/FootTip.R
+    m_Weight: 0
+  - m_Path: Armature/IK_Heel.R/Foot.R/FootTip.R/FootTip.R_end
+    m_Weight: 0
+  - m_Path: Armature/IK_Knee.L
+    m_Weight: 0
+  - m_Path: Armature/IK_Knee.L/IK_Knee.L_end
+    m_Weight: 0
+  - m_Path: Armature/IK_Knee.R
+    m_Weight: 0
+  - m_Path: Armature/IK_Knee.R/IK_Knee.R_end
+    m_Weight: 0
+  - m_Path: Armature/Weapon
+    m_Weight: 0
+  - m_Path: Armature/Weapon/Hand.L.002
+    m_Weight: 0
+  - m_Path: Armature/Weapon/Hand.L.002/Hand.L.002_end
+    m_Weight: 0
+  - m_Path: Armature/Weapon/Hand.R.002
+    m_Weight: 0
+  - m_Path: Armature/Weapon/Hand.R.002/Hand.R.002_end
+    m_Weight: 0
   - m_Path: bz_hero_01
-    m_Weight: 0
-  - m_Path: bz_wp_shotgun_01
-    m_Weight: 0
-  - m_Path: L_Char01
-    m_Weight: 0
-  - m_Path: L_Char01/Bone
-    m_Weight: 0
-  - m_Path: L_Char01/Bone/Leg_Control.L
-    m_Weight: 0
-  - m_Path: L_Char01/Bone/Leg_Control.L/Foot Roll.L
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.L/Foot Roll.L/Leg_IK.L
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.L/Foot Roll.L/Leg_IK.L/Leg_IK.L_end
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.L/Foot.L
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.L/Foot.L/Toes.L
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.L/Foot.L/Toes.L/Toes.L_end
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.L/Toes Control.L
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.L/Toes Control.L/Toes Control.L_end
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.R
-    m_Weight: 0
-  - m_Path: L_Char01/Bone/Leg_Control.R/Foot Roll.R
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.R/Foot Roll.R/Leg_IK.R
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.R/Foot Roll.R/Leg_IK.R/Leg_IK.R_end
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.R/Foot.R
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.R/Foot.R/Toes.R
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.R/Foot.R/Toes.R/Toes.R_end
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.R/Toes Control.R
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Control.R/Toes Control.R/Toes Control.R_end
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Pole_Target.L
-    m_Weight: 0
-  - m_Path: L_Char01/Bone/Leg_Pole_Target.L/Leg_Pole_Target.L_end
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Leg_Pole_Target.R
-    m_Weight: 0
-  - m_Path: L_Char01/Bone/Leg_Pole_Target.R/Leg_Pole_Target.R_end
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach
-    m_Weight: 0
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest
-    m_Weight: 0
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Neck
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Neck/Head
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Neck/Head/Head_end
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.L
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.L/Lower_Arm.L
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.L/Lower_Arm.L/Hand.L
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.L/Lower_Arm.L/Hand.L/Hand.L_end
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.R
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.R/Lower_Arm.R
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.R/Lower_Arm.R/Hand.R
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.R/Lower_Arm.R/Hand.R/weapon.r
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.R/Lower_Arm.R/Hand.R/weapon.r/bz_wp_handgun_01
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Lower_Chest/Upper_Chest/Upper_Arm.R/Lower_Arm.R/Hand.R/weapon.r/weapon.r_end
-    m_Weight: 1
-  - m_Path: L_Char01/Bone/Stomach/Upper_Leg.L
-    m_Weight: 0
-  - m_Path: L_Char01/Bone/Stomach/Upper_Leg.L/Lower_Leg.L
-    m_Weight: 0
-  - m_Path: L_Char01/Bone/Stomach/Upper_Leg.L/Lower_Leg.L/Lower_Leg.L_end
-    m_Weight: 0
-  - m_Path: L_Char01/Bone/Stomach/Upper_Leg.R
-    m_Weight: 0
-  - m_Path: L_Char01/Bone/Stomach/Upper_Leg.R/Lower_Leg.R
-    m_Weight: 0
-  - m_Path: L_Char01/Bone/Stomach/Upper_Leg.R/Lower_Leg.R/Lower_Leg.R_end
     m_Weight: 0
