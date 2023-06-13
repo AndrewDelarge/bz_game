@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationSet: {fileID: 11400000, guid: d1e186efc0bbe45fb88d1193cfa131c0, type: 2}
   _normalSpeed: 1.2
-  _speedMultiplier: 2
+  _speedMultiplier: 2.2
   _speedSmoothTime: 5
   _kickPhysicsImpulseDelay: 0.25
   _kickFlightSphereDistance: 0
