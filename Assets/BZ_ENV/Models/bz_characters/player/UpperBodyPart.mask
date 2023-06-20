@@ -11,67 +11,49 @@ AvatarMask:
   m_Elements:
   - m_Path: 
     m_Weight: 1
-  - m_Path: Hips
+  - m_Path: Armature
     m_Weight: 0
-  - m_Path: Hips/IK_Hand.L
+  - m_Path: Armature/Hips
     m_Weight: 0
-  - m_Path: Hips/IK_Hand.R
+  - m_Path: Armature/Hips/Spine 0
     m_Weight: 0
-  - m_Path: Hips/Spine 0
+  - m_Path: Armature/Hips/Spine 0/Spine 1
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Neck
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Neck/Head
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.L
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.L/Arm.L
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.L/Arm.L/Forarm.L
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.L/Arm.L/Forarm.L/Hand.L
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.R
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.R/Arm.R
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.R/Arm.R/Forarm.R
+    m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.R/Arm.R/Forarm.R/Hand.R
+    m_Weight: 1
+  - m_Path: Armature/Hips/Thigh.L
     m_Weight: 0
-  - m_Path: Hips/Spine 0/Spine 1
-    m_Weight: 1
-  - m_Path: Hips/Spine 0/Spine 1/Neck
-    m_Weight: 1
-  - m_Path: Hips/Spine 0/Spine 1/Neck/Head
-    m_Weight: 1
-  - m_Path: Hips/Spine 0/Spine 1/Shoulder.L
-    m_Weight: 1
-  - m_Path: Hips/Spine 0/Spine 1/Shoulder.L/Arm.L
-    m_Weight: 1
-  - m_Path: Hips/Spine 0/Spine 1/Shoulder.L/Arm.L/Forarm.L
-    m_Weight: 1
-  - m_Path: Hips/Spine 0/Spine 1/Shoulder.L/Arm.L/Forarm.L/Hand.L
-    m_Weight: 1
-  - m_Path: Hips/Spine 0/Spine 1/Shoulder.R
-    m_Weight: 1
-  - m_Path: Hips/Spine 0/Spine 1/Shoulder.R/Arm.R
-    m_Weight: 1
-  - m_Path: Hips/Spine 0/Spine 1/Shoulder.R/Arm.R/Forarm.R
-    m_Weight: 1
-  - m_Path: Hips/Spine 0/Spine 1/Shoulder.R/Arm.R/Forarm.R/Hand.R
-    m_Weight: 1
-  - m_Path: Hips/Thigh.L
+  - m_Path: Armature/Hips/Thigh.L/Leg.L
     m_Weight: 0
-  - m_Path: Hips/Thigh.L/Leg.L
+  - m_Path: Armature/Hips/Thigh.L/Leg.L/Foot.L
     m_Weight: 0
-  - m_Path: Hips/Thigh.R
+  - m_Path: Armature/Hips/Thigh.L/Leg.L/Foot.L/FootTip.L
     m_Weight: 0
-  - m_Path: Hips/Thigh.R/Leg.R
+  - m_Path: Armature/Hips/Thigh.R
     m_Weight: 0
-  - m_Path: IK_Hand_Pole.L
-    m_Weight: 1
-  - m_Path: IK_Hand_Pole.R
-    m_Weight: 1
-  - m_Path: IK_Heel.L
+  - m_Path: Armature/Hips/Thigh.R/Leg.R
     m_Weight: 0
-  - m_Path: IK_Heel.L/Foot.L
+  - m_Path: Armature/Hips/Thigh.R/Leg.R/Foot.R
     m_Weight: 0
-  - m_Path: IK_Heel.L/Foot.L/FootTip.L
+  - m_Path: Armature/Hips/Thigh.R/Leg.R/Foot.R/FootTip.R
     m_Weight: 0
-  - m_Path: IK_Heel.R
+  - m_Path: bz_hero_01
     m_Weight: 0
-  - m_Path: IK_Heel.R/Foot.R
-    m_Weight: 0
-  - m_Path: IK_Heel.R/Foot.R/FootTip.R
-    m_Weight: 0
-  - m_Path: IK_Knee.L
-    m_Weight: 0
-  - m_Path: IK_Knee.R
-    m_Weight: 0
-  - m_Path: Weapon
-    m_Weight: 1
-  - m_Path: Weapon/Hand.L.002
-    m_Weight: 1
-  - m_Path: Weapon/Hand.R.002
-    m_Weight: 1
