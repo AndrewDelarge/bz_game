@@ -62,8 +62,8 @@ namespace game.Gameplay.Weapon
             var projectile = _context.data.GetProjectile();
             
             projectile.SetSource(_context.owner);
-            projectileManager.Launch(projectile, _view.GetMarkerPosition("muzzle"));
-                
+            projectileManager.Launch(projectile, _context.data.projectilesForShot, _view.GetMarkerPosition("muzzle"), _context.data.spreadX, _context.data.spreadY);
+
             _view.Shot();
 
             AppCore.Get<ILogger>().Log($"AMMO ({_context.data.currentMagazineAmount}/{_context.data.magazineCapacity})");

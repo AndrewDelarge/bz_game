@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99b0dc330f64411998554de5df311858, type: 3}
-  m_Name: ShotgunWeapon
+  m_Name: AKWeapon
   m_EditorClassIdentifier: 
   _animationSet: {fileID: 11400000, guid: 55a6970fd6d244d3fa60da10e585ffe9, type: 2}
   _statesOverrides: []
   _actionStatesOverrides:
-  - {fileID: 11400000, guid: 1b5c5c8f3a1f84bfaac9e473aa58732c, type: 2}
-  _shotTime: 0.3
+  - {fileID: 11400000, guid: 8e8bc3c3624352846a96b7f42032239a, type: 2}
+  _shotTime: 0.2
   _reloadTime: 2
-  _magazineCapacity: 10
-  _damage: 100
+  _magazineCapacity: 30
+  _damage: 10
   _damageType: 0
   _defaultProjectile: {fileID: 11400000, guid: 3a7b10d5a5bc8384bac2def6f857d4dc, type: 2}
-  _spreadX: {x: -20, y: 20}
-  _spreadY: {x: -20, y: 20}
-  _projectilesForShot: 10
-  _viewTemplate: {fileID: 8325011414452542468, guid: c3f4bd6cd57d31946a98e858734b71a5, type: 3}
+  _spreadX: {x: 5, y: 5}
+  _spreadY: {x: 5, y: 5}
+  _projectilesForShot: 1
+  _viewTemplate: {fileID: 5375954929132649162, guid: ae0b7dcea1ff5b1428e6fcad648776d2, type: 3}
   _fx:
   - _name: shot
     _prefab: {fileID: 7811088277396355905, guid: 080c288369852483699151d1283726c1, type: 3}

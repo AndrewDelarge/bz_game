@@ -21,7 +21,7 @@ namespace game.Gameplay.Characters.Player
         [SerializeField] private Camera _camera;
 
 
-        [SerializeField] private PlayerCharacterCommonData data;
+        [SerializeField] private PlayerCharacterCommonData _playerData;
 
         private CharacterEquipmentManger _equipmentManger;
         private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
@@ -29,7 +29,6 @@ namespace game.Gameplay.Characters.Player
 
         private InputData _data;
         private bool isInited;
-        private EquipmentData _equipmentData;
 
         public bool isPlayer => true;
         public HealthChange<DamageType> GetDamage()
@@ -43,9 +42,7 @@ namespace game.Gameplay.Characters.Player
         {
             AppCore.Get<IInputManager>().RegisterControlable(this);
 
-            _equipmentData = Resources.Load<EquipmentData>("Data/Weapons/ShotgunWeapon");
-            
-            _animation.Init(data.animationSet);
+            _animation.Init(_playerData.animationSet);
             _equipmentManger = new CharacterEquipmentManger();
             
             InitStates();
@@ -81,11 +78,11 @@ namespace game.Gameplay.Characters.Player
 
         private void InitStates()
         {
-            var context = new PlayerCharacterContext(_healthable, _movement, _animation, data,
+            var context = new PlayerCharacterContext(_healthable, _movement, _animation, _playerData,
                 _movement.transform, _equipmentManger, _boneListenerManager, this);
             
-            _mainStateMachine = new CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext>(context, data.states);
-            _actionStateMachine = new CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext>(context, data.actionStates);
+            _mainStateMachine = new CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext>(context, _playerData.states);
+            _actionStateMachine = new CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext>(context, _playerData.actionStates);
 
             context.mainStateMachine = _mainStateMachine;
             context.actionStateMachine = _actionStateMachine;
@@ -103,8 +100,13 @@ namespace game.Gameplay.Characters.Player
         {
             _data = data;
 
-            if (data.GetAction(InputActionType.DEBUG_0) is {value: {status: InputStatus.DOWN}}) {
-                Equip(_equipmentData);
+            if (data.GetAction(InputActionType.DEBUG_0) is {value: {status: InputStatus.DOWN}})
+            {
+                if (_equipmentManger.isEquiped) {
+                    return;
+                }
+                
+                Equip(_playerData.weapon);
             }
         }
 

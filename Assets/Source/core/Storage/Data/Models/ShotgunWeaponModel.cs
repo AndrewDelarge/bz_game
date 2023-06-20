@@ -9,8 +9,6 @@ namespace game.core.storage.Data.Models
 {
     public class ShotgunWeaponModel : WeaponModel
     {
-        protected ShotgunWeaponData _data;
-        
         private Dictionary<WeaponStateEnum, WeaponStateBase> _weaponStates = new () {
             {WeaponStateEnum.IDLE, new WeaponIdle()},
             {WeaponStateEnum.AIM, new WeaponAim()},
@@ -20,8 +18,6 @@ namespace game.core.storage.Data.Models
         public ShotgunWeaponModel(WeaponData weaponData) : base(weaponData) {
             _data = (ShotgunWeaponData) weaponData;
         }
-
-        public GameObject GetFxByName(string name) => _data.fx.First(x => x.name == name).prefab;
 
         public override IReadOnlyDictionary<WeaponStateEnum, WeaponStateBase> GetWeaponStates() => _weaponStates;
         public override Projectile GetProjectile()

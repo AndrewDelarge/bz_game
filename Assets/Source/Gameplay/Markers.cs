@@ -4,14 +4,16 @@ using UnityEngine;
 
 namespace game.Gameplay
 {
-    public class Markers : MonoBehaviour
+    [Serializable]
+    public class Markers
     {
         [SerializeField] private List<Marker> _markers;
 
         private Dictionary<string, Marker> _markersDict;
         
-        public IReadOnlyDictionary<string, Marker> markers;
-        private void Start() {
+        public IReadOnlyDictionary<string, Marker> markers => _markersDict;
+        
+        public void Init() {
             _markersDict = new Dictionary<string, Marker>();
 
             foreach (var marker in _markers) {

@@ -6,7 +6,7 @@ namespace game.Gameplay
     {
         [SerializeField] private string _name;
         [SerializeField] private GameObject _markerObject;
-
+        public new string name => _name;
         public GameObject markerObject => _markerObject;
         
         private void Start()

@@ -13,8 +13,8 @@ namespace game.Gameplay.Weapon
         protected int _hitCount;
         protected bool _isStopped;
         protected ProjectileModel _model;
-        protected List<ProjectileView> _views;
-
+        protected List<ProjectileView> _views = new List<ProjectileView>();
+        protected int _count;
         
         public void Init(ProjectileModel model) {
             _model = model;
@@ -27,7 +27,7 @@ namespace game.Gameplay.Weapon
         public ICharacter source => _source;
 
         public abstract HealthChange<DamageType> GetDamage();
-        public abstract void Start(GameObject startPosition);
+        public abstract void Start(Vector3 startPosition, Quaternion rotation);
 
         public abstract void Stop();
         public abstract void Update(float deltaTime);

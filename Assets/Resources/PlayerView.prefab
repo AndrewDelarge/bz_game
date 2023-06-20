@@ -630,7 +630,7 @@ MonoBehaviour:
   _boneListenerManager: {fileID: 6979399051235741700}
   _healthable: {fileID: 0}
   _camera: {fileID: 2723501063103147753}
-  data: {fileID: 11400000, guid: 8d9eab988f3233245b63bdc55ee5db37, type: 2}
+  _playerData: {fileID: 11400000, guid: 8d9eab988f3233245b63bdc55ee5db37, type: 2}
 --- !u!1001 &7470017772497927126
 PrefabInstance:
   m_ObjectHideFlags: 0

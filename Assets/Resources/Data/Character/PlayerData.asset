@@ -22,3 +22,4 @@ MonoBehaviour:
   _kickAngle: 57.5
   _kickPower: 14.5
   _yKick: 0.7
+  weapon: {fileID: 11400000, guid: 37a88d077af84f04099494edeae675a8, type: 2}

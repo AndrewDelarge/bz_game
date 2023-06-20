@@ -3,20 +3,22 @@ using game.core.storage.Data.Models;
 using UnityEngine;
 
 namespace game.Gameplay.Weapon {
-	public class ShotgunWeaponView : EquipmentViewBase, IWeaponView
+	public class WeaponView : EquipmentViewBase, IWeaponView
 	{
 		private const string SHOT_FX = "shot";
 		private const string AMMO_DROP_FX = "ammo_drop";
 		private const string MUZZLE_MARKER = "muzzle";
 		
-		private ShotgunWeaponModel _data;
+		private WeaponModel _data;
 		[SerializeField] private Markers _markers;
 
 
 		private List<GameObject> _particles = new ();
 		
 		public override void Init(EquipmentModel data) {
-			_data = (ShotgunWeaponModel) data;
+			_data = (WeaponModel) data;
+			
+			_markers.Init();
 		}
 		
 		public void Shot() {

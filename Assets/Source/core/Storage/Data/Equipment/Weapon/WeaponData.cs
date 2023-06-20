@@ -16,7 +16,11 @@ namespace game.core.storage.Data.Equipment.Weapon
         [SerializeField] private DamageType _damageType;
         [SerializeField] private ProjectileData _defaultProjectile;
 
-        [SerializeField] private EquipmentViewBase _viewTemplate;
+        [SerializeField] private Vector2 _spreadX;
+        [SerializeField] private Vector2 _spreadY;
+        [SerializeField] private int _projectilesForShot;
+        
+        [SerializeReference] private EquipmentViewBase _viewTemplate;
         [SerializeField] private List<WeaponFxData> _fx;
         public EquipmentViewBase viewTemplate => _viewTemplate;
         public float shotTime => _shotTime;
@@ -27,6 +31,9 @@ namespace game.core.storage.Data.Equipment.Weapon
         public float damage => _damage;
         public DamageType damageType => _damageType;
         public ProjectileData defaultProjectile => _defaultProjectile;
+        public Vector2 spreadX => _spreadX;
+        public Vector2 spreadY => _spreadY;
+        public int projectilesForShot => _projectilesForShot;
         
         [Serializable]
         public class WeaponFxData {

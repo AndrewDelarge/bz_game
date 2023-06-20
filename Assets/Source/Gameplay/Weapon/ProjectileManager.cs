@@ -8,10 +8,15 @@ namespace game.Gameplay.Weapon {
 		protected List<Projectile> _projectiles = new ();
 		protected List<Projectile> _projectilesToDestroy = new ();
         
-		public void Launch(Projectile projectile, GameObject startPosition)
+		public void Launch(Projectile projectile, int count, GameObject startPosition, Vector2 spreadX, Vector2 spreadY)
 		{
-			projectile.Start(startPosition);
-			_projectiles.Add(projectile);
+			for (int i = 0; i < count; i++)
+			{			
+				var rotation = startPosition.transform.rotation * Quaternion.Euler(Random.Range(spreadX.x, spreadX.y), Random.Range(spreadY.x, spreadY.y), 0);
+			
+				projectile.Start(startPosition.transform.position, rotation);
+				_projectiles.Add(projectile);
+			}
 		}
 
 		public void Update(float deltaTime)

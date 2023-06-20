@@ -56,7 +56,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5739953506191894448}
   - component: {fileID: 8325011414452542468}
-  - component: {fileID: 2133323699304482458}
   m_Layer: 0
   m_Name: bz_wp_shotgun
   m_TagString: Untagged
@@ -92,21 +91,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6228f422174dfe897cb87b92176f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _markers: {fileID: 2133323699304482458}
---- !u!114 &2133323699304482458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5558461511457719272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 527021f12dbe47719090a266c44f6592, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _markers:
-  - {fileID: 994272255}
+    _markers:
+    - {fileID: 994272255}
 --- !u!1 &5781387919528461108
 GameObject:
   m_ObjectHideFlags: 0

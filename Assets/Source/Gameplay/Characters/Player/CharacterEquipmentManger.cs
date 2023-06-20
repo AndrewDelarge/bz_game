@@ -23,6 +23,8 @@ namespace game.Gameplay.Characters.Player
         public EquipmentModel currentEquipment => _currentEquipment;
         public EquipmentViewBase currentEquipmentView => _currentEquipmentView;
         
+        public bool isEquiped => _currentEquipment != null;
+
 
         public void Init(CharacterAnimation animation, CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> mainStateMachine, 
             CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> actionStateMachine)
@@ -62,15 +64,13 @@ namespace game.Gameplay.Characters.Player
 
         public void Unequip()
         {
+            if (isEquiped == false) {
+                return;
+            }
+            
             if (_equipers.ContainsKey(_currentEquipment.GetType())) {
                 _equipers[_currentEquipment.GetType()].Unequip(_currentEquipmentView);
             }
-        }
-
-
-        public HealthChange<DamageType> GetDamageValue()
-        {
-            return _currentEquipment.GetDamage();
         }
         
     }

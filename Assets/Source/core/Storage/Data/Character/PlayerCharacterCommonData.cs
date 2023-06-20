@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using game.core.storage.Data.Equipment.Weapon;
 using game.Gameplay.Characters;
 using game.Gameplay.Characters.Player;
 using UnityEngine;
@@ -16,6 +17,8 @@ namespace game.core.Storage.Data.Character
         [SerializeField] private float _kickPower = 20;
         [SerializeField] private float _yKick = -.7f;
 
+
+        public WeaponData weapon;
 
         private Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, PlayerCharacterContext>> _states =
             new () {

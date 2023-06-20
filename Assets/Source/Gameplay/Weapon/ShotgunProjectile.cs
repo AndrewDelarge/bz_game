@@ -8,32 +8,17 @@ using Random = UnityEngine.Random;
 namespace game.Gameplay.Weapon {
 	public class ShotgunProjectile : Projectile
 	{
-		private const float LIFE_TIME = 2f;
+		private const float LIFE_TIME = 1f;
 
 		private float _lifeTimeLeft = LIFE_TIME;
 
-		private int PROJECTILE_COUNT = 10;
-
 		private Dictionary<Healthable, List<ProjectileView>> _hitDictionary = new Dictionary<Healthable, List<ProjectileView>>();
 
-		public override void Start(GameObject startPosition)
+		public override void Start(Vector3 startPosition, Quaternion rotation)
 		{
-			_views = new List<ProjectileView>();
-			var transformRotation = startPosition.transform.rotation;
-			var rotation = new Quaternion(transformRotation.x, transformRotation.y,
-				transformRotation.z, transformRotation.w);
-
-
-			for (int i = 0; i < PROJECTILE_COUNT; i++)
-			{
-				rotation = startPosition.transform.rotation;
-            
-				rotation *= Quaternion.Euler(Random.Range(-20, 20), Random.Range(-20, 20), 0);
-                
-				var view = Object.Instantiate<ProjectileView>(_model.viewTemplate, startPosition.transform.position, rotation);
-				view.onHitHealthable.Add(OnHitHandle);
-				_views.Add(view);
-			}
+			var view = Object.Instantiate<ProjectileView>(_model.viewTemplate, startPosition, rotation);
+			view.onHitHealthable.Add(OnHitHandle);
+			_views.Add(view);
 		}
 
 		private void OnHitHandle(Healthable healthable, ProjectileView view) 
@@ -89,7 +74,7 @@ namespace game.Gameplay.Weapon {
         
 		public override HealthChange<DamageType> GetDamage() {
 			var damage = source.GetDamage();
-			damage.ChangeValue(damage.value / PROJECTILE_COUNT);
+			damage.ChangeValue(damage.value / _count);
 			return damage;
 		}
 		
