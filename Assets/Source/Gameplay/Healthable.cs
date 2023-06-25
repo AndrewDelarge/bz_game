@@ -7,7 +7,7 @@ namespace game.Gameplay {
 		[SerializeField] private float _maxHealth;
 		[SerializeField] private float _currentHealth;
 		[SerializeField] protected bool _initializeOnStart = false;
-
+		[SerializeField] private ParticleSystem fx;
 		protected HealthResource health;
 		public Whistle die = new Whistle();
 		
@@ -29,7 +29,9 @@ namespace game.Gameplay {
 		
 		public virtual void TakeDamage(HealthChange<DamageType> damage) {
 			health.Reduce(damage.value);
-			
+			if (fx != null) { 
+				fx.Play();
+			}
 			if (health.value == 0) {
 				die.Dispatch();
 			}

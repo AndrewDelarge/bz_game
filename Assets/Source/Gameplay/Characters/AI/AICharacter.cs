@@ -14,7 +14,8 @@ namespace game.Gameplay.Characters.AI {
 		[SerializeField] private CharacterAnimationSet _animSet;
 		[SerializeField] private CharacterCommonData _data;
 		[SerializeField] private Healthable _healthable;
-
+        [SerializeField] private string[] nearMessages = new string[0];
+        [SerializeField] private string[] eMessages = new string[0];
 		private CharacterStateMachine<CharacterStateEnum, CharacterContext> _mainStateMachine;
 		private bool isInited;
 		
@@ -49,13 +50,31 @@ namespace game.Gameplay.Characters.AI {
 			isInited = true;
 		}
 		
-		private void Update()
-		{
+		private void Update() {
 			if (isInited == false) {
 				return;
 			}
 			
 			_mainStateMachine.HandleState();
 		}
-	}
+        private void OnTriggerEnter(Collider other) {
+			var player = other.GetComponent<Player>();
+			if (player == null) return;
+			player.near = this;
+            int messgaeIndex = UnityEngine.Random.Range(0, nearMessages.Length);
+			Debug.LogError(nearMessages[messgaeIndex]);
+        }
+
+        private void OnTriggerExit(Collider other) {
+            var player = other.GetComponent<Player>();
+            if (player == null) return;
+			if (player.near == this) { player.near = null; }
+        }
+
+        public void OnPressE(Player p) {
+            int messgaeIndex = UnityEngine.Random.Range(0, eMessages.Length);
+            Debug.LogError(eMessages[messgaeIndex]);
+        }
+
+    }
 }

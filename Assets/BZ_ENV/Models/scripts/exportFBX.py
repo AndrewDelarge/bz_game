@@ -138,7 +138,7 @@ class ExportFbxData(bpyUtils.PropertyGroup):
                         apply_scale_options = 'FBX_SCALE_UNITS', 
                         add_leaf_bones = False, 
                         use_armature_deform_only = True, 
-                        use_space_transform = False,
+                        use_space_transform = True,
                         bake_anim = True, 
                         bake_anim_use_all_bones = False, 
                         bake_anim_use_nla_strips = False, 
@@ -171,7 +171,7 @@ class ExportFbxData(bpyUtils.PropertyGroup):
                     filepath = meshDestination.format(name = collection.name), 
                     use_selection = True, 
                     apply_scale_options = 'FBX_SCALE_UNITS', 
-                    use_space_transform = False,
+                    use_space_transform = True,
                     add_leaf_bones=False, 
                     use_armature_deform_only = True, 
                     bake_anim = False)
