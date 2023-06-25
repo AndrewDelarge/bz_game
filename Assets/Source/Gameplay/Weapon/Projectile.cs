@@ -14,7 +14,7 @@ namespace game.Gameplay.Weapon
         protected bool _isStopped;
         protected ProjectileModel _model;
         protected List<ProjectileView> _views = new List<ProjectileView>();
-        protected int _count;
+        protected int _count = 1;
         
         public void Init(ProjectileModel model) {
             _model = model;

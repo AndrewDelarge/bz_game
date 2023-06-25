@@ -13,6 +13,7 @@ namespace game.Gameplay.Weapon {
 		private float _lifeTimeLeft = LIFE_TIME;
 
 		private Dictionary<Healthable, List<ProjectileView>> _hitDictionary = new Dictionary<Healthable, List<ProjectileView>>();
+		private List<Healthable> _clearList = new List<Healthable>();
 
 		public override void Start(Vector3 startPosition, Quaternion rotation)
 		{
@@ -51,10 +52,17 @@ namespace game.Gameplay.Weapon {
 			foreach (var pair in _hitDictionary) {
 				if (pair.Key.GetHealth() <= 0) {
 					AddForce(pair.Key, pair.Value[0]);
-					
-					_hitDictionary.Remove(pair.Key);
+
+					_clearList.Add(pair.Key);
 				}
 			}
+
+			foreach (var healthable in _clearList)
+			{
+				_hitDictionary.Remove(healthable);
+			}
+			_clearList.Clear();
+
 			if (_lifeTimeLeft < 0 || _isStopped) {
 				Stop();
 				return;
