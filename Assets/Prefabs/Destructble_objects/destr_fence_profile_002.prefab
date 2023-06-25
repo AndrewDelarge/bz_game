@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 7123411273924885326}
   - component: {fileID: 5084457288603456034}
   - component: {fileID: 5037094807758278908}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bz_fence_profile_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 1802575875646365163}
   - component: {fileID: 8226355063065558771}
   - component: {fileID: 4239268014507195989}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bz_fence_profile_006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,6 +316,7 @@ MonoBehaviour:
   _maxHealth: 10
   _currentHealth: 10
   _initializeOnStart: 1
+  fx: {fileID: 0}
   _baseCollider: {fileID: 2889702594924024874}
   _baseRigidbody: {fileID: 0}
   _baseObject: {fileID: 9142669547659869784}
@@ -362,7 +363,7 @@ GameObject:
   - component: {fileID: 2697794577168456492}
   - component: {fileID: 5613289587259499466}
   - component: {fileID: 249700471241333164}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bz_fence_profile_008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +477,7 @@ GameObject:
   - component: {fileID: 5060588355300714934}
   - component: {fileID: 479573580579360917}
   - component: {fileID: 961635992591858160}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bz_fence_profile_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -590,7 +591,7 @@ GameObject:
   - component: {fileID: 3311610934325832387}
   - component: {fileID: 2736166730837828087}
   - component: {fileID: 6563010506636621987}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bz_fence_profile_004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,7 +705,7 @@ GameObject:
   - component: {fileID: 1039474693500807893}
   - component: {fileID: 1057955027791834593}
   - component: {fileID: 6406361281870735474}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bz_fence_profile_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

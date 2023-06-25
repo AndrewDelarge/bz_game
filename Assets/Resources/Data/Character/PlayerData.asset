@@ -16,7 +16,7 @@ MonoBehaviour:
   _normalSpeed: 1.2
   _speedMultiplier: 2.2
   _speedSmoothTime: 5
-  _kickPhysicsImpulseDelay: 0.25
+  _kickPhysicsImpulseDelay: 0.4
   _kickFlightSphereDistance: 0
   _kickSphereRadius: 0.87
   _kickAngle: 57.5
