@@ -3,7 +3,12 @@ guid: 62d42936a748fed4aa7375764ea1e403
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bl_alcash_01
+    second: {fileID: 2100000, guid: 90d6a32874c3b2143ae73382481fbe19, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
