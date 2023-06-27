@@ -11,6 +11,7 @@ namespace game.Gameplay.Characters
     {
         private readonly int PARAM_VELOCITY = Animator.StringToHash("velocity");
         
+        private const int BASE_LAYER_ID = 0;
         private const int ACTION_LAYER_ID = 1;
         private const int ACTION_INMOVE_LAYER_ID = 2;
         
@@ -28,7 +29,7 @@ namespace game.Gameplay.Characters
         protected CharacterAnimationSet _defalutAnimationSet;
         private AnimatorOverrideController _overrideController;
         private CharacterAnimationEnum _currentAnimation;
-        
+        private bool _hideBase = false;
         public CharacterAnimationEnum currentAnimation => _currentAnimation;
 
         
@@ -46,10 +47,13 @@ namespace game.Gameplay.Characters
             base.Update();
 
             // TODO: Smooth layer wight change 
-            // var layerWeight = animator.GetLayerWeight(ACTION_LAYER);
+            var targetWeight = _hideBase ? 0 : 1;
+            var layerWeight = animator.GetLayerWeight(BASE_LAYER_ID);
             // var targetWeight = animator.GetFloat(PARAM_VELOCITY) < .01f ? 1f : 0;
-            // Mathf.Lerp(layerWeight, targetWeight, 1 * Time.deltaTime);
+            var result = Mathf.Lerp(layerWeight, targetWeight, 5f);
             
+            
+            animator.SetLayerWeight(BASE_LAYER_ID, result);
             animator.SetLayerWeight(ACTION_LAYER, animator.GetFloat(PARAM_VELOCITY) < .01f ? 1f : 0);
             animator.SetLayerWeight(ACTION_INMOVE_LAYER_ID, animator.GetFloat(PARAM_VELOCITY) > 0 ? 1 : 0);
         }
@@ -58,20 +62,22 @@ namespace game.Gameplay.Characters
         {
             var data = GetAnimationData(state);
 
-            if (data != null) {
-                _currentAnimation = state;
-                base.PlayAnimation(data.clip, withExitTransition);
+            if (data == null) {
+                AppCore.Get<ILogger>().Log($"Animation <{state.ToString()}> not found in <{name}>");
                 return;
             }
-            
-            AppCore.Get<ILogger>().Log($"Animation <{state.ToString()}> not found in <{name}>");
+
+            _currentAnimation = state;
+            _hideBase = true;
+            base.PlayAnimation(data.clip, withExitTransition);
         }
 
 
 
         public override void StopAnimation() {
             _currentAnimation = CharacterAnimationEnum.NONE;
-
+            _hideBase = false;
+            
             base.StopAnimation();
         }
         

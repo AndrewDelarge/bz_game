@@ -12,7 +12,7 @@ namespace game.Gameplay.Characters.AI {
 		[SerializeField] private CharacterAnimation _animation;
 		[SerializeField] private CharacterMovement _movement;
 		[SerializeField] private CharacterAnimationSet _animSet;
-		[SerializeField] private CharacterCommonData _data;
+		[SerializeField] private AICharacterData _data;
 		[SerializeField] private Healthable _healthable;
         [SerializeField] private string[] nearMessages = new string[0];
         [SerializeField] private string[] eMessages = new string[0];
@@ -20,7 +20,11 @@ namespace game.Gameplay.Characters.AI {
 		private bool isInited;
 		
 		public bool isPlayer => false;
-		
+
+		public Vector3 currentPosition => transform.position;
+
+		public AICharacterData data => _data;
+
 		public HealthChange<DamageType> GetDamage()
 		{
 			throw new NotImplementedException();

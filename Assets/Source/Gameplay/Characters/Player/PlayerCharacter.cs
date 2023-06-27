@@ -21,7 +21,7 @@ namespace game.Gameplay.Characters.Player
         [SerializeField] private Camera _camera;
 
 
-        [SerializeField] private PlayerCharacterCommonData _playerData;
+        [SerializeField] private PlayerCharacterData _playerData;
 
         private CharacterEquipmentManger _equipmentManger;
         private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
@@ -31,6 +31,8 @@ namespace game.Gameplay.Characters.Player
         private bool isInited;
 
         public bool isPlayer => true;
+        public Vector3 currentPosition => transform.position;
+
         public HealthChange<DamageType> GetDamage()
         {
             return _equipmentManger.currentEquipment.GetDamage();

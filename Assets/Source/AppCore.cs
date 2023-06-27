@@ -8,9 +8,12 @@ namespace game
     public class AppCore
     {   
         private static AppCore _instance = new();
-
+        
         private Dictionary<Type, ICoreManager> _managers = new Dictionary<Type, ICoreManager>();
         private Queue<Action> _initQueue = new Queue<Action>();
+
+        private bool isStarted;
+        
         public static void Register<TConcrete>(ICoreManager manager) => _instance.RegisterInternal<TConcrete>(manager);
 
         public static TConcrete Get<TConcrete>() => _instance.InternalGet<TConcrete>();
@@ -19,7 +22,11 @@ namespace game
             _managers.Add(typeof(TConcrete), manager);
             
             if (manager is IInitalizeable initalizeable) {
-                _initQueue.Enqueue(initalizeable.Init);
+                if (isStarted == false) {
+                    _initQueue.Enqueue(initalizeable.Init);
+                } else {
+                    initalizeable.Init();
+                }
             }
         }
 
@@ -34,6 +41,8 @@ namespace game
             while (_initQueue.Count > 0) {
                 _initQueue.Dequeue().Invoke();
             }
+
+            isStarted = true;
         }
         
         public static void Start()

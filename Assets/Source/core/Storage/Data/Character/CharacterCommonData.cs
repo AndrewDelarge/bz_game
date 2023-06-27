@@ -1,8 +1,7 @@
 using UnityEngine;
 
 namespace game.core.Storage.Data.Character {
-	[CreateAssetMenu(fileName = "Create CommonData", menuName = "GameData/Character/CommonData", order = 0)]
-	public class CharacterCommonData : ScriptableObject
+	public abstract class CharacterCommonData : ScriptableObject
 	{
 		[SerializeField] private CharacterAnimationSet _animationSet;
 		[SerializeField] private float _normalSpeed = 1.3f;

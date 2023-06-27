@@ -7,7 +7,7 @@ using UnityEngine;
 namespace game.core.Storage.Data.Character
 {
     [CreateAssetMenu(fileName = "PlayerData", menuName = "GameData/Character/PlayerData")]
-    public class PlayerCharacterCommonData : CharacterCommonData
+    public class PlayerCharacterData : CharacterCommonData
     {
         [Header("Kick data")]
         [SerializeField] private float _kickPhysicsImpulseDelay = .25f;

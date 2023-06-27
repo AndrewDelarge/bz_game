@@ -11,7 +11,7 @@ namespace game.Gameplay.Characters.Player
 		private CharacterMovement _movement;
 		private CharacterEquipmentManger _equipmentManger;
 		private CharacterAnimation _animation;
-		private PlayerCharacterCommonData _data;
+		private PlayerCharacterData _data;
 		private BoneListenerManager _boneListenerManager;
 
 		private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
@@ -21,7 +21,7 @@ namespace game.Gameplay.Characters.Player
 		public readonly ICharacter character;
 		public Transform transform => _transform;
 		public Healthable healthable => _healthable;
-		public PlayerCharacterCommonData data => _data;
+		public PlayerCharacterData data => _data;
 		public BoneListenerManager boneListenerManager => _boneListenerManager;
 
 		public CharacterEquipmentManger equipmentManger => _equipmentManger;
@@ -38,7 +38,7 @@ namespace game.Gameplay.Characters.Player
 			set => _mainStateMachine = value;
 		}
 
-		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, PlayerCharacterCommonData data, 
+		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, PlayerCharacterData data, 
 			Transform transform, CharacterEquipmentManger equipmentManger, BoneListenerManager boneListenerManager, ICharacter character)
 		{
 			this.character = character;

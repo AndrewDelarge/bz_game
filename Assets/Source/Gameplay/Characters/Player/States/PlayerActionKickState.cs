@@ -34,7 +34,7 @@ namespace game.Gameplay.Characters.Player {
 			base.Enter();
 			
 			var animData = context.animation.GetAnimationData(CharacterAnimationEnum.KICK);
-			_endTime = animData.length * .9f;
+			_endTime = animData.length;
 			_impulsTime = _endTime - context.data.kickPhysicsImpulseDelay;
 			context.animation.PlayAnimation(CharacterAnimationEnum.KICK);
 		}
