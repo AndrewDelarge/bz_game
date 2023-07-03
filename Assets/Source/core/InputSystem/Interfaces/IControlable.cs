@@ -7,5 +7,7 @@ namespace game.core.InputSystem.Interfaces
     {
         bool isListen { get; }
         void OnDataUpdate(InputData data);
+
+        Vector3 currentPosition { get; }
     }
 }

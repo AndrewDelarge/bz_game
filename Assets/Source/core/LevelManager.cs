@@ -73,9 +73,10 @@ namespace game.core
             _cachedPath.Clear();
             if (CalculatePath(start, target) == false) {
                 _logger.Log("[Navigator] : Error pathfinding");
+                return null;
             }
             
-            _logger.Log($"[Navigator] : Path was found #{_cachedRawPath.status.ToString()}#");
+            _logger.Log($"[Navigator] : Path was found #[{_cachedRawPath.status.ToString()}]#");
 
             foreach (var corner in _cachedRawPath.corners)
             {
@@ -87,7 +88,7 @@ namespace game.core
 
         private bool CalculatePath(Vector3 start, Vector3 target)
         {
-            return NavMesh.CalculatePath(start, target, 0, _cachedRawPath);
+            return NavMesh.CalculatePath(start, target, 1, _cachedRawPath);
         }
     }
 

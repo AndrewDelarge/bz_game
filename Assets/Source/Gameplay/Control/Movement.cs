@@ -21,6 +21,7 @@ namespace game.gameplay.control
         private Vector3 _lastPosition;
         private float _rotationVelocity;
         private bool _sprint;
+        public Vector3 currentPosition => transform.position;
 
 
         private void Start()

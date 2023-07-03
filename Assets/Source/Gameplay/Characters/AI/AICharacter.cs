@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using game.core;
+using game.core.InputSystem;
+using game.core.InputSystem.Interfaces;
 using game.core.Storage.Data.Character;
 using game.Gameplay.Characters.Player;
 using game.Gameplay.Characters;
@@ -8,7 +10,7 @@ using game.Gameplay.Characters.Common;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.AI {
-	public class AICharacter : MonoBehaviour, ICharacter {
+	public class AICharacter : MonoBehaviour, ICharacter, IControlable {
 		[SerializeField] private CharacterAnimation _animation;
 		[SerializeField] private CharacterMovement _movement;
 		[SerializeField] private CharacterAnimationSet _animSet;
@@ -25,10 +27,15 @@ namespace game.Gameplay.Characters.AI {
 
 		public AICharacterData data => _data;
 
+		public IControlable controlable => this;
+
+		private InputData _inputData;
+		
 		public HealthChange<DamageType> GetDamage()
 		{
 			throw new NotImplementedException();
 		}
+
 
 		private void Start() {
 			game.AppCore.Get<CharactersManager>().RegisterCharacter(this);
@@ -42,6 +49,7 @@ namespace game.Gameplay.Characters.AI {
 				new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, CharacterContext>>()
 				{
 					{CharacterStateEnum.IDLE, new AIIdleState()},
+					{CharacterStateEnum.WALK, new AIWalkState()},
 					{CharacterStateEnum.DEAD, new AIDeadState()}
 				});
 
@@ -58,10 +66,15 @@ namespace game.Gameplay.Characters.AI {
 			if (isInited == false) {
 				return;
 			}
+
+			if (_inputData != null) {
+				_mainStateMachine.HandleInput(_inputData);
+			}
 			
 			_mainStateMachine.HandleState();
 		}
-        private void OnTriggerEnter(Collider other) {
+
+		private void OnTriggerEnter(Collider other) {
 			var player = other.GetComponent<Player>();
 			if (player == null) return;
 			player.near = this;
@@ -80,5 +93,9 @@ namespace game.Gameplay.Characters.AI {
             Debug.LogError(eMessages[messgaeIndex]);
         }
 
-    }
+        public bool isListen { get; }
+        public void OnDataUpdate(InputData data) {
+	        _inputData = data;
+        }
+	}
 }

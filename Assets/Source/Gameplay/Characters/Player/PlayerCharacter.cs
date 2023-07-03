@@ -38,6 +38,8 @@ namespace game.Gameplay.Characters.Player
             return _equipmentManger.currentEquipment.GetDamage();
         }
 
+        public IControlable controlable => this;
+
         public bool isListen => true;
 
         public void Init()
