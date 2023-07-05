@@ -11,6 +11,8 @@ namespace game.Gameplay.Characters.AI.Behaviour
 {
     public class AICharacterControl
     {
+        private const float THRESHOLD = 1f;
+        
         private IControlable _controlable;
 
         private List<Vector3> _currentPath;
@@ -18,6 +20,8 @@ namespace game.Gameplay.Characters.AI.Behaviour
         private Vector3 _currentTargetPoint;
 
         private InputData _inputData = new InputData();
+        
+        private float _lastDistance;
         public bool hasTarget => _currentTargetPoint != default;
         
         public void Init(IControlable controlable) {
@@ -41,22 +45,27 @@ namespace game.Gameplay.Characters.AI.Behaviour
                 _currentTargetPoint = default;
                 return;
             }
-
+            
             if (isReached) {
                 _currentTargetPoint = TakeNextPoint();
-                
+            }
+
+            var currentDistance = Vector3.Distance(_currentTargetPoint, _controlable.currentPosition);
+            
+            if (isReached || currentDistance > _lastDistance)
+            {
                 var direction = GetDirection(_currentTargetPoint, _controlable.currentPosition);
                 _inputData.Update(direction, direction, new List<InputActionField<InputAction>>());
             }
+
+            _lastDistance = currentDistance;
             
             _controlable.OnDataUpdate(_inputData);
         }
         
         private bool IsPointReached(Vector3 point) {
-            return RoundPosition(point) == RoundPosition(_controlable.currentPosition);
+            return Vector3.Distance(point, _controlable.currentPosition) <= THRESHOLD;
         }
-
-        private Vector3Int RoundPosition(Vector3 pos) => new (Mathf.FloatToHalf(pos.x), Mathf.FloatToHalf(pos.y), Mathf.FloatToHalf(pos.z));
 
         private Vector3 TakeNextPoint() {
             var point = _currentPath[0];
