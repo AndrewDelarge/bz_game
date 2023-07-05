@@ -31,7 +31,7 @@ namespace game.Gameplay.Characters.Player
         private bool isInited;
 
         public bool isPlayer => true;
-        public Vector3 currentPosition => transform.position;
+        public Vector3 currentPosition => _movement.transform.position;
 
         public HealthChange<DamageType> GetDamage()
         {

@@ -97,5 +97,14 @@ namespace game.Gameplay.Characters.AI {
         public void OnDataUpdate(InputData data) {
 	        _inputData = data;
         }
+
+        private void OnDrawGizmos() {
+	        if (_inputData == null) {
+		        return;
+	        }
+	        
+	        Gizmos.color = Color.magenta;
+	        Gizmos.DrawLine(transform.position, transform.position + (Vector3) (_inputData.move.value * 10));
+        }
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using game.core;
 using game.core.InputSystem;
 using game.core.InputSystem.Interfaces;
@@ -17,6 +18,7 @@ namespace game.Gameplay.Characters.AI.Behaviour
         private Vector3 _currentTargetPoint;
 
         private InputData _inputData = new InputData();
+        public bool hasTarget => _currentTargetPoint != default;
         
         public void Init(IControlable controlable) {
             _controlable = controlable;
@@ -54,7 +56,7 @@ namespace game.Gameplay.Characters.AI.Behaviour
             return RoundPosition(point) == RoundPosition(_controlable.currentPosition);
         }
 
-        private Vector3Int RoundPosition(Vector3 pos) => new (Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.y), Mathf.FloorToInt(pos.z));
+        private Vector3Int RoundPosition(Vector3 pos) => new (Mathf.FloatToHalf(pos.x), Mathf.FloatToHalf(pos.y), Mathf.FloatToHalf(pos.z));
 
         private Vector3 TakeNextPoint() {
             var point = _currentPath[0];
@@ -63,7 +65,7 @@ namespace game.Gameplay.Characters.AI.Behaviour
         }
 
         private Vector2 GetDirection(Vector3 vectorA, Vector3 vectorB) {
-            return (vectorA - vectorB).normalized;
+            return new Vector2(vectorA.x - vectorB.x, vectorA.z - vectorB.z)  ;
         }
     }
     public class TestBehaviour : AIBehaviour {
@@ -92,6 +94,10 @@ namespace game.Gameplay.Characters.AI.Behaviour
                 return;
             }
 
+            if (_control.hasTarget) {
+                return;
+            }
+            
             _lastUpdate = UPDATE_TICK;
 
             var manager = AppCore.Get<CharactersManager>();
