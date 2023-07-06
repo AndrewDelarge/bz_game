@@ -19,7 +19,7 @@ MonoBehaviour:
   _shotTime: 0.2
   _reloadTime: 2
   _magazineCapacity: 30
-  _damage: 10
+  _damage: 25
   _damageType: 0
   _defaultProjectile: {fileID: 11400000, guid: 3a7b10d5a5bc8384bac2def6f857d4dc, type: 2}
   _spreadX: {x: 5, y: 5}

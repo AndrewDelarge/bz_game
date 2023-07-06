@@ -83,7 +83,6 @@ GameObject:
   - component: {fileID: 5641989493477104041}
   - component: {fileID: 5641989493477104042}
   - component: {fileID: 5641989493477104040}
-  - component: {fileID: 1431903589}
   m_Layer: 9
   m_Name: char_alcash
   m_TagString: Untagged
@@ -179,19 +178,6 @@ MonoBehaviour:
   _currentHealth: 10
   _initializeOnStart: 1
   fx: {fileID: 5564110778311208130}
---- !u!135 &1431903589
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5641989493477104037}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &1014912882707214946
 PrefabInstance:
   m_ObjectHideFlags: 0
