@@ -1,4 +1,5 @@
-﻿using game.core.InputSystem.Interfaces;
+﻿using game.core;
+using game.core.InputSystem.Interfaces;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.Common
@@ -11,5 +12,6 @@ namespace game.Gameplay.Characters.Common
         // TODO: Получение статов персонажа или одного стата вместо просто дамаги но что имеем то имеем пока или хз
         HealthChange<DamageType> GetDamage();
         public IControlable controlable { get; }
+        public AIBehaviour behaviour { get; }
     }
 }

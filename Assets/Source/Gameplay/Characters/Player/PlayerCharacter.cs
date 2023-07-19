@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using game.core;
 using game.core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using game.core.Storage.Data.Character;
@@ -39,6 +40,7 @@ namespace game.Gameplay.Characters.Player
         }
 
         public IControlable controlable => this;
+        public AIBehaviour behaviour => null;
 
         public bool isListen => true;
 

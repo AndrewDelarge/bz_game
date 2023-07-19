@@ -4,8 +4,6 @@ using game.core;
 using game.core.InputSystem;
 using game.core.InputSystem.Interfaces;
 using game.core.Storage.Data.Character;
-using game.Gameplay.Characters.Player;
-using game.Gameplay.Characters;
 using game.Gameplay.Characters.Common;
 using UnityEngine;
 
@@ -20,7 +18,8 @@ namespace game.Gameplay.Characters.AI {
         [SerializeField] private string[] eMessages = new string[0];
 		private CharacterStateMachine<CharacterStateEnum, CharacterContext> _mainStateMachine;
 		private bool isInited;
-		
+		private InputData _inputData;
+		private AIBehaviour _behaviour;
 		public bool isPlayer => false;
 
 		public Vector3 currentPosition => transform.position;
@@ -29,13 +28,12 @@ namespace game.Gameplay.Characters.AI {
 
 		public IControlable controlable => this;
 
-		private InputData _inputData;
-		
+		public AIBehaviour behaviour => _behaviour ??= GetNewBehavior();
+
 		public HealthChange<DamageType> GetDamage()
 		{
 			throw new NotImplementedException();
 		}
-
 
 		private void Start() {
 			game.AppCore.Get<CharactersManager>().RegisterCharacter(this);
@@ -105,6 +103,12 @@ namespace game.Gameplay.Characters.AI {
 	        
 	        Gizmos.color = Color.magenta;
 	        Gizmos.DrawLine(transform.position, transform.position + (Vector3) (_inputData.move.value * 10));
+        }
+        
+        private AIBehaviour GetNewBehavior() {
+	        var behaviour = data.behaviourData.GetBehaviour();
+	        behaviour.Init(this);
+	        return behaviour;
         }
 	}
 }

@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
 using game.core.common;
-using game.Gameplay.Characters;
-using game.Gameplay.Characters.AI;
 using game.Gameplay.Characters.Common;
 using game.сore.Common;
-using game.Gameplay.Characters.Player;
-using UnityEngine;
 
 namespace game.core {
 
@@ -22,12 +18,7 @@ namespace game.core {
 		private List<AIBehaviour> _behaviours = new List<AIBehaviour>();
 		
 		public void Add(ICharacter character) {
-			// hack
-			var aiCharacter = (AICharacter) character;
-
-			var behaviour = aiCharacter.data.behaviourData.GetBehaviour();
-			behaviour.Init(character);
-			_behaviours.Add(behaviour);
+			_behaviours.Add(character.behaviour);
 		}
 
 		public void Update(float deltaTime) {
