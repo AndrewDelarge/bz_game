@@ -7,12 +7,12 @@ namespace game.Gameplay.Weapon
     {
         private float _startTime;
 
-        public override bool CheckExitCondition()
+        public bool CheckExitCondition()
         {
             return _startTime <= 0;
         }
 
-        public override bool CheckEnterCondition()
+        public bool CheckEnterCondition()
         {
             return _context.data.magazineCapacity != _context.data.currentMagazineAmount;
         }
@@ -22,7 +22,7 @@ namespace game.Gameplay.Weapon
             _startTime = _context.data.reloadTime;
         }
 
-        public override void HandleState()
+        public override void HandleState(float delta)
         {
             _startTime -= Time.deltaTime;
 

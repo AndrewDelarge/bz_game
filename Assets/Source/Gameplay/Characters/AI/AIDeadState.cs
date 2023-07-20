@@ -18,18 +18,18 @@ namespace game.Gameplay.Characters.AI {
 			SetRagdollValue(true);
 		}
 
-		public override void Enter() {
+		public void Enter() {
 			var animData = context.animation.GetAnimationData(CharacterAnimationEnum.KICK);
 			_endTime = animData.clip.length * 0;
 
 			context.animation.PlayAnimation(animData.clip);
 		}
 
-		public override void Exit() {
+		public void Exit() {
 			throw new System.NotImplementedException();
 		}
 
-		public override void HandleState() {
+		public void HandleState() {
 			_endTime -= Time.deltaTime;
 			
 			if (_endTime <= 0) {
@@ -40,7 +40,7 @@ namespace game.Gameplay.Characters.AI {
 			}
 		}
 
-		public override void HandleInput(InputData data) {}
+		public void HandleInput(InputData data) {}
 
 		private void SetRagdollValue(bool value) {
 			foreach (var bone in _ragdollBones) {

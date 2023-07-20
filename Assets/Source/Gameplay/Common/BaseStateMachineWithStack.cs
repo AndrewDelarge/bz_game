@@ -2,7 +2,29 @@
 
 namespace game.Gameplay.Common
 {
-    public class BaseStateMachineWithStack<T> : BaseStateMachine<T> where T : BaseState
+    public class BaseStateMachineWithStack<TType, TState, TContext> : BaseStateMachineWithStack<TState> where TState : class, IBaseState<TType, TContext>
+    {
+        private Dictionary<TType, TState> _availableStates = new ();
+
+        public virtual bool ChangeState(TType type) {
+            if (_availableStates.ContainsKey(type)) {
+                return ChangeState(_availableStates[type]);
+            }
+
+            return false;
+        }
+        
+        public virtual void Init(List<TState> states, TContext context)
+        {
+            foreach (var state in states) {
+                state.Init(context);
+                
+                _availableStates.Add(state.type, state);
+            }
+        }
+    }
+    
+    public class BaseStateMachineWithStack<T> : BaseStateMachine<T> where T : class, IBaseState
     {
         private Stack<T> _states = new ();
         

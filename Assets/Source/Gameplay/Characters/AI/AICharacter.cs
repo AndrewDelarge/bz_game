@@ -69,7 +69,7 @@ namespace game.Gameplay.Characters.AI {
 				_mainStateMachine.HandleInput(_inputData);
 			}
 			
-			_mainStateMachine.HandleState();
+			_mainStateMachine.HandleState(Time.deltaTime);
 		}
 
 		private void OnTriggerEnter(Collider other) {

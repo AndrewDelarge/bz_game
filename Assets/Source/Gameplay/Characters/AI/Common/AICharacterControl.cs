@@ -50,7 +50,7 @@ namespace game.Gameplay.Characters.AI.Common {
 			if (isReached || currentDistance > _lastDistance)
 			{
 				var direction = GetDirection(_currentTargetPoint, _controlable.currentPosition);
-				_inputData.Update(direction, direction, new List<InputActionField<InputAction>>());
+				_inputData.Update(direction, direction, new List<InputActionField<InputAction<InputActionType>>>());
 			}
 
 			_lastDistance = currentDistance;

@@ -3,7 +3,7 @@ using game.Gameplay.Common;
 
 namespace game.Gameplay.Weapon
 {
-    public abstract class WeaponStateBase : BaseState
+    public abstract class WeaponStateBase : IBaseState
     {
         protected WeaponStateContext _context;
         
@@ -12,19 +12,19 @@ namespace game.Gameplay.Weapon
             _context = context;
         }
         
-        public override void Enter()
+        public virtual void Enter()
         {
         }
 
-        public override void Exit()
+        public virtual void Exit()
         {
         }
 
-        public override void HandleState()
+        public virtual void HandleState(float deltaTime)
         {
         }
 
-        public override void HandleInput(InputData data)
+        public virtual void HandleInput(InputData data)
         {
         }
     }

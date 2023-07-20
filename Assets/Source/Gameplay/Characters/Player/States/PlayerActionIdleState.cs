@@ -3,7 +3,7 @@ using game.Gameplay.Characters;
 
 namespace game.Gameplay.Characters.Player {
 	public class PlayerActionIdleState : PlayerStateBase<PlayerActionStateEnum, PlayerCharacterContext> {
-		public override void HandleState() {
+		public override void HandleState(float delta) {
 		}
 
 		public override void HandleInput(InputData data) {

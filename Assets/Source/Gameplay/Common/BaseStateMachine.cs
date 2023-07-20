@@ -4,7 +4,7 @@ using ILogger = game.core.Common.ILogger;
 
 namespace game.Gameplay.Common
 {
-    public class BaseStateMachine<T> where T : BaseState {
+    public class BaseStateMachine<T> where T : class, IBaseState {
         public T currentState => _currentState;
         
         public IWhistle<T> onStateChanged => _onStateChanged;
@@ -28,8 +28,8 @@ namespace game.Gameplay.Common
             return isStateChanged;
         }
     
-        public void HandleState() {
-            _currentState.HandleState();
+        public void HandleState(float deltaTime) {
+            _currentState.HandleState(deltaTime);
         }
     
         public void HandleInput(InputData data) {

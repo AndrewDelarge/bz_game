@@ -8,15 +8,6 @@ using ILogger = game.core.Common.ILogger;
 namespace game.core
 {
     //TODO отвязатьот монобеха
-    public interface ILevelManager
-    {
-        void Add(IUpdatable updatable);
-        T Get<T>();
-        void SpawnDebugObject(Vector3 position, float size = 1f);
-
-        public INavigator navigator { get; }
-    }
-
     public class LevelManager : MonoBehaviour, ICoreManager, ILevelManager
     {
         protected Dictionary<Type, IUpdatable> _updatables = new Dictionary<Type, IUpdatable>();
@@ -94,10 +85,5 @@ namespace game.core
         {
             return NavMesh.CalculatePath(start, target, 1, _cachedRawPath);
         }
-    }
-
-    public interface IUpdatable
-    {
-        public void Update(float deltaTime);
     }
 }

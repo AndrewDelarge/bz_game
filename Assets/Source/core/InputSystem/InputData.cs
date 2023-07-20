@@ -4,11 +4,11 @@ using UnityEngine.PlayerLoop;
 
 namespace game.core.InputSystem
 {
-    public class InputData
+    public class InputData : IInputData<InputActionType>
     {
         public InputActionField<Vector2> move { get; private set; }
         public InputActionField<Vector2> aim { get; private set;  }
-        public List<InputActionField<InputAction>> actions { get; private set; }
+        public List<InputActionField<InputAction<InputActionType>>> actions { get; private set; }
 
         public InputData()
         {
@@ -16,14 +16,14 @@ namespace game.core.InputSystem
             aim = new InputActionField<Vector2>(Vector2.zero);
         }
 
-        public void Update(Vector2 move, Vector2 aim, List<InputActionField<InputAction>> actions)
+        public void Update(Vector2 move, Vector2 aim, List<InputActionField<InputAction<InputActionType>>> actions)
         {
             this.move.Update(move);
             this.aim.Update(aim);
             this.actions = actions;
         }
 
-        public InputActionField<InputAction> GetAction(InputActionType action, bool ignoreAbsorbed = false)
+        public InputActionField<InputAction<InputActionType>> GetAction(InputActionType action, bool ignoreAbsorbed = false)
         {
             foreach (var inputAction in actions)
                 if (inputAction.value.type == action && (inputAction.isAbsorbed == false || ignoreAbsorbed))
@@ -31,6 +31,11 @@ namespace game.core.InputSystem
 
             return null;
         }
+    }
+
+    public interface IInputData<TAction>
+    {
+        InputActionField<InputAction<InputActionType>> GetAction(TAction action, bool ignoreAbsorbed = false);
     }
 
     public class InputRawData
@@ -80,12 +85,13 @@ namespace game.core.InputSystem
         }
     }
 
-    public struct InputAction
+
+    public struct InputAction<T>
     {
-        public InputActionType type { get; }
+        public T type { get; }
         public InputStatus status { get; private set; }
 
-        public InputAction(InputActionType type, InputStatus status)
+        public InputAction(T type, InputStatus status)
         {
             this.type = type;
             this.status = status;

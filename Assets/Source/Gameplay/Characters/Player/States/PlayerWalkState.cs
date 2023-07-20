@@ -6,7 +6,7 @@ namespace game.Gameplay.Characters.Player {
 		protected Vector2 _move;
 		protected float _currentSpeedMultiplier = 1f;
 
-		public override void HandleState() {
+		public override void HandleState(float deltaTime) {
 			var direction = _move.normalized;
 			var angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg + context.camera.transform.eulerAngles.y;
 			var moveDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;

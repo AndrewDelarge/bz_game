@@ -4,7 +4,7 @@ namespace game.Gameplay.Weapon
 {
     public class WeaponIdle : WeaponStateBase
     {
-        public override void HandleInput(InputData data)
+        public void HandleInput(InputData data)
         {
             var aim = data.GetAction(InputActionType.AIM);
 			

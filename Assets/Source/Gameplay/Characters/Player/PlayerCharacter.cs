@@ -78,8 +78,8 @@ namespace game.Gameplay.Characters.Player
                 _data = null;
             }
             
-            _actionStateMachine.HandleState();
-            _mainStateMachine.HandleState();
+            _actionStateMachine.HandleState(Time.deltaTime);
+            _mainStateMachine.HandleState(Time.deltaTime);
         }
 
         private void InitStates()

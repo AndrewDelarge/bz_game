@@ -110,8 +110,8 @@ namespace game.gameplay.control
         private InputData _inputData = new InputData();
         private InputRawData _rawData;
         
-        private List<InputActionField<InputAction>> _actionPool = new List<InputActionField<InputAction>>();
-        private List<InputActionField<InputAction>> _filledActions = new List<InputActionField<InputAction>>();
+        private List<InputActionField<InputAction<InputActionType>>> _actionPool = new ();
+        private List<InputActionField<InputAction<InputActionType>>> _filledActions = new ();
 
         private Dictionary<KeyCode, InputActionType> _actionDictionary = new Dictionary<KeyCode, InputActionType>()
         {
@@ -129,8 +129,8 @@ namespace game.gameplay.control
             _inputListener.updated += OnUpdateRawData;
             
             foreach (var action in _actionDictionary) {
-                var inputAction = new InputAction(action.Value, InputStatus.NONE);
-                _actionPool.Add(new InputActionField<InputAction>(inputAction));
+                var inputAction = new InputAction<InputActionType>(action.Value, InputStatus.NONE);
+                _actionPool.Add(new InputActionField<InputAction<InputActionType>>(inputAction));
             }
         }
 
@@ -153,7 +153,7 @@ namespace game.gameplay.control
 
                 var action = _actionPool.First();
                 _actionPool.Remove(action);
-                action.Update(new InputAction(type, button.status));
+                action.Update(new InputAction<InputActionType>(type, button.status));
 
                 _filledActions.Add(action);
             }

@@ -10,7 +10,7 @@ namespace game.Gameplay.Characters.Player {
 		private float _impulsTime;
 		private float _delayTime;
 
-		public override void HandleState() {
+		public override void HandleState(float delta) {
 			_endTime -= Time.deltaTime;
 			if (_endTime <= 0) {
 				context.animation.StopAnimation();

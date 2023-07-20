@@ -22,9 +22,9 @@ namespace game.Gameplay.Characters.Player
             _weaponStateMachine.onStatesChanged.Add(WeaponChangeStateHandle);
         }
         
-        public override void HandleState()
+        public override void HandleState(float delta)
         {
-            _weaponStateMachine.HandleState();
+            _weaponStateMachine.HandleState(delta);
         }
 
         private void WeaponChangeStateHandle(WeaponStateEnum last, WeaponStateEnum current) {

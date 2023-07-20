@@ -17,7 +17,7 @@ namespace game.Gameplay.Weapon
             _view = context.view;
         }
 
-        public override bool CheckEnterCondition()
+        public bool CheckEnterCondition()
         {
             if (_context.data.currentMagazineAmount > 0)
             {
@@ -38,7 +38,7 @@ namespace game.Gameplay.Weapon
             _shotDelayTime = _context.stateMachine.currentStateType == WeaponStateEnum.AIM ? 0 : FROM_IDLE_SHOT_DELAY;
         }
 
-        public override void HandleState() {
+        public override void HandleState(float deltaTime) {
             _shotDelayTime -= Time.deltaTime;
             
             if (_shotDelayTime <= 0 && _isDone == false) {
