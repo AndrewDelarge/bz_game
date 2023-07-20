@@ -103,7 +103,6 @@ namespace game.Gameplay.Characters.AI.Behaviour
     }
     
     public class TestBehaviour : AIBehaviour {
-        private ICharacter _character;
         private CharactersManager _charactersManager;
         private float _lastUpdate;
 
@@ -117,16 +116,13 @@ namespace game.Gameplay.Characters.AI.Behaviour
         public BaseStateMachineWithStack<BehaviourState, BaseBehaviourState, BehaviourContext> stateMachine = new ();
 
         public override void Init(ICharacter character) {
-            _character = character;
-            
             _charactersManager = AppCore.Get<CharactersManager>();
 
             var context = new BehaviourContext();
-            context.character = _character;
+            context.character = character;
             context.stateMachine = stateMachine;
             
-            
-            stateMachine.Init(_baseStates, new BehaviourContext());
+            stateMachine.Init(_baseStates, context);
             
             stateMachine.ChangeState(BehaviourState.IDLE);
         }

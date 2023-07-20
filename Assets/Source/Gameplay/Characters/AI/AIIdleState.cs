@@ -8,7 +8,7 @@ namespace game.Gameplay.Characters.AI {
 		protected Vector2 _move;
 		protected float _currentSpeedMultiplier = 1f;
 
-		public void HandleState() {
+		public override void HandleState(float deltaTime) {
 			var direction = _move.normalized;
 			var angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg + context.transform.rotation.z;
 			var moveDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
@@ -42,7 +42,7 @@ namespace game.Gameplay.Characters.AI {
 			}
 		}
 
-		public void HandleState() {
+		public override void HandleState(float deltaTime) {
 			context.animation.SetMotionVelocityPercent(context.movement.GetHorizontalVelocity() /
 			                                           (context.data.normalSpeed * context.data.speedMultiplier));
 		}

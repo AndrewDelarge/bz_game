@@ -4,11 +4,11 @@ using game.Gameplay.Characters.Player;
 
 namespace game.Gameplay.Characters.AI {
 	public abstract class BaseAICharacterState : CharacterState<CharacterStateEnum, CharacterContext> {
-		public virtual void Enter() {
+		public override void Enter() {
 			context.healthable.die.Add(CharacterDied);
 		}
 
-		public virtual void Exit() {
+		public override void Exit() {
 			context.healthable.die.Remove(CharacterDied);
 		}
 

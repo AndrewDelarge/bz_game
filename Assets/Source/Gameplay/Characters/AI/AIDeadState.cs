@@ -18,18 +18,18 @@ namespace game.Gameplay.Characters.AI {
 			SetRagdollValue(true);
 		}
 
-		public void Enter() {
+		public override void Enter() {
 			var animData = context.animation.GetAnimationData(CharacterAnimationEnum.KICK);
 			_endTime = animData.clip.length * 0;
 
 			context.animation.PlayAnimation(animData.clip);
 		}
 
-		public void Exit() {
+		public override void Exit() {
 			throw new System.NotImplementedException();
 		}
 
-		public void HandleState() {
+		public override void HandleState(float deltaTime) {
 			_endTime -= Time.deltaTime;
 			
 			if (_endTime <= 0) {
