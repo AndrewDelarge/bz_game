@@ -9,8 +9,8 @@ namespace game.Gameplay.Common {
 	}
 	public interface IBaseState
 	{
-		virtual bool CheckEnterCondition() => true;
-		virtual bool CheckExitCondition() => true;
+		bool CheckEnterCondition();
+		bool CheckExitCondition();
 
 		void Enter();
 

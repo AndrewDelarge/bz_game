@@ -12,10 +12,6 @@ namespace game.Gameplay.Characters.AI {
 			context.healthable.die.Remove(CharacterDied);
 		}
 
-		public virtual void HandleInput(InputData data) {
-			
-		}
-
 		public virtual void CharacterDied() {
 			context.mainStateMachine.ChangeState(CharacterStateEnum.DEAD);
 		}

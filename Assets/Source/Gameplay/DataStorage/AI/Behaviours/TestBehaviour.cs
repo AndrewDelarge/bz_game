@@ -2,7 +2,7 @@
 using game.core.storage.Data.AI;
 using UnityEngine;
 
-namespace game.Gameplay.DataStorage.AI
+namespace game.Gameplay.DataStorage.AI.Behaviours
 {
     [CreateAssetMenu(menuName = "GameData/AIBehaviour/TestBehaviour", fileName = "TestBehaviour", order = 0)]
     public class TestBehaviour : BehaviourData

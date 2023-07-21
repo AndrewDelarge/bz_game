@@ -11,7 +11,6 @@ namespace game.Gameplay.Characters.AI {
 	public class AICharacter : MonoBehaviour, ICharacter, IControlable {
 		[SerializeField] private CharacterAnimation _animation;
 		[SerializeField] private CharacterMovement _movement;
-		[SerializeField] private CharacterAnimationSet _animSet;
 		[SerializeField] private AICharacterData _data;
 		[SerializeField] private Healthable _healthable;
         [SerializeField] private string[] nearMessages = new string[0];
@@ -23,6 +22,7 @@ namespace game.Gameplay.Characters.AI {
 		public bool isPlayer => false;
 
 		public Vector3 currentPosition => transform.position;
+		public Transform currentTransform => transform;
 
 		public AICharacterData data => _data;
 
@@ -41,7 +41,7 @@ namespace game.Gameplay.Characters.AI {
 
 		public void Init()
 		{
-			var context = new CharacterContext(_healthable, _movement, _animation, _animSet, _movement.transform, _data);
+			var context = new CharacterContext(_healthable, _movement, _animation, data.animationSet, _movement.transform, _data);
 
 			_mainStateMachine = new CharacterStateMachine<CharacterStateEnum, CharacterContext>(context,
 				new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, CharacterContext>>()
@@ -53,7 +53,7 @@ namespace game.Gameplay.Characters.AI {
 
 			context.mainStateMachine = _mainStateMachine;
 			
-			_animation.Init(_animSet);
+			_animation.Init(data.animationSet);
 			
 			_mainStateMachine.ChangeState(CharacterStateEnum.IDLE);
 
@@ -106,9 +106,13 @@ namespace game.Gameplay.Characters.AI {
         }
         
         private AIBehaviour GetNewBehavior() {
-	        var behaviour = data.behaviourData.GetBehaviour();
-	        behaviour.Init(this);
-	        return behaviour;
+	        if (data.behaviourData != null) {
+		        var behaviour = data.behaviourData.GetBehaviour();
+		        behaviour.Init(this);
+		        return behaviour;
+	        }
+
+	        return null;
         }
 	}
 }

@@ -11,22 +11,18 @@ namespace game.Gameplay.Weapon
         {
             _context = context;
         }
-        
-        public virtual void Enter()
-        {
-        }
 
-        public virtual void Exit()
-        {
-        }
+        public virtual bool CheckEnterCondition() => true;
 
-        public virtual void HandleState(float deltaTime)
-        {
-        }
+        public virtual bool CheckExitCondition() => true;
 
-        public virtual void HandleInput(InputData data)
-        {
-        }
+        public virtual void Enter() { }
+
+        public virtual void Exit() { }
+
+        public virtual void HandleState(float deltaTime) { }
+
+        public virtual void HandleInput(InputData data) { }
     }
 
     public enum WeaponStateEnum {

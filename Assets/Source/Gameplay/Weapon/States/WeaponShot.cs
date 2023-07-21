@@ -5,7 +5,7 @@ using ILogger = game.core.Common.ILogger;
 namespace game.Gameplay.Weapon
 {
     public class WeaponShot : WeaponStateBase {
-        private const float FROM_IDLE_SHOT_DELAY = .085f;
+        private const float FROM_IDLE_SHOT_DELAY = .07f;
         private IWeaponView _view;
         
         private float _endTime;
@@ -17,7 +17,7 @@ namespace game.Gameplay.Weapon
             _view = context.view;
         }
 
-        public bool CheckEnterCondition()
+        public override bool CheckEnterCondition()
         {
             if (_context.data.currentMagazineAmount > 0)
             {

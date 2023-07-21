@@ -12,30 +12,19 @@ namespace game.Gameplay.Characters
             this.context = context;
         }
 
-        public virtual void OnChangedStateHandler<TObservered>(TObservered state)
-        {
-            
-        }
+        public virtual void OnChangedStateHandler<TObservered>(TObservered state) { }
 
-        public virtual void Enter()
-        {
-            throw new System.NotImplementedException();
-        }
+        public virtual bool CheckEnterCondition() => true;
 
-        public virtual void Exit()
-        {
-            throw new System.NotImplementedException();
-        }
+        public virtual bool CheckExitCondition() => true;
 
-        public virtual void HandleState(float deltaTime)
-        {
-            throw new System.NotImplementedException();
-        }
+        public virtual void Enter() { }
+
+        public virtual void Exit() { }
+
+        public virtual void HandleState(float deltaTime) { }
 
 
-        public virtual void HandleInput(InputData data)
-        {
-            throw new System.NotImplementedException();
-        }
+        public virtual void HandleInput(InputData data) { }
     }
 }

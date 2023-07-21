@@ -23,6 +23,19 @@ namespace game.core.InputSystem
             this.actions = actions;
         }
 
+        public void Reset() {
+            move.Reset();
+            aim.Reset();
+            
+            if (actions == null) {
+                return;
+            }
+            
+            foreach (var action in actions) {
+                action.Reset();
+            }
+        }
+
         public InputActionField<InputAction<InputActionType>> GetAction(InputActionType action, bool ignoreAbsorbed = false)
         {
             foreach (var inputAction in actions)
@@ -81,6 +94,11 @@ namespace game.core.InputSystem
         public void Update(T value)
         {
             this.value = value;
+            isAbsorbed = false;
+        }
+
+        public void Reset() {
+            value = default;
             isAbsorbed = false;
         }
     }

@@ -18,7 +18,9 @@ namespace game.core {
 		private List<AIBehaviour> _behaviours = new List<AIBehaviour>();
 		
 		public void Add(ICharacter character) {
-			_behaviours.Add(character.behaviour);
+			if (character.behaviour != null) {
+				_behaviours.Add(character.behaviour);
+			}
 		}
 
 		public void Update(float deltaTime) {

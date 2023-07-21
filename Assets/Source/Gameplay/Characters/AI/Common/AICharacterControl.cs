@@ -16,7 +16,6 @@ namespace game.Gameplay.Characters.AI.Common {
 
 		private InputData _inputData = new ();
         
-		private float _lastDistance;
 		public bool hasTarget => _currentTargetPoint != default;
         
 		public void Init(IControlable controlable) {
@@ -30,8 +29,15 @@ namespace game.Gameplay.Characters.AI.Common {
 			_currentPath.Remove(_currentTargetPoint);
 		}
 
+		public void StopFollow() {
+			_currentPath = null;
+			_currentTargetPoint = default;
+		}
+
 		public void Update(float deltaTime) {
 			if (_currentTargetPoint == default) {
+				_inputData.Reset();
+				_controlable.OnDataUpdate(_inputData);
 				return;
 			}
 
@@ -43,18 +49,10 @@ namespace game.Gameplay.Characters.AI.Common {
             
 			if (isReached) {
 				_currentTargetPoint = TakeNextPoint();
-			}
-
-			var currentDistance = Vector3.Distance(_currentTargetPoint, _controlable.currentPosition);
-            
-			if (isReached || currentDistance > _lastDistance)
-			{
 				var direction = GetDirection(_currentTargetPoint, _controlable.currentPosition);
 				_inputData.Update(direction, direction, new List<InputActionField<InputAction<InputActionType>>>());
-			}
+			} 
 
-			_lastDistance = currentDistance;
-            
 			_controlable.OnDataUpdate(_inputData);
 		}
         

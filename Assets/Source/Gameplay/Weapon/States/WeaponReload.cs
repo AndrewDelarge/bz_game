@@ -7,12 +7,12 @@ namespace game.Gameplay.Weapon
     {
         private float _startTime;
 
-        public bool CheckExitCondition()
+        public override bool CheckExitCondition()
         {
             return _startTime <= 0;
         }
 
-        public bool CheckEnterCondition()
+        public override bool CheckEnterCondition()
         {
             return _context.data.magazineCapacity != _context.data.currentMagazineAmount;
         }
