@@ -4,16 +4,12 @@ using game.core.InputSystem.Interfaces;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.AI.Common {
-	public class AICharacterControl
-	{
+	public class AICharacterControl {
 		private const float THRESHOLD = 1f;
         
 		private IControlable _controlable;
-
 		private List<Vector3> _currentPath;
-        
 		private Vector3 _currentTargetPoint;
-
 		private InputData _inputData = new ();
         
 		public bool hasTarget => _currentTargetPoint != default;
@@ -30,7 +26,7 @@ namespace game.Gameplay.Characters.AI.Common {
 		}
 
 		public void StopFollow() {
-			_currentPath = null;
+			_currentPath.Clear();
 			_currentTargetPoint = default;
 		}
 

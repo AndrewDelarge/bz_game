@@ -23,6 +23,9 @@ namespace game.core.Storage.Data.Character
         AIM = 4,
         SHOT = 5,
         RELOAD = 6,
-        DEATH = 7
+        ABILITY = 7,
+        ABILITY1 = 8,
+        ABILITY2 = 9,
+        DEATH = 30
     }
 }

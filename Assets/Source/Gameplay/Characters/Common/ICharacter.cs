@@ -5,7 +5,6 @@ using UnityEngine;
 namespace game.Gameplay.Characters.Common
 {
     public interface ICharacter {
-        
         public void Init();
         public bool isPlayer { get; }
         public Vector3 currentPosition { get; }

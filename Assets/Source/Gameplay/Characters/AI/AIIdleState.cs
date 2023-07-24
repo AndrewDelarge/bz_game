@@ -3,6 +3,10 @@ using game.Gameplay.Characters;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.AI {
+	public class AIUseAbilityState : BaseAICharacterState 
+	{
+		
+	}
 	public class AIWalkState : BaseAICharacterState
 	{
 		protected Vector2 _move;

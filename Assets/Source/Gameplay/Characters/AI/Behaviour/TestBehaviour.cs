@@ -13,23 +13,20 @@ namespace game.Gameplay.Characters.AI.Behaviour
         IDLE = 0,
         TARGET_SEARCHING = 1,
         TARGET_FOLLOW = 2,
+        ATTACK = 3,
+        ABILITY = 4,
     }
 
     public abstract class BaseBehaviourState : IBaseState<BehaviourState, BehaviourContext>
     {
         public abstract BehaviourState type { get; }
-        public bool CheckEnterCondition() => true;
-        public bool CheckExitCondition() => true;
+        public virtual bool CheckEnterCondition() => true;
+        public virtual bool CheckExitCondition() => true;
         public virtual void Enter() { }
         public virtual void Exit() { }
         public virtual void HandleState(float deltaTime) { }
         public virtual void HandleInput(InputData data) { }
         public virtual void Init(BehaviourContext context) { }
-    }
-    
-    public class IdleBehaviourState : BaseBehaviourState
-    {
-        public override BehaviourState type => BehaviourState.IDLE;
     }
 
     public class ChasingTargetBehaviourState : BaseBehaviourState {

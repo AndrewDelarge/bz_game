@@ -12,15 +12,15 @@ namespace game.Gameplay.Characters.Common
         private T _currentState;
         private TContext _context;
         
-        private Whistle<T> _whistle;
+        private Whistle<T> _onStateChange;
         public IReadOnlyDictionary<T, CharacterState<T, TContext>> states => _states;
         public new T currentState => _currentState;
-        public new IWhistle<T> onStateChanged => _whistle;
+        public new IWhistle<T> onStateChanged => _onStateChange;
 
         public CharacterStateMachine(TContext context, Dictionary<T, CharacterState<T, TContext>> states) {
             _context = context;
             _states = states;
-            _whistle = new Whistle<T>();
+            _onStateChange = new Whistle<T>();
 
             foreach (var characterState in _states.Values) {
                 characterState.Init(_context);
