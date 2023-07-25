@@ -21,7 +21,7 @@ namespace game.Gameplay.Characters.Common.Abilities {
 
 		public void Update(float delta) {
 			foreach (var ability in _abilities) {
-				if (ability.isCooldown && ability.isUsing) {
+				if (ability.isCooldown || ability.isUsing) {
 					ability.Update(delta);
 				}
 			}

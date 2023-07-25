@@ -11,13 +11,13 @@ namespace game.Gameplay.Characters.Common.Abilities {
 		private ICharacter _character;
 		private ICharacter _target;
 		
-		private bool _isUsing;
 		private float _currentCooldown;
+		private float _currentUsingTime;
 		
 		public float cooldown => _currentCooldown;
 		public float abilityTime => _data.abilityTime;
 		public bool isCooldown => _currentCooldown > 0;
-		public bool isUsing => _isUsing;
+		public bool isUsing => _currentUsingTime > 0;
 		public AbilityBehaviourState behaviourState => _behaviourState;
 		public IWhistle<IAbility> onUse => _onUse;
 		
@@ -37,19 +37,19 @@ namespace game.Gameplay.Characters.Common.Abilities {
 		}
 
 		public void Update(float delta) {
-			if (_currentCooldown > 0) {
-				_currentCooldown -= delta;
-				return;
+			if (isUsing) {
+				_currentUsingTime -= delta;
 			}
-
-			_isUsing = false;
+			if (isCooldown) {
+				_currentCooldown -= delta;
+			}
 		}
 
 		public void Use() {
 			_character.animator.PlayAnimation(_data.animation.clip);
 			_target.healthable.TakeDamage(_character.GetDamage());
 			
-			_isUsing = true;
+			_currentUsingTime = _data.abilityTime;
 			_currentCooldown = _data.cooldown;
 			_onUse.Dispatch(this);
 		}

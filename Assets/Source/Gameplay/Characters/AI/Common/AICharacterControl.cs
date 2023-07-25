@@ -30,7 +30,7 @@ namespace game.Gameplay.Characters.AI.Common {
 		}
 
 		public void StopFollow() {
-			_currentPath.Clear();
+			_currentPath?.Clear();
 			_currentTargetPoint = default;
 			ResetInput();
 		}

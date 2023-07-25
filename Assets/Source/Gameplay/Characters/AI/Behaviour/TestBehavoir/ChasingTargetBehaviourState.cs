@@ -66,6 +66,7 @@ namespace game.Gameplay.Characters.AI.Behaviour {
 		}
 
 		private void OnFollowComplete() {
+			_control.followComplete.Remove(OnFollowComplete);
 			_context.stateMachine.ChangeState(BehaviourState.ATTACK);
 		}
 
