@@ -1,5 +1,6 @@
 ﻿using game.core;
 using game.core.InputSystem.Interfaces;
+using game.Gameplay.Characters.Common.Abilities;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.Common
@@ -13,5 +14,8 @@ namespace game.Gameplay.Characters.Common
         HealthChange<DamageType> GetDamage();
         public IControlable controlable { get; }
         public AIBehaviour behaviour { get; }
+        public AbilitySystem abilitySystem { get; }
+        public CharacterAnimation animator { get; }
+        public Healthable healthable { get; }
     }
 }

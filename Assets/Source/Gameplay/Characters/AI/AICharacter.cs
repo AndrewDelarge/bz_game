@@ -5,6 +5,7 @@ using game.core.InputSystem;
 using game.core.InputSystem.Interfaces;
 using game.core.Storage.Data.Character;
 using game.Gameplay.Characters.Common;
+using game.Gameplay.Characters.Common.Abilities;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.AI {
@@ -19,6 +20,8 @@ namespace game.Gameplay.Characters.AI {
 		private bool isInited;
 		private InputData _inputData;
 		private AIBehaviour _behaviour;
+		private AbilitySystem _abilitySystem = new AbilitySystem();
+		
 		public bool isPlayer => false;
 
 		public Vector3 currentPosition => transform.position;
@@ -29,10 +32,19 @@ namespace game.Gameplay.Characters.AI {
 		public IControlable controlable => this;
 
 		public AIBehaviour behaviour => _behaviour ??= GetNewBehavior();
+		public AbilitySystem abilitySystem => _abilitySystem;
+		public CharacterAnimation animator => _animation;
+		public Healthable healthable => _healthable;
 
-		public HealthChange<DamageType> GetDamage()
-		{
-			throw new NotImplementedException();
+		private Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, CharacterContext>> _states = new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, CharacterContext>>() {
+			{CharacterStateEnum.IDLE, new AIIdleState()},
+			{CharacterStateEnum.WALK, new AIWalkState()},
+			{CharacterStateEnum.DEAD, new AIDeadState()},
+			{CharacterStateEnum.ABILITY, new AIUseAbilityState()}
+		};
+		
+		public HealthChange<DamageType> GetDamage() {
+			return new HealthChange<DamageType>(25, DamageType.PHYSICS);
 		}
 
 		private void Start() {
@@ -42,24 +54,26 @@ namespace game.Gameplay.Characters.AI {
 		public void Init()
 		{
 			var context = new CharacterContext(_healthable, _movement, _animation, data.animationSet, _movement.transform, _data);
-
-			_mainStateMachine = new CharacterStateMachine<CharacterStateEnum, CharacterContext>(context,
-				new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, CharacterContext>>()
-				{
-					{CharacterStateEnum.IDLE, new AIIdleState()},
-					{CharacterStateEnum.WALK, new AIWalkState()},
-					{CharacterStateEnum.DEAD, new AIDeadState()}
-				});
+			_mainStateMachine = new CharacterStateMachine<CharacterStateEnum, CharacterContext>(context, _states);
 
 			context.mainStateMachine = _mainStateMachine;
 			
 			_animation.Init(data.animationSet);
 			
 			_mainStateMachine.ChangeState(CharacterStateEnum.IDLE);
-
+			
+			_abilitySystem.Init(this, _data.abilities);
+			_abilitySystem.onUseAbility.Add(OnUseAbilityHandler);
 			isInited = true;
 		}
-		
+
+		private void OnUseAbilityHandler(IAbility ability) {
+			var state = (AIUseAbilityState) _states[CharacterStateEnum.ABILITY];
+			state.SetAbility(ability);
+			
+			_mainStateMachine.ChangeState(CharacterStateEnum.ABILITY);
+		}
+
 		private void Update() {
 			if (isInited == false) {
 				return;
@@ -70,6 +84,7 @@ namespace game.Gameplay.Characters.AI {
 			}
 			
 			_mainStateMachine.HandleState(Time.deltaTime);
+			_abilitySystem.Update(Time.deltaTime);
 		}
 
 		private void OnTriggerEnter(Collider other) {

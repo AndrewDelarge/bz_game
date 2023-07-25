@@ -6,6 +6,7 @@ using game.core.Storage.Data.Character;
 using game.core.storage.Data.Equipment;
 using game.Gameplay.Characters;
 using game.Gameplay.Characters.Common;
+using game.Gameplay.Characters.Common.Abilities;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.Player
@@ -42,6 +43,9 @@ namespace game.Gameplay.Characters.Player
 
         public IControlable controlable => this;
         public AIBehaviour behaviour => null;
+        public AbilitySystem abilitySystem => null;
+        public CharacterAnimation animator => _animation;
+        public Healthable healthable => _healthable;
 
         public bool isListen => true;
 

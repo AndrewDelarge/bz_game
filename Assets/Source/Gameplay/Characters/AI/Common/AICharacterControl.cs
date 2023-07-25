@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using game.core.Common;
 using game.core.InputSystem;
 using game.core.InputSystem.Interfaces;
 using UnityEngine;
@@ -11,9 +12,12 @@ namespace game.Gameplay.Characters.AI.Common {
 		private List<Vector3> _currentPath;
 		private Vector3 _currentTargetPoint;
 		private InputData _inputData = new ();
-        
+		private Whistle _followComplete = new Whistle();
+		
 		public bool hasTarget => _currentTargetPoint != default;
-        
+
+		public IWhistle followComplete => _followComplete;
+
 		public void Init(IControlable controlable) {
 			_controlable = controlable;
 		}
@@ -28,21 +32,23 @@ namespace game.Gameplay.Characters.AI.Common {
 		public void StopFollow() {
 			_currentPath.Clear();
 			_currentTargetPoint = default;
+			ResetInput();
 		}
 
 		public void Update(float deltaTime) {
 			if (_currentTargetPoint == default) {
-				_inputData.Reset();
-				_controlable.OnDataUpdate(_inputData);
+				ResetInput();
 				return;
 			}
 
 			var isReached = IsPointReached(_currentTargetPoint);
 			if (isReached && _currentPath.Count == 0) {
 				_currentTargetPoint = default;
+				_followComplete.Dispatch();
+				ResetInput();
 				return;
 			}
-            
+
 			if (isReached) {
 				_currentTargetPoint = TakeNextPoint();
 				var direction = GetDirection(_currentTargetPoint, _controlable.currentPosition);
@@ -64,6 +70,11 @@ namespace game.Gameplay.Characters.AI.Common {
 
 		private Vector2 GetDirection(Vector3 vectorA, Vector3 vectorB) {
 			return new Vector2(vectorA.x - vectorB.x, vectorA.z - vectorB.z)  ;
+		}
+
+		private void ResetInput() {
+			_inputData.Reset();
+			_controlable.OnDataUpdate(_inputData);
 		}
 	}
 }

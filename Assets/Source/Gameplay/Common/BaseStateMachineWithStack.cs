@@ -5,6 +5,16 @@ namespace game.Gameplay.Common
     public class BaseStateMachineWithStack<TType, TState, TContext> : BaseStateMachineWithStack<TState> where TState : class, IBaseState<TType, TContext>
     {
         private Dictionary<TType, TState> _availableStates = new ();
+        private TContext _context;
+        
+        public override bool ChangeState(TState state) {
+            if (_availableStates.ContainsValue(state)) {
+                return base.ChangeState(state);
+            }
+            
+            state.Init(_context);
+            return base.ChangeState(state);
+        }
 
         public virtual bool ChangeState(TType type) {
             if (_availableStates.ContainsKey(type)) {
@@ -14,8 +24,9 @@ namespace game.Gameplay.Common
             return false;
         }
         
-        public virtual void Init(List<TState> states, TContext context)
-        {
+        public virtual void Init(List<TState> states, TContext context) {
+            _context = context;
+            
             foreach (var state in states) {
                 state.Init(context);
                 

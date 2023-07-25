@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: TestAbility
   m_EditorClassIdentifier: 
   _cooldown: 5
+  _abilityTime: 1
   _animation:
     _type: 7
-    _clip: {fileID: 0}
-  _ability: {fileID: 0}
-  _specialBehaviour: {fileID: 0}
+    _clip: {fileID: -623603649343465320, guid: eaddb0ee6aff4f54db44fb6feed0d204, type: 3}
+  _ability: {fileID: 11400000, guid: 9b4c335c227b44e0ab3af281972beffb, type: 2}
+  _specialBehaviour: {fileID: 11400000, guid: 72f855820f60f424a8d084d8d41c024f, type: 2}

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: AICharacterData
   m_EditorClassIdentifier: 
   _animationSet: {fileID: 11400000, guid: d1e186efc0bbe45fb88d1193cfa131c0, type: 2}
+  _abilities:
+  - {fileID: 11400000, guid: 659a2a64f772d4d21b645f0f112e03b5, type: 2}
   _normalSpeed: 2
   _speedMultiplier: 1
   _speedSmoothTime: 2

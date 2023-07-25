@@ -247,6 +247,7 @@ GameObject:
   - component: {fileID: 5034367973382105561}
   - component: {fileID: 5034367973382105568}
   - component: {fileID: 1629503457}
+  - component: {fileID: 7963920923632100851}
   m_Layer: 0
   m_Name: player_test
   m_TagString: Untagged
@@ -313,6 +314,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3673ab02250fd5345bf50be5d61785df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7963920923632100851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5034367973382105575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d032ca3833645fdb8fa9abd8d461120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 500
+  _currentHealth: 500
+  _initializeOnStart: 1
+  fx: {fileID: 0}
 --- !u!1 &6127430461656113646
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +658,7 @@ MonoBehaviour:
   _movement: {fileID: 5034367973382105568}
   _animation: {fileID: 6351774118339861028}
   _boneListenerManager: {fileID: 6979399051235741700}
-  _healthable: {fileID: 0}
+  _healthable: {fileID: 7963920923632100851}
   _camera: {fileID: 2723501063103147753}
   _playerData: {fileID: 11400000, guid: 8d9eab988f3233245b63bdc55ee5db37, type: 2}
 --- !u!1001 &7470017772497927126
