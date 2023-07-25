@@ -21,6 +21,10 @@ namespace game.Gameplay.Characters.AI.Behaviour {
 
 		public override void HandleState(float deltaTime)
 		{
+			if (_player.healthable.isDead) {
+				return;
+			}
+			
 			if (Vector3.Distance(_player.currentPosition, _context.character.currentPosition) > AGRODISTANCE) {
 				return;
 			}

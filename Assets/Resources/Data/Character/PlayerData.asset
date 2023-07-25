@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   _animationSet: {fileID: 11400000, guid: d1e186efc0bbe45fb88d1193cfa131c0, type: 2}
+  _abilities: []
   _normalSpeed: 1.2
   _speedMultiplier: 2.2
   _speedSmoothTime: 5
@@ -22,4 +23,5 @@ MonoBehaviour:
   _kickAngle: 57.5
   _kickPower: 14.5
   _yKick: 0.7
+  health: 100
   weapon: {fileID: 11400000, guid: 37a88d077af84f04099494edeae675a8, type: 2}

@@ -36,11 +36,6 @@ namespace game.Gameplay.Characters.Player
         public Vector3 currentPosition => _movement.transform.position;
         public Transform currentTransform => _movement.transform;
 
-        public HealthChange<DamageType> GetDamage()
-        {
-            return _equipmentManger.currentEquipment.GetDamage();
-        }
-
         public IControlable controlable => this;
         public AIBehaviour behaviour => null;
         public AbilitySystem abilitySystem => null;
@@ -61,7 +56,15 @@ namespace game.Gameplay.Characters.Player
             _equipmentManger.Init(_animation, _mainStateMachine, _actionStateMachine);
             _equipmentManger.AddEquiper(new WeaponEquiper(_boneListenerManager));
             
+            _healthable.Init(_playerData.health, _playerData.health);
+            _healthable.die.Add(OnDieHandler);
             isInited = true;
+        }
+
+        private void OnDieHandler()
+        {
+            _mainStateMachine.ChangeState(CharacterStateEnum.DEAD);
+            _actionStateMachine.ChangeState(PlayerActionStateEnum.DEAD);
         }
 
         private void Update()
@@ -123,6 +126,10 @@ namespace game.Gameplay.Characters.Player
 
         public void Equip(EquipmentData equipment) {
             _equipmentManger.Equip(equipment);
+        }
+        
+        public HealthChange<DamageType> GetDamage() {
+            return _equipmentManger.currentEquipment.GetDamage();
         }
     }
 }

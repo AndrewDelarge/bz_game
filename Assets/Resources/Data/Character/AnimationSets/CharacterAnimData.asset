@@ -21,3 +21,5 @@ MonoBehaviour:
     _clip: {fileID: -623603649343465320, guid: 89d73a3aea6e71049997265329f25c76, type: 3}
   - _type: 3
     _clip: {fileID: -623603649343465320, guid: e2ae9c988c3bfb14b868904819e62e83, type: 3}
+  - _type: 30
+    _clip: {fileID: -623603649343465320, guid: c0b616777330b464482bf83d552d38c9, type: 3}

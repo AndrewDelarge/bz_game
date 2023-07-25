@@ -8,8 +8,12 @@ namespace game.Gameplay {
 		[SerializeField] private float _currentHealth;
 		[SerializeField] protected bool _initializeOnStart = false;
 		[SerializeField] private ParticleSystem fx;
+		
 		protected HealthResource health;
-		public Whistle die = new Whistle();
+		private Whistle _die = new Whistle();
+
+		public bool isDead => health.value <= 0;
+		public IWhistle die => _die;
 		
 		protected virtual void Start() {
 			if (! _initializeOnStart) 
@@ -33,7 +37,7 @@ namespace game.Gameplay {
 				fx.Play();
 			}
 			if (health.value == 0) {
-				die.Dispatch();
+				_die.Dispatch();
 			}
 		}
 

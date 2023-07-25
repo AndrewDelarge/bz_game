@@ -17,7 +17,7 @@ namespace game.core.Storage.Data.Character
         [SerializeField] private float _kickPower = 20;
         [SerializeField] private float _yKick = -.7f;
 
-
+        public float health = 500;
         public WeaponData weapon;
 
         private Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, PlayerCharacterContext>> _states =
@@ -25,12 +25,14 @@ namespace game.core.Storage.Data.Character
                 {CharacterStateEnum.IDLE, new PlayerIdleState()},
                 {CharacterStateEnum.WALK, new PlayerWalkState()},
                 {CharacterStateEnum.RUN, new PlayerRunState()},
+                {CharacterStateEnum.DEAD, new PlayerDeadState()},
             };
         
         private Dictionary<PlayerActionStateEnum, CharacterState<PlayerActionStateEnum, PlayerCharacterContext>> _actionStates =
             new () {
                 {PlayerActionStateEnum.IDLE, new PlayerActionIdleState()},
                 {PlayerActionStateEnum.KICK, new PlayerActionKickState()},
+                {PlayerActionStateEnum.DEAD, new PlayerActionDeadState()},
             };
         
         public float kickPhysicsImpulseDelay => _kickPhysicsImpulseDelay;

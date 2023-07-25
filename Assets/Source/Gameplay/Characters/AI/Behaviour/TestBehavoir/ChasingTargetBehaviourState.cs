@@ -61,10 +61,19 @@ namespace game.Gameplay.Characters.AI.Behaviour {
 			_control.followComplete.Add(OnFollowComplete);
 		}
 
-		public override void Exit() {
-			_control.StopFollow();
+		public override void Enter() {
+			_context.target.healthable.die.Add(OnTargetDie);
 		}
 
+		public override void Exit() {
+			_control.StopFollow();
+			_context.target?.healthable.die.Remove(OnTargetDie);
+		}
+
+		private void OnTargetDie() {
+			_context.target = null;
+		}
+		
 		private void OnFollowComplete() {
 			_control.followComplete.Remove(OnFollowComplete);
 			_context.stateMachine.ChangeState(BehaviourState.ATTACK);

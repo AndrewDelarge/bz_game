@@ -14,7 +14,7 @@ namespace game.Gameplay.Characters.Common.Abilities {
 		private float _currentCooldown;
 		private float _currentUsingTime;
 		
-		public float cooldown => _currentCooldown;
+		public float cooldown => _data.cooldown;
 		public float abilityTime => _data.abilityTime;
 		public bool isCooldown => _currentCooldown > 0;
 		public bool isUsing => _currentUsingTime > 0;
