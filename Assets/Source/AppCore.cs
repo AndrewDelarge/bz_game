@@ -17,6 +17,11 @@ namespace game
         public static void Register<TConcrete>(ICoreManager manager) => _instance.RegisterInternal<TConcrete>(manager);
 
         public static TConcrete Get<TConcrete>() => _instance.InternalGet<TConcrete>();
+
+        private void DisposeInternal() {
+            _managers.Clear();
+        }
+        
         private void RegisterInternal<TConcrete>(ICoreManager manager)
         {
             _managers.Add(typeof(TConcrete), manager);
@@ -48,6 +53,11 @@ namespace game
         public static void Start()
         {
             _instance.InternalStart();
+        }
+        
+        public static void Dispose()
+        {
+            _instance.DisposeInternal();
         }
     }
 }

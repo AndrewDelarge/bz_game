@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace game.core.common
 {
@@ -7,6 +8,10 @@ namespace game.core.common
         private void Awake()
         {
             init();
+        }
+
+        private void OnDestroy() {
+            Dispose();
         }
 
         private void init()
@@ -19,5 +24,6 @@ namespace game.core.common
         protected abstract void CoreInit();
         protected abstract void CoreStart();
         protected abstract void GameStart();
+        protected abstract void Dispose();
     }
 }

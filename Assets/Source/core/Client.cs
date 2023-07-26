@@ -50,6 +50,10 @@ namespace game.core
 
         }
 
+        protected override void Dispose() {
+            AppCore.Dispose();
+        }
+
         private void Start()
         {
             // TODO костыль пока что
