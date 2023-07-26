@@ -6,6 +6,12 @@ namespace game.Gameplay.Characters.Player {
 		protected Vector2 _move;
 		protected float _currentSpeedMultiplier = 1f;
 
+		public override void Enter() {
+			base.Enter();
+			
+			_currentSpeedMultiplier = context.movement.GetHorizontalVelocity();
+		}
+
 		public override void HandleState(float deltaTime) {
 			var direction = _move.normalized;
 			var angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg + context.camera.transform.eulerAngles.y;
@@ -39,7 +45,8 @@ namespace game.Gameplay.Characters.Player {
 		}
 
 		protected virtual float GetSpeedMultiplier() {
-			return _currentSpeedMultiplier = 1;
+			return _currentSpeedMultiplier = Mathf.Lerp(_currentSpeedMultiplier, 1,
+				context.data.speedSmoothTime * Time.deltaTime);
 		}
 	}
 }

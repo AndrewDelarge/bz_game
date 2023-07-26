@@ -3,11 +3,6 @@ using UnityEngine;
 
 namespace game.Gameplay.Characters.Player {
 	public class PlayerRunState : PlayerWalkState {
-		public override void Enter() {
-			base.Enter();
-			
-			_currentSpeedMultiplier = 1;
-		}
 
 		public override void HandleInput(InputData data) {
 			_move = data.move.isAbsorbed ? Vector2.zero : data.move.value;

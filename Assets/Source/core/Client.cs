@@ -1,25 +1,30 @@
-﻿using game.core.common;
+﻿using System;
+using game.core.common;
 using game.core.InputSystem;
 using game.gameplay.control;
 using game.Gameplay.Characters.Player;
 using game.Gameplay.Weapon;
+using game.Source.core.Common;
 using UnityEngine;
 using ILogger = game.core.Common.ILogger;
 using Logger = game.core.Common.Logger;
 
 namespace game.core
 {
-    public class Client : ClientBase
-    {
+    public class Client : ClientBase {
+        private GameTimer _timer;
         protected override void CoreInit()
         {
             AppCore.Register<SceneLoader>(new SceneLoader());
             AppCore.Register<IInputManager>(new InputManager());
             AppCore.Register<ILogger>(new Logger());
+            AppCore.Register<GameTimer>(new GameTimer());
         }
 
         protected override void CoreStart() {
             AppCore.Start();
+            
+            _timer = AppCore.Get<GameTimer>();
         }
 
         protected override void GameStart()
@@ -51,6 +56,9 @@ namespace game.core
             AppCore.Get<LevelManager>().Add(new ProjectileManager());
         }
 
+        private void Update() {
+            _timer.Update(Time.deltaTime);
+        }
 
         private void InitLevelManager()
         {

@@ -25,6 +25,12 @@ namespace game.Gameplay.Characters.AI.Behaviour
             stateMachine.Init(_baseStates, context);
             
             stateMachine.ChangeState(BehaviourState.TARGET_SEARCHING);
+            
+            character.healthable.die.Add(OnDieHandler);
+        }
+
+        private void OnDieHandler() {
+            stateMachine.ChangeState(BehaviourState.IDLE);
         }
 
         public override void Update(float deltaTime) {

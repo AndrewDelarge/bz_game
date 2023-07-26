@@ -50,6 +50,11 @@ namespace game.Gameplay.Characters
             return horizontalVelocity.magnitude;
         }
 
+        public void ForceStop() {
+            horizontalVelocity = Vector3.zero;
+            _movesQueue.Clear();
+        }
+
         private void DoMove()
         {
             var moveDirection = Vector3.zero;

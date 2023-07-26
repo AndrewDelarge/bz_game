@@ -10,11 +10,13 @@ namespace game.Gameplay.Characters.Common
         private Dictionary<T, CharacterState<T, TContext>> _states;
         private Dictionary<T, CharacterState<T, TContext>> _statesOverrides = new ();
         private T _currentState;
+        private T _prevState;
         private TContext _context;
         
         private Whistle<T> _onStateChange;
         public IReadOnlyDictionary<T, CharacterState<T, TContext>> states => _states;
         public new T currentState => _currentState;
+        public new T prevState => _prevState;
         public new IWhistle<T> onStateChanged => _onStateChange;
 
         public CharacterStateMachine(TContext context, Dictionary<T, CharacterState<T, TContext>> states) {
@@ -36,6 +38,7 @@ namespace game.Gameplay.Characters.Common
             }
             
             base.ChangeState(characterState);
+            _prevState = _currentState;
             _currentState = state;
         }
 

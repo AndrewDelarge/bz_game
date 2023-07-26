@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace game.core
+namespace game.core.view.animation
 {
     public class BaseAnimator : MonoBehaviour
     {
@@ -25,10 +25,9 @@ namespace game.core
             animator.runtimeAnimatorController = overrideController;
         }
 
-        protected virtual void Update()
+        protected virtual void LateUpdate()
         {
-            if (_animationTime > 0)
-            {
+            if (_animationTime > 0) {
                 _animationTime -= Time.deltaTime;
                 if (_animationTime <= 0)
                 {
@@ -41,13 +40,17 @@ namespace game.core
         {
             overrideController[DEFAULT_ACTION_ANIMATION_NAME] = animationClip;
             animator.SetTrigger(withExitTransition ? PARAM_ACTION_WITH_TRANSITION_TRIGGER : PARAM_ACTION_TRIGGER);
+            animator.Update(0);
             _animationTime = animationClip.isLooping ? float.PositiveInfinity : animationClip.length;
         }
 
         public virtual void StopAnimation()
         {
             animator.SetTrigger(PARAM_STOP_ACTION_TRIGGER);
-            animator.Update(0);
+            if (animator.isActiveAndEnabled) {
+                animator.Update(0);
+            }
+            
             // if (animator.IsInTransition(ACTION_LAYER)) {
             //     return;
             // }

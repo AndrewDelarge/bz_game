@@ -16,7 +16,7 @@ MonoBehaviour:
   _statesOverrides: []
   _actionStatesOverrides:
   - {fileID: 11400000, guid: 8e8bc3c3624352846a96b7f42032239a, type: 2}
-  _shotTime: 0.2
+  _shotTime: 0.1
   _reloadTime: 2
   _magazineCapacity: 30
   _damage: 25

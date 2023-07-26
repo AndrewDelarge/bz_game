@@ -9,5 +9,6 @@ namespace game.Gameplay.Characters.Common
         float GetHorizontalVelocity();
         void Disable();
         void SetLockRotation(bool value);
+        void ForceStop();
     }
 }

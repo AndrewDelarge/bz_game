@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using game.core.Storage.Data.Character;
+using game.Source.core.Common;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.AI {
@@ -19,20 +20,16 @@ namespace game.Gameplay.Characters.AI {
 
 		public override void Enter() {
 			var animData = context.animation.GetAnimationData(CharacterAnimationEnum.KICK);
-			_endTime = animData.clip.length * 0;
+			AppCore.Get<GameTimer>().SetTimeout(_endTime, OnDie);
 
 			context.animation.PlayAnimation(animData.clip);
 		}
-		
-		public override void HandleState(float deltaTime) {
-			_endTime -= Time.deltaTime;
+
+		private void OnDie() {
+			context.animation.Disable();
+			context.movement.Disable();
 			
-			if (_endTime <= 0) {
-				context.animation.Disable();
-				context.movement.Disable();
-			
-				SetRagdollValue(false);
-			}
+			SetRagdollValue(false);
 		}
 
 		private void SetRagdollValue(bool value) {

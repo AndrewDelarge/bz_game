@@ -1,29 +1,19 @@
-﻿using game.core.InputSystem;
+﻿using System.Collections.Generic;
+using game.core.InputSystem;
 using game.core.storage;
 using game.core.Common.Helpers;
 using game.core.Storage.Data.Character;
+using game.Source.core.Common;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.Player {
 	public class PlayerActionKickState : PlayerStateBase<PlayerActionStateEnum, PlayerCharacterContext> {
-		private float _endTime;
-		private float _impulsTime;
-		private float _delayTime;
-
-		public override void HandleState(float delta) {
-			_endTime -= Time.deltaTime;
-			if (_endTime <= 0) {
-				context.animation.StopAnimation();
-				context.actionStateMachine.ChangeState(PlayerActionStateEnum.IDLE);
-				return;
-			}
-
-			if (_endTime <= _impulsTime) {
-				ProduceDamage();
-				ProduceKickImpulse();
-
-				_impulsTime = int.MinValue;
-			}
+		private List<int> _timers = new List<int>();
+		private GameTimer _timer;
+		public override void Init(PlayerCharacterContext context) {
+			base.Init(context);
+			
+			_timer = AppCore.Get<GameTimer>();
 		}
 
 		public override void HandleInput(InputData data) {
@@ -32,11 +22,37 @@ namespace game.Gameplay.Characters.Player {
 
 		public override void Enter() {
 			base.Enter();
+			context.movement.ForceStop();
+			context.animation.SetMotionVelocityPercent(0f, true);
 			
-			var animData = context.animation.GetAnimationData(CharacterAnimationEnum.KICK);
-			_endTime = animData.length;
-			_impulsTime = _endTime - context.data.kickPhysicsImpulseDelay;
+			if (context.mainStateMachine.currentState != CharacterStateEnum.IDLE) {
+				var id = _timer.SetTimeout(.1f, StartKick);
+				_timers.Add(id);
+				return;
+			}
+
+			StartKick();
+		}
+
+		public override void Exit() {
+			foreach (var timer in _timers) {
+				_timer.KillTimeout(timer);
+			}
+		}
+
+		private void StartKick() {
+			_timer.SetTimeout(context.data.kickPhysicsImpulseDelay, ProduceKick);
 			context.animation.PlayAnimation(CharacterAnimationEnum.KICK);
+			context.animation.onAnimationComplete.Add(OnAnimationComplete);
+		}
+
+		private void ProduceKick() {
+			ProduceDamage();
+			ProduceKickImpulse();
+		}
+		
+		private void OnAnimationComplete(CharacterAnimationEnum obj) {
+			context.actionStateMachine.ChangeState(PlayerActionStateEnum.IDLE);
 		}
 
 		private void ProduceDamage() {

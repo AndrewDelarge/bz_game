@@ -9,17 +9,13 @@ namespace game.Gameplay.Characters.Player
 
         public override void Enter() {
             context.animation.PlayAnimation(CharacterAnimationEnum.DEATH);
-            var data = context.animation.GetAnimationData(CharacterAnimationEnum.DEATH);
+            context.animation.onAnimationComplete.Add(OnAnimationComplete);
         }
 
-        public override void HandleState(float deltaTime)
-        {
-            if (_deathLenght > 0) {
-                _deathLenght -= deltaTime;
-                return;
+        private void OnAnimationComplete(CharacterAnimationEnum anim) {
+            if (anim == CharacterAnimationEnum.DEATH) {
+                context.animation.Disable();
             }
-            
-            context.animation.Disable();
         }
     }
 }

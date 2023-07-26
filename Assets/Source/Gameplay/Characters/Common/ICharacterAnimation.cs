@@ -1,6 +1,6 @@
 ﻿using System;
+using game.core.Common;
 using game.core.Storage.Data.Character;
-using UnityEngine;
 
 namespace game.Gameplay.Characters.Common
 {
@@ -9,12 +9,13 @@ namespace game.Gameplay.Characters.Common
     public interface ICharacterAnimation<T, TEnum, TClipType> where T : IAnimationSet<TEnum, TClipType> where TEnum : Enum
     {
         TEnum currentAnimation { get; }
+        IWhistle<TEnum> onAnimationComplete { get; }
         IAnimationData<TEnum, TClipType> GetAnimationData(TEnum state);
         void PlayAnimation(TClipType animationClip, bool withExitTransition = false);
         void PlayAnimation(TEnum animationClip, bool withExitTransition = false);
         void StopAnimation();
 
-        void SetMotionVelocityPercent(float percent);
+        void SetMotionVelocityPercent(float percent, bool fast = false);
         void Disable();
     }
 }
