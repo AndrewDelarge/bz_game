@@ -1,3 +1,4 @@
+using game.Gameplay.Characters.Common.Abilities;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.AI.Behaviour {
@@ -16,9 +17,15 @@ namespace game.Gameplay.Characters.AI.Behaviour {
 			}
 			
 			var ability = _context.character.abilitySystem.GetBestFreeAbility();
+
+			if (ability == null) {
+				return;
+			}
 			
-			if (ability?.behaviourState != null) {
+			if (ability.behaviourState != null) {
 				_context.stateMachine.ChangeState(ability.behaviourState);
+			} else {
+				UseAbilityFallback(ability);
 			}
 		}
 		
@@ -30,6 +37,11 @@ namespace game.Gameplay.Characters.AI.Behaviour {
 			_context.target?.healthable.die.Remove(OnTargetDie);
 		}
 
+		private void UseAbilityFallback(IAbility ability) {
+			ability.SetTarget(_context.target);
+			ability.Use();
+		}
+		
 		private void OnTargetDie() {
 			_context.target = null;
 		}
