@@ -1,11 +1,14 @@
+using game.core.InputSystem;
 using game.Gameplay.Characters.Common.Abilities;
+using game.Source.core.Common;
 using UnityEngine;
 
 namespace game.Gameplay.Characters.AI.Behaviour {
 	public class AttackBehaviourState : BaseBehaviourState {
 		private const int ATTACK_RANGE = 1;
+		private IAbility _currentAbility;
 		public override BehaviourState type => BehaviourState.ATTACK;
-
+		
 		public override void HandleState(float deltaTime) {
 			if (_context.target == null) {
 				_context.stateMachine.ChangeState(BehaviourState.TARGET_SEARCHING);
@@ -25,10 +28,17 @@ namespace game.Gameplay.Characters.AI.Behaviour {
 			if (ability.behaviourState != null) {
 				_context.stateMachine.ChangeState(ability.behaviourState);
 			} else {
+				_currentAbility = ability;
 				UseAbilityFallback(ability);
 			}
 		}
-		
+
+		public override void HandleInput(InputData data) {
+			if (_currentAbility != null) {
+				_currentAbility.HandleInput(data);
+			}
+		}
+
 		public override void Enter() {
 			_context.target?.healthable.die.Add(OnTargetDie);
 		}
@@ -40,8 +50,13 @@ namespace game.Gameplay.Characters.AI.Behaviour {
 		private void UseAbilityFallback(IAbility ability) {
 			ability.SetTarget(_context.target);
 			ability.Use();
+			AppCore.Get<GameTimer>().SetTimeout(ability.abilityTime, OnAbilityEnd);
 		}
-		
+
+		private void OnAbilityEnd() {
+			_currentAbility = null;
+		}
+
 		private void OnTargetDie() {
 			_context.target = null;
 		}
