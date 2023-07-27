@@ -30,6 +30,7 @@ namespace Editor.UnityUpperMenu
         [MenuItem("BZ Tools/Restart current scene")]
         static void RestartCurrentScene() {
             if (EditorApplication.isPlaying == false) {
+                Debug.LogError("Игру сначала запусти, еблан");
                 return;
             }
             
