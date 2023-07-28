@@ -29,6 +29,8 @@ namespace game.Gameplay.Common
             
             return isStateChanged;
         }
+
+        public bool canExitState => _currentState == null || _currentState.CheckExitCondition();
     
         public void HandleState(float deltaTime) {
             _currentState.HandleState(deltaTime);

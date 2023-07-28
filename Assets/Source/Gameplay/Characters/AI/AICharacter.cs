@@ -23,6 +23,7 @@ namespace game.Gameplay.Characters.AI {
 		private AbilitySystem _abilitySystem = new AbilitySystem();
 		
 		public bool isPlayer => false;
+		public bool canChangeState => _mainStateMachine.canExitState;
 
 		public Vector3 currentPosition => transform.position;
 		public Transform currentTransform => transform;

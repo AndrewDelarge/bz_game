@@ -54,6 +54,10 @@ namespace game.Gameplay.Characters.Player
             var aim = data.aim.value;
             
             if (currentWeaponState is WeaponStateEnum.AIM or WeaponStateEnum.SHOT) {
+                var sprint = data.GetAction(InputActionType.SPRINT);
+                if (sprint is {value: {status: InputStatus.DOWN}} || sprint is {value: {status: InputStatus.PRESSED}}) {
+                    sprint.isAbsorbed = true;
+                }
                 var rotateAngle = Mathf.Atan2(aim.x, aim.y) * Mathf.Rad2Deg + context.camera.transform.eulerAngles.y;
                 context.movement.SetLockRotation(true);
                 context.movement.Rotate(rotateAngle);
@@ -62,7 +66,7 @@ namespace game.Gameplay.Characters.Player
                 context.movement.SetLockRotation(false);
             }
             
-            if (currentWeaponState is WeaponStateEnum.AIM or WeaponStateEnum.RELOAD) {
+            if (currentWeaponState is WeaponStateEnum.RELOAD) {
                 var sprint = data.GetAction(InputActionType.SPRINT);
                 if (sprint is {value: {status: InputStatus.PRESSED}}) {
                     sprint.isAbsorbed = true;

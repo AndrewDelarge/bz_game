@@ -33,6 +33,7 @@ namespace game.Gameplay.Characters.Player
         private bool isInited;
 
         public bool isPlayer => true;
+        public bool canChangeState => _mainStateMachine.canExitState && _actionStateMachine.canExitState;
         public Vector3 currentPosition => _movement.transform.position;
         public Transform currentTransform => _movement.transform;
 

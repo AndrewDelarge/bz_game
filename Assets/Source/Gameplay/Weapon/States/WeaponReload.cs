@@ -1,39 +1,30 @@
-﻿using UnityEngine;
+﻿using game.core.Storage.Data.Character;
+using game.Source.core.Common;
 using ILogger = game.core.Common.ILogger;
 
 namespace game.Gameplay.Weapon
 {
     public class WeaponReload : WeaponStateBase
     {
-        private float _startTime;
+        private int _timerId;
 
-        public override bool CheckExitCondition()
-        {
-            return _startTime <= 0;
-        }
-
-        public override bool CheckEnterCondition()
-        {
+        public override bool CheckEnterCondition() {
             return _context.data.magazineCapacity != _context.data.currentMagazineAmount;
         }
 
-        public override void Enter()
-        {
-            _startTime = _context.data.reloadTime;
+        public override void Enter() {
+            _timerId = AppCore.Get<GameTimer>().SetTimeout(_context.data.reloadTime, OneTimeReload);
         }
 
-        public override void HandleState(float delta)
-        {
-            _startTime -= Time.deltaTime;
+        public override void Exit() {
+            AppCore.Get<GameTimer>().KillTimeout(_timerId);
+        }
 
-            if (CheckExitCondition())
-            {
-                _context.data.currentMagazineAmount = _context.data.magazineCapacity;
-                _context.stateMachine.ReturnState();
-                return;
-            }
+        private void OneTimeReload() {
+            _context.data.currentMagazineAmount = _context.data.magazineCapacity;
+            _context.stateMachine.ReturnState();
             
-            AppCore.Get<ILogger>().Log("Reload...");
+            AppCore.Get<ILogger>().Log("Reloaded!");
         }
     }
 }
