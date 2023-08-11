@@ -1,5 +1,8 @@
 ﻿using game.core.InputSystem;
 using game.core.Storage.Data.Character;
+using game.core.storage.Data.Equipment.Weapon;
+using game.core.storage.Data.Models;
+using game.Gameplay.Characters.Common;
 using game.Gameplay.Weapon;
 using UnityEngine;
 
@@ -51,14 +54,27 @@ namespace game.Gameplay.Characters.Player
 
             var currentWeaponState = _weaponStateMachine.currentStateType;
 
-            var aim = data.aim.value;
-            
             if (currentWeaponState is WeaponStateEnum.AIM or WeaponStateEnum.SHOT) {
                 var sprint = data.GetAction(InputActionType.SPRINT);
                 if (sprint is {value: {status: InputStatus.DOWN}} || sprint is {value: {status: InputStatus.PRESSED}}) {
                     sprint.isAbsorbed = true;
                 }
-                var rotateAngle = Mathf.Atan2(aim.x, aim.y) * Mathf.Rad2Deg + context.camera.transform.eulerAngles.y;
+                
+                var screenRes = AppCore.Get<CameraManager>().GetScreenResolutionDelta();
+                var actualPointerPos = Input.mousePosition * screenRes;
+                var ray = context.camera.ScreenPointToRay(actualPointerPos);
+
+                if (Physics.Raycast(ray, out var hit, 1000)) {
+                    var position = hit.point;
+                    context.target.position = position;
+                }
+                
+                var weapon = (WeaponView) context.equipmentManger.currentEquipmentView;
+                var muzzle = weapon.GetMarkerPosition("muzzle");
+                var targetDirection = context.target.position - muzzle.transform.position;
+
+                
+                var rotateAngle = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg;
                 context.movement.SetLockRotation(true);
                 context.movement.Rotate(rotateAngle);
             }

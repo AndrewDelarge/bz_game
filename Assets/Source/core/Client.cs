@@ -1,6 +1,7 @@
 ﻿using System;
 using game.core.common;
 using game.core.InputSystem;
+using game.Gameplay.Characters.Common;
 using game.gameplay.control;
 using game.Gameplay.Characters.Player;
 using game.Gameplay.Weapon;
@@ -19,6 +20,7 @@ namespace game.core
             AppCore.Register<IInputManager>(new InputManager());
             AppCore.Register<ILogger>(new Logger());
             AppCore.Register<GameTimer>(new GameTimer());
+            AppCore.Register<CameraManager>(new CameraManager());
         }
 
         protected override void CoreStart() {

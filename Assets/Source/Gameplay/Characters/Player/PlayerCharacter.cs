@@ -18,6 +18,7 @@ namespace game.Gameplay.Characters.Player
         [SerializeField] private CharacterAnimation _animation;
         [SerializeField] private BoneListenerManager _boneListenerManager;
         [SerializeField] private Healthable _healthable;
+        [SerializeField] private Transform _target;
         
         // TODO: Camera manager and controller
         [SerializeField] private Camera _camera;
@@ -94,7 +95,7 @@ namespace game.Gameplay.Characters.Player
         private void InitStates()
         {
             var context = new PlayerCharacterContext(_healthable, _movement, _animation, _playerData,
-                _movement.transform, _equipmentManger, _boneListenerManager, this);
+                _movement.transform, _equipmentManger, _boneListenerManager, this, _target);
             
             _mainStateMachine = new CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext>(context, _playerData.states);
             _actionStateMachine = new CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext>(context, _playerData.actionStates);

@@ -22,8 +22,8 @@ MonoBehaviour:
   _damage: 25
   _damageType: 0
   _defaultProjectile: {fileID: 11400000, guid: 3a7b10d5a5bc8384bac2def6f857d4dc, type: 2}
-  _spreadX: {x: 5, y: 5}
-  _spreadY: {x: 5, y: 5}
+  _spreadX: {x: 0, y: 0}
+  _spreadY: {x: 0, y: 0}
   _projectilesForShot: 1
   _viewTemplate: {fileID: 5375954929132649162, guid: ae0b7dcea1ff5b1428e6fcad648776d2, type: 3}
   _fx:

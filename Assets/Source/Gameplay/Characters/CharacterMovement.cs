@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using game.Gameplay.Characters.Common;
 using UnityEngine;
 
@@ -87,6 +88,10 @@ namespace game.Gameplay.Characters
         {
             var vel = _characterController.velocity;
             horizontalVelocity = new Vector3(vel.x, 0, vel.z);
+        }
+
+        private void OnDrawGizmos() {
+            Debug.DrawLine(transform.position, transform.forward, Color.cyan);
         }
     }
     

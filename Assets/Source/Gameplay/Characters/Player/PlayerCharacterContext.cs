@@ -13,6 +13,7 @@ namespace game.Gameplay.Characters.Player
 		private CharacterAnimation _animation;
 		private PlayerCharacterData _data;
 		private BoneListenerManager _boneListenerManager;
+		private Transform _target;
 
 		private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
 		private CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> _actionStateMachine;
@@ -27,6 +28,7 @@ namespace game.Gameplay.Characters.Player
 		public CharacterEquipmentManger equipmentManger => _equipmentManger;
 		public ICharacterMovement movement => _movement;
 		public ICharacterAnimation<CharacterAnimationSet, CharacterAnimationEnum, AnimationClip> animation => _animation;
+		public Transform target => _target;
 
 		public CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> actionStateMachine {
 			get => _actionStateMachine;
@@ -38,8 +40,8 @@ namespace game.Gameplay.Characters.Player
 			set => _mainStateMachine = value;
 		}
 
-		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, PlayerCharacterData data, 
-			Transform transform, CharacterEquipmentManger equipmentManger, BoneListenerManager boneListenerManager, ICharacter character)
+		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, PlayerCharacterData data,
+			Transform transform, CharacterEquipmentManger equipmentManger, BoneListenerManager boneListenerManager, ICharacter character, Transform target)
 		{
 			this.character = character;
 			_data = data;
@@ -49,6 +51,7 @@ namespace game.Gameplay.Characters.Player
 			_transform = transform;
 			_equipmentManger = equipmentManger;
 			_boneListenerManager = boneListenerManager;
+			_target = target;
 		}
 	}
 }
