@@ -15,13 +15,16 @@ namespace game.Gameplay
         private void Awake()
         {
             _defaultOffset = transform.localPosition;
+            _defaultRotation = transform.rotation;
         }
 
 
         private void LateUpdate()
         {
             transform.position = _target.position + (_keepCurrentObjectOffset ? _defaultOffset : Vector3.zero);
-            transform.rotation = _target.rotation;
+            var rotation = _target.rotation;
+            rotation.eulerAngles += _keepCurrentObjectOffset ? _defaultRotation.eulerAngles : Quaternion.identity.eulerAngles;
+            transform.rotation = rotation;
         }
     }
 }

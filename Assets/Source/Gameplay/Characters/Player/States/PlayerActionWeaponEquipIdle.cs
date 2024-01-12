@@ -1,4 +1,5 @@
 ﻿using game.core.InputSystem;
+using game.core.storage;
 using game.core.Storage.Data.Character;
 using game.core.storage.Data.Equipment.Weapon;
 using game.core.storage.Data.Models;
@@ -64,7 +65,7 @@ namespace game.Gameplay.Characters.Player
                 var actualPointerPos = Input.mousePosition * screenRes;
                 var ray = context.camera.ScreenPointToRay(actualPointerPos);
 
-                if (Physics.Raycast(ray, out var hit, 1000)) {
+                if (Physics.Raycast(ray, out var hit, 1000, (int) GameLayers.AIM_PLANE)) {
                     var position = hit.point;
                     context.target.position = position;
                 }
@@ -72,7 +73,6 @@ namespace game.Gameplay.Characters.Player
                 var weapon = (WeaponView) context.equipmentManger.currentEquipmentView;
                 var muzzle = weapon.GetMarkerPosition("muzzle");
                 var targetDirection = context.target.position - muzzle.transform.position;
-
                 
                 var rotateAngle = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg;
                 context.movement.SetLockRotation(true);
