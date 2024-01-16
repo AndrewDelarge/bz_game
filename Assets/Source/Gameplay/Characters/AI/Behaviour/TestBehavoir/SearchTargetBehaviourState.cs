@@ -7,7 +7,7 @@ namespace game.Gameplay.Characters.AI.Behaviour {
 	{
 		private const int AGRODISTANCE = 10;
 		private BehaviourContext _context;
-		private CharactersManager _charactersManager;
+		private CharactersController _charactersController;
 		private ICharacter _player;
 
 		public override BehaviourState type => BehaviourState.TARGET_SEARCHING;
@@ -15,8 +15,8 @@ namespace game.Gameplay.Characters.AI.Behaviour {
 		public override void Init(BehaviourContext context)
 		{
 			_context = context;
-			_charactersManager = AppCore.Get<CharactersManager>();
-			_player = _charactersManager.player;
+			_charactersController = AppCore.Get<CharactersController>();
+			_player = _charactersController.player;
 		}
 
 		public override void HandleState(float deltaTime)
@@ -29,7 +29,7 @@ namespace game.Gameplay.Characters.AI.Behaviour {
 				return;
 			}
             
-			_context.target = _charactersManager.player;
+			_context.target = _charactersController.player;
 
 			_context.stateMachine.ChangeState(BehaviourState.TARGET_FOLLOW);
 		}

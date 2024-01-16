@@ -2,7 +2,8 @@
     "name": "game",
     "rootNamespace": "game",
     "references": [
-        "NaughtyAttributes.Core"
+        "NaughtyAttributes.Core",
+        "Cinemachine"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

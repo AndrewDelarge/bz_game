@@ -49,7 +49,9 @@ namespace game.Gameplay.Characters.AI {
 		}
 
 		private void Start() {
-			game.AppCore.Get<CharactersManager>().RegisterCharacter(this);
+			if (isInited == false) {
+				AppCore.Get<LevelManager>().characterController.RegisterCharacter(this);
+			}
 		}
 
 		public void Init()

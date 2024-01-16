@@ -1,10 +1,6 @@
-﻿using System;
-using game.core.common;
+﻿using game.core.common;
 using game.core.InputSystem;
 using game.Gameplay.Characters.Common;
-using game.gameplay.control;
-using game.Gameplay.Characters.Player;
-using game.Gameplay.Weapon;
 using game.Source.core.Common;
 using UnityEngine;
 using ILogger = game.core.Common.ILogger;
@@ -14,66 +10,39 @@ namespace game.core
 {
     public class Client : ClientBase {
         private GameTimer _timer;
+        private LevelManager _levelManager;
+
         protected override void CoreInit()
         {
-            AppCore.Register<SceneLoader>(new SceneLoader());
+            AppCore.Register<CameraManager>(new CameraManager());
+            AppCore.Register<LevelManager>(new LevelManager());
             AppCore.Register<IInputManager>(new InputManager());
             AppCore.Register<ILogger>(new Logger());
             AppCore.Register<GameTimer>(new GameTimer());
-            AppCore.Register<CameraManager>(new CameraManager());
         }
 
         protected override void CoreStart() {
             AppCore.Start();
             
             _timer = AppCore.Get<GameTimer>();
+            _levelManager = AppCore.Get<LevelManager>();
         }
 
         protected override void GameStart()
         {
-            // init input
-            var inputListener = Instantiate(Resources.Load<InputListener>("InputListener"));
-            
-            InitLevelManager();
-
-            // init player
-            var playerCharacter = Instantiate(Resources.Load<PlayerCharacter>("PlayerView"), Vector3.zero, Quaternion.identity);
-
-            var manager = AppCore.Get<LevelManager>();
-
-            var characterManager = new CharactersManager();
-            characterManager.RegisterCharacter(playerCharacter);
-            
-            AppCore.Register<CharactersManager>(characterManager);
-            #if UNITY_EDITOR 
+            #if UNITY_EDITOR
                 return;
             #endif
-            AppCore.Get<SceneLoader>().LoadScene(1);
-
+            AppCore.Get<LevelManager>().Load(1);
         }
 
         protected override void Dispose() {
             AppCore.Dispose();
         }
 
-        private void Start()
-        {
-            // TODO костыль пока что
-            AppCore.Get<LevelManager>().Add(new ProjectileManager());
-        }
-
         private void Update() {
             _timer.Update(Time.deltaTime);
-        }
-
-        private void InitLevelManager()
-        {
-            if (AppCore.Get<LevelManager>() == null) {
-                var holder = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                holder.transform.position = new Vector3(0, -100);
-                var component = holder.AddComponent<LevelManager>();
-                component.Init();
-            }
+            _levelManager.Update(Time.deltaTime);
         }
     }
 }

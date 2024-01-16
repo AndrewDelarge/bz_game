@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using game.core.common;
 using game.Gameplay.Characters.Common;
-using game.сore.Common;
 
 namespace game.core {
 
@@ -30,17 +28,13 @@ namespace game.core {
 		}
 		
 	}
-	public class CharactersManager : ICoreManager, IInitalizeable, IUpdatable {
+	public class CharactersController : IUpdatable {
 		private List<ICharacter> _characters = new List<ICharacter>();
 
 		private ICharacter _player;
 		private AIManager _manager = new AIManager();
 
 		public ICharacter player => _player;
-		
-		public void Init() {
-			AppCore.Get<LevelManager>().Add(this);
-		}
 
 		public void RegisterCharacter(ICharacter character) {
 			character.Init();
@@ -58,7 +52,7 @@ namespace game.core {
 			if (_player != null) {
 				throw new CharacterManagerException("Player already added");
 			}
-
+			
 			_player = player;
 		}
 

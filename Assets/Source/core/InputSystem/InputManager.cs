@@ -24,7 +24,7 @@ namespace game.core.InputSystem
                 return;
             }
 
-            input.updated += DispatchInputDataUpdate;
+            input.updated.Add(DispatchInputDataUpdate);
             
             _inputs.Add(input);
         }
@@ -48,6 +48,14 @@ namespace game.core.InputSystem
             }
             
             _controlables.Add(control);
+        }
+
+        public void Reset() {
+            foreach (var input in _inputs) {
+                input.Dispose();
+            }
+            
+            _controlables.Clear();
         }
 
     }

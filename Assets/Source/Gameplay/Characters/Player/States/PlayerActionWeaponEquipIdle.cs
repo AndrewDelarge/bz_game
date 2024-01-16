@@ -1,8 +1,7 @@
-﻿using game.core.InputSystem;
+﻿using game.core;
+using game.core.InputSystem;
 using game.core.storage;
 using game.core.Storage.Data.Character;
-using game.core.storage.Data.Equipment.Weapon;
-using game.core.storage.Data.Models;
 using game.Gameplay.Characters.Common;
 using game.Gameplay.Weapon;
 using UnityEngine;
@@ -18,8 +17,9 @@ namespace game.Gameplay.Characters.Player
             base.Init(context);
 
             _weaponStateMachine = new WeaponStateMachine();
-			
-            var weaponContext = new WeaponStateContext(_weaponStateMachine, context.equipmentManger.currentEquipmentView, context.equipmentManger.currentEquipment, context.character);
+
+            var projectileController = AppCore.Get<LevelManager>().levelController.Get<ProjectileController>();
+            var weaponContext = new WeaponStateContext(_weaponStateMachine, context.equipmentManger.currentEquipmentView, context.equipmentManger.currentEquipment, context.character, projectileController);
 
             _weaponStateMachine.Init(weaponContext);
             _weaponStateMachine.ChangeState(WeaponStateEnum.IDLE);

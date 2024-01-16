@@ -67,7 +67,7 @@ namespace game.Gameplay.Weapon
             }
             
             
-            AppCore.Get<LevelManager>().SpawnDebugObject(hit.point, .1f);
+            AppCore.Get<LevelManager>().levelController.SpawnDebugObject(hit.point, .1f);
 
             _onHitHealthable.Dispatch(healthable, this);
         }

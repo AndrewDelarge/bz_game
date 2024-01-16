@@ -1,4 +1,6 @@
-﻿namespace game.сore.Common
+﻿using System;
+
+namespace game.сore.Common
 {
     public interface IInitalizeable
     {

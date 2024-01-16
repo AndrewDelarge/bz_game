@@ -1,4 +1,6 @@
 ﻿using System;
+using game;
+using game.core;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -25,6 +27,7 @@ namespace Editor.UnityUpperMenu
             EditorApplication.EnterPlaymode();
 
             EditorSceneManager.OpenScene(ROOT_SCENE_PATH, OpenSceneMode.Additive);
+            AppCore.Get<LevelManager>().LoadCurrent();
         }
         
         [MenuItem("BZ Tools/Restart current scene")]

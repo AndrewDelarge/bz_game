@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cinemachine;
 using game.core;
 using game.core.InputSystem.Interfaces;
 using game.core.InputSystem;
@@ -48,8 +49,6 @@ namespace game.Gameplay.Characters.Player
 
         public void Init()
         {
-            AppCore.Get<IInputManager>().RegisterControlable(this);
-
             _animation.Init(_playerData.animationSet);
             _equipmentManger = new CharacterEquipmentManger();
             
@@ -132,6 +131,10 @@ namespace game.Gameplay.Characters.Player
         
         public HealthChange<DamageType> GetDamage() {
             return _equipmentManger.currentEquipment.GetDamage();
+        }
+
+        public void SetCamera(Camera camera) {
+            _camera = camera;
         }
     }
 }

@@ -8,14 +8,18 @@ namespace game.core.Common
         public Logger() {}
 
 
-        public void Log(string text)
-        {
+        public void Log(string text) {
             Debug.Log(text);
+        }
+
+        public void Error(string text) {
+            Debug.LogError(text);
         }
     }
 
     public interface ILogger
     {
         void Log(string text);
+        void Error(string text);
     }
 }

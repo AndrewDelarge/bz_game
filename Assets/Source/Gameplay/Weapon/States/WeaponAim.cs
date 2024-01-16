@@ -1,10 +1,8 @@
-﻿using game.core.Common;
-using game.core.InputSystem;
+﻿using game.core.InputSystem;
 
 namespace game.Gameplay.Weapon
 {
-    public class WeaponAim : WeaponStateBase
-    {
+    public class WeaponAim : WeaponStateBase {
         public override void HandleInput(InputData data)
         {
             var aim = data.GetAction(InputActionType.AIM);
@@ -34,9 +32,7 @@ namespace game.Gameplay.Weapon
             }
         }
 
-        public override void HandleState(float deltaTime)
-        {
-            AppCore.Get<ILogger>().Log("AIMING");
+        public override void HandleState(float deltaTime) {
         }
     }
 }

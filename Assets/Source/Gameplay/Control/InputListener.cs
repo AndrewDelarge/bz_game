@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using game.core.Common;
 using game.core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using UnityEngine;
@@ -24,7 +25,8 @@ namespace game.gameplay.control
             KeyCode.R,
             KeyCode.Mouse0,
             KeyCode.Mouse1,
-            KeyCode.P
+            KeyCode.P,
+            KeyCode.Space
         };
 
         private List<InputRawButton> _buttonsPool = new List<InputRawButton>();
@@ -101,7 +103,7 @@ namespace game.gameplay.control
 
     public class KeyboardInputDataProvider : IInputable
     {
-        public event Action<InputData> updated;
+        public IWhistle<InputData> updated => _updated;
         public event Action<KeyCode> keyDown;
         public event Action<KeyCode> keyUp;
         public event Action<Vector3> inputVector;
@@ -109,6 +111,7 @@ namespace game.gameplay.control
         private IInputRawListener _inputListener;
         private InputData _inputData = new InputData();
         private InputRawData _rawData;
+        private Whistle<InputData> _updated = new Whistle<InputData>();
         
         private List<InputActionField<InputAction<InputActionType>>> _actionPool = new ();
         private List<InputActionField<InputAction<InputActionType>>> _filledActions = new ();
@@ -121,6 +124,7 @@ namespace game.gameplay.control
             {KeyCode.Mouse1, InputActionType.AIM},
             {KeyCode.Mouse0, InputActionType.SHOT},
             {KeyCode.P, InputActionType.DEBUG_0},
+            {KeyCode.Space, InputActionType.SHOT},
         };
 
         public void Init(IInputRawListener listener)
@@ -132,6 +136,11 @@ namespace game.gameplay.control
                 var inputAction = new InputAction<InputActionType>(action.Value, InputStatus.NONE);
                 _actionPool.Add(new InputActionField<InputAction<InputActionType>>(inputAction));
             }
+        }
+        
+        public void Dispose() {
+            _inputListener.updated -= OnUpdateRawData;
+            _updated.Clear();
         }
 
         public InputRawData GetRaw()
@@ -160,7 +169,7 @@ namespace game.gameplay.control
             
             _inputData.Update(_rawData.axes[InputListener.AXIS_WASD], _rawData.axes[InputListener.AXIS_MOUSE], _filledActions);
             
-            updated?.Invoke(_inputData);
+            _updated.Dispatch(_inputData);
 
             foreach (var filledAction in _filledActions) {
                 filledAction.isAbsorbed = false;

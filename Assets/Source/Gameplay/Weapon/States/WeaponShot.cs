@@ -57,12 +57,11 @@ namespace game.Gameplay.Weapon
         private void Shot() {
             _context.data.currentMagazineAmount -= 1;
 
-            var levelManager = AppCore.Get<LevelManager>();
-            var projectileManager = levelManager.Get<ProjectileManager>();
+            var projectileController = _context.projectileController;
             var projectile = _context.data.GetProjectile();
             
             projectile.SetSource(_context.owner);
-            projectileManager.Launch(projectile, _context.data.projectilesForShot, _view.GetMarkerPosition("muzzle"), _context.data.spreadX, _context.data.spreadY);
+            projectileController.Launch(projectile, _context.data.projectilesForShot, _view.GetMarkerPosition("muzzle"), _context.data.spreadX, _context.data.spreadY);
 
             _view.Shot();
 

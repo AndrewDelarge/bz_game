@@ -1,5 +1,5 @@
 ﻿using System;
-using game.core.InputSystem;
+using game.core.Common;
 using UnityEngine;
 
 namespace game.core.InputSystem.Interfaces
@@ -11,6 +11,8 @@ namespace game.core.InputSystem.Interfaces
 
         public event Action<Vector3> inputVector;
 
-        public event Action<InputData> updated;
+        public IWhistle<InputData> updated { get; }
+
+        public void Dispose();
     }
 }

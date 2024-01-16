@@ -1,3 +1,4 @@
+using Cinemachine;
 using game.core.common;
 using game.core.storage.Data.Abilities;
 using game.сore.Common;
@@ -9,6 +10,8 @@ namespace game.Gameplay.Characters.Common {
 		
 		private CameraData _data;
 
+		private GameCamera _camera;
+
 
 		public void Init() {
 			_data = Resources.Load<CameraData>(DATA_PATH);
@@ -16,6 +19,10 @@ namespace game.Gameplay.Characters.Common {
 
 		public Vector2 GetScreenResolutionDelta() {
 			return new((float) _data.texture.width / Screen.width, (float) _data.texture.height / Screen.height);
+		}
+
+		public void AddCamera(GameCamera camera) {
+			_camera = camera;
 		}
 	}
 }

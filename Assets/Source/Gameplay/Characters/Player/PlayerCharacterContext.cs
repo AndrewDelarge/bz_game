@@ -5,53 +5,34 @@ using UnityEngine;
 namespace game.Gameplay.Characters.Player
 {
 	public class PlayerCharacterContext {
-		private Transform _transform;
-		private Healthable _healthable;
+		public Transform transform { get; }
+		public Healthable healthable { get; }
 		
-		private CharacterMovement _movement;
-		private CharacterEquipmentManger _equipmentManger;
-		private CharacterAnimation _animation;
-		private PlayerCharacterData _data;
-		private BoneListenerManager _boneListenerManager;
-		private Transform _target;
+		public CharacterMovement movement { get; }
+		public CharacterEquipmentManger equipmentManger { get; }
+		public ICharacterAnimation<CharacterAnimationSet, CharacterAnimationEnum, AnimationClip> animation { get; }
+		public PlayerCharacterData data { get; }
+		public BoneListenerManager boneListenerManager { get; }
+		public Transform target { get; }
 
-		private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
-		private CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> _actionStateMachine;
+		public CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> mainStateMachine { get; set; }
+		public CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> actionStateMachine { get; set; }
 
 		public Camera camera;
 		public readonly ICharacter character;
-		public Transform transform => _transform;
-		public Healthable healthable => _healthable;
-		public PlayerCharacterData data => _data;
-		public BoneListenerManager boneListenerManager => _boneListenerManager;
-
-		public CharacterEquipmentManger equipmentManger => _equipmentManger;
-		public ICharacterMovement movement => _movement;
-		public ICharacterAnimation<CharacterAnimationSet, CharacterAnimationEnum, AnimationClip> animation => _animation;
-		public Transform target => _target;
-
-		public CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> actionStateMachine {
-			get => _actionStateMachine;
-			set => _actionStateMachine = value;
-		}
-		
-		public CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> mainStateMachine {
-			get => _mainStateMachine;
-			set => _mainStateMachine = value;
-		}
 
 		public PlayerCharacterContext(Healthable healthable, CharacterMovement movement, CharacterAnimation animation, PlayerCharacterData data,
 			Transform transform, CharacterEquipmentManger equipmentManger, BoneListenerManager boneListenerManager, ICharacter character, Transform target)
 		{
 			this.character = character;
-			_data = data;
-			_healthable = healthable;
-			_movement = movement;
-			_animation = animation;
-			_transform = transform;
-			_equipmentManger = equipmentManger;
-			_boneListenerManager = boneListenerManager;
-			_target = target;
+			this.data = data;
+			this.healthable = healthable;
+			this.movement = movement;
+			this.animation = animation;
+			this.transform = transform;
+			this.equipmentManger = equipmentManger;
+			this.boneListenerManager = boneListenerManager;
+			this.target = target;
 		}
 	}
 }

@@ -1,26 +1,36 @@
-﻿using System;
-using game.core.common;
-using game.сore.Common;
+﻿using System.Collections.Generic;
+using game.core.Common;
+using game.core.storage.Data.Level;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using ILogger = game.core.Common.ILogger;
 
 namespace game.core
 {
-    public class SceneLoader : IInitalizeable, ICoreManager
-    {
-        public event Action<Scene> sceneLoaded;
+    public class SceneLoader {
+        private static string DATA_PATH = "Data/Levels";
+        private static int DEFAULT_INDEX = -1;
         
         private Scene _root;
         private Scene _currentScene;
         private AsyncOperation _loading;
+        private Dictionary<int, LevelData> _levelsData = new ();
+        private Whistle<Scene, LevelData> _sceneLoaded = new ();
+
+        public IWhistle<Scene, LevelData> sceneLoaded => _sceneLoaded;
         
-        public void Init()
+        public SceneLoader()
         {
             _root = SceneManager.GetActiveScene();
             SceneManager.sceneLoaded += SceneLoadingComplete;
+            var levels = Resources.LoadAll<LevelData>(DATA_PATH);
+            
+            foreach (var levelData in levels) {
+                _levelsData.Add(levelData.sceneId, levelData);
+            }
         }
         
-        // TODO Make scene dictionary\enum
         public void LoadScene(int id)
         {
             if (_loading != null)
@@ -42,7 +52,7 @@ namespace game.core
             _loading.completed += LoadingComplete;
         }
 
-        private void LoadingComplete(AsyncOperation obj)
+        private void LoadingComplete(AsyncOperation _)
         {
             _loading.completed -= LoadingComplete;
             _loading = null;
@@ -51,7 +61,33 @@ namespace game.core
         private void SceneLoadingComplete(Scene scene, LoadSceneMode mode)
         {
             _currentScene = scene;
-            sceneLoaded?.Invoke(_currentScene);
+            var levelData = GetLevelData(scene.buildIndex);
+
+            if (levelData == null) {
+                AppCore.Get<ILogger>().Error($"SceneLoader: Error; There isnt config for level with index [{scene.buildIndex}]");
+                return;
+            }
+            
+            _sceneLoaded.Dispatch(_currentScene, levelData);
+        }
+
+        [CanBeNull]
+        private LevelData GetLevelData(int index) {
+            if (_levelsData.ContainsKey(index) == false) {
+                if (_levelsData.ContainsKey(DEFAULT_INDEX)) {
+                    AppCore.Get<ILogger>().Log($"SceneLoader: Loading default scene config");
+                    return _levelsData[DEFAULT_INDEX];
+                }
+
+                return null;
+            }
+
+            return _levelsData[index];
+        }
+
+        public void LoadCurrent() {
+            var scene = SceneManager.GetActiveScene();
+            SceneLoadingComplete(scene, LoadSceneMode.Additive);
         }
     }
 }

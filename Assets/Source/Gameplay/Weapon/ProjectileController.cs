@@ -3,7 +3,7 @@ using game.core;
 using UnityEngine;
 
 namespace game.Gameplay.Weapon {
-	public class ProjectileManager : IUpdatable
+	public class ProjectileController : IUpdatable
 	{
 		protected List<Projectile> _projectiles = new ();
 		protected List<Projectile> _projectilesToDestroy = new ();
