@@ -20,10 +20,6 @@ namespace game.Gameplay.Characters.Player
         [SerializeField] private BoneListenerManager _boneListenerManager;
         [SerializeField] private Healthable _healthable;
         [SerializeField] private Transform _target;
-        
-        // TODO: Camera manager and controller
-        [SerializeField] private Camera _camera;
-
 
         [SerializeField] private PlayerCharacterData _playerData;
 
@@ -33,6 +29,7 @@ namespace game.Gameplay.Characters.Player
 
         private InputData _data;
         private bool isInited;
+        private Camera _camera;
 
         public bool isPlayer => true;
         public bool canChangeState => _mainStateMachine.canExitState && _actionStateMachine.canExitState;

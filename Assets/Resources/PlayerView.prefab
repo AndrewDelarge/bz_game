@@ -644,24 +644,6 @@ MonoBehaviour:
   animator: {fileID: 3945223916801705543}
   _velocityDampTime: 0.1
   _actionName: 
---- !u!114 &7681284573115209700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7740487401849144967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RigLayers:
-  - m_Rig: {fileID: 0}
-    m_Active: 1
-  - m_Rig: {fileID: 0}
-    m_Active: 1
-  m_Effectors: []
 --- !u!4 &8388360345224886840 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1424163173900861934, guid: 597406d1013af5b4c98fb9a595ad46f6, type: 3}
