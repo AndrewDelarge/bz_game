@@ -4,7 +4,7 @@ using game.Gameplay.Weapon;
 using game.сore.Common;
 using UnityEngine.SceneManagement;
 
-namespace game.core {
+namespace game.core.level {
 	public class LevelManager : ICoreManager, IInitalizeable {
 		private SceneLoader _sceneLoader;
 		private LevelController _levelController;

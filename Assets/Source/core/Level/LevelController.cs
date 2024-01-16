@@ -9,7 +9,7 @@ using UnityEngine.AI;
 using ILogger = game.core.Common.ILogger;
 using Object = UnityEngine.Object;
 
-namespace game.core
+namespace game.core.level
 {
     public class LevelController
     {
