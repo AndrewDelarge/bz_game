@@ -69,4 +69,7 @@ UserSettings/EditorUserSettings.asset
 UserSettings/Layouts
 UserSettings/Search.index
 UserSettings/Search.settings
-__pycache__
+
+
+# kolyan's blender scripts
+Assets/BZ_ENV/Models/scripts/__pycache__
