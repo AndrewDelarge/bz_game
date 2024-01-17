@@ -11,9 +11,9 @@ namespace game.Gameplay.Characters.Common
         TEnum currentAnimation { get; }
         IWhistle<TEnum> onAnimationComplete { get; }
         IAnimationData<TEnum, TClipType> GetAnimationData(TEnum state);
-        void PlayAnimation(TClipType animationClip, bool withExitTransition = false);
-        void PlayAnimation(TEnum animationClip, bool withExitTransition = false);
-        void StopAnimation();
+        void PlayAnimation(TClipType animationClip, bool enterTransition = false);
+        void PlayAnimation(TEnum animationClip, bool enterTransition = false);
+        void StopAnimation(bool exitTransition);
 
         void SetMotionVelocityPercent(float percent, bool fast = false);
         void Disable();

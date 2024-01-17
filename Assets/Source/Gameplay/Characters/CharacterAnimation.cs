@@ -49,10 +49,10 @@ namespace game.Gameplay.Characters
             base.LateUpdate();
 
             animator.SetLayerWeight(ACTION_LAYER, animator.GetFloat(PARAM_VELOCITY) < .01f ? 1f : 0);
-            animator.SetLayerWeight(ACTION_INMOVE_LAYER_ID, animator.GetFloat(PARAM_VELOCITY) > 0 ? 1 : 0);
+            animator.SetLayerWeight(ACTION_INMOVE_LAYER_ID, animator.GetFloat(PARAM_VELOCITY) > .01f ? 1 : 0);
         }
 
-        public void PlayAnimation(CharacterAnimationEnum state, bool withExitTransition = false)
+        public void PlayAnimation(CharacterAnimationEnum state, bool enterTransition = false)
         {
             var data = GetAnimationData(state);
 
@@ -62,16 +62,16 @@ namespace game.Gameplay.Characters
             }
 
             _currentAnimation = state;
-            base.PlayAnimation(data.clip, withExitTransition);
+            base.PlayAnimation(data.clip, enterTransition);
         }
 
 
 
-        public override void StopAnimation() {
+        public override void StopAnimation(bool exitTransition) {
             _onAnimationComplete.Dispatch(_currentAnimation);
             _currentAnimation = CharacterAnimationEnum.NONE;
             
-            base.StopAnimation();
+            base.StopAnimation(exitTransition);
         }
 
         public void SetMotionVelocityPercent(float percent, bool fast = false) {
@@ -92,12 +92,7 @@ namespace game.Gameplay.Characters
                 return _currentAnimationSet.GetAnimationData(state);
             }
 
-            var data = _currentAnimationSet.GetAnimationData(state);
-
-            if (data == null)
-            {
-                data = _defalutAnimationSet.GetAnimationData(state);
-            }
+            var data = _currentAnimationSet.GetAnimationData(state) ?? _defalutAnimationSet.GetAnimationData(state);
 
             return data;
         }

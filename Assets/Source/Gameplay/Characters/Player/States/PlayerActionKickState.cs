@@ -53,6 +53,7 @@ namespace game.Gameplay.Characters.Player {
 		
 		private void OnAnimationComplete(CharacterAnimationEnum obj) {
 			context.actionStateMachine.ChangeState(PlayerActionStateEnum.IDLE);
+			context.animation.onAnimationComplete.Remove(OnAnimationComplete);
 		}
 
 		private void ProduceDamage() {

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: default
   m_EditorClassIdentifier: 
   _camera: {fileID: -1958150592410133599, guid: cf65e3d9619164d3aaec14df79198bd3, type: 3}
-  _playerCharacter: {fileID: 5519087118801596931, guid: bb99d9e8c441a5e41aef32e33840ce0e, type: 3}
+  _playerCharacter: {fileID: 3982217390857746938, guid: c5e53b0bc9200490cac0ff9b26013d66, type: 3}
   _sceneId: -1

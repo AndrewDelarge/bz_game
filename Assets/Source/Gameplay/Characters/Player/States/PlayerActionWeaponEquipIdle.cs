@@ -35,14 +35,14 @@ namespace game.Gameplay.Characters.Player
         private void WeaponChangeStateHandle(WeaponStateEnum last, WeaponStateEnum current) {
             switch (current) {
                 case WeaponStateEnum.IDLE:
-                    context.animation.StopAnimation();
+                    context.animation.StopAnimation(true);
                     break;
                 case WeaponStateEnum.SHOT:
                     var transition = last == WeaponStateEnum.IDLE;
                     context.animation.PlayAnimation(CharacterAnimationEnum.SHOT, transition);
                     break;
                 case WeaponStateEnum.AIM:
-                    context.animation.PlayAnimation(CharacterAnimationEnum.AIM, true);
+                    context.animation.PlayAnimation(CharacterAnimationEnum.AIM, last != WeaponStateEnum.SHOT);
                     break;
                 case WeaponStateEnum.RELOAD:
                     context.animation.PlayAnimation(CharacterAnimationEnum.RELOAD, true);
@@ -104,7 +104,7 @@ namespace game.Gameplay.Characters.Player
                 if (kick is {value: {status: InputStatus.DOWN}}) {
                     kick.isAbsorbed = true;
                     
-                    // _weaponStateMachine.ReturnState();
+                    _weaponStateMachine.ReturnState();
                     
                     context.actionStateMachine.ChangeState(PlayerActionStateEnum.KICK);
                 }

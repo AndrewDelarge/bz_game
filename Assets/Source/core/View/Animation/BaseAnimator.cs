@@ -5,9 +5,9 @@ namespace game.core.view.animation
 {
     public class BaseAnimator : MonoBehaviour
     {
-        protected readonly int PARAM_ACTION_TRIGGER = Animator.StringToHash("action");
-        protected readonly int PARAM_ACTION_WITH_TRANSITION_TRIGGER = Animator.StringToHash("actionWithTransition");
-        protected readonly int PARAM_STOP_ACTION_TRIGGER = Animator.StringToHash("endAction");
+        protected readonly int PARAM_ACTION_BOOL = Animator.StringToHash("actionBool");
+        protected readonly int PARAM_TRANSITION_BOOL = Animator.StringToHash("transition");
+        protected readonly int PARAM_EXIT_TRANSITION_BOOL = Animator.StringToHash("exitTransition");
         public const int ACTION_LAYER = 1;
 
         protected const string DEFAULT_ACTION_STATE_NAME = "Action";
@@ -31,29 +31,35 @@ namespace game.core.view.animation
                 _animationTime -= Time.deltaTime;
                 if (_animationTime <= 0)
                 {
-                    StopAnimation();
+                    StopAnimation(true);
                 }
             }
         }
 
-        public virtual void PlayAnimation(AnimationClip animationClip, bool withExitTransition = false)
+        public virtual void PlayAnimation(AnimationClip animationClip, bool enterTransition = false)
         {
+            if (_animationTime > 0) {
+                StopAnimation(false);
+            }
+            
             overrideController[DEFAULT_ACTION_ANIMATION_NAME] = animationClip;
-            animator.SetTrigger(withExitTransition ? PARAM_ACTION_WITH_TRANSITION_TRIGGER : PARAM_ACTION_TRIGGER);
+            if (enterTransition) {
+                animator.SetBool(PARAM_TRANSITION_BOOL, true);
+            }
+            
+            animator.SetBool(PARAM_ACTION_BOOL, true);
             animator.Update(0);
             _animationTime = animationClip.isLooping ? float.PositiveInfinity : animationClip.length;
         }
 
-        public virtual void StopAnimation()
+        public virtual void StopAnimation(bool exitTransition)
         {
-            animator.SetTrigger(PARAM_STOP_ACTION_TRIGGER);
+            animator.SetBool(PARAM_ACTION_BOOL, false);
+            animator.SetBool(PARAM_TRANSITION_BOOL, false);
+            animator.SetBool(PARAM_EXIT_TRANSITION_BOOL, exitTransition);
             if (animator.isActiveAndEnabled) {
                 animator.Update(0);
             }
-            
-            // if (animator.IsInTransition(ACTION_LAYER)) {
-            //     return;
-            // }
 
             _animationTime = 0;
         }
