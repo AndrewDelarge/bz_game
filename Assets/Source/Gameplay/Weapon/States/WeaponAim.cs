@@ -31,8 +31,5 @@ namespace game.Gameplay.Weapon
                 _context.stateMachine.ChangeState(WeaponStateEnum.RELOAD);
             }
         }
-
-        public override void HandleState(float deltaTime) {
-        }
     }
 }

@@ -30,6 +30,7 @@ namespace game.Gameplay.Weapon
         IDLE = 0,
         AIM = 1,
         SHOT = 2,
-        RELOAD = 3
+        RELOAD = 3,
+        READY = 4,
     }
 }

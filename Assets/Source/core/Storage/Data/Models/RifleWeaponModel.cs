@@ -7,16 +7,17 @@ using UnityEngine;
 
 namespace game.core.storage.Data.Models
 {
-    public class ShotgunWeaponModel : WeaponModel
+    public class RifleWeaponModel : WeaponModel
     {
         private Dictionary<WeaponStateEnum, WeaponStateBase> _weaponStates = new () {
             {WeaponStateEnum.IDLE, new WeaponIdle()},
             {WeaponStateEnum.AIM, new WeaponAim()},
             {WeaponStateEnum.RELOAD, new WeaponReload()},
             {WeaponStateEnum.SHOT, new WeaponShot()},
+            {WeaponStateEnum.READY, new WeaponReady()},
         };
-        public ShotgunWeaponModel(WeaponData weaponData) : base(weaponData) {
-            _data = (ShotgunWeaponData) weaponData;
+        public RifleWeaponModel(WeaponData weaponData) : base(weaponData) {
+            _data = (RifleWeaponData) weaponData;
         }
 
         public override IReadOnlyDictionary<WeaponStateEnum, WeaponStateBase> GetWeaponStates() => _weaponStates;

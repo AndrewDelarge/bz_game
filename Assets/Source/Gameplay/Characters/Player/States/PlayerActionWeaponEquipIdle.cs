@@ -44,6 +44,9 @@ namespace game.Gameplay.Characters.Player
                 case WeaponStateEnum.AIM:
                     context.animation.PlayAnimation(CharacterAnimationEnum.AIM, last != WeaponStateEnum.SHOT);
                     break;
+                case WeaponStateEnum.READY:
+                    context.animation.PlayAnimation(CharacterAnimationEnum.AIM);
+                    break;
                 case WeaponStateEnum.RELOAD:
                     context.animation.PlayAnimation(CharacterAnimationEnum.RELOAD, true);
                     break;
@@ -79,7 +82,7 @@ namespace game.Gameplay.Characters.Player
                 context.movement.SetLockRotation(true);
                 context.movement.Rotate(rotateAngle);
             }
-            else {
+            else if (currentWeaponState != WeaponStateEnum.READY) {
                 context.movement.SetLockRotation(false);
             }
             

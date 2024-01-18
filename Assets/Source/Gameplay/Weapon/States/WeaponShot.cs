@@ -1,16 +1,17 @@
-﻿using game.core;
-using UnityEngine;
+﻿using UnityEngine;
 using ILogger = game.core.Common.ILogger;
 
 namespace game.Gameplay.Weapon
 {
     public class WeaponShot : WeaponStateBase {
-        private const float FROM_IDLE_SHOT_DELAY = .07f;
+        private const float FROM_IDLE_SHOT_DELAY = .1f;
         private IWeaponView _view;
         
         private float _endTime;
         private float _shotDelayTime;
         private bool _isDone;
+        private float _spreadMultiplier;
+        private WeaponStateEnum _lastState;
         public override void Init(WeaponStateContext context) {
             base.Init(context);
             
@@ -31,11 +32,11 @@ namespace game.Gameplay.Weapon
 
         public override void Enter()
         {
-            base.Enter();
-
             _isDone = false;
             _endTime = _context.data.shotTime;
-            _shotDelayTime = _context.stateMachine.currentStateType == WeaponStateEnum.AIM ? 0 : FROM_IDLE_SHOT_DELAY;
+            _lastState = _context.stateMachine.currentStateType;
+            _spreadMultiplier = _lastState is WeaponStateEnum.IDLE or WeaponStateEnum.READY ? 5 : 1;
+            _shotDelayTime = _context.stateMachine is {currentStateType: WeaponStateEnum.AIM or WeaponStateEnum.READY} ? 0 : FROM_IDLE_SHOT_DELAY;
         }
 
         public override void HandleState(float deltaTime) {
@@ -51,6 +52,10 @@ namespace game.Gameplay.Weapon
             if (_endTime <= 0)
             {
                 _context.stateMachine.ReturnState();
+                if (_lastState == WeaponStateEnum.IDLE) {
+                    _context.stateMachine.ChangeState(WeaponStateEnum.READY);
+                    return;
+                }
             }
         }
 
@@ -61,7 +66,7 @@ namespace game.Gameplay.Weapon
             var projectile = _context.data.GetProjectile();
             
             projectile.SetSource(_context.owner);
-            projectileController.Launch(projectile, _context.data.projectilesForShot, _view.GetMarkerPosition("muzzle"), _context.data.spreadX, _context.data.spreadY);
+            projectileController.Launch(projectile, _context.data.projectilesForShot, _view.GetMarkerPosition("muzzle"), _context.data.spreadX * _spreadMultiplier, _context.data.spreadY * _spreadMultiplier);
 
             _view.Shot();
 
