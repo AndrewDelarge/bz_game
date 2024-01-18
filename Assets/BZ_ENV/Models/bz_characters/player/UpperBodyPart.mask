@@ -39,6 +39,8 @@ AvatarMask:
     m_Weight: 1
   - m_Path: Armature/Hips/Spine 0/Spine 1/Shoulder.R/Arm.R/Forarm.R/Hand.R
     m_Weight: 1
+  - m_Path: Armature/Hips/Spine 0/Weapon
+    m_Weight: 1
   - m_Path: Armature/Hips/Thigh.L
     m_Weight: 0
   - m_Path: Armature/Hips/Thigh.L/Leg.L
@@ -55,7 +57,5 @@ AvatarMask:
     m_Weight: 0
   - m_Path: Armature/Hips/Thigh.R/Leg.R/Foot.R/FootTip.R
     m_Weight: 0
-  - m_Path: Armature/Weapon
-    m_Weight: 1
   - m_Path: bz_hero_01
     m_Weight: 0
