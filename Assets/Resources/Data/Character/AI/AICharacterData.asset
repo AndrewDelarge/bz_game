@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f0231326c2d41fba17e5d6896494069, type: 3}
   m_Name: AICharacterData
   m_EditorClassIdentifier: 
-  _animationSet: {fileID: 11400000, guid: d1e186efc0bbe45fb88d1193cfa131c0, type: 2}
+  _animationSet: {fileID: 11400000, guid: c97b5213fea5b304288a1adc59e2b3c1, type: 2}
   _abilities:
   - {fileID: 11400000, guid: 659a2a64f772d4d21b645f0f112e03b5, type: 2}
   _normalSpeed: 2

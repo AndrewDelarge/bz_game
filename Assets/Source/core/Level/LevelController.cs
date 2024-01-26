@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using game.core.common;
 using game.core.InputSystem;
 using game.core.storage.Data.Level;
-using game.Gameplay.Characters.Common;
 using game.gameplay.control;
 using UnityEngine;
 using UnityEngine.AI;

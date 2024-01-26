@@ -43,11 +43,12 @@ namespace Editor.UnityUpperMenu
 
             var path = scene.path;
 
-            SceneManager.UnloadSceneAsync(scene);
-            SceneManager.UnloadSceneAsync(rootScene);
+            SceneManager.SetActiveScene(rootScene);
+            var asyncOperation = SceneManager.LoadSceneAsync(path, LoadSceneMode.Single);
 
-            SceneManager.LoadScene(path);
-            SceneManager.LoadScene(ROOT_SCENE_PATH, LoadSceneMode.Additive);
+            asyncOperation.completed += (x) => {
+                SceneManager.LoadScene(ROOT_SCENE_PATH, LoadSceneMode.Additive);
+            };
         }
 
         private static void ChangePlayModeHandler(PlayModeStateChange obj) {

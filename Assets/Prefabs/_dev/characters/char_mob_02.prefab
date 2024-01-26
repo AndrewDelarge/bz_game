@@ -69,7 +69,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animation: {fileID: 4755665293537424485}
   _movement: {fileID: 9056297129841453602}
-  _animSet: {fileID: 11400000, guid: 10879c1e94f9ae648a793b84b4f598b2, type: 2}
   _data: {fileID: 11400000, guid: 6205271c7be3c41c8902495c885fd1d2, type: 2}
   _healthable: {fileID: 9056297129841453600}
   nearMessages: []
@@ -1008,7 +1007,7 @@ Animator:
   m_GameObject: {fileID: 5566147541189167403}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 597406d1013af5b4c98fb9a595ad46f6, type: 3}
-  m_Controller: {fileID: 9100000, guid: 798091f34a6c6dc40a5c4e45cefc48a0, type: 2}
+  m_Controller: {fileID: 9100000, guid: c11c57dcbae289c4086dd64bf2006426, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

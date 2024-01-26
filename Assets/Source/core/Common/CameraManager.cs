@@ -1,10 +1,11 @@
 using Cinemachine;
 using game.core.common;
 using game.core.storage.Data.Abilities;
+using game.Gameplay;
 using game.сore.Common;
 using UnityEngine;
 
-namespace game.Gameplay.Characters.Common {
+namespace game.core.common {
 	public class CameraManager : ICoreManager, IInitalizeable {
 		private const string DATA_PATH = "Data/CameraData";
 		

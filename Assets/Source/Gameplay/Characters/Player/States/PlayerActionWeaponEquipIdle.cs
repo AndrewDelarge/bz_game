@@ -1,9 +1,9 @@
 ﻿using game.core;
+using game.core.common;
 using game.core.InputSystem;
 using game.core.level;
 using game.core.storage;
 using game.core.Storage.Data.Character;
-using game.Gameplay.Characters.Common;
 using game.Gameplay.Weapon;
 using UnityEngine;
 

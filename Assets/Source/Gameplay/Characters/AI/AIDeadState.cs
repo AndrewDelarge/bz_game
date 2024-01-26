@@ -19,7 +19,7 @@ namespace game.Gameplay.Characters.AI {
 		}
 
 		public override void Enter() {
-			var animData = context.animation.GetAnimationData(CharacterAnimationEnum.KICK);
+			var animData = context.animation.GetAnimationData(CharacterAnimationEnum.DEATH);
 			AppCore.Get<GameTimer>().SetTimeout(_endTime, OnDie);
 
 			context.animation.PlayAnimation(animData.clip);

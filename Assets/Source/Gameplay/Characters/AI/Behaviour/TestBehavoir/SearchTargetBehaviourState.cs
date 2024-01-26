@@ -1,4 +1,5 @@
 using game.core;
+using game.core.level;
 using game.Gameplay.Characters.Common;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace game.Gameplay.Characters.AI.Behaviour {
 		public override void Init(BehaviourContext context)
 		{
 			_context = context;
-			_charactersController = AppCore.Get<CharactersController>();
+			_charactersController = AppCore.Get<LevelManager>().characterController;
 			_player = _charactersController.player;
 		}
 
