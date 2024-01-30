@@ -56,6 +56,18 @@ namespace game.Gameplay.Characters.Common
                 ChangeState(type);
             }
         }
+
+        public void RemoveReplacedState(T type) {
+            var state = _statesOverrides[type];
+            _statesOverrides.Remove(type);
+            
+            if (currentState.Equals(type))
+            {
+                ChangeState(type);
+            }
+
+            state.Dispose();
+        }
         
         public void OnStateChangeHandler<TObservered>(TObservered state) {
             base.currentState.OnChangedStateHandler(state);

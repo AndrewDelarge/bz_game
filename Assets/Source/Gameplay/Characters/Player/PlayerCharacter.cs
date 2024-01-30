@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cinemachine;
 using game.core;
 using game.core.InputSystem.Interfaces;
@@ -9,6 +10,7 @@ using game.Gameplay.Characters;
 using game.Gameplay.Characters.Common;
 using game.Gameplay.Characters.Common.Abilities;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace game.Gameplay.Characters.Player
 {
@@ -115,10 +117,11 @@ namespace game.Gameplay.Characters.Player
             if (data.GetAction(InputActionType.DEBUG_0) is {value: {status: InputStatus.DOWN}})
             {
                 if (_equipmentManger.isEquiped) {
+                    _equipmentManger.Unequip();
                     return;
                 }
                 
-                Equip(_playerData.weapon);
+                Equip(_playerData.weapon[Random.Range(0, _playerData.weapon.Length)]);
             }
         }
 

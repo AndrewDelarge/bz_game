@@ -1,8 +1,6 @@
-﻿using System;
-using game.core.storage.Data.Equipment;
+﻿using game.core.storage.Data.Equipment;
 using game.core.storage.Data.Equipment.Weapon;
 using game.Gameplay.Weapon;
-using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace game.Gameplay.Characters.Player
@@ -16,8 +14,8 @@ namespace game.Gameplay.Characters.Player
             _boneListenerManager = boneListenerManager;
         }
         
-        public Type GetDataType() => typeof(WeaponData);
-        
+        public CharacterEquiperType type => CharacterEquiperType.WEAPON;
+
         public EquipmentViewBase Equip(EquipmentData equipment)
         {
             var weaponData = (WeaponData) equipment;
@@ -29,7 +27,7 @@ namespace game.Gameplay.Characters.Player
 
         public void Unequip(EquipmentViewBase equipmentView)
         {
-            Object.Destroy(equipmentView);
+            equipmentView.Dispose();
         }
     }
 }

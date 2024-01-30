@@ -17,7 +17,7 @@ namespace game.Gameplay.Characters.Player
         private CharacterAnimation _animation;
         private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
         private CharacterStateMachine<PlayerActionStateEnum, PlayerCharacterContext> _actionStateMachine;
-        private Dictionary<Type, ICharacterEquiper<EquipmentData, EquipmentViewBase>> _equipers = new ();
+        private Dictionary<CharacterEquiperType, ICharacterEquiper<EquipmentData, EquipmentViewBase>> _equipers = new ();
 
         public EquipmentData currentEquipmentData => _currentEquipmentData;
         public EquipmentModel currentEquipment => _currentEquipment;
@@ -35,7 +35,7 @@ namespace game.Gameplay.Characters.Player
         }
         
         public void AddEquiper(ICharacterEquiper<EquipmentData, EquipmentViewBase> equiper) {
-            _equipers.Add(equiper.GetDataType(), equiper);
+            _equipers.Add(equiper.type, equiper);
         }
 
         public void Equip(EquipmentData equipment)
@@ -45,10 +45,8 @@ namespace game.Gameplay.Characters.Player
             _currentEquipment = _currentEquipmentData.CreateModel();
             _animation.SetAnimationSet(equipment.animationSet);
             
-            //TODO: REMOVE DIRTY HACK!
-            var baseType = equipment.GetType().BaseType;
-            if (baseType != null && _equipers.ContainsKey(baseType)) {
-                _currentEquipmentView = _equipers[baseType].Equip(equipment);
+            if (_equipers.ContainsKey(equipment.equiperType)) {
+                _currentEquipmentView = _equipers[equipment.equiperType].Equip(equipment);
             }
             
             _currentEquipmentView.Init(_currentEquipment);
@@ -67,18 +65,35 @@ namespace game.Gameplay.Characters.Player
             if (isEquiped == false) {
                 return;
             }
-            
-            if (_equipers.ContainsKey(_currentEquipment.GetType())) {
-                _equipers[_currentEquipment.GetType()].Unequip(_currentEquipmentView);
+
+            foreach (var state in _currentEquipmentData.statesOverrides) {
+                _mainStateMachine.RemoveReplacedState(state.overrideStateType);
             }
+            
+            foreach (var state in _currentEquipmentData.actionStatesOverrides) {
+                _actionStateMachine.RemoveReplacedState(state.overrideStateType);
+            }
+
+            if (_equipers.ContainsKey(_currentEquipmentData.equiperType)) {
+                _equipers[_currentEquipmentData.equiperType].Unequip(_currentEquipmentView);
+            }
+
+            _animation.ResetAnimationSetToDefault();
+            
+            _currentEquipmentData = null;
+            _currentEquipment = null;
+            _currentEquipmentView = null;
         }
-        
     }
 
     public interface ICharacterEquiper<T, TView>
     {
-        Type GetDataType();
+        CharacterEquiperType type { get; }
         TView Equip(T equipment);
         void Unequip(TView equipmentView);
+    }
+
+    public enum CharacterEquiperType {
+        WEAPON = 0
     }
 }

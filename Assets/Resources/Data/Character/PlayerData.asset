@@ -24,4 +24,6 @@ MonoBehaviour:
   _kickPower: 14.5
   _yKick: 0.7
   health: 100
-  weapon: {fileID: 11400000, guid: 37a88d077af84f04099494edeae675a8, type: 2}
+  weapon:
+  - {fileID: 11400000, guid: 37a88d077af84f04099494edeae675a8, type: 2}
+  - {fileID: 11400000, guid: 1c782617996cc4430bc30aaffd64b5a9, type: 2}

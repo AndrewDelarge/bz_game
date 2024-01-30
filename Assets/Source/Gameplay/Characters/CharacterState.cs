@@ -26,5 +26,7 @@ namespace game.Gameplay.Characters
 
 
         public virtual void HandleInput(InputData data) { }
+
+        public virtual void Dispose() { }
     }
 }

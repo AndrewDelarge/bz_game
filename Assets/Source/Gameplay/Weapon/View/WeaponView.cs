@@ -43,5 +43,9 @@ namespace game.Gameplay.Weapon {
 
 			return null;
 		}
+
+		public override void Dispose() {
+			Destroy(gameObject);
+		}
 	}
 }

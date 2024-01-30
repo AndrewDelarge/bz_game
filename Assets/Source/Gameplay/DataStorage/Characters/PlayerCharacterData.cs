@@ -18,7 +18,7 @@ namespace game.core.Storage.Data.Character
         [SerializeField] private float _yKick = -.7f;
 
         public float health = 500;
-        public WeaponData weapon;
+        public WeaponData[] weapon;
 
         private Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, PlayerCharacterContext>> _states =
             new () {

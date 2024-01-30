@@ -84,6 +84,12 @@ namespace game.Gameplay.Characters
             
             ApplyAnimationSet();
         }
+
+        public void ResetAnimationSetToDefault() {
+            _currentAnimationSet = _defalutAnimationSet;
+            
+            ApplyAnimationSet();
+        }
         
         public IAnimationData<CharacterAnimationEnum, AnimationClip> GetAnimationData(CharacterAnimationEnum state)
         {
