@@ -87,9 +87,11 @@ namespace game.Gameplay.Weapon {
 		}
 		
 		private void AddForce(Healthable healthable, ProjectileView view) {
-			var impulsePower = Math.Clamp(10 * _hitDictionary[healthable].Count, 10, 100);
 			var rigidbody = healthable.GetComponentInChildren<Rigidbody>();
-			rigidbody.AddForce(view.transform.forward * (impulsePower), ForceMode.Impulse);
+			if (rigidbody != null) {
+				var impulsePower = Math.Clamp(10 * _hitDictionary[healthable].Count, 10, 100);
+				rigidbody.AddForce(view.transform.forward * (impulsePower), ForceMode.Impulse);
+			}
 		}
 	}
 }
