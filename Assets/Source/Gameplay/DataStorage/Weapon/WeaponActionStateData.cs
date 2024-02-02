@@ -7,7 +7,7 @@ namespace game.core.storage.Data.Character {
 	public class WeaponActionStateData : StateData<CharacterState<PlayerActionStateEnum, PlayerCharacterContext>, 
 		PlayerActionStateEnum,PlayerCharacterContext> {
 		
-		private CharacterState<PlayerActionStateEnum, PlayerCharacterContext> _state = new PlayerActionWeaponEquipIdle();
+		private CharacterState<PlayerActionStateEnum, PlayerCharacterContext> _state = new PlayerActionWeaponEquipState();
 
 		public override CharacterState<PlayerActionStateEnum, PlayerCharacterContext> GetState() => _state;
 	}

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace game.Gameplay.Characters.Player
 {
-    public class PlayerActionWeaponEquipIdle : PlayerStateBase<PlayerActionStateEnum, PlayerCharacterContext>
+    public class PlayerActionWeaponEquipState : PlayerStateBase<PlayerActionStateEnum, PlayerCharacterContext>
     {
         private WeaponStateMachine _weaponStateMachine;
 
@@ -126,6 +126,12 @@ namespace game.Gameplay.Characters.Player
             {
                 _weaponStateMachine.ChangeState(WeaponStateEnum.IDLE);
             }
+        }
+
+        public override void Exit() {
+            _weaponStateMachine.currentState.Exit();
+            context.animation.StopAnimation(true);
+            context.movement.SetLockRotation(false);
         }
     }
 }
