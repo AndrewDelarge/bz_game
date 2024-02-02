@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using game.core.Common;
 using game.core.storage.Data.Level;
 using JetBrains.Annotations;
@@ -18,12 +19,18 @@ namespace game.core
         private Dictionary<int, LevelData> _levelsData = new ();
         private Whistle<Scene, LevelData> _sceneLoaded = new ();
 
+        public int currentSceneIndex => _currentScene.buildIndex;
         public IWhistle<Scene, LevelData> sceneLoaded => _sceneLoaded;
         
         public SceneLoader()
         {
-            _root = SceneManager.GetActiveScene();
-            SceneManager.sceneLoaded += SceneLoadingComplete;
+            _root = SceneManager.GetSceneByBuildIndex(0);
+
+            if (_root == null) {
+                AppCore.Get<ILogger>().Error("Root Scene not loaded!");
+                throw new Exception("Root Scene not loaded!");
+            }
+            
             var levels = Resources.LoadAll<LevelData>(DATA_PATH);
             
             foreach (var levelData in levels) {
@@ -43,12 +50,13 @@ namespace game.core
 
             if (_currentScene != default)
             {
-                SceneManager.UnloadSceneAsync(_currentScene);
+                SceneManager.UnloadScene(_currentScene);
                 _currentScene = default;
             }
 
+            SceneManager.sceneLoaded += SceneLoadingComplete;
             _loading = SceneManager.LoadSceneAsync(id, LoadSceneMode.Additive);
-            
+
             _loading.completed += LoadingComplete;
         }
 
@@ -61,6 +69,8 @@ namespace game.core
         private void SceneLoadingComplete(Scene scene, LoadSceneMode mode)
         {
             _currentScene = scene;
+            SceneManager.SetActiveScene(_currentScene);
+            
             var levelData = GetLevelData(scene.buildIndex);
 
             if (levelData == null) {
@@ -69,6 +79,7 @@ namespace game.core
             }
             
             _sceneLoaded.Dispatch(_currentScene, levelData);
+            SceneManager.sceneLoaded -= SceneLoadingComplete;
         }
 
         [CanBeNull]

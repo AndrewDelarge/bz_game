@@ -28,6 +28,14 @@ namespace game.core.level {
 			_sceneLoader.LoadCurrent();
 		}
 
+		public void ReloadCurrent() {
+			_levelController.Dispose();
+			_levelController = null;
+			_characterController.Dispose();
+			_characterController = new CharactersController();
+			_sceneLoader.LoadScene(_sceneLoader.currentSceneIndex);
+		}
+
 		public void Update(float deltaTime) {
 			_levelController?.Update(deltaTime);
 		}
@@ -37,6 +45,8 @@ namespace game.core.level {
 			_levelController.Init(data);
 			_levelController.Add(new ProjectileController());
 			_levelController.Add(_characterController);
+			
+			_characterController.Init();
 		}
 	}
 }

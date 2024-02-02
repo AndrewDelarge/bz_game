@@ -32,7 +32,8 @@ namespace game.gameplay.control
         private List<InputRawButton> _buttonsPool = new List<InputRawButton>();
 
         private InputRawData _inputRaw = new InputRawData();
-        
+        private KeyboardInputDataProvider _dataProvider;
+
         private void Start()
         {
             foreach (var key in _trackingKeys)
@@ -40,10 +41,18 @@ namespace game.gameplay.control
                 _buttonsPool.Add(new InputRawButton(key, InputStatus.NONE));
             }
 
-            var dataProvider = new KeyboardInputDataProvider();
-            dataProvider.Init(this);
+            _dataProvider = new KeyboardInputDataProvider();
+            _dataProvider.Init(this);
             
-            AppCore.Get<IInputManager>().RegisterInput(dataProvider);
+            AppCore.Get<IInputManager>().RegisterInput(_dataProvider);
+        }
+
+        private void OnDestroy() {
+            Dispose();
+        }
+
+        private void Dispose() {
+            AppCore.Get<IInputManager>()?.RemoveInput(_dataProvider);
         }
 
         private void Update()

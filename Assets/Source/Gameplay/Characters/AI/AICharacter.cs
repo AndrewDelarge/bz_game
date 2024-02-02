@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using game.core;
+using game.core.common;
 using game.core.InputSystem;
 using game.core.InputSystem.Interfaces;
 using game.core.level;
@@ -37,6 +38,7 @@ namespace game.Gameplay.Characters.AI {
 		public AbilitySystem abilitySystem => _abilitySystem;
 		public CharacterAnimation animator => _animation;
 		public Healthable healthable => _healthable;
+		public INavigator navigator => _navigator;
 
 		private Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, CharacterContext>> _states = new Dictionary<CharacterStateEnum, CharacterState<CharacterStateEnum, CharacterContext>>() {
 			{CharacterStateEnum.IDLE, new AIIdleState()},
@@ -44,7 +46,9 @@ namespace game.Gameplay.Characters.AI {
 			{CharacterStateEnum.DEAD, new AIDeadState()},
 			{CharacterStateEnum.ABILITY, new AIUseAbilityState()}
 		};
-		
+
+		private INavigator _navigator;
+
 		public HealthChange<DamageType> GetDamage() {
 			return new HealthChange<DamageType>(25, DamageType.PHYSICS);
 		}
@@ -55,8 +59,8 @@ namespace game.Gameplay.Characters.AI {
 			}
 		}
 
-		public void Init()
-		{
+		public void Init() {
+			_navigator = AppCore.Get<LevelManager>().levelController.navigator;
 			var context = new CharacterContext(_healthable, _movement, _animation, data.animationSet, _movement.transform, _data);
 			_mainStateMachine = new CharacterStateMachine<CharacterStateEnum, CharacterContext>(context, _states);
 

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: b2b40ca8a65e5224d8767a6ea7030760, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -589,6 +589,10 @@ PrefabInstance:
     - target: {fileID: 4370978197882011521, guid: 02b64c935f044664e93369e13fe7034a, type: 3}
       propertyPath: m_Name
       value: char_mob_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4370978197882011521, guid: 02b64c935f044664e93369e13fe7034a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4370978197882011532, guid: 02b64c935f044664e93369e13fe7034a, type: 3}
       propertyPath: _maxHealth

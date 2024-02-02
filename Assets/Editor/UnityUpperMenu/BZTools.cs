@@ -1,21 +1,20 @@
 ﻿using System;
 using game;
-using game.core;
 using game.core.level;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Editor.UnityUpperMenu
 {
     [ExecuteInEditMode]
     [InitializeOnLoad]
-    public class BZTools : MonoBehaviour
-    {
+    public class BZTools : MonoBehaviour {
         public const string ROOT_SCENE_PATH = "Assets/Scenes/_root.unity";
         
         private static readonly Action _exitPlaymode;
+        private static Action _enterPlaymode;
+        private static bool _test;
         
         static BZTools() {
             EditorApplication.playModeStateChanged += ChangePlayModeHandler;
@@ -28,9 +27,8 @@ namespace Editor.UnityUpperMenu
             EditorApplication.EnterPlaymode();
 
             EditorSceneManager.OpenScene(ROOT_SCENE_PATH, OpenSceneMode.Additive);
-            AppCore.Get<LevelManager>().LoadCurrent();
         }
-        
+
         [MenuItem("BZ Tools/Restart current scene")]
         static void RestartCurrentScene() {
             if (EditorApplication.isPlaying == false) {
@@ -38,17 +36,7 @@ namespace Editor.UnityUpperMenu
                 return;
             }
             
-            var scene = SceneManager.GetActiveScene();
-            var rootScene = EditorSceneManager.GetSceneByPath(ROOT_SCENE_PATH);
-
-            var path = scene.path;
-
-            SceneManager.SetActiveScene(rootScene);
-            var asyncOperation = SceneManager.LoadSceneAsync(path, LoadSceneMode.Single);
-
-            asyncOperation.completed += (x) => {
-                SceneManager.LoadScene(ROOT_SCENE_PATH, LoadSceneMode.Additive);
-            };
+            AppCore.Get<LevelManager>().ReloadCurrent();
         }
 
         private static void ChangePlayModeHandler(PlayModeStateChange obj) {
@@ -57,11 +45,11 @@ namespace Editor.UnityUpperMenu
                 _exitPlaymode.Invoke();
             }
 
-            // "mb later" feature  
-            // if (obj == PlayModeStateChange.ExitingEditMode) {
-            //     _rootScene = EditorSceneManager.OpenScene(ROOT_SCENE_PATH, OpenSceneMode.Additive);
-            //     EditorSceneManager.SetActiveScene(_rootScene);
-            // }
+            if (obj == PlayModeStateChange.EnteredPlayMode) {
+                var levelManager = AppCore.Get<LevelManager>();
+                
+                levelManager?.LoadCurrent();
+            }
         }
         
         private static void ClearRootScene() {

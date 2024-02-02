@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Cinemachine;
-using game.core;
+﻿using game.core;
+using game.core.common;
 using game.core.InputSystem.Interfaces;
 using game.core.InputSystem;
 using game.core.Storage.Data.Character;
 using game.core.storage.Data.Equipment;
-using game.Gameplay.Characters;
 using game.Gameplay.Characters.Common;
 using game.Gameplay.Characters.Common.Abilities;
 using UnityEngine;
@@ -43,6 +40,7 @@ namespace game.Gameplay.Characters.Player
         public AbilitySystem abilitySystem => null;
         public CharacterAnimation animator => _animation;
         public Healthable healthable => _healthable;
+        public INavigator navigator { get; }
 
         public bool isListen => true;
 

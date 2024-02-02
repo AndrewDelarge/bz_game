@@ -23,7 +23,7 @@ namespace game.Gameplay.Characters.AI.Behaviour {
 		{
 			base.Init(context);
 			
-			_navigator = AppCore.Get<LevelManager>().levelController.navigator;
+			_navigator = context.character.navigator;
 			_control.Init(_context.character.controlable);
 		}
 

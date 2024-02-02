@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using game.core.InputSystem.Interfaces;
 using game.core.common;
-using UnityEngine;
 
 namespace game.core.InputSystem
 {
@@ -10,6 +8,9 @@ namespace game.core.InputSystem
     {
         void RegisterInput(IInputable input);
         void RegisterControlable(IControlable control);
+
+        void RemoveControlable(IControlable control);
+        void RemoveInput(IInputable input);
     }
 
     public class InputManager : ICoreManager, IInputManager
@@ -31,8 +32,7 @@ namespace game.core.InputSystem
 
         private void DispatchInputDataUpdate(InputData data)
         {
-            foreach (var controlable in _controlables)
-            {
+            foreach (var controlable in _controlables) {
                 if (controlable.isListen == false) 
                     continue;
                 
@@ -42,12 +42,29 @@ namespace game.core.InputSystem
 
         public void RegisterControlable(IControlable control)
         {
-            if (_controlables.Contains(control))
-            {
+            if (_controlables.Contains(control)) {
                 return;
             }
             
             _controlables.Add(control);
+        }
+
+        public void RemoveControlable(IControlable control) {
+            if (_controlables.Contains(control) == false) {
+                return;
+            }
+            
+            _controlables.Remove(control);
+        }
+
+        public void RemoveInput(IInputable input) {
+            if (_inputs.Contains(input) == false) {
+                return;
+            }
+
+            input.Dispose();
+            
+            _inputs.Remove(input);
         }
 
         public void Reset() {

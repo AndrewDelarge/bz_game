@@ -1,5 +1,7 @@
 ﻿using game.core;
+using game.core.common;
 using game.core.InputSystem.Interfaces;
+using game.core.level;
 using game.Gameplay.Characters.Common.Abilities;
 using UnityEngine;
 
@@ -18,5 +20,6 @@ namespace game.Gameplay.Characters.Common
         public AbilitySystem abilitySystem { get; }
         public CharacterAnimation animator { get; }
         public Healthable healthable { get; }
+        public INavigator navigator { get; }
     }
 }

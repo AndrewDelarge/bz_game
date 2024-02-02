@@ -26,26 +26,37 @@ namespace game.core {
 				behaviour.Update(deltaTime);
 			}
 		}
-		
+
+		public void Dispose() {
+			_behaviours.Clear();
+		}
 	}
 	public class CharactersController : IUpdatable {
 		private List<ICharacter> _characters = new List<ICharacter>();
+		private List<ICharacter> _initPool = new List<ICharacter>();
 
 		private ICharacter _player;
 		private AIManager _manager = new AIManager();
-
+		private bool _inited;
 		public ICharacter player => _player;
 
-		public void RegisterCharacter(ICharacter character) {
-			character.Init();
-			
-			if (character.isPlayer) {
-				AddPlayer(character);
-				return;
+		public void Init() {
+			foreach (var character in _initPool) {
+				RegisterCharacterInternal(character);
 			}
 			
-			_characters.Add(character);
-			_manager.Add(character);
+			_initPool.Clear();
+
+			_inited = true;
+		}
+		
+		public void RegisterCharacter(ICharacter character) {
+			if (_inited == false) {
+				_initPool.Add(character);
+				return;
+			}
+
+			RegisterCharacterInternal(character);
 		}
 
 		public void AddPlayer(ICharacter player) {
@@ -59,6 +70,24 @@ namespace game.core {
 		public void Update(float deltaTime) {
 			_manager.Update(deltaTime);
 		}
+
+		public void Dispose() {
+			_characters.Clear();
+			_manager.Dispose();
+		}
+
+		private void RegisterCharacterInternal(ICharacter character) {
+			character.Init();
+			
+			if (character.isPlayer) {
+				AddPlayer(character);
+				return;
+			}
+			
+			_characters.Add(character);
+			_manager.Add(character);
+		}
+
 	}
 
 	public class CharacterManagerException : Exception {
