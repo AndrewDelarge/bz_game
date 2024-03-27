@@ -1,7 +1,7 @@
 ﻿using game.core;
 using game.core.Common;
 using game.core.Storage.Data.Character;
-using game.core.view.animation;
+using game.Gameplay.view.animation;
 using game.Gameplay.Characters.Common;
 using UnityEngine;
 using ILogger = game.core.Common.ILogger;

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace game.core.view.animation
+namespace game.Gameplay.view.animation
 {
     public class BaseAnimator : MonoBehaviour
     {
