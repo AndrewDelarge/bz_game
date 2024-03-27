@@ -1,5 +1,6 @@
 ﻿using game.core.common;
 using game.core.InputSystem;
+using game.core.Inventory;
 using game.core.level;
 using game.Gameplay.Characters.Common;
 using game.Source.core.Common;
@@ -20,6 +21,7 @@ namespace game.core
             AppCore.Register<IInputManager>(new InputManager());
             AppCore.Register<ILogger>(new Logger());
             AppCore.Register<GameTimer>(new GameTimer());
+            AppCore.Register<InventoryManager>(new InventoryManager());
         }
 
         protected override void CoreStart() {

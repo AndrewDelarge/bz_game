@@ -1,3 +1,4 @@
+using game.core.Inventory.Common;
 using UnityEngine;
 
 namespace game.core.storage.Data.Abilities.Inventory {

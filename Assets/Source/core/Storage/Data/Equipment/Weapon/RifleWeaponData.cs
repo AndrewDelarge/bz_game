@@ -6,9 +6,11 @@ namespace game.core.storage.Data.Equipment.Weapon {
 	[CreateAssetMenu(fileName = "Shotgun weapon", menuName = "GameData/Equipment/ShotgunWeapon")]
 	public class RifleWeaponData : WeaponData
 	{
-		public override EquipmentModel CreateModel()
+		public override IEquipment CreateModel()
 		{
-			return new RifleWeaponModel(this);
+			var rifle = new RifleWeapon();
+			rifle.Init(this);
+			return rifle;
 		}
 	}
 }

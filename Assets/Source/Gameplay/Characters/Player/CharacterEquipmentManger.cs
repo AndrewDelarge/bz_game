@@ -12,7 +12,7 @@ namespace game.Gameplay.Characters.Player
     public class CharacterEquipmentManger
     {
         private EquipmentData _currentEquipmentData;
-        private EquipmentModel _currentEquipment;
+        private IEquipment _currentEquipment;
         private EquipmentViewBase _currentEquipmentView;
         private CharacterAnimation _animation;
         private CharacterStateMachine<CharacterStateEnum, PlayerCharacterContext> _mainStateMachine;
@@ -20,7 +20,7 @@ namespace game.Gameplay.Characters.Player
         private Dictionary<CharacterEquiperType, ICharacterEquiper<EquipmentData, EquipmentViewBase>> _equipers = new ();
 
         public EquipmentData currentEquipmentData => _currentEquipmentData;
-        public EquipmentModel currentEquipment => _currentEquipment;
+        public IEquipment currentEquipment => _currentEquipment;
         public EquipmentViewBase currentEquipmentView => _currentEquipmentView;
         
         public bool isEquiped => _currentEquipment != null;

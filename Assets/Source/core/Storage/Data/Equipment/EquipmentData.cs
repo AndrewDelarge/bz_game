@@ -18,7 +18,7 @@ namespace game.core.storage.Data.Equipment {
 		public IReadOnlyList<StateData<CharacterState<PlayerActionStateEnum, PlayerCharacterContext>, PlayerActionStateEnum,PlayerCharacterContext>> actionStatesOverrides => _actionStatesOverrides;
 		public CharacterEquiperType equiperType => _equiperType;
 		
-		// TODO Придумать как инвертировать зависимость 
-		public abstract EquipmentModel CreateModel();
+		// TODO Придумать как инвертировать зависимость (нужна фабрика)
+		public abstract IEquipment CreateModel();
 	}
 }

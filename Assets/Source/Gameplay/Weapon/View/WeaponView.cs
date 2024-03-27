@@ -9,14 +9,14 @@ namespace game.Gameplay.Weapon {
 		private const string AMMO_DROP_FX = "ammo_drop";
 		private const string MUZZLE_MARKER = "muzzle";
 		
-		private WeaponModel _data;
+		private core.storage.Data.Models.Weapon _data;
 		[SerializeField] private Markers _markers;
 
 
 		private List<GameObject> _particles = new ();
 		
-		public override void Init(EquipmentModel data) {
-			_data = (WeaponModel) data;
+		public override void Init(IEquipment data) {
+			_data = (core.storage.Data.Models.Weapon) data;
 			
 			_markers.Init();
 		}
